@@ -1,0 +1,28 @@
+<div class="free-gift-popup">
+  <h4 class="free-gift-title"> You've unlocked a free gift!</h4>
+  <p class="free-gift-desc">
+    Get the <strong>3 Slot Travel Watch Case</strong> for free. Add it to your cart below.
+  </p>
+
+  {% if gift_product %}
+    <img 
+      src="{{ gift_product.featured_image | img_url: '300x' }}" 
+      alt="Free Gift" 
+      class="free-gift-img"
+    />
+  {% endif %}
+
+  <button 
+    onclick="addFreeGiftToCart()" 
+    class="btn btn--secondary add-gift-btn"
+  >
+    Add Free Gift
+  </button>
+
+  <button 
+    onclick="document.querySelector('.free-gift-popup').style.display = 'none'" 
+    class="dismiss-gift-btn"
+  >
+    Maybe later
+  </button>
+</div>

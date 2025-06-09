@@ -70,7 +70,12 @@
     {% assign show_progress = true %}
     {% assign progress_message = "You are <b class='progress_price'>" | append: difference | append: "</b> away from getting the 3 watch travel case for free!" %}
   {% endif %}
+
+  {% if cart.total_price >= threshold_price and travel_case_in_cart == false %}
+    {% render 'mobile-optimized-gift-popup' %}
+  {% endif %}
 {% endif %}
+
 
 <p class="progress_info" style="display: {{ show_progress | yesno: 'block, none' }};">
   {{ progress_message | raw }}
