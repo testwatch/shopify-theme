@@ -1,0 +1,335 @@
+<div class="corporate">
+  <div class="full-corpo">
+    <div class="image-corporate">
+      <div class="data-corporate mini-wrapper">
+     <div class="data-center">
+       <h1>{%if section.settings.Title != blank %}{{section.settings.Title}}{%else%}STUHRLING CORPORATE SALES{%endif%}</h1>
+       <h2>{%if section.settings.subtitle != blank %}{{section.settings.subtitle}}{%else%}Reward. Motivate. Encourage. Inspire. Thank.{%endif%}</h2>
+        </div>
+      </div>
+    </div>
+    
+    <div class="corporate-sales-main mini-wrapper">
+      {{section.settings.textarea}}
+      
+     
+
+
+    </div>
+    
+    
+    <div class="coloumn-corporate mini-wrapper">
+       {% for block in section.blocks %}
+    <div class="col-inner">
+      <div>
+        <h3>{%if block.settings.heading != blank %}{{block.settings.heading}}{%else%}Hilton{%endif%}</h3>
+        <p>
+          <img class="lazy-load-active" src="{%if block.settings.image != blank %}{{block.settings.image | img_url:'master'}}{%else%}https://btiwe3du61r38ffz43cak8rb-wpengine.netdna-ssl.com/wp-content/uploads/hilton.jpg{%endif%}" data-src="https://btiwe3du61r38ffz43cak8rb-wpengine.netdna-ssl.com/wp-content/uploads/hilton.jpg"></p>
+        <div class="ask-corporate">
+         {%if block.settings.Content != blank %}{{block.settings.Content}} {%else%}Hiton asked us to create a one-of-a-kind commemorative watch for the 35th anniversary of Embassy Suites by Hilton, and that collaboration led to a remarkable one-hand watch in a striking green color.{%endif%}
+        </div>
+      </div>
+      </div>
+      {%endfor%}
+    </div>
+<div class="content-cor mini-wrapper">
+  <h2 id="contact-us">Contact Us</h2>
+  <p>{%if section.settings.Section != blank%}{{section.settings.Section}}{%else%}Our trained Stürhling representatives are ready to help you create an incentive program that suits your needs. It’s time to tell the story of your success. Contact us today.{%endif%}</p>
+  <div class="contact-bar">
+    {% form 'contact' %}
+
+        {% if form.posted_successfully? %}
+          <p class="note form-success">
+            {{ 'contact.form.post_success' | t }}
+          </p>
+        {% endif %}
+
+        {{ form.errors | default_errors }}
+  <label for="Company" class="label-">Company</label>
+        <input type="text" id="Company" name="contact[Company]" placeholder="" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+
+        {% assign name_attr = 'contact.form.name' | t | handle %}
+        <label for=" Your Name" class="label-"> Your Name </label>
+        <input type="text" id="ContactFormName" name="contact[ Your Name]" placeholder="" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+
+        <label for="Email" class="label-"> * Your Email
+</label>
+        <input type="email" id="Email" name="contact[email]" placeholder="" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+
+        <input type="submit" class="btn right" value="Submit">
+
+      {% endform %}
+  </div>
+    </div>
+    <div class="div-wrapper">
+    <div class="wrapper">
+    <div class="text-title">
+      <img src="{%if section.settings.imagepicker != blank %}{{section.settings.imagepicker | img_url:'master'}}{%else%} https://btiwe3du61r38ffz43cak8rb-wpengine.netdna-ssl.com/wp-content/uploads/Stuhrling-B2B-Brochure-Inside-Final-Final-1050.jpg{%endif%}">
+      </div>
+      <p class="textmills">{%if section.settings.section-image != blank %}{{section.settings.section-image}}{%else%} imprinting of logos or messages available on most watch dials.{%endif%}</p>
+    </div>
+  </div>
+  </div>
+{% schema %}
+{
+  "name": "Icons",
+  "class": "index-section index-icons",
+  "settings": [
+   {
+"type":"text",
+"id":"Title",
+"label":"Title"
+},  
+     {
+"type":"text",
+"id":"subtitle",
+"label":"Subtitle"
+},
+    {
+"type":"textarea",
+"id":"textarea",
+"label":"Content"
+},
+  {
+"type":"text",
+"id":"Section",
+"label":"Contact Section"
+},
+  {
+"type":"image_picker",
+"id":"imagepicker",
+"label":"Image Bottom"
+},
+  {
+"type":"text",
+"id":"section-image",
+"label":"Text"
+}
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name":"Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+   {
+"type":"text",
+"id":"heading",
+"label":"Heading"
+},
+  {
+"type":"text",
+"id":"Content",
+"label":"Content"
+}
+        
+        
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icons",
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "image"
+        }
+ 
+      ]
+    }
+  ]
+}
+{% endschema %}
+<style>
+  .image-corporate{
+      background-image: url(https://btiwe3du61r38ffz43cak8rb-wpengine.netdna-ssl.com/wp-content/uploads/Cp-1.jpg);
+height:300px;
+    background-size: cover;
+    background-position: center;
+  }
+  .data-center h1 {
+    text-shadow: 3px 3px 5px black;
+    font-size: 3.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.data-center h2 {
+    text-shadow: 3px 3px 5px black;
+    font-size: 2.2em;
+    letter-spacing: .05em;
+    margin-top: .4em;
+    color: #fff;
+}
+
+.data-center {
+    text-align: center;
+}
+
+.corporate-sales-main p {
+    font-size: 18px;
+}
+
+.corporate-sales-main {
+    text-align: center;
+}
+
+.corporate-sales-main h2 {
+    font-weight: bold;
+    margin-bottom: 1.25em;
+    margin-top: 1.25em;
+    color: #333333;
+}
+  .text-title img {
+    max-width: 100%;
+}
+  .data-center h1 {
+    text-shadow: 3px 3px 5px black;
+    font-size: 3.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.data-center h2 {
+    text-shadow: 3px 3px 5px black;
+    font-size: 2.2em;
+    letter-spacing: .05em;
+    margin-top: .4em;
+    color: #fff;
+}
+
+.image-corporate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  .mini-wrapper {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.div-wrapper {
+    margin-bottom: 50px;
+}
+
+.data-center {
+    text-align: center;
+}
+
+.corporate-sales-main p {
+    font-size: 18px;
+}
+
+.corporate-sales-main {
+    text-align: center;
+}
+
+.corporate-sales-main h2 {
+    font-weight: bold;
+    margin-bottom: 1.25em;
+    margin-top: 1.25em;
+    color: #333333;
+}
+
+.image-corporate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.col-inner h3 {
+    font-weight: bold;
+    margin-bottom: 1.25em;
+    margin-top: 1.25em;
+    color: #333333;
+}
+
+.col-inner img {
+    text-align: center;
+    display: block;
+    max-width: 100%;
+  margin:0 auto;
+}
+
+.ask-corporate {
+    font-size: 18px;
+}
+
+.col-inner {
+    text-align: center;
+    padding: 0 10px;
+}
+  .contact-bar {
+    width: 100%;
+    float: left;
+    display: flex;
+    background-color: #F4F4F4 !important;
+    text-align: left;
+    font-size: 16px;
+    padding-top: 25px;
+    padding: 20px;
+    margin: 0 auto;
+    box-shadow: 1px 1px 15px rgba(0,0,0,0.15);
+    margin-bottom: 60px;
+    margin-top: 10px;
+    max-width: 600px;
+}
+
+.contact-bar form {
+    width: 100%;
+}
+.content-cor {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+  
+.contact-bar .btn.right {
+    background: #ff6b00;
+}
+
+input.btn.right {
+    display: block;
+    float: left !important;
+    width: 100%;
+    max-width: 200px;
+}
+  .content-cor {
+    text-align: center;
+}
+
+.content-cor p {
+    font-size: 18px;
+}
+
+h2#contact-us {
+    font-weight: bold;
+    margin-bottom: 1.25em;
+    margin-top: 1.25em;
+    color: #333333;
+}
+  h2#contact-us {
+    font-weight: bold;
+    margin-bottom: 1.25em;
+    margin-top: 1.25em;
+    color: #333333;
+}
+ 
+.text-title {
+    text-align: center;
+    margin-top: 60px;
+}
+
+p.textmills {
+    text-align: center;
+    font-size: 18px;
+}
+</style>

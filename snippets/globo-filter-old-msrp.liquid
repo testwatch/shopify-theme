@@ -1,0 +1,106 @@
+{% raw %}
+  {% assign swatch_options = '' | downcase | replace: ', ', ',' | split: ","  %}
+  {% assign images_count = product.images | size %}
+  {% assign variants_count = product.variants | size %}
+  {% assign options_count   = product.options | size %}
+  {% assign featured_image = 'https://cdn.shopify.com/s/images/themes/product-1.png' %}
+  {% if product.featured_image %}
+    {% assign featured_image = product.featured_image.src %}
+  {% endif %}
+
+            <div class="spf-col-xl-4 spf-col-lg-4 spf-col-md-6 spf-col-sm-6 spf-col-6">
+        <div class="spf-product-card spf-product-card__template-1{% unless product.available %} spf-soldout{% endunless %}">
+          <div class="spf-product-card__inner">
+            {% unless product.available %}
+                        <span class="spf-product__label spf-product__label-soldout">Sold out</span>
+                                    {% elsif product.compare_at_price > product.price %}
+            <span class="spf-product__label spf-product__label-sale">
+                            -{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%                          </span>
+                        {% endunless %}
+                          <a title="Quick view" href="javascript:;" onclick="globofilter.quickView('{{product.url}}')" class="open-quick-view"><span>Quick view</span></a>
+                        {% assign images_count = product.images | size %}
+            <a class="spf-product-card__image-wrapper{% if images_count > 1 %} hover-effect{% endif %}" href="{{product.url}}" style="padding-top:100%; padding-top:100%;">
+              {% if images_count > 0 %}
+              {% for image in product.images %}
+              <img data-variants="{{image.variant_ids | join: ','}}" class="spf-product-card__image spf-product-card__image-{% if product.featured_image.id == image.id %}main{% elsif forloop.index == 2 %}secondary{% else %}hidden{% endif %}" src="{{image.src | img_url: '500x500' }}" alt="{{image.alt | escape}}">
+              {% endfor %}
+              {% else %}
+              <img data-variants="" class="spf-product-card__image spf-product-card__image-main" src="https://cdn.shopify.com/s/images/themes/product-1.png" alt="{{product.title}}">
+              {% endif %}
+            </a>
+            <form class="spf-product__form" action="/cart/add" method="post">
+              <select name="id" class="spf-product__variants">
+                {% for variant in product.variants %}
+                <option data-price="{{variant.price}}" data-compare_at_price="{{variant.compare_at_price}}" data-available="{{variant.available}}" data-image="{% if variant.image.src %}{{variant.image.src | img_url: '500x500' }}{% endif %}" {% if variant.id == product.first_available_variant.id %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }}</option>
+                {% endfor %}
+              </select>
+                            <button {% unless product.available %}disabled{% endunless %} type="submit" class="spf-product__form-btn-addtocart" data-available="Add To Cart" data-soldout="Sold out" data-unavailable="Unavailable"><span>{% if product.available %}Add To Cart{% else %}Sold out{% endif %}</span></button>
+                          </form>
+          </div>
+ <div id="background-slideshow" class="background-slideshow">
+      {% for variant in product.variants %}
+
+      <img data-href="https://stuhrling-evan.myshopify.com/{{product.url}}?variant={{variant.id}}" src="{{variant.image.src | img_url: '500x500'}}">
+
+
+      {%endfor%}
+    </div>
+          <div class="spf-product__info">
+            <div class="h4 spf-product-card__title"><a href="{{product.url}}">{{product.title}}</a></div>
+           
+                        {% if product.vendor %}<div class="spf-product-card__vendor"><a href="/collections/vendors?q={{product.vendor}}">{{product.vendor}}</a></div>{% endif %}
+
+            <div class="spf-product-card__price-wrapper">
+               {% if product.compare_at_price > product.price %}
+              <span class="spf-product-card__saleprice money">{{ product.price | money }}</span>
+              <span class="spf-product-card__oldprice money"  style='color:#000;text-decoration:line-through'><span style='color:#000'>{{ product.compare_at_price | money }}</span></span>
+            </div>
+              <div class="spf-msrp">
+                {%if product.metafields.Stuhrling.MSRP != blank %}   <span data-href="https://stuhrling-evan.myshopify.com/{{product.url}}" class="price-review">MSRP: {{product.metafields.Stuhrling.MSRP}}</span>{%endif%}
+
+              </div>
+    {% else %}
+
+    <div class="nosale">                                    
+      <span class="spf-product-card__price money">{{ product.price | money }}</span>
+     {%if product.metafields.Stuhrling.MSRP != blank %} <span data-href="https://stuhrling-evan.myshopify.com/{{product.url}}" class="price-review">MSRP: {{product.metafields.Stuhrling.MSRP}}</span>{%endif%}
+    </div>
+    {% endif %}
+            </div>
+                                    {% for option in product.options %}
+            {% assign option_index = 'option' | append: forloop.index %}
+            {% assign option_name  = option.name | downcase %}
+            {% if swatches[option_name] or swatch_options contains option_name %}
+            <div class="spf-product__swatchs round">
+              {% for value in option.values %}
+                {% assign option_value  = value | downcase %}
+                <span class="spf-product__swatch{% if product.first_available_variant[option_index] == value %} is-selected{% endif %}" title="{{value}}">
+                  <span class="spf-product__swatch-inner">
+                    {% if swatches[option_name] and swatches[option_name][option_value] %}
+                      {% if swatches[option_name][option_value].mode == 1 %}
+                        <span class="spf-product__swatch-color" style="background-color: {{ swatches[option_name][option_value].color_1 }}"></span>
+                      {% elsif swatches[option_name][option_value].mode == 2 %}
+                        <span class="spf-product__swatch-color" style="background-color: {{ swatches[option_name][option_value].color_1 }}"></span>
+                        <span class="spf-product__swatch-color" style="border-right-color: {{ swatches[option_name][option_value].color_2 }}"></span>
+                      {% elsif swatches[option_name][option_value].mode == 3 %}
+                        <span class="spf-product__swatch-image" style="background-image: url('{{ swatches[option_name][option_value].image }}')"></span>
+                      {% endif %}
+                    {% elsif option_name contains 'colo' %}
+                      <span class="spf-product__swatch-image" style="background-color: {{ option_value | replace:"'", "\'" | escape_once }}; background-image: url('{{ option_value | handle | append: '.png' | asset_img_url: '50x' | prepend: 'https:' | split: '?' | first }}')"></span>
+                    {% else %}
+                      <span class="spf-product__swatch-text">{{value}}</span>
+                    {% endif %}
+                  </span>
+                </span>
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% endfor %}
+             <div class='jdgm-widget jdgm-preview-badge' data-id='{{ product.id }}' data-template='manual-installation' data-auto-install='false'>{{product.metafields.judgeme.badge}}</div>
+
+<!--              <div data-href="https://stuhrling-evan.myshopify.com/{{product.url}}" class="star-review"></div> -->
+                      </div>
+        </div>
+      </div>
+      {% endraw %}
+ 

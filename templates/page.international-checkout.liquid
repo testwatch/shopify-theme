@@ -1,0 +1,59 @@
+
+{% include 'globale-tracking' %}
+<div class="grid">
+
+  <div class="grid__item post-large--two-thirds push--post-large--one-sixth">
+
+    <div class="section-header">
+      <h1>a</h1>
+      <h1 class="section-header--title">{{ page.title }}</h1>
+    </div>
+    
+    <div class="rte">
+      {{ page.content }}
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  var enhanced_conversion_data = {
+    "first_name": "{{ checkout.billing_address.first_name }}",
+    "last_name": "{{ checkout.billing_address.last_name }}",
+    "home_address": {
+      "street": "{{ checkout.billing_address.street }}",
+      "city": "{{ checkout.billing_address.city }}",
+      "region": "{{ checkout.billing_address.province }}",
+      "postal_code": "{{ checkout.billing_address.zip }}",
+      "country": "{{ checkout.billing_address.country_code }}"
+    }
+  }
+if("{{ checkout.email }}"){
+   enhanced_conversion_data.email = "{{ checkout.email }}";
+}
+if("{{ checkout.billing_address.phone }}"){
+   enhanced_conversion_data.phone_number = "{{ checkout.billing_address.phone }}";
+}
+</script>
+<!-- Global site tag (gtag.js) - Google Ads: 828532197 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-828532197"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-828532197', {'allow_enhanced_conversions': true});
+</script>
+{% if first_time_accessed %}
+<script>
+  gtag('event', 'conversion', {
+    'send_to': 'AW-828532197/l2_iCOz09N8BEOXLiYsD',
+    'value': {{ checkout.total_price | divided_by: 100.0 }},
+       'currency': '{{ currency }}',
+       'transaction_id': '{{ order_number }}',
+       });
+</script>
+{% endif %}
+
+

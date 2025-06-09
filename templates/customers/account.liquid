@@ -1,0 +1,81 @@
+<!-- globale_my_account_globale_orders_list_include -->
+{% include 'globale-orders-list' %}
+
+<div class="container max-same">
+  <div class="section-header section-header--large">
+  <h1 class="headertitle">{{ 'customer.account.title' | t }}</h1>
+</div>
+<div class="row">
+<div class="col-md-4 col-sm-12 links_areas">
+    {%include 'sidebar-account'%}
+  </div>
+  <div class="col-md-8 col-sm-12">
+    <div class="login_customer">
+      <p class="cusomter_name">Hello  {{customer.name}}  <a href="/account/logout">Logout</a></p>
+      <p>From your account dashboard you can view your recent orders,manage your shipping and billing address
+        ,place a return request,and edit your account password and account details.</p>
+        <ul>
+          <li> <a href="/account">Orders</a></li>
+          <li><a href="{{ routes.account_addresses_url }}">Address</a></li>
+
+       {{ customer.default_address | format_address }}
+
+    <li><a href="{{ routes.account_addresses_url }}">Account Details</a>
+   <li> <a href="#">Wishlist</a></li>
+      </ul>
+    </div>
+    <h2 class="h4">{{ 'customer.orders.title' | t }}</h2>
+
+    {% comment %}
+      If we have past orders, loop through each one
+    {% endcomment %}
+
+    {% paginate customer.orders by 20 %}
+
+    {% if customer.orders.size != 0 %}
+
+      <div class="table-wrap">
+        <table class="full">
+          <thead>
+            <tr>
+              <th>{{ 'customer.orders.order_number' | t }}</th>
+              <th>{{ 'customer.orders.date' | t }}</th>
+              <th>{{ 'customer.orders.payment_status' | t }}</th>
+              <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+              <th>{{ 'customer.orders.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in customer.orders %}
+              <tr>
+                <td>{{ order.name | link_to: order.customer_url }}</td>
+                <td>{{ order.created_at | date: format: 'date' }}</td>
+                <td>{{ order.financial_status_label }}</td>
+                <td>{{ order.fulfillment_status_label }}</td>
+                <td>{{ order.total_price | money }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    {% else %}
+
+      <p>{{ 'customer.orders.none' | t }}</p>
+
+    {% endif %}
+
+    {% if paginate.pages > 1 %}
+      <div class="text-center">
+        {% include 'pagination-custom' %}
+      </div>
+    {% endif %}
+
+    {% endpaginate %}
+
+  </div>
+
+  
+
+</div>
+</div>

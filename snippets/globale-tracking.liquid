@@ -1,0 +1,166 @@
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+var glegem = glegem || function(){(window["glegem"].q = window["glegem"].q || []).push(arguments)};
+  
+glegem("OnCheckoutStepLoaded",function(data){
+  
+  var element = document.createElement("h2");
+  element.style.textAlign  = "center";
+  element.style.fontSize = "20px";
+  element.style.fontWeight ="600";
+  element.appendChild(document.createTextNode("Use Code: FREETRAVEL"));
+  document.getElementById('international-checkout').prepend(element);
+  var element = document.createElement("h1");
+  element.style.textAlign  = "center";
+  element.style.fontSize = "20px";
+  element.appendChild(document.createTextNode("You can get a 3 watch travel case for free if the price greater than $350.00"));
+  document.getElementById('international-checkout').prepend(element);
+
+  
+ 
+
+
+ switch(data.StepId){
+  case data.Steps.LOADED:
+      break;
+  case data.Steps.CONFIRMATION:
+     if (data.IsSuccess && !data.IsPageReload){
+      
+        // Trigger International Checkout Event on GTM 
+    
+       var ecommerceEvent = 
+       {
+          "ecommerce" : {
+            "purchase": {
+              "actionField": {
+				"OID": data.details.OrderID,
+                "COUPON": "",
+                "DISCOUNT": 0,
+				},
+              "products": [
+              ]
+            }
+          }
+       }
+       
+       
+       for(i=0;i<data.details.Discounts.length;i++){
+         if (data.details.Discounts[i].CouponCode) {
+  			ecommerceEvent.ecommerce.purchase.actionField.COUPON = data.details.Discounts[i].CouponCode;
+    		ecommerceEvent.ecommerce.purchase.actionField.DISCOUNT = data.details.Discounts[i].DiscountPrices.MerchantTransaction.Price;
+            break;
+         }
+       }
+         
+        for(i=0;i<data.details.ProductInformation.length;i++){
+         console.log("product " + i);
+         ecommerceEvent.ecommerce.purchase.products.push({
+           'ITEM':data.details.ProductInformation[i].SKU,
+           'AMT': data.details.ProductInformation[i].ProductPrices.CustomerTransactionInMerchantCurrency.CustomerDiscountedPriceInMerchantCurrency,  
+           'QTY': parseInt(data.details.ProductInformation[i].Quantity),
+         });
+       }
+       
+  	   dataLayer.push(ecommerceEvent);
+       dataLayer.push({'event': 'internationalCheckoutConfirmation'});
+       
+       // End GTM
+       
+        // Start of GA Ecommerce
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                               })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-39285435-1', 'auto');
+       ga('require', 'ecommerce'); 
+       
+	   ga('ecommerce:addTransaction', {
+        'id': data.details.OrderID,
+        'affiliation': 'Global-E',
+        'revenue': data.details.OrderPrices.CustomerTransactionInMerchantCurrency.CustomerTotalPriceInMerchantCurrency,
+        'shipping': data.details.OrderPrices.CustomerTransactionInMerchantCurrency.CustomerShippingPriceInMerchantCurrency,
+        'tax': data.details.OrderPrices.CustomerTransactionInMerchantCurrency.CustomerVATInMerchantCurrency,
+        'currency': data.details.MerchantCurrencyCode
+      });       
+       
+
+      for(i=0;i<data.details.ProductInformation.length;i++){
+         ga('ecommerce:addItem', {
+           'id': data.OrderId,
+           'name': data.details.ProductInformation[i].ProductName,
+           'sku':data.details.ProductInformation[i].SKU,
+           'category': (data.details.ProductInformation[i].Categories != null && data.details.ProductInformation[i].Categories.length ) ? data.details.ProductInformation[i].Categories[0].Name : '',           
+           'price': data.details.ProductInformation[i].ProductPrices.CustomerTransactionInMerchantCurrency.CustomerDiscountedPriceInMerchantCurrency,  
+           'quantity': data.details.ProductInformation[i].Quantity,
+           'currency': data.details.MerchantCurrencyCode
+         });
+       }
+
+       ga('ecommerce:send');
+      
+       // End of GA Ecommerce
+       
+       // Facebook
+       if (fbq) {
+        fbq('track', 'Purchase', {currency: "USD", value:  data.details.OrderPrices.CustomerTransactionInMerchantCurrency.CustomerTotalPriceInMerchantCurrency}, {eventID: data.details.OrderId});
+       
+       }
+	   // End Facebook
+       
+        // Criteo
+       var deviceType = /iPad/.test(navigator.userAgent) ? "t" : /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Silk/.test(navigator.userAgent) ? "m" : "d";
+	 
+       window.criteo_q  = window.criteo_q  || [];
+	
+       
+       var criteoTransaction = { event: "trackTransaction", 
+         id: data.details.OrderID,
+		 item: []};
+       
+        for(i=0;i<data.details.ProductInformation.length;i++){
+         criteoTransaction.item.push({
+           id:data.details.ProductInformation[i].SKU,
+           price: data.details.ProductInformation[i].ProductPrices.CustomerTransactionInMerchantCurrency.CustomerDiscountedPriceInMerchantCurrency,  
+           quantity: parseInt(data.details.ProductInformation[i].Quantity),
+         });
+        }
+           
+       window.criteo_q.push( 
+         { event: "setAccount", account: 65568 },
+         { event: "setSiteType", type: deviceType},
+         criteoTransaction
+	   );
+       
+       // End Criteo
+       
+        // Klicky
+		var scriptTag = document.createElement('script');
+    	scriptTag.src = "https://track.klickly.com/track.bundle.js?shop=stuhrling-evan.myshopify.com";
+    	document.body.appendChild(scriptTag);
+	   // End Klicky      
+      
+    
+	 
+       
+       //TikTok
+       if (ttq) {
+       	ttq.track('PlaceAnOrder', {
+   			value: data.details.OrderPrices.CustomerTransactionInMerchantCurrency.CustomerTotalPriceInMerchantCurrency,
+    		currency: 'USD',
+			});
+       }
+       
+       // Google Ads
+       if (gtag) {
+           gtag('event', 'conversion', {
+     	 	'send_to': 'AW-828532197/l2_iCOz09N8BEOXLiYsD',
+      		'value':  data.details.OrderPrices.CustomerTransactionInMerchantCurrency.CustomerTotalPriceInMerchantCurrency,
+      		'transaction_id': data.details.OrderId
+  			});
+       }
+
+     }  
+ 	}
+	});
+</script>

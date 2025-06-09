@@ -1,0 +1,49 @@
+{% comment %}
+  The contents of the product.liquid template can be found in /sections/product-template.liquid
+{% endcomment %}
+{%if product.tags contains 'Flash'%}
+{%if settings.checkproduct %}
+{% section 'flash-sale'%}
+{%endif%}
+{%endif%} 
+{% section 'product-alternate-template' %}
+
+{%if product.metafields.Stuhrling.MSRP != blank %} 
+<div class="metafieldss" style="display:none;">MSRP:{{ product.metafields.Stuhrling.MSRP }}</div>
+{%endif%}
+{%section 'product-instagram'%}
+
+{%comment%}
+<div class="small--hide">
+{%section'product-collection-tabs-new'%}
+</div> 
+{% section 'product-recommendations' %}
+{%endcomment%}
+
+{%section'Home-icons'%}
+<style>
+  .col-md-6.col-sm-6.col-xs-12 {
+    padding: 0;
+}
+  span#ProductPrice p.affirm-as-low-as {
+    display: none !important;
+}
+  @media (max-width:768px)
+  {
+    .affirm-as-low-as
+    {
+      position:unset;
+    }
+  }
+</style>
+<script>
+  $(document).ready(function(){
+  $('.swatch-element').click(function(){
+    var variant_price = $(this).data('price');   
+    $('.price_part .price_update').html(variant_price);
+  });});
+</script>
+
+<!-- <script src=https://widget.sezzle.com/v1/javascript/price-widget/initial?uuid=a819f3f3-05f7-4c8f-b12a-810864d4ba74></script>
+ -->
+  {% section 'skafos-product-recommender' %} 

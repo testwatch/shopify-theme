@@ -1,0 +1,440 @@
+<!doctype html>
+<html class="no-js">
+  <head> 
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WVP4JT9');</script>
+<!-- End Google Tag Manager --> 
+    <!-- Basic page needs ================================================== -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Expires" content="10" /> 
+
+    {% if settings.favicon %}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
+    {% endif %}
+
+    <!-- Title and description ================================================== -->
+    <title>
+      {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+
+    {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {% if product.id > 0 or template.name == "index" %}
+    <script type="text/javascript" >
+      // JS code added by StarApps Studio
+      (function () {
+        var time_count = 120;
+
+        var intervalID = setInterval(function () {
+          var selectors_to_hide = document.querySelectorAll('.grid.product-single__thumbnails');
+
+          if (selectors_to_hide.length) {
+
+            for (var index = 0; index < selectors_to_hide.length; index++) {
+              selectors_to_hide[index].style.opacity = 0.001;
+            }
+
+            if ((typeof variant_images == 'object' && variant_images.length > 0) || time_count < 1) {
+              clearInterval(intervalID);
+              if (selectors_to_hide.length) {
+                for (var index = 0; index < selectors_to_hide.length; index++) {
+                  selectors_to_hide[index].style.opacity = 1;
+                }
+              }
+            }
+
+            time_count = time_count - 1
+          } else if (document.readyState == "complete") {
+            // Remove interval
+            clearInterval(intervalID);
+          }
+
+        }, 25);
+
+      })();
+      // END
+    </script>
+    {% endif %}
+    {% if product.id > 0 %}
+    <script type="text/javascript" >
+      "use strict";
+      // JS code added by StarApps Studio
+      // It hides the default option selector so it's not visible in the frontend
+      // Javascript to prevent options selector to be visible on JS disabled browsers
+      (function() {
+        var workStatus = 0;
+        var selectorsToTarget = "form[action=\"/cart/add\"]";
+        var selectorsToUnHide = "form[action=\"/cart/add\"]";
+        var swatchTarget = ".swatches div[option-target] .swatch-single";
+        var intervalID = setInterval(function() {
+          if (workStatus == 0) {
+            // Hide selectors
+            var hideElements = document.querySelectorAll(selectorsToTarget);
+
+            if (hideElements.length > 0) {
+              // Set work status
+              workStatus = 1;
+
+              // Set work to 2 as second step is not required
+              if (selectorsToUnHide == "") {
+                workStatus = 2;
+              }
+
+              // Let's hide all elements
+              for (var index = 0; index < hideElements.length; index++) {
+                hideElements[index].style.maxHeight = "0px";
+                hideElements[index].style.opacity = "0";
+              }
+
+              // Un hide if VSK doesn't load in 5 sec
+              setTimeout(function() {
+                var variant_swatch_king = document.querySelector(swatchTarget);
+                var unHideElements = document.querySelectorAll(selectorsToTarget);
+                if (!variant_swatch_king) {
+                  for (var index = 0; index < unHideElements.length; index++) {
+                    unHideElements[index].style.maxHeight = "";
+                    unHideElements[index].style.opacity = "1";
+                  }
+                }
+              }, 5000);
+              // End
+            }
+          } else if (workStatus == 1) {
+            // Un hide if VSK is loaded
+            var variant_swatch_king = document.querySelector(swatchTarget);
+            var unHideElements = document.querySelectorAll(selectorsToUnHide);
+            if (variant_swatch_king || document.readyState == "complete") {
+              for (var index = 0; index < unHideElements.length; index++) {
+                unHideElements[index].style.maxHeight = "";
+                unHideElements[index].style.opacity = "1";
+              }
+
+              // Set work status
+              workStatus = 2;
+            }
+            // End
+          } else if (workStatus == 2 && document.readyState == "complete") {
+            // Remove interval
+            clearInterval(intervalID);
+          }
+        }, 10);
+      })();
+      // END
+      
+    </script>
+    {% endif %}
+    <!-- starapps_scripts_start -->
+    <!-- This code is automatically managed by StarApps Studio -->
+    <!-- Please contact support@starapps.studio for any help -->
+
+    {% render "starapps-product-json", product: product, starapps_app: "VIA", starapps_attribute: "sa-product-json" %}
+	
+	
+<script type="text/javascript" src="https://bcdn.starapps.studio/apps/via/stuhrling-evan/script-1606756932.js?shop={{shop.permanent_domain}}" async></script>
+<!-- starapps_scripts_end -->
+    <!-- Social meta ================================================== -->
+    {% include 'social-meta-tags' %}
+    {% if template contains 'product' or template contains 'index' %}
+    {% else %}
+    
+    
+    
+    {% if request.page_type contains 'search' %}
+    <script type="text/javascript">globofilter.collection.sort = 'best-selling';</script>
+    {% endif %}  
+    
+    {% endif %}    
+
+    <!-- Helpers ================================================== -->
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_primary }}">
+   
+
+
+    <!-- CSS ================================================== -->
+    {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'custom.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'responsive.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'slick.css' | asset_url | stylesheet_tag }}
+    {{ 'slick-theme.css' | asset_url | stylesheet_tag }}
+	 {{ 'owl.carousel.min.css' | asset_url | stylesheet_tag }}	
+    {{ 'owl.theme.default.min.css' | asset_url | stylesheet_tag }}
+    {%if template contains 'product'%}
+    {{ 'video.popup.css' | asset_url | stylesheet_tag }}
+    {%endif%}
+    {%if template contains 'cart'%}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> 
+    {%endif%}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+      window.theme = window.theme || {};
+
+      var theme = {
+        strings: {
+          addToCart: {{ 'products.product.add_to_cart' | t | json }},
+          soldOut: {{ 'products.product.sold_out' | t | json }},
+          unavailable: {{ 'products.product.unavailable' | t | json }},
+          zoomClose: {{ "products.zoom.close" | t | json }},
+          zoomPrev: {{ "products.zoom.prev" | t | json }},
+          zoomNext: {{ "products.zoom.next" | t | json }},
+          addressError: {{ 'map.errors.address_error' | t | json }},
+          addressNoResults: {{ 'map.errors.address_no_results' | t | json }},
+          addressQueryLimit: {{ 'map.errors.address_query_limit_html' | t | json }},
+          authError: {{ 'map.errors.auth_error_html' | t | json }}
+        },
+        settings: {
+          // Adding some settings to allow the editor to update correctly when they are changed
+          enableWideLayout: {{ settings.enable_wide_layout }},
+          typeAccentTransform: {{ settings.type_accent_transform }},
+          typeAccentSpacing: {{ settings.type_accent_spacing }},
+          baseFontSize: '{{ settings.type_base_size }}',
+          headerBaseFontSize: '{{ settings.type_header_size }}',
+          accentFontSize: '{{ settings.type_accent_size }}'
+        },
+        variables: {
+          mediaQueryMedium: 'screen and (max-width: 768px)',
+          bpSmall: false
+        },
+        moneyFormat: {{ shop.money_format | json }}
+      }
+
+        document.documentElement.className = document.documentElement.className.replace('no-js', 'supports-js');
+    </script>
+    
+    {{ 'cj-event-storage2.js' | asset_url | script_tag }}
+    {% include 'globo.filter.script' %}{{ content_for_header }} 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+     <script  src="{{ 'lazysizes.min.js' | asset_url }}" ></script>
+         <script src="{{ 'owl.carousel.js' | asset_url }}"></script>	
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" ></script>
+
+   
+    <script src="{{ 'custom.js' | asset_url }}" ></script>
+    {% if template contains 'product' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.elevatezoom.min.js"></script>
+    {% endif %}
+
+
+{% if template contains 'index' or template contains 'collection' %}
+    {% else %}
+    {%if template contains 'product'%}
+    {{ 'video.popup.js' | asset_url | script_tag }}
+    {%endif%}
+    {%endif%}
+    {% comment %}
+    If you store has customer accounts disabled, you can remove the following JS file
+    {% endcomment %}
+    {% if request.page_type contains 'customers/' %}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {% endif %}
+    {% if template contains 'index'  %}
+	{% else %}
+    {% include 'judgeme_core' %}
+    {% endif %}
+    {% comment %}
+    {% if template contains 'index' or template contains 'collections' %}
+    {% else %}
+<!--     <script src="https://sdk.helloextend.com/extend-sdk-client/v1/extend-sdk-client.min.js"></script>
+    <script src="https://sdk.helloextend.com/extend-sdk-client-shopify-addon/v1/extend-sdk-client-shopify-addon.min.js"></script>
+	<script>Extend.config({ storeId: '65f9968c-3953-494d-8b24-5282c6bc8cf1', environment: 'production' })</script> -->
+    {% endif %}
+    {% endcomment %}
+  
+  <script src="https://demandforapps.com/flycart/js/aod_flycart.js"></script>
+    <!-- Affirm -->
+<!--     <script>
+      _affirm_config = {
+        public_api_key:  "RT8O12TLPV2KIIG8",
+        script:          "https://cdn1.affirm.com/js/v2/affirm.js"
+      };
+      (function(l,g,m,e,a,f,b){var d,c=l[m]||{},h=document.createElement(f),n=document.getElementsByTagName(f)[0],k=function(a,b,c){return function(){a[b]._.push([c,arguments])}};c[e]=k(c,e,"set");d=c[e];c[a]={};c[a]._=[];d._=[];c[a][b]=k(c,a,b);a=0;for(b="set add save post open empty reset on off trigger ready setProduct".split(" ");a<b.length;a++)d[b[a]]=k(c,e,b[a]);a=0;for(b=["get","token","url","items"];a<b.length;a++)d[b[a]]=function(){};h.async=!0;h.src=g[f];n.parentNode.insertBefore(h,n);delete g[f];d(g);l[m]=c})(window,_affirm_config,"affirm","checkout","ui","script","ready");
+      // Use your live public API Key and https://cdn1.affirm.com/js/v2/affirm.js script to point to Affirm production environment.
+
+
+    </script> -->
+    <!-- End Affirm -->
+   {% if request.page_type == 'product' or request.page_type == 'index' %}
+    {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+    
+    {% endif %} 
+   {{ 'theme.js' | asset_url | script_tag }}
+  {% include 'kart_discount' %}</head>
+
+  <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ request.page_type | handle }} pushmenu-push overhidden">
+
+    {% section 'header' %}
+<!-- Google Tag Manager (noscript) 
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVP4JT9"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+ End Google Tag Manager (noscript) -->
+    <main class="wrapper main-content" role="main">
+      <div class="grid1">
+        <div class="grid__item1">
+          {{ content_for_layout }}
+        </div>
+      </div>
+    </main>
+    {% section 'footer-section' %}
+
+
+    {%- if request.page_type == 'index' -%}
+    <p id="slideshow-info" class="visually-hidden" aria-hidden="true">
+      {{- 'home_page.slideshow.navigation_instructions' | t -}}
+    </p>
+    {%- endif -%}
+
+    
+
+    <ul hidden> 
+      <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
+      <li id="a11y-external-message">{{ 'general.accessibility.new_window' | t }}</li>
+      <li id="a11y-new-window-external-message">{{ 'general.accessibility.new_window_and_external' | t }}</li>
+    </ul>
+<!--     <script  src="{{ 'theme.js' | asset_url  }}"></script> -->
+    
+    <script>
+      jQuery(document).ready(function() {
+        jQuery('.swatch :radio').change(function() {
+          var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
+          var optionValue = jQuery(this).val();
+          jQuery(this)
+          .closest('form')
+          .find('.single-option-selector')
+          .eq(optionIndex)
+          .val(optionValue)
+          .trigger('change');
+        });
+        var text1 = $('.timer-cls #days').text();
+        console.log(text1);
+        if(text1 == '0 Days'){
+          $('.timer-cls #days').hide();
+        }
+        else{
+          $('.timer-cls #days').show();
+        }
+      });
+      {% if template contains 'product' %}
+      $('.product-single__thumbnails a').click(function(e){
+                e.preventDefault();
+                var src= $(this).children('img').attr('data-src');
+                $('#ProductPhoto img').attr('src',src);
+                $('#ProductPhoto img').attr('srcset',src);
+                $(".zoom-cls").attr('src',src);
+               $('.zoomWindowContainer div').stop().css("background-image","url("+ src +")");
+              })
+// Initialize theme's JS on docready
+              
+              $(".zoom-cls").elevateZoom({
+                zoomWindowFadeIn: 500,
+                zoomWindowFadeOut: 500,
+                lensFadeIn: 500,
+                lensFadeOut: 500,
+                 zoomWindowHeight:700,
+                            zoomWindowWidth:700
+              });
+      {% endif %}
+    </script>
+    {%if template contains 'index'  %}
+    {%else%}
+    
+    {%endif%}
+    <div class="overlay" style="display:none;"></div>
+    <div class="overlays" style="display:none;"></div>
+
+    <script src="https://cdn.attn.tv/stuhrling/dtag.js"></script>
+  
+
+<!--     <script async>
+      /*ConvertCart.com-stuhrling.com*/(function(c,o,n,v,e,r,t,s){s=c.fetch?'f':'',
+        c.ccartObj=e,c[e]=c[e]||function(){(c[e].q=c[e].q||[]).push(arguments)},c[e].t=Date.now(),
+        r=o.createElement(n);r.async=1;r.src=v+s+'.js';t=o.getElementsByTagName(n)[0];t.parentNode
+      .insertBefore(r,t)})(window, document,'script','//cdn.convertcart.com/35572549','ccart')
+    </script> -->
+    <script type="text/javascript" async>
+      usi_installed = 0; USI_installCode = function() { if (usi_installed == 0) { usi_installed = 1; var USI_headID = document.getElementsByTagName("head")[0]; var USI_installID = document.createElement('script'); USI_installID.type = 'text/javascript'; USI_installID.src = 'https://www.upsellit.com/active/stuhrling.jsp'; USI_headID.appendChild(USI_installID); } }; if (typeof(document.readyState) != "undefined" && document.readyState === "complete") { USI_installCode(); } else if (window.addEventListener){ window.addEventListener('load', USI_installCode, true); } else if (window.attachEvent) { window.attachEvent('onload', USI_installCode); } else { USI_installCode(); } setTimeout("USI_installCode()", 10000);
+    </script>
+    {%if template contains 'cart'%}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js" async></script>
+    {%endif%}
+
+    {%include 'login-register'%}
+
+    {%if template contains 'index'%}
+    {%else%}
+    <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=HGfVu9"></script>
+    {%endif%}
+
+    <script type="text/javascript" async>
+      (function () {
+        var fltr = document.createElement('script'); fltr.type = 'text/javascript'; fltr.async = true;
+        fltr.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'scriptcdn.feelter.com/scripts/feelter.js?referrer=stuhrling.com';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(fltr, s);
+      })();
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,615;0,700;0,800;1,400;1,500;1,600;1,615;1,700;1,800&display=swap" rel="stylesheet">
+{% if template contains 'index' or template contains 'collection' %}
+{% else %}
+  <script async>window.KlarnaThemeGlobals={};{%case template.name%} {%when"product"%} window.KlarnaThemeGlobals.data_purchase_amount={{product.first_available_variant.price}};window.KlarnaThemeGlobals.productVariants={{product.variants|json}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%when"cart"%} window.KlarnaThemeGlobals.data_purchase_amount={{cart.total_price}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%endcase%}</script>
+    
+    {% if template contains 'product'%}
+    <script>
+      $(document).ready(function(){
+        $(".desktop_review").on('click',function() {
+          $('html, body').animate({
+            scrollTop: $("ul#tab-wrapper").offset().top-200
+          }, 2000);
+
+          setTimeout(function(){
+            $('ul#tab-wrapper li.desktop_review_tab a').trigger('click');
+          },200);
+        });
+          $(".mobile-review").on('click',function() {
+          $('html, body').animate({
+            scrollTop: $(".accordinn").offset().top-50
+          }, 2000);
+
+          setTimeout(function(){
+           
+            if ($('.reviews_body').is(':visible')) {
+
+              $('.reviews_body').css('display','block');
+              $('.reviews_accordion').next(".accordion_body").children(".plusminus").text('-');
+            } else {
+              $('.reviews_accordion').trigger('click');
+            }
+          },200);
+        });
+        // Removed Video from Product Pages on Mobile
+        if ($(window).width() <= 768) {
+        $('.gallery-video').remove();
+        }
+      });
+    </script>
+    {% endif %}
+    <!-- Header hook for plugins ================================================== -->
+    
+    {% endif %}
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVP4JT9"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+{% include 'aod-flying-cart' %}<!-- CRITEO START -->
+{% include 'criteo-tracking' %}
+<!-- CRITEO END -->
+
+{% include 'globo.filter.action' %}
+	</body>
+</html> 

@@ -1,0 +1,296 @@
+
+<div class="block css-review">
+  <div class="wrapper-mini">
+    
+  <div class="review__header">
+    {%if section.settings.Customer != blank %} <div class="customer_review_title"><span class="csutomer">{{section.settings.Customer }}</span></div>{%endif%}
+      <div class="review_total_count"> 
+                <p class="judgeme_total_reviews">{%if section.settings.Average != blank %}{{section.settings.Average }}{%endif%}</p>
+        <p class="starts"><span>REVIEWS</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i></p>
+<!--         <p class="judgeme_total_reviews">{{ shop.metafields.judgeme.shop_reviews_count }}+ REVIEWS</p> -->
+      </div>
+     {%if section.settings.Read-url != blank %}
+       <div class="read__btn"><a class="read_them" href="{{section.settings.Read-url }}">{%if section.settings.Read != blank %}{{section.settings.Read }}{%else%}Read Them{%endif%}</a></div>
+  {% endif %}
+       </div> 
+    
+  <div class="review-center desktop desktop_reviews_block">
+    <div class="first-review review-blocks">
+      <div class="image_align"><a href="{{  section.settings.img_one_link }}"><img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.image != blank %}{{section.settings.image | img_url:'master'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/Money-Inc-FINAL.png?v=1582607554{%endif%}"></a></div>
+      <span class="text-consider">
+      {%if section.settings.data != blank %}{{section.settings.data}}{%else%}“Stührling has managed to build up a respectable reputation for itself… by its commitment{%endif%}
+      </span>
+    </div>
+    
+    <div class="2nd-review review-blocks">
+      <div class="image_align"><a href="{{  section.settings.img_two_link }}"><img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.image-1 != blank %}{{section.settings.image-1 | img_url:'master'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/real_simple_logo.png?v=1582607567{%endif%}"></a></div>
+      <span class="text-consider">
+      {%if section.settings.data-1 != blank %}{{section.settings.data-1}}{%else%}“Classic, casual, or cutting edge, they’re the brand that makes time for you."{%endif%}
+      </span>
+    </div>
+    
+    
+    <div class="third-review review-blocks">
+      <div class="image_align"><a href="{{  section.settings.img_three_link }}"><img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.image-4 != blank %}{{section.settings.image-4 | img_url:'master'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/real_simple_logo.png?v=1582607567{%endif%}"></a></div>
+      <span class="text-consider">
+      {%if section.settings.data-4 != blank %}{{section.settings.data-4}}{%else%}“Level up your style without bringing down that bank account"{%endif%}
+      </span>
+    </div>
+    
+    <div class="fourth-review review-blocks">
+      <div class="image_align"><a href="{{  section.settings.img_four_link }}"><img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.image-2 != blank %}{{section.settings.image-2 | img_url:'master'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/Popular-science.png?v=1582607554{%endif%}"></a></div>
+      <span class="text-consider">
+        {%if section.settings.data-2 != blank %}{{section.settings.data-2}}{%else%}“I bought it...loved it...the design is classic.”{%endif%}
+      </span>
+    </div>
+    
+    <div class="fifth-review review-blocks">
+      <div class="image_align"><a href="{{  section.settings.img_five_link }}"><img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.image-3 != blank %}{{section.settings.image-3 | img_url:'master'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/lifewire_logo.png?v=1582607554{%endif%}"></a></div>
+      <span class="text-consider">
+      {%if section.settings.data-3 != blank %}{{section.settings.data-3}}{%else%}“Striking the perfect balance between good looks and affordability… is the selection to beat.”{%endif%}
+      </span>
+    </div>
+  </div>
+    <div class="review-center mobile_reviews_block mobslider-collection mobile">
+    <div class="first-review review-blocks">
+      <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.image != blank %}{{section.settings.image | img_url:'master'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/Money-Inc-FINAL.png?v=1582607554{%endif%}">
+      <span class="text-consider">
+      {%if section.settings.data != blank %}{{section.settings.data}}{%else%} “Stührling has managed to build up a respectable reputation for itself… by its commitment{%endif%}
+      </span>
+    </div>
+    
+    <div class="2nd-review review-blocks">
+      <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.image-1 != blank %}{{section.settings.image-1 | img_url:'master'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/real_simple_logo.png?v=1582607567{%endif%}">
+      <span class="text-consider">
+      {%if section.settings.data-1 != blank %}{{section.settings.data-1}}{%else%}“Classic, casual, or cutting edge, they’re the brand that makes time for you."{%endif%}
+      </span>
+    </div>
+    
+    
+    <div class="third-review review-blocks">
+      <a href="{{  section.settings.img_three_link }}"><img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.image-4 != blank %}{{section.settings.image-4 | img_url:'master'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/real_simple_logo.png?v=1582607567{%endif%}"></a>
+      <span class="text-consider">
+      {%if section.settings.data-4 != blank %}{{section.settings.data-4}}{%else%}“Level up your style without bringing down that bank account"{%endif%}
+      </span>
+    </div>
+    
+    <div class="fourth-review review-blocks">
+      <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.image-2 != blank %}{{section.settings.image-2 | img_url:'master'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/Popular-science.png?v=1582607554{%endif%}">
+      <span class="text-consider">
+      {%if section.settings.data-2 != blank %}{{section.settings.data-2}}{%else%}“I bought it...loved it...the design is classic.”{%endif%}
+      </span>
+    </div>
+    
+    <div class="fifth-review review-blocks">
+      <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.image-3 != blank %}{{section.settings.image-3 | img_url:'master'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/lifewire_logo.png?v=1582607554{%endif%}">
+      <span class="text-consider">
+      {%if section.settings.data-3 != blank %}{{section.settings.data-3}}{%else%}“Striking the perfect balance between good looks and affordability… is the selection to beat.”{%endif%}
+      </span>
+    </div>
+  </div>
+  </div>
+</div>
+<style>
+  .review__header {
+    justify-content: center;
+}
+  .review_total_count .judgeme_total_reviews {
+    font-size: 30px;
+    line-height: 10px;
+    color: #f37c2a;
+        letter-spacing: 6px;
+
+}
+  .review-center .slick-dots{
+    display: none !important;
+}
+  @media (max-width:480px)
+    {
+  .review_total_count {
+    width: 100%;
+}
+      .css-review {
+    padding-bottom: 0px;
+}
+
+      .review_total_count .judgeme_total_reviews{
+line-height: normal;
+}
+.starts{
+margin: 0 !important;
+}
+
+.slick-dotted.slick-slider {
+margin-bottom: 0 !important;
+}
+
+.mobslider-collection .slick-list {
+margin-bottom: 0;
+}
+
+.text-consider {
+color: #000;
+font-weight: 400;
+font-size: 16px;
+}
+
+.img_cont h2{
+font-weight: 500;
+}
+
+.block {
+padding: 40px 25px 20px 30px;
+}
+      
+    }
+</style>
+
+{% schema %}
+{
+  "name": "Home Reviews",
+  "class": "index-section",
+      "settings": [
+      
+      {
+          "type": "image_picker",
+          "id": "image",
+          "label":"Content"
+        },
+		{
+		  "type": "url",
+          "id": "img_one_link",          
+          "label": "Image link"
+         },
+         {
+          "type": "textarea",
+          "id": "data",
+          "label":"Content"
+        },
+{
+"type":"header",
+"content":"second Review"
+},
+{
+          "type": "image_picker",
+          "id": "image-1",
+          "label":"Content"
+        },
+		{
+		  "type": "url",
+          "id": "img_two_link",          
+          "label": "Image link"
+         },
+         {
+          "type": "textarea",
+          "id": "data-1",
+          "label":"Content"
+        },
+{
+"type":"header",
+"content":"Third Review"
+},
+{
+          "type": "image_picker",
+          "id": "image-4",
+          "label":"Image"
+        },
+		{
+		  "type": "url",
+          "id": "img_three_link",          
+          "label": "Image link"
+         },
+         {
+          "type": "textarea",
+          "id": "data-4",
+          "label":"Content"
+        },
+{
+"type":"header",
+"content":"Fourth Review"
+},
+{
+          "type": "image_picker",
+          "id": "image-2",
+          "label":"Content"
+        },
+		{
+		  "type": "url",
+          "id": "img_four_link",          
+          "label": "Image link"
+         },
+         {
+          "type": "textarea",
+          "id": "data-2",
+          "label":"Content"
+        },
+{
+"type":"header",
+"content":"Fifth Review"
+},
+{
+          "type": "image_picker",
+          "id": "image-3",
+          "label":"Content"
+        },
+		{
+		  "type": "url",
+          "id": "img_five_link",          
+          "label": "Image link"
+         },
+         {
+          "type": "textarea",
+          "id": "data-3",
+          "label":"Content"
+        },
+{
+"type":"header",
+"content":"Customer Review"
+},
+		{
+          "type": "text",
+          "id": "Customer",
+          "label":"Customer"
+        },
+       {
+          "type": "text",
+          "id": "Average",
+          "label":"Average"
+        },
+ {
+          "type": "text",
+          "id": "Read",
+          "label":"Read Them"
+        },
+{
+          "type": "url",
+          "id": "Read-url",
+          "label":"Read Them Link"
+        }
+      ],
+  "presets": [
+    {
+      "name": "Home Reviews",
+      "category": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,183 @@
+<div class="image_wd_txt_container">
+  <div class="image_wd_txt_row {{ section.settings.custom_classes }}">
+    {% capture image_layout %}
+    <div class="content__box">
+      <div class="container_box_image"><img src="{{ section.settings.image | img_url: 'master' }}"></div>
+    </div>
+    {% endcapture %}
+    
+      {% if section.settings.layout == 'left' %}
+      {{ image_layout }}
+   	  {% endif %}
+    <div class="content__box">
+      <div class="container_box_txt">
+        <h2>{{ section.settings.box_heading }}</h2>
+        <p>{{ section.settings.box_text }}</p>
+        <a href="https://stuhrling.com/pages/register-your-watch" class="register-button">REGISTER</a>
+      </div>
+     </div>  
+      {% if section.settings.layout == 'right' %}
+      {{ image_layout }}
+      {% endif %}
+   
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "New Image with Text",
+    "settings": [
+			  {
+              "type": "text",
+              "id": "custom_classes",
+              "label": "Custom Class"
+              },
+			 {
+              "type": "select",
+              "id": "layout",
+              "label": {        
+                "en": "Image alignment"
+              },
+              "default": "left",
+              "options": [
+                {
+                  "value": "left",
+                  "label": {          
+                    "en": "Left"            
+                  }
+                },
+                {
+                  "value": "right",
+                  "label": {          
+                    "en": "Right"           
+                  }
+                }
+              ]
+             },
+			 {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+              },
+			  {
+               "type": "text",
+               "id": "box_heading",
+               "label": "Heading"
+              },
+              {
+               "type": "textarea",
+               "id": "box_text",
+               "label": "Content"
+              }
+],
+
+"presets": [
+      {
+        "name": "New Image With Text"
+      }
+
+
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+<style>
+.image_wd_txt_row {
+    display: flex;
+    flex-wrap: wrap;
+  	align-items: center;
+    justify-content: center;
+  	background-color: #000;
+}
+.content__box {
+    width: 50%;
+}  
+.container_box_image img {
+    max-width: 100%;
+    width: 100%;
+}  
+.container_box_txt {
+    padding: 0 82px;
+}  
+.container_box_txt h2 {
+    font-size: 52px;
+    letter-spacing: 8px;
+    color: #f2f2f2;
+    font-weight: 400;
+    text-transform: uppercase;
+  	line-height: 62px;
+}  
+.container_box_txt p {
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 24px;
+    color: #f2f2f2;
+    font-weight: 300;
+  	padding-top: 22px;
+}
+
+@media only screen and (max-width: 1200px) {   
+.container_box_txt h2 {
+    font-size: 42px;
+    line-height: 56px;
+}
+}
+  
+@media only screen and (max-width: 1024px) {   
+.container_box_txt h2 {
+    font-size: 36px;
+    line-height: 42px;
+  	margin: 0;
+} 
+.container_box_txt p {
+    padding-top: 12px;
+}  
+.container_box_txt {
+    padding: 0 65px;
+}  
+}
+  
+@media only screen and (max-width: 1024px) {   
+.container_box_txt h2 {
+    font-size: 28px;
+    line-height: 34px;
+    margin: 0;
+}
+.container_box_txt {
+    padding: 0 40px;
+    padding-top: 10px;
+}  
+}    
+  
+  
+@media only screen and (max-width: 768px) {     
+.content__box {
+    width: 100%;
+}  
+.container_box_txt {
+    padding: 26px 65px;
+}  
+.col-mob-direction {
+    display: flex;
+    flex-direction: column-reverse;
+}  
+}  
+  
+@media only screen and (max-width: 480px) {   
+.container_box_txt h2 {
+    font-size: 21px;
+    line-height: 28px;
+
+}  
+.container_box_txt {
+    padding: 26px 25px;
+}   
+}  
+  
+</style>

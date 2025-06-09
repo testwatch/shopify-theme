@@ -1,0 +1,45 @@
+
+{%comment%}
+v0.1
+This snippet is created by Skafos.ai.
+We'll overwrite this file as and when we push updates.
+So, please don't modify this file, since it'll get overwritten when we push our update.
+{%endcomment%}
+<script type="module">
+    const { setupSkafosPdpRecommendersByClassName } = await import('https://hosted.skafos.ai/assets/scripts/skafos-iframe-messenger.js');
+
+    try{
+        // Shopify.currency is an undocumented object, so they can change it anytime without warning.
+        window.skafosCurrency = window.skafosCurrency || {};
+        window.skafosCurrency.currency_code = Shopify.currency.active ;
+        window.skafosCurrency.currency_rate = Shopify.currency.rate ;
+        window.skafosCurrency.currency_symbol = '{{cart.currency.symbol}}'
+        //Eg window.skafosCurrency = {currency_code: 'USD', currency_rate: '1.0', currency_symbol: '$'}
+    } catch(error){}
+
+    {% if shop.metafields.skafos.similarItems.value.enabled %}
+        var similarityConfig = {{shop.metafields.skafos.similarItems}}
+        if(window.skafosCurrency){
+            if (!similarityConfig.app) similarityConfig.app = {}
+            similarityConfig.app.currency_code = window.skafosCurrency.currency_code;
+            similarityConfig.app.currency_formats = {};
+            similarityConfig.app.currency_formats.money_format = window.skafosCurrency.currency_symbol + '{{amount}}' ;
+            similarityConfig.app.currency = window.skafosCurrency;
+        }
+
+        setupSkafosPdpRecommendersByClassName("skafos-similarity-recommender", null, similarityConfig, 'production')
+    {% endif %}
+
+    {% if shop.metafields.skafos.crossSellItems.value.enabled %}
+        var crossSellItemsConfig = {{shop.metafields.skafos.crossSellItems}}
+        if(window.skafosCurrency){
+            if (!crossSellItemsConfig.app) crossSellItemsConfig.app = {}
+            crossSellItemsConfig.app.currency_code = window.skafosCurrency.currency_code;
+            crossSellItemsConfig.app.currency_formats = {};
+            crossSellItemsConfig.app.currency_formats.money_format = window.skafosCurrency.currency_symbol + '{{amount}}' ;
+            crossSellItemsConfig.app.currency = window.skafosCurrency;
+        }
+
+        setupSkafosPdpRecommendersByClassName("skafos-cross-sell-recommender", null, crossSellItemsConfig, 'production')
+    {% endif %}
+</script>

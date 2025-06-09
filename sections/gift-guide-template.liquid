@@ -1,0 +1,59 @@
+<div class="block-section story-banner">
+<div class="block">
+  <div class="images-section" style="background-image: url({{ section.settings.image | img_url:'master'}});">
+  <div class="wrapper-mini">
+    {%if section.settings.Title != blank %}<h1 class="banner-title section-header--title">{{section.settings.Title}}</h1>{%endif%}
+    {%if section.settings.data != blank or section.settings.url-one  != blank%}
+    <div class="line-paragraph">
+      {{section.settings.data}} 
+      {% if section.settings.url-one %}
+      <a href="{{section.settings.url-one}}" class="continue-reading">{{section.settings.text}}</a>
+      {% endif %}
+    </div>
+    {%endif%}
+  </div>
+</div>
+</div>
+</div>
+{% schema %}
+  {
+    "name": "Banner",
+    "settings": [
+	{
+          "type":"header",
+          "content":"Banner"
+          },
+          {			
+          "type": "text",
+          "id": "Title",
+          "label":"Title"
+          },
+          {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Banner Image"
+          },
+          {
+          "type": "textarea",
+          "id": "data",
+          "label":"Text"
+          },
+          {
+          "type": "text",
+          "id": "text",
+          "label":"Text"
+          },
+          {
+          "type": "url",
+          "id": "url-one",
+          "label":"URL"
+          }
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

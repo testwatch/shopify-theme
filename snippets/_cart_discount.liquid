@@ -1,0 +1,12 @@
+{% assign liquid_date = 'now' | date: '%s' %}
+{% assign liquid_date = liquid_date | plus: 0 %}
+{% assign last_updated = shop.metafields.appid_2922505.time_updated %}{% assign threedays_later = last_updated| plus: 259200  %}
+{% if liquid_date < threedays_later %}{% assign af_cart_json = cart | json %}
+{% assign af_customer_id = customer.id %}
+	<script>
+	window.af_custom_id = '{{ af_customer_id }}';
+	window.af_cd_cart_obj = {{af_cart_json}};
+	document.addEventListener("StartOtherLoading", function(event) { loadJS('https://cd.anglerfox.com/app/script/load_script.php?v={{last_updated}}&shop={{ shop.permanent_domain }}'); });
+	</script>
+	{% comment %}<script defer type='text/javascript' src='https://cd.anglerfox.com/app/script/load_script.php?v={{last_updated}}&shop={{ shop.permanent_domain }}'></script>{% endcomment %}
+{% endif %}

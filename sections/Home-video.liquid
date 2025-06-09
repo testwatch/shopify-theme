@@ -1,0 +1,84 @@
+<div class="video block">
+  <div class="wrapper-mini">
+    <div class="video-blocks">
+      <h2 class="block-title">{{section.settings.title}}</h2>
+      {% if section.settings.id == 'one' %}
+      <div class="videosrc">
+        {%if section.settings.url != blank %}<a href="{{section.settings.url}}">{%endif%}<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.image != blank %}{{section.settings.image | img_url:'1270x650'}}{%endif%}">
+        {%if section.settings.url != blank %}</a>{%endif%}
+        {%if section.settings.url != blank %}<a href="{{section.settings.url}}">{%endif%}<img class="videoplayer lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://cdn.shopify.com/s/files/1/0333/0936/0264/files/Video.png?v=1582608417">
+        {%if section.settings.url != blank %}</a>{%endif%}
+      </div>
+      {% elsif section.settings.id == 'two' %}
+        {%if section.settings.url != blank %}<a href="{{section.settings.url}}">{%endif%}
+          <video width="100%" controls><source src="{{section.settings.data2}}" type="video/mp4"></video>
+        {%if section.settings.url != blank %}</a>{%endif%}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Home video",
+  "class": "index-section",
+      "settings": [
+ {
+          "type": "text",
+          "id": "title",
+          "label":"Title"
+        },
+{
+          "type": "url",
+          "id": "url",
+          "label":"url"
+        },
+      {
+   "type":      "radio",
+   "id":        "id",
+   "label":     "Text",
+   "options": [
+     { "value": "one", "label": "image" },
+     { "value": "two", "label": "video" }
+   ],
+   "default":   "one",
+   "info":      "Image"
+},
+      {
+          "type": "image_picker",
+          "id": "image",
+          "label":"Content"
+        },
+         {
+          "type": "textarea",
+          "id": "data2",
+          "label":"video"
+        }
+      ],
+  "presets": [
+    {
+      "name": "Home video",
+      "category": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,122 @@
+<div class="mobile-search-popup-open">
+      <div class="section-header section-header--large mobile-search-bar-popups">
+        {% include 'search-bar-mobile' %}
+      </div>
+      
+    </div>
+
+
+<div class="desktop header-desktop">
+  <header class="logo-menu-cart">
+    <div class="icons-menu for_mobile">
+      <div class="i-menu" id="nav_list">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+   
+    <div class="logo-section">
+      <a href="/" ><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.logo !=blank %}{{section.settings.logo}}{%else%}{{ 'stuhrling-new-logo.png' | asset_url }}{%endif%}" class="header_logo header-logo lazyload" alt="Stührling"></a>
+    </div>
+     <div class="s-menu ss for_mobile">
+    <form action="{{ routes.search_url }}" method="get" class="input-group search-bar" role="search" style="display: none;">
+
+                <input type="search" name="q" value="{{ search.terms | escape }}" id="s" placeholder="{{ 'general.search.placeholder' | t }}" class="search-field mb-1 mobile-banner-image-search" aria-label="{{ 'general.search.placeholder' | t }}" placeholder="{{ 'general.search.placeholder' | t }}">
+                <input type="hidden" name="type" value="product" />
+    
+
+    </form>
+
+    </div>
+     <div class="header-button mobile_btn"> 
+              <a href="#" class="nav-top-link nav-top-not-logged-in icon button circle is-outline is-small" data-open="#login-form-popup">{%include 'user'%}</a>
+            </div>
+    <div class="menu-section for_desktop">
+      {% include 'site-nav' with linklists[section.settings.nav_menu] %}
+    </div>
+    <div class="cart-section">
+      <div class="flex-col hide-for-medium flex-right">
+        <ul class="header-nav_header">
+          <li class="header-search for_desktop">
+            <div class="input-search">
+              <form action="{{ routes.search_url }}" method="get" class="input-group search-bar" role="search">
+                <input type="search" name="q" value="{{ search.terms | escape }}" id="s" placeholder="{{ 'general.search.placeholder' | t }}" class="search-field mb-1" aria-label="{{ 'general.search.placeholder' | t }}" placeholder="{{ 'general.search.placeholder' | t }}">
+                <input type="hidden" name="type" value="product" />
+              </form>
+              <div class="searchs"><i class="fa fa-search" aria-hidden="true"></i></div>
+            </div>
+          </li>
+          <li class="account-items">
+            <div class="header-button"> 
+              <a href="https://shopify.com/33309360264/account" class="nav-top-link nav-top-not-logged-in icon button circle is-outline is-small">{%include 'user'%}</a>
+            </div>
+          </li> 
+          <li class="header-divider"></li>
+          <li class="cart-item has-icon has-dropdown">
+            <div class="header-button">
+              <a href="javascript:void(0);" title="Cart" class="header-cart-link icon button circle is-outline is-small cart-orange-on-item {% if cart.item_count != 0 %} cart-has-item-css {% endif %}"> <i class="fa fa-shopping-basket"></i></a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="mini_cart extras"> {%include 'custom-cart-drawer'%}</div>
+    <div class="style-menu for_mobile" style="display:none;">
+      <div class="menu-section">
+        <nav class="pushmenu pushmenu-left">{% include 'mobile-nav' with linklists[section.settings.nav_menu_mobile] %}</nav>
+      </div>
+    </div>
+  </header>
+</div>
+
+{% if false %}
+<div class="mobile header-mobile">
+  <header class="logo-menu-cart">
+    <div class="icons-menu">
+      <div class="i-menu" id="nav_list">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+
+    <div class="s-menu"><i class="fa fa-search" aria-hidden="true"></i></div>
+    <div class="logo-section">
+      <a href="/" > 
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.logo !=blank %}{{section.settings.logo}}{%else%}{{ 'Shape 3.png' | asset_url }}{%endif%}" class="header_logo header-logo lazyload" alt="Stührling">  
+      </a>
+    </div>
+
+    <div class="cart-section">
+      <div class="flex-col hide-for-medium flex-right">
+        <ul class="header-nav_header">
+          <li class="cart-item has-icon has-dropdown">
+            <div class="header-button">
+              <a href="javascript:void(0);" title="Cart" class="header-cart-link icon button circle is-outline is-small"> 
+                <i class="fa fa-shopping-basket"></i>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    {% comment %}
+    <div class="mini_cart extras"> {%include 'custom-cart-drawer'%}</div>
+    {% endcomment %}
+    <div class="style-menu" style="display:none;">
+      <div class="menu-section">
+        <nav class="pushmenu pushmenu-left">
+    <!--       <div class="mobile-search">
+            <div class="header-bar__module header-bar__search">
+              {% include 'search-bar' with 'header' %}
+            </div>
+          </div> -->
+        {% include 'mobile-nav' with linklists[section.settings.nav_menu_mobile] %}
+        </nav>
+      </div>
+    </div>
+  </header>
+</div>
+{% endif %}

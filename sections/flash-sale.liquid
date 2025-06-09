@@ -1,0 +1,93 @@
+<div class="flash-sale">
+  <div class="sale-flash">
+  <div class="banner-sale">
+    <img class="desktop-img" src="{%if section.settings.Desktop_image !=blank %}{{section.settings.Desktop_image | img_url:'master'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/Flash-sale-banner-no.jpg?v=1585848123{%endif%}">
+       <img class="mobile-img" src="{%if section.settings.Mobile_image !=blank %}{{section.settings.Mobile_image | img_url:'master'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/Flash-sale-banner-mobile-3-no.jpg?v=1585848255{%endif%}">
+
+    </div>
+    <div class="flash-combi">
+    <div class="ware">{%if section.settings.textheading != blank %}{{section.settings.textheading}}{%else%}<h2>WAREHOUSE <span class="flash">FLASH SALE</span></h2>{%endif%}
+    <p class="center-ware">
+   {%if section.settings.text-Content != blank %}{{section.settings.text-Content}}{%else%}
+      For 24 Hours only,we're featuring one of our favorite watches with saving you won't see again.
+    {%endif%}</p>
+      </div>
+    <div class="flash-timer">
+      <span class="flash-span">{%if section.settings.text-title !=blank %}{{section.settings.text-title}}{%else%}DEALS ENDS IN{%endif%}</span>
+      <div class="timer-cls">   <p id="days"></p><p id="demo"></p><p id="mint"></p><p id="sec"></p></div>
+    </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Flash sale",
+    "settings": [
+       { 
+        "type":"image_picker",
+        "id":"Desktop_image",
+        "label":"Desktop Image"
+        },
+		 { 
+        "type":"image_picker",
+        "id":"Mobile_image",
+        "label":"Mobile Image"
+        },
+ { 
+        "type":"textarea",
+        "id":"textheading",
+        "label":"Heading"
+        },
+ { 
+        "type":"text",
+        "id":"text-Content",
+        "label":"Content"
+        },
+		 { 
+        "type":"text",
+        "id":"text-title",
+        "label":"Title"
+        },
+ { 
+        "type":"text",
+        "id":"time-title",
+        "label":"Count Down Timer Time",
+		"default":"Jan 5, 2021 15:37:25"
+        }
+
+]
+
+  }
+{% endschema %}
+<script>
+// Set the date we're counting down to
+  var countDownDate = new Date("{%if section.settings.time-title != blank %}{{section.settings.time-title}}{%else%}Jan 5, 2021 15:37:25{%endif%}").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+     document.getElementById("days").innerHTML =days  + "<span class='days'> Days</span> ";
+  document.getElementById("demo").innerHTML =hours  + "<span class='hours'> Hours</span> ";
+  document.getElementById("mint").innerHTML = minutes + "<span class='mintue'> Min</span> ";
+    document.getElementById("sec").innerHTML = seconds + "<span class='mintue'> Sec</span> ";
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>

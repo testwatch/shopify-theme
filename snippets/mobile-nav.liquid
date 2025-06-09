@@ -1,0 +1,153 @@
+<nav role="navigation">
+  <ul id="MobileNav" class="mobile-nav post-large--hide">
+    {% for link in mobile-nav.links %}
+      {% if link.links != blank %}
+        {% assign parent_index = forloop.index %}
+        <li class="mobile_head title_color" aria-haspopup="true">
+            {{ link.title | escape }}
+            <span class="mobplusminus"> <span class="icon icon-arrow-down" aria-hidden="true"></span></span>
+          
+        </li>
+    <ul
+            id="MobileNav-Parent-{{ parent_index }}"
+            class="mobile_body" style="display: none;">
+           {% comment %} {% if link.type == 'collection_link' or link.type == 'blog_link' or link.url == routes.all_products_collection_url %}
+              <li class="mobile-nav__sublist-link {% if link.active %}site-nav--active{% endif %}">
+                <a href="{{ link.url }}" class="site-nav__link"{% if link.active %} aria-current="page"{% endif %}>{{ 'collections.sorting.all_tags' | t }} <span class="visually-hidden">{{ link.title | escape }}</span></a>
+              </li>
+            {% endif %}{% endcomment %}
+            {% for childlink in link.links %}
+              {% if childlink.links != blank %}
+                {% assign child_index = forloop.index %}
+                <li class="mobile-nav__sublist-link">
+                  <a
+                    href="{{ childlink.url }}"
+                    class="mobile-nav__sublist-trigger"
+                    aria-controls="MobileNav-Child-{{ parent_index }}-{{ child_index }}"
+                    aria-expanded="false"
+                    >{{ childlink.title | escape }}</a>
+                      <div class="mobile-icons-parent"> {% include 'mobile-nav-icons' %}</div>
+
+                  <ul
+                    id="MobileNav-Child-{{ parent_index }}-{{ child_index }}"
+                    class="mobile-nav__sublist mobile-nav__sublist--grandchilds">
+                    {% for grandchildlink in childlink.links %}
+                      <li class="mobile-nav__sublist-link">
+                        <a
+                          href="{{ grandchildlink.url }}"
+                          {% unless request.page_type == 'index' %}{% if grandchildlink.active %}aria-current="page"{% endif %}{% endunless%}>
+                          {{ grandchildlink.title | escape }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </li>
+              {% else %}
+                <li class="mobile-nav__sublist-link">
+                  <a
+                    href="{{ childlink.url }}"
+                    {% unless request.page_type == 'index' %}{% if childlink.active %}aria-current="page"{% endif %}{% endunless%}>
+                    {{ childlink.title | escape }}
+                  </a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+      {% else %}
+        <li class="mobile-nav__link">
+          <a
+            href="{{ link.url }}"
+            class="mobile-nav"
+            {% unless request.page_type == 'index' %}{% if link.active %}aria-current="page"{% endif %}{% endunless%}>
+            {{ link.title | escape }}
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+
+    {% if shop.customer_accounts_enabled %}
+      {% if customer %}
+        <li class="mobile-nav__link">
+          <a href="{{ routes.account_url }}">{{ 'layout.customer.account' | t }}</a>
+        </li>
+        <li class="mobile-nav__link">
+          {{ 'layout.customer.log_out' | t | customer_logout_link }}
+        </li>
+      {% else %}
+        <li class="mobile-nav__link">
+          {{ 'layout.customer.log_in' | t | customer_login_link }}
+        </li>
+        <li class="mobile-nav__link">
+          {{ 'layout.customer.create_account' | t | customer_register_link }}
+        </li>
+      {% endif %}
+    {% endif %}
+
+   
+<div class="mobile-header-search-form">
+<form action="{{ routes.search_url }}" method="get" class="input-group search-bar" role="search">
+
+                <input type="search" name="q" value="{{ search.terms | escape }}" id="s" placeholder="{{ 'general.search.placeholder' | t }}" class="search-field mb-1 mobile-banner-image-search" aria-label="{{ 'general.search.placeholder' | t }}" placeholder="{{ 'general.search.placeholder' | t }}">
+                <input type="hidden" name="type" value="product" />
+    
+
+    </form>
+</div>
+  </ul>
+</nav>
+
+
+<script>
+  $(document).ready(function() {
+  //toggle the component with class accordion_body
+  $(".mobile_head").click(function() {
+    if ($('.mobile_body').is(':visible')) {
+      $(".mobile_body").slideUp(300);
+      $(".mobplusminus").html('<span class="icon icon-arrow-down" aria-hidden="true"></span>');
+    }
+    if ($(this).next(".mobile_body").is(':visible')) {
+      $(this).next(".mobile_body").slideUp(300);
+      $(this).children(".mobplusminus").html('<span class="icon icon-arrow-down" aria-hidden="true"></span>');
+    } else {
+      $(this).next(".mobile_body").slideDown(300);
+      $(this).children(".mobplusminus").html('<span class="icon icon-arrow-down" aria-hidden="true"></span>');
+    }
+  });
+});
+</script>
+
+<style>
+
+.mobile-nav li:last-child
+  {
+    border-bottom: none !important;
+  }
+
+.mobile-nav .mobile-nav__link a
+  {
+    color: #000 !important;
+  }
+
+.mobile-nav .mobile-banner-image-search {
+    background-size: 13%;
+    margin-left: 7px !important;
+    padding: 20px 0px;
+}
+
+.mobile-header-search-form {
+    padding: 10px 0px;
+}
+
+.mobile-nav li.mobile_head.title_color {
+    font-size: 14px;
+    padding: 15px 15px !important;
+}
+
+.mobile-nav .mobile-banner-image-search::placeholder {
+    font-size: 14px !important;
+    color: #000;
+    font-family: "Lato", sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+</style>

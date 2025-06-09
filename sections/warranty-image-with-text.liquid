@@ -1,0 +1,271 @@
+<div class="image_wd_txt_container_war">
+  <div class="image_wd_txt_row {{ section.settings.custom_classes }}">
+    {% capture image_layout %}
+    <div class="content__box">
+      <div class="container_box_image"><img src="{{ section.settings.image | img_url: 'master' }}"></div>
+    </div>
+    {% endcapture %}
+    
+      {% if section.settings.layout == 'left' %}
+      {{ image_layout }}
+   	  {% endif %}
+    <div class="content__box {{ section.settings.layout }}">
+      <div class="container_box_txt">
+        <h2>{{ section.settings.box_heading }}</h2>
+        {{ section.settings.box_text }}
+        
+        <div class="location-USA">
+        {% assign manufacturer_warrant_claim_usa = all_products['manufacturer-warranty-claim'] %}
+        {% assign quartz_out_of_warranty_repair_usa = all_products['quartz-out-of-warranty-repair'] %}
+        {% assign automatic_out_of_warranty_repair_usa = all_products['automatic-out-of-warranty-repair'] %}
+        {% assign complications_out_of_warranty_repair_usa = all_products['complications-watch-out-of-warranty-repair'] %}
+        <div class="warranty-repair-button-container">
+          {% if section.settings.btn_war == "1" %}
+            <div class="warranty-repair-button-div">
+            <a data-address="Stührling Original Service Center, 449 20th st , Brooklyn, NY 11215-6247" data-price="{{ manufacturer_warrant_claim_usa.price | money_with_currency  }}" data-title="{{ manufacturer_warrant_claim_usa.title }}" data-location="United States" data-id="{{ manufacturer_warrant_claim_usa.selected_or_first_available_variant.id }}" class="warranty-repair-button">Submit a Warranty Claim</a>
+          </div>
+          {% elsif section.settings.btn_war == "2" %}
+           <div class="warranty-repair-button-div">
+            <a data-address="Stührling Original Service Center, 449 20th st , Brooklyn, NY 11215-6247" data-price="{{ quartz_out_of_warranty_repair_usa.price | money  }}" data-title="{{ quartz_out_of_warranty_repair_usa.title }}" data-location="United States" data-id="{{ quartz_out_of_warranty_repair_usa.selected_or_first_available_variant.id }}" class="warranty-repair-button">Request Quartz Service</a>
+          </div>
+          {% elsif section.settings.btn_war == "3" %}
+            <div class="warranty-repair-button-div">
+            <a data-address="Stührling Original Service Center, 449 20th st , Brooklyn, NY 11215-6247" data-price="{{ automatic_out_of_warranty_repair_usa.price | money  }}" data-title="{{ automatic_out_of_warranty_repair_usa.title }}" data-location="United States" data-id="{{ automatic_out_of_warranty_repair_usa.selected_or_first_available_variant.id }}" class="warranty-repair-button">Request Automatic Service</a>
+          </div>
+          {% elsif section.settings.btn_war == "4" %}
+            <div class="warranty-repair-button-div">
+            <a data-address="Stührling Original Service Center, 449 20th st , Brooklyn, NY 11215-6247" data-price="{{ complications_out_of_warranty_repair_usa.price | money }}" data-title="{{ complications_out_of_warranty_repair_usa.title }}" data-location="United States" data-id="{{ complications_out_of_warranty_repair_usa.selected_or_first_available_variant.id }}" class="warranty-repair-button">Request Tourbillon Service</a>
+          </div>
+          {% else %}
+            Add button!
+          {% endif %}
+        </div>    
+        </div>  
+        
+      </div>
+     </div>  
+      {% if section.settings.layout == 'right' %}
+      {{ image_layout }}
+      {% endif %}
+   
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Warranty Image With Text",
+    "settings": [
+			  {
+              "type": "text",
+              "id": "custom_classes",
+              "label": "Custom Class"
+              },
+			 {
+              "type": "select",
+              "id": "layout",
+              "label": {        
+                "en": "Image alignment"
+              },
+              "default": "left",
+              "options": [
+                {
+                  "value": "left",
+                  "label": {          
+                    "en": "Left"            
+                  }
+                },
+                {
+                  "value": "right",
+                  "label": {          
+                    "en": "Right"           
+                  }
+                }
+              ]
+             },
+			 {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+              },
+			  {
+               "type": "text",
+               "id": "box_heading",
+               "label": "Heading"
+              },
+              {
+               "type": "richtext",
+               "id": "box_text",
+               "label": "Content"
+              },
+             {
+            "type": "select",
+            "id": "btn_war",
+            "label": {
+              "en": "Select Button Type"
+            },
+            "default": "1",
+            "options": [
+              {
+                "value": "1",
+                "label": {
+                  "en": "Submit a Warranty Claim"
+                }
+              },
+              {
+                "value": "2",
+                "label": {
+                  "en": "Request Quartz Service"
+                }
+              },
+               {
+                "value": "3",
+                "label": {
+                  "en": "Request Automatic Service"
+                }
+              },
+               {
+                "value": "4",
+                "label": {
+                  "en": "Request Tourbillon Service"
+                }
+              }
+            ]
+          }
+],
+
+"presets": [
+      {
+        "name": "Warranty Image With Text"
+      }
+
+
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+<style>
+ .image_wd_txt_container_war {
+    max-width: 1331px;
+    margin: auto;
+    padding: 40px;
+  }
+   .image_wd_txt_container_war .warranty-repair-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+  .image_wd_txt_container_war .warranty-repair-button-div{
+    padding:0px!important;
+  }
+.image_wd_txt_container_war .image_wd_txt_row {
+    display: flex;
+    flex-wrap: wrap;
+  	align-items: center;
+    justify-content: center;
+}
+.image_wd_txt_container_war .content__box {
+    width: 50%;
+}  
+.image_wd_txt_container_war .container_box_image img {
+    max-width: 100%;
+    width: 100%;
+}  
+.image_wd_txt_container_war .container_box_txt {
+    padding: 0 82px;
+}  
+.image_wd_txt_container_war .container_box_txt h2 {
+    font-size: 40px;
+    color: #FF6B00;
+    font-weight: 400;
+  	line-height: 42px;
+}  
+.image_wd_txt_container_war .container_box_txt p {
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 24px;
+    font-weight: 300;
+  	padding-top: 10px;
+}
+.content__box.right .container_box_txt {
+    padding: 0 82px 0px 0px;
+}
+
+.content__box.left .container_box_txt {
+    padding: 0 0px 0px 82px;
+}
+  
+@media only screen and (max-width: 1200px) {   
+.image_wd_txt_container_war .container_box_txt h2 {
+    font-size: 26px;
+    line-height: 56px;
+}
+}
+  
+@media only screen and (max-width: 1024px) {   
+.container_box_txt h2 {
+    font-size: 36px;
+    line-height: 42px;
+  	margin: 0;
+} 
+.image_wd_txt_container_war .container_box_txt p {
+    padding-top: 12px;
+}  
+.image_wd_txt_container_war .container_box_txt {
+    padding: 0 65px;
+}  
+}
+  
+@media only screen and (max-width: 1024px) {   
+.image_wd_txt_container_war .container_box_txt h2 {
+    font-size: 28px;
+    line-height: 34px;
+    margin: 0;
+}
+.image_wd_txt_container_war .container_box_txt {
+    padding: 0 40px;
+    padding-top: 10px;
+}  
+}    
+  
+  
+@media only screen and (max-width: 768px) {     
+.image_wd_txt_container_war .content__box {
+    width: 100%;
+}  
+ 
+.image_wd_txt_container_war .col-mob-direction {
+    display: flex;
+    flex-direction: column-reverse;
+}  
+  .content__box.right .container_box_txt {
+    padding: 10px;
+}
+
+.content__box.left .container_box_txt {
+    padding: 10px;
+}
+  
+}  
+  
+@media only screen and (max-width: 480px) {   
+.image_wd_txt_container_war .container_box_txt h2 {
+    font-size: 21px;
+    line-height: 28px;
+
+}  
+  .content__box.right .container_box_txt {
+    padding: 10px;
+}
+
+.content__box.left .container_box_txt {
+    padding: 10px;
+}
+}  
+  
+</style>

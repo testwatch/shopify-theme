@@ -1,0 +1,901 @@
+<script src="{{ 'owl.carousel.js' | asset_url }}"></script>	
+{{ 'owl.carousel.min.css' | asset_url | stylesheet_tag }}	
+  {{ 'owl.theme.default.min.css' | asset_url | stylesheet_tag }}
+<style>
+  div.landing-collec-sec.mob
+  {
+    display:none;
+    visibility:hidden;
+    opacity:0;
+  }
+  
+  div.landing-collec-sec > div.coll-page-header
+  {
+    background-color:#b7b7b7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    min-height:380px;
+  }
+  div.landing-collec-sec > div.coll-page-header > h3
+  {
+    margin:0;
+    font-size: 3.5vw;
+	letter-spacing: 10px;
+	line-height: 1.2;
+	color: #ffffff;
+	font-weight: 900;
+    text-transform:uppercase;
+  }
+  div.landing-collec-sec > div.product-banner > a > div.inner-product, div.landing-collec-sec > div.product-banner > div.inner-product
+  {
+    background-color:#b7b7b7;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    padding:30px 50px;
+    min-height:910px;
+  }
+  div.landing-collec-sec > div.product-banner.product-banner-rhs > a > div.inner-product
+  {
+    justify-content:flex-end;
+  }
+  div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data ,div.landing-collec-sec > div.product-banner > div.inner-product > div.product-data
+  {
+    flex:0 0 50%;
+    text-align:center;
+    overflow:hidden;
+    position:relative;
+  } 
+  div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > h1 , div.landing-collec-sec > div.product-banner > div.inner-product > div.product-data > h1
+  {
+    font-size: 3vw;
+	line-height: 1;
+	color: #ff6600;
+	font-weight: 800;
+    letter-spacing:2px;
+    margin: 0 0 20px 0;
+  }
+  div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-sub , div.landing-collec-sec > div.product-banner > div.inner-product > div.product-data > div.product-sub
+  {
+    font-size: 1.3vw;
+	line-height: 1.5;
+	color: #ffffff;
+	font-weight: 300;
+	margin: 0 0 20px 0;
+  }
+  div.landing-collec-sec > div.product-banner.product-banner-rhs > a > div.inner-product > div.product-data > div.product-sub, div.landing-collec-sec > div.product-banner.product-banner-rhs > div.inner-product > div.product-data > div.product-sub
+  {
+	color: #000;
+  }
+  div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-review
+  {
+    padding:50px 15px;
+  }
+  div.landing-collec-sec .owl-theme .owl-nav button
+  {
+    z-index:999;
+  }
+  div.landing-collec-sec .owl-theme .owl-nav button > i
+  {
+    font-size: 3vw;
+	color: #f60;
+	font-weight: 900;
+    
+  }
+  div.product-review div.review-data
+  {
+    text-align:center;
+  }
+  div.product-review div.review-data > h3
+  {
+    font-size: 3vw;
+	line-height: 1;
+	color: #fefefe;
+	font-weight: 900;
+    padding: 0 30px;
+    margin:0;
+  }
+  div.product-banner.product-banner-rhs div.product-review div.review-data > h3
+  {
+    color:#515151;
+  }
+  div.product-review div.review-data > div
+  {
+    font-size: 1vw;
+	line-height: 1;
+	color: #ff6500;
+	font-weight: 300;
+    padding: 20px 30px 0;
+  }
+  div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-btn
+  {
+    padding-top:20px;
+  }
+  div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-btn > button
+  {
+    display:inline-block;
+    border-radius: 4px;
+	background-color: #ff6600;
+    padding: 20px 60px;
+	font-size: 18px;
+	letter-spacing: 1px;
+	color: #fff;
+	font-weight: 700;
+    text-transform:uppercase;
+    border:none;
+  }
+  div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-btn > button:hover
+  {
+    color:#fff !important;
+    background-color: #ff7920;
+  }
+/*   Center Alignment  */
+  div.landing-collec-sec > div.product-banner.product-banner-center > a > div.inner-product ,  div.landing-collec-sec > div.product-banner.product-banner-center > div.inner-product {
+    justify-content: center;
+}
+  div.landing-collec-sec > div.product-banner.product-banner-center > a > div.inner-product > div.product-data .product-sub , div.landing-collec-sec > div.product-banner.product-banner-center > div.inner-product > div.product-data .product-sub
+  {
+    font-size: 30px;
+    line-height: 40px;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+  }
+  .product-banner-border-line {
+    border-width: 2px;
+}
+  .product-banner-border-line.open_quotes
+  {
+    margin-left: 25px;
+  }
+
+  .product-banner-border-line.open_quotes:before
+  {
+    content: '“';
+    color: #f86403;
+    position: absolute;
+    left: 0px;
+    font-size: 70px;
+   top: 25%;
+  }
+  .product-banner-border-line.close_quotes
+  {
+    margin-right: 25px;
+  }
+  .product-banner-border-line.close_quotes:after {
+    content: '“';
+    color: #f86403;
+    position: absolute;
+    right: 0px;
+    font-size: 70px;
+    transform: rotateY(
+      182deg
+    );
+    bottom: -15%;
+  }
+ div.landing-collec-sec > div.product-banner.product-banner-center .inner-product {
+    min-height: 400px;
+}
+  .product-banner-border-line.open_quotes.open-6:before {
+    top: 55%;
+    transform: translate(0px, -50%);
+}
+  .product-banner-border-line.open_quotes.open-4:before {
+    top: 20%;
+}
+  .coll-page-header a {
+    color: #fff;
+  }
+  .outer_banner_block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  div.landing-collec-sec > div.product-banner-center > div.inner-product > div.product-data {
+    flex: 0 0 100%;
+}
+  .owl-theme .owl-nav button {
+    outline: unset;
+}
+  
+/*   Live icons css */
+  .owl-carousel .owl-nav button.owl-next {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0px, -50%);
+  }
+  .owl-carousel .owl-nav button.owl-prev {
+    width: auto;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0px, -50%);
+  }
+  div.landing-collec-sec .owl-theme .owl-nav button:hover {
+    background: transparent;
+}
+  @media only screen and (min-width:768px)
+  {
+    .content_info .product-banner-border-line.open_quotes:before
+    {
+      left: 0px;
+      top: 0px;
+      line-height: normal;
+    }
+    .content_info {
+      position: relative;
+    }
+    .product-banner-border-line.close_quotes:after
+    {
+      bottom: 0px;
+      line-height: 0;
+    }
+    .content_info .product-banner-border-line.open_quotes.open-6:before {
+      top: 25%;
+    }
+    .product-banner-border-line.close_quotes.close--6:after {
+      bottom: 5px;
+    }
+    .banner_logo {
+      margin-right: 10%;
+    }
+    div.landing-collec-sec > div.product-banner.product-banner-center .inner-product {
+      min-height: 200px;
+    }
+
+  }
+  @media only screen and (max-width:1440px)
+  {
+    	div.landing-collec-sec > div.coll-page-header
+    	{
+			min-height: 288px;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product
+    	{
+			min-height: 690px;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-btn > button
+    	{
+			font-size: 15px;
+		}
+  }
+  @media only screen and (max-width:1366px)
+  {
+    	div.landing-collec-sec > div.coll-page-header
+    	{
+			min-height: 273px;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product
+    	{
+			min-height: 655px;
+		}
+  }
+  @media only screen and (max-width:1280px)
+  {
+    	div.landing-collec-sec > div.coll-page-header
+    	{
+			min-height: 255px;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product
+    	{
+			min-height: 613px;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-btn
+    	{
+			padding-top: 0;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-btn > button 
+    	{
+			font-size: 14px;
+          	padding: 12px 45px;
+		}
+  }
+  @media only screen and (max-width:1024px)
+  {
+    	div.landing-collec-sec > div.coll-page-header
+    	{
+			min-height: 205px;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product
+    	{
+          	padding:30px;
+			min-height: 490px;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-review
+    	{
+			padding: 35px 0;
+		}
+    	div.product-review div.review-data > h3
+    	{
+			font-size: 2.7vw;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-btn > button
+    	{
+			font-size: 13px;
+			padding: 10px 35px;
+		}
+  }
+  @media only screen and (max-width:768px)
+  {
+    	div.landing-collec-sec > div.coll-page-header
+    	{
+			min-height: 153px;
+		}
+    	div.landing-collec-sec > div.coll-page-header > h3
+    	{
+			letter-spacing: 8px;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product 
+    	{
+			min-height: 365px;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > h1
+    	{
+			font-size: 2.8vw;
+			margin: 0 0 10px 0;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-sub
+    	{
+			line-height: 1.2;
+			margin: 0;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-review 
+    	{
+			padding: 25px 0;
+		}
+    	div.product-review div.review-data > div
+    	{
+			font-size: 1.3vw;
+			padding: 15px 30px 0;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-btn > button
+    	{
+			font-size: 12px;
+			padding: 9px 30px;
+		}
+    
+/*    Banner Update Css  */
+/*     .product-data.mobile_product_info {
+      background: #000;
+    } */
+    .product-data.mobile_product_info h1 {
+      font-size: 22px;
+      text-align: center;
+      margin-top: 0px;
+      padding: 20px 0px 0px;
+      color: #ff6600;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+    .product-data.mobile_product_info .product-sub {
+      font-size: 14px;
+      text-align: center;
+      color: #fff;
+      padding-bottom: 20px;
+    }
+    .product-banner.product-banner-center .product-data.mobile_product_info {
+      display: none;
+    }
+    div.landing-collec-sec > div.product-banner.product-banner-center > a > div.inner-product > div.product-data,  div.landing-collec-sec > div.product-banner.product-banner-center > div.inner-product > div.product-data
+    {
+          flex: 0 0 100%;
+    }
+  }
+  @media only screen and (max-width:480px)
+  {
+    	div.landing-collec-sec.desk
+  		{
+    		display:none;
+    		visibility:hidden;
+    		opacity:0;
+  		}
+    	div.landing-collec-sec.mob
+  		{
+    		display:block;
+    		visibility:visible;
+    		opacity:1;
+  		}
+    	div.landing-collec-sec > div.coll-page-header
+    	{
+			min-height: 600px;
+		}
+    	div.landing-collec-sec > div.coll-page-header > h3
+    	{
+          	font-size:25px;
+			letter-spacing: 5px;
+          	text-align: center;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product, div.landing-collec-sec > div.product-banner > div.inner-product
+    	{
+			min-height: 700px;
+			align-items: flex-end;
+          	padding: 30px 20px;
+          	background-position: center top;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data, div.landing-collec-sec > div.product-banner > div.inner-product > div.product-data
+    	{
+			flex: 0 0 100%;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > h1,
+    	div.product-review div.review-data > h3, div.landing-collec-sec > div.product-banner > div.inner-product > div.product-data > h1
+    	{
+			font-size: 22px;
+		}
+    	div.landing-collec-sec > div.product-banner > a > div.inner-product > div.product-data > div.product-sub,
+    	div.product-review div.review-data > div , div.landing-collec-sec > div.product-banner > div.inner-product > div.product-data > div.product-sub
+    	{
+			font-size: 10px;
+		}
+    	div.landing-collec-sec .owl-theme .owl-nav button > i
+    	{
+			font-size: 35px;
+		}
+    .banner_logo img {
+      width: 50%;
+    }
+    .product-banner-border-line.open_quotes:before
+    {
+      top: 17%;
+    }
+    .product-banner-border-line.close_quotes:after
+    {
+      bottom:5px;
+    }
+    div.landing-collec-sec > div.product-banner.product-banner-center > a > div.inner-product > div.product-data .product-sub, div.landing-collec-sec > div.product-banner.product-banner-center > div.inner-product > div.product-data .product-sub
+    {
+      font-size:18px;
+    }
+    .product-banner-border-line.open_quotes.open-4:before {
+    top: 12%;
+}
+    .product-banner-border-line.open_quotes.open-6:before {
+	    top: 70%;
+    transform: translate(0px, -75%);
+}
+    .product-data.mobile_product_info {
+      position: absolute;
+      top: 5%;
+      text-align: center;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .product-banner {
+      position: relative;
+    }
+    .hide_on_mobile
+    {
+      display:none;
+    }
+    .product-banner-center .hide_on_mobile
+    {
+      display:block;
+    }
+    .product-data.mobile_product_info.content_block_3 .product-sub, .product-data.mobile_product_info.content_block_7 .product-sub {
+      color: #000;
+    }
+    .product-data.mobile_product_info .product-sub br {
+      display: none;
+    }
+    .product-data.mobile_product_info .product-sub {
+      padding:20px;
+      padding-top: 0px;
+    }
+    .product-banner.product-banner-center .product-review {
+      display: none;
+    }
+    div.landing-collec-sec > div.product-banner.product-banner-center .inner-product {
+      min-height: 300px;
+    }
+    .product-banner-border-line.close_quotes:after {
+    bottom: 0px;
+    line-height: 0;
+}
+  }
+  
+</style>
+<div class="landing-collec-sec desk">
+ 
+  {% for block in section.blocks %}
+  <div class="product-banner {% if block.settings.section-align == "right" %}product-banner-rhs{% elsif block.settings.section-align == "center" %}product-banner-center{% endif %}">
+    {% if block.settings.sec-prod-url  != blank %}
+    <a href="{{ block.settings.sec-prod-url }}"> 
+      {% endif %}
+      <div class="inner-product" {% if block.settings.sec-back-img != blank %}style="background-image:url('{{ block.settings.sec-back-img | img_url: 'master' }}');"{% endif %}>
+      <div class="product-data banner_data">
+        <h1>
+          {% if block.settings.title != blank %}
+          	{{ block.settings.title }}
+          {% endif %}
+        </h1>
+        {% if block.settings.section-align == "center" %}
+        <div class="outer_banner_block">
+          {% if block.settings.banner_logo != blank %}
+          <div class="banner_logo">
+            <img src="{{ block.settings.banner_logo | img_url:'original'  }}"/>
+          </div>
+          {% endif %}
+          <div class="content_info">
+          {% if block.settings.section-align == "center" %}
+          <hr class="product-banner-border-line open_quotes open-{{ forloop.index }}"/>
+          {% endif %}
+          <div class="product-sub">
+            {% if block.settings.sec-ban-sub != blank %}
+            {{ block.settings.sec-ban-sub }}
+            {% endif %}
+          </div>
+       
+        {% if block.settings.section-align == "center" %}
+        <hr class="product-banner-border-line close_quotes close--{{ forloop.index }}"/>
+        {% endif %}
+          </div>
+           </div>
+        {% else %}
+     
+        <div class="product-sub">
+          {% if block.settings.sec-ban-sub != blank %}
+          	{{ block.settings.sec-ban-sub }}
+          {% endif %}
+        </div>
+     
+        {% endif %}
+        {% if block.settings.review-txt1 != blank or block.settings.review-auth1 != blank%}
+        <div class="product-review">
+          <div class="owl-review owl-carousel owl-theme">
+            {% if block.settings.review-txt1 != blank or block.settings.review-auth1 != blank%}
+            <div class="review-data item">
+              <h3>
+                "{{ block.settings.review-txt1 }}"
+              </h3>
+              <div>- {{ block.settings.review-auth1 }}</div>
+            </div>
+            {% endif %}
+            {% if block.settings.review-txt2 != blank or block.settings.review-auth2 != blank%}
+            <div class="review-data item">
+              <h3>
+                "{{ block.settings.review-txt2 }}"
+              </h3>
+              <div>- {{ block.settings.review-auth2 }}</div>
+            </div>
+            {% endif %}
+            {% if block.settings.review-txt3 != blank or block.settings.review-auth3 != blank%}
+            <div class="review-data item">
+              <h3>
+                "{{ block.settings.review-txt3 }}"
+              </h3>
+              <div>- {{ block.settings.review-auth3 }}</div>
+            </div>
+            {% endif %}
+            {% if block.settings.review-txt4 != blank or block.settings.review-auth4 != blank%}
+            <div class="review-data item">
+              <h3>
+                "{{ block.settings.review-txt4 }}"
+              </h3>
+              <div>- {{ block.settings.review-auth4 }}</div>
+            </div>
+            {% endif %}
+            {% if block.settings.review-txt5 != blank or block.settings.review-auth5 != blank%}
+            <div class="review-data item">
+              <h3>
+                "{{ block.settings.review-txt5 }}"
+              </h3>
+              <div>- {{ block.settings.review-auth5 }}</div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+        {% if block.settings.button_label != blank %}
+        <div class="product-btn">
+          <button>{{block.settings.button_label }}</button>
+        </div>
+        {% endif %}
+      </div>
+      </div>
+    {% if block.settings.sec-prod-url  != blank %}
+    </a>
+    {% endif %}
+  </div>
+  {% endfor %}
+   <div id="best_Seller" class="coll-page-header" {% if section.settings.col-ban-img != blank %}style="background-image:url('{{ section.settings.col-ban-img | img_url: 'master' }}');"{% endif %}>
+    {% if section.settings.collection-page-heading != blank %}
+     <h3>{% if section.settings.collection_head_link != blank %}<a href="{{ section.settings.collection_head_link }}">{{ section.settings.collection-page-heading }}</a>{% endif %}</h3>
+    {% endif %}
+  </div>
+</div>
+<div class="landing-collec-sec mob">
+  {% if section.settings.enable_mobile_banner != blank %}
+  <div class="coll-page-header" {% if section.settings.mobile_banner_image != blank %}style="background-image:url('{{ section.settings.mobile_banner_image | img_url: 'master' }}');"{% endif %}>
+    {% if section.settings.collection-page-heading != blank %}
+    <h3>{{ section.settings.collection-page-heading }}</h3>
+    {% endif %}
+  </div>
+  {% endif %}
+  {% for block in section.blocks %}
+  <div class="product-banner {% if block.settings.section-align == "right" %}product-banner-rhs{% elsif block.settings.section-align == "center" %}product-banner-center{% endif %}">
+    {% if block.settings.sec-prod-url  != blank %}
+    <a href="{{ block.settings.sec-prod-url }}">
+      {% endif %}
+      
+      <div class="product-data mobile_product_info content_block_{{ forloop.index }}">
+       <h1>
+          {% if block.settings.title != blank %}
+          	{{ block.settings.title }}
+          {% endif %}
+        </h1>
+        <div class="product-sub">
+          {% if block.settings.sec-ban-sub != blank %}
+          	{{ block.settings.sec-ban-sub }}
+          {% endif %}
+        </div>
+      </div>
+     
+    <div class="inner-product" {% if block.settings.sec-back-img-mob != blank %}style="background-image:url('{{ block.settings.sec-back-img-mob | img_url: 'master' }}');"{% endif %}>
+      <div class="product-data banner_data">
+        <div class="hide_on_mobile">
+       <h1>
+          {% if block.settings.title != blank %}
+          	{{ block.settings.title }}
+          {% endif %}
+        </h1>
+        {% if block.settings.banner_logo != blank %}
+        <div class="banner_logo">
+          <img src="{{ block.settings.banner_logo | img_url:'original'  }}"/>
+        </div>
+        {% endif %}
+        {% if block.settings.section-align == "center" %}
+        <hr class="product-banner-border-line open_quotes open-{{ forloop.index }}"/>
+        {% endif %}
+        <div class="product-sub">
+          {% if block.settings.sec-ban-sub != blank %}
+          {{ block.settings.sec-ban-sub }}
+          {% endif %}
+        </div>
+        {% if block.settings.section-align == "center" %}
+        <hr class="product-banner-border-line close_quotes close--{{ forloop.index }}"/>
+        {% endif %}
+        </div>
+        <div class="product-review">
+          <div class="owl-review owl-carousel owl-theme">
+            {% if block.settings.review-txt1 != blank or block.settings.review-auth1 != blank%}
+            <div class="review-data item">
+              <h3>
+                "{{ block.settings.review-txt1 }}"
+              </h3>
+              <div>- {{ block.settings.review-auth1 }}</div>
+            </div>
+            {% endif %}
+            {% if block.settings.review-txt2 != blank or block.settings.review-auth2 != blank%}
+            <div class="review-data item">
+              <h3>
+                "{{ block.settings.review-txt2 }}"
+              </h3>
+              <div>- {{ block.settings.review-auth2 }}</div>
+            </div>
+            {% endif %}
+            {% if block.settings.review-txt3 != blank or block.settings.review-auth3 != blank%}
+            <div class="review-data item">
+              <h3>
+                "{{ block.settings.review-txt3 }}"
+              </h3>
+              <div>- {{ block.settings.review-auth3 }}</div>
+            </div>
+            {% endif %}
+            {% if block.settings.review-txt4 != blank or block.settings.review-auth4 != blank%}
+            <div class="review-data item">
+              <h3>
+                "{{ block.settings.review-txt4 }}"
+              </h3>
+              <div>- {{ block.settings.review-auth4 }}</div>
+            </div>
+            {% endif %}
+            {% if block.settings.review-txt5 != blank or block.settings.review-auth5 != blank%}
+            <div class="review-data item">
+              <h3>
+                "{{ block.settings.review-txt5 }}"
+              </h3>
+              <div>- {{ block.settings.review-auth5 }}</div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+         {% if block.settings.button_label != blank %}
+        <div class="product-btn">
+          <button>{{block.settings.button_label }}</button>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+      {% if block.settings.sec-prod-url  != blank %}
+    </a>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+
+{% schema %}
+  {
+    "name": "Collection Landing Page",
+    "settings":
+	[
+		{
+			"id": "collection-page-heading",
+			"type": "text",
+			"label": "Banner Heading",
+			"default": "Type Page Heading Here"
+		},
+		{
+			"type":"url",
+			"id":"collection_head_link",			
+			"label":"Collection Heading Link"
+		},
+		{
+      		"type": "image_picker",
+      		"id": "col-ban-img",
+      		"label": "Collection Heading Banner Background Image"
+    	},
+		{
+      		"type": "checkbox",
+      		"id": "enable_mobile_banner",
+      		"label": "Enable Banner for Mobile"
+    	},
+		{
+      		"type": "image_picker",
+      		"id": "mobile_banner_image",
+      		"label": "Collection Heading Banner Background Image for Mobile"
+    	}
+	],
+	"blocks":
+	[
+	{
+      "type": "select",
+      "name": "Banner Section",
+      "settings":
+	  [
+        {
+          	"type": "select",
+		  	"id": "section-align",
+		  	"options": 
+		  	[
+      			{ "value": "left", "label": "Left Side Content"},
+				{ "value": "center", "label": "Center Side Content"},
+      			{ "value": "right", "label": "Right Side Content"}
+   		  	],
+		  	"label": "Section Content Alignment"
+        },
+		{
+      		"type": "image_picker",
+      		"id": "sec-back-img",
+      		"label": "Product Section Background Image for Desktop and tablet"
+    	},
+		{
+      		"type": "image_picker",
+      		"id": "sec-back-img-mob",
+      		"label": "Product Section Background Image for Mobile Devices"
+    	},
+		{
+   			"type": "textarea",
+   			"id": "title",
+   			"default": "Type Your Section Heading",
+   			"label": "Section Heading"
+		},
+		{
+			"type":"image_picker",
+			"id":"banner_logo",
+			"label":"Pick banner logo"
+		},
+		{
+   			"type": "textarea",
+   			"id": "sec-ban-sub",
+   			"default": "Type Your Section Sub Heading",
+   			"label": "Section Sub Heading"
+		},
+		{
+   			"type": "text",
+   			"id": "review-txt1",
+   			"default": "Type Review Here",
+   			"label": "Product Review 1"
+		},
+		{
+   			"type": "text",
+   			"id": "review-auth1",
+   			"default": "Type Review Author Name Here",
+   			"label": "Product author 1"
+		},
+		{
+   			"type": "text",
+   			"id": "review-txt2",
+   			"default": "Type Review Here",
+   			"label": "Product Review 2"
+		},
+		{
+   			"type": "text",
+   			"id": "review-auth2",
+   			"default": "Type Review Author Name Here",
+   			"label": "Product author 2"
+		},
+		{
+   			"type": "text",
+   			"id": "review-txt3",
+   			"default": "Type Review Here",
+   			"label": "Product Review 3"
+		},
+		{
+   			"type": "text",
+   			"id": "review-auth3",
+   			"default": "Type Review Author Name Here",
+   			"label": "Product author 3"
+		},
+		{
+   			"type": "text",
+   			"id": "review-txt4",
+   			"default": "Type Review Here",
+   			"label": "Product Review 4"
+		},
+		{
+   			"type": "text",
+   			"id": "review-auth4",
+   			"default": "Type Review Author Name Here",
+   			"label": "Product author 4"
+		},
+		{
+   			"type": "text",
+   			"id": "review-txt5",
+   			"default": "Type Review Here",
+   			"label": "Product Review 5"
+		},
+		{
+   			"type": "text",
+   			"id": "review-auth5",
+   			"default": "Type Review Author Name Here",
+   			"label": "Product author 5"
+		},
+		{
+  			"id": "sec-prod-url",
+  			"type": "url",
+  			"label": "Product Shop Now Link Here"
+		},
+		{
+			"type":"text",
+			"id":"button_label",
+			"label":"Enter Button Text",
+			"default":"Shop Now"
+		}
+      ]
+    }
+	]
+  }
+{% endschema %}
+{% javascript %}
+{% endjavascript %}
+<script>
+  $(document).ready(function() {
+    var owl = $('.owl-review');
+    owl.owlCarousel({
+      items: 1,
+      dots:false,
+      autoHeight:false,
+      nav:true,
+      center: false,
+      navText: ["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+      loop:true,
+      autoplay:true,
+	  autoplayTimeout:5000,
+	  autoplayHoverPause:true
+    });
+  $('div.landing-collec-sec .owl-theme .owl-nav button > i').click(function(e){
+    e.preventDefault();
+
+  })
+  });
+
+</script>

@@ -1,0 +1,47 @@
+<div id="tab-outer">
+    <ul id="tab-wrapper">
+        <li><a href="#tab1">Specs</a></li>
+        <li class="desktop_review_tab"><a href="#tab2">Reviews</a></li>
+    </ul>
+    <div id="tab-body">
+        <div id="tab1">
+          {% if product.tags contains 'Straps' %}
+          {% include 'strap-spec' %}
+          {% else %}
+          <ul class="starps_video">
+             {%if product.metafields.Stuhrling.strap_material != blank %}
+            <li><span class="starps">Strap Material: </span>{{product.metafields.Stuhrling.strap_material}}</li>
+            {%endif%}
+           {%if product.metafields.Stuhrling.strap_buckle_color != blank %}
+            <li><span class="starps">Buckle Color: </span>{{product.metafields.Stuhrling.strap_buckle_color}}</li>
+            {%endif%}
+             {%if product.metafields.Stuhrling.strap_color != blank %}
+            <li><span class="starps">Strap Color: </span>{{product.metafields.Stuhrling.strap_color}}</li>
+            {%endif%}
+               {%if product.metafields.Stuhrling.strap_buckle_type != blank %}
+            <li><span class="starps">Buckle Type: </span>{{product.metafields.Stuhrling.strap_buckle_type}}</li>
+            {%endif%}
+            {%if product.metafields.Stuhrling.Strap_Width != blank %}
+            <li><span class="starps">Strap Width: </span>{{product.metafields.Stuhrling.Strap_Width}}</li>
+            {%endif%}
+ 		{%if product.metafields.Stuhrling.strap_ModelNumber != blank %}
+            <li><span class="starps">Model Number: </span>{{product.metafields.Stuhrling.strap_ModelNumber}}</li>
+            {%endif%}
+             {%if product.metafields.Stuhrling.strap_CompatibleModels != blank %}
+            <li><span class="starps">Compatible Models: </span>{{product.metafields.Stuhrling.strap_CompatibleModels}}</li>
+            {%endif%}
+            
+
+             {%if product.metafields.Stuhrling.Strap_Gender != blank %}
+            <li><span class="starps">Gender: </span>{{product.metafields.Stuhrling.Strap_Gender}}</li>
+            {%endif%}
+          </ul>
+      {% endif %}
+        </div>
+        
+        <div id="tab2">
+         {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: false, product: product %}
+  
+        </div>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+<div class="Corporate_pg_container">
+  <div class="Corporate_banner" style="background-image:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url({{ section.settings.bg-image |img_url: 'master'}});background-size: cover;background-position: center;">
+    <div class="Corporate_banner_heading">
+    	<h2>{{ section.settings.banner_heading }}</h2>
+        <p>{{ section.settings.banner_text }}</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Banner",
+    "settings": [
+			{
+         	 "type": "image_picker",
+             "id": "bg-image",
+             "label": "Banner Background Image"
+            },
+			{
+             "type": "text",
+             "id": "banner_heading",
+             "label": "Banner Heading"
+            },
+            {
+             "type": "textarea",
+             "id": "banner_text",
+             "label": "Content"
+            }
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+<style>
+.Corporate_banner {
+    min-height: 430px;
+  	text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Corporate_banner_heading h2 {
+    font-size: 47px;
+    letter-spacing: 7px;
+    line-height: 43px;
+    color: #f2f2f2;
+    font-weight: 700;
+    text-align: center;
+}  
+.Corporate_banner_heading p {
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 38px;
+    color: #f2f2f2;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+}  
+  
+/*-- Custom html css section --*/
+.corporate-des-sec p {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 54px 0;
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 24px;
+    color: #606060;
+    font-weight: 300;
+    font-family: "Lato";
+    text-align: center;
+}  
+  
+.single_title_sec h2 {
+    font-size: 48px;
+    letter-spacing: 7px;
+    line-height: 43px;
+    color: #0b0b0b;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 86px 0;
+}
+
+@media only screen and (max-width: 1200px) {   
+.single_title_sec h2 {
+    font-size: 42px;    
+}  
+.Corporate_banner_heading h2 {
+    font-size: 42px;
+}   
+}  
+  
+@media only screen and (max-width: 768px) { 
+.Corporate_banner_heading h2 {
+    font-size: 28px;
+  	line-height: 26px;
+}  
+.Corporate_banner_heading p {
+    font-size: 16px;
+    line-height: 28px;
+}  
+.single_title_sec h2 {
+    font-size: 28px;
+  	padding: 60px 0;
+}  
+}  
+  
+@media only screen and (max-width: 480px) {
+.Corporate_banner_heading h2 {
+    font-size: 21px;
+    letter-spacing: 4px;
+}  
+.Corporate_banner_heading {
+    padding: 0 21px;
+}  
+.Corporate_banner_heading p {
+    font-size: 14px;
+    line-height: 20px;
+}  
+.corporate-des-sec p {
+    padding: 54px 20px;
+}  
+.single_title_sec h2 {
+    font-size: 21px;
+    padding: 40px 20px;
+    line-height: 28px;
+}  
+}  
+</style>

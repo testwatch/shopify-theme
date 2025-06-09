@@ -1,0 +1,39 @@
+<div class="collection-area block">
+{%assign main = collection.handle%}
+  <div class="wrapper-mini1">
+    <div class="collection-grid row">
+      {% for link in linklists[main].links limit:2 %}
+         {% if link.type == 'collection_link' %}
+          {% assign collection = link.object %}
+  <div class="collection-div col-md-6 col-sm-6 col-xs-12">
+    <div class="collection-area">
+      <img src=" {% if collection.image %}{{ collection.image.src | img_url: '200x200'  }}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/mens.jpg?v=1582538862{%endif%}">
+      <div class="absolute-area {% if forloop.last == true %}second-area{%endif%}">
+      <span> {{ collection.title }}</span>
+        <a href=" {{ collection.url }}">SHOP ALL</a>
+      </div>
+    </div>
+  </div>
+      {%endif%}
+  {%endfor%}
+  </div>
+  </div>
+</div>
+
+<style>
+  .absolute-area.second-area {
+    right: 0;
+}
+
+.collection-area .absolute-area {
+  max-width: 380px !important;
+    width: 100%;
+    bottom: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.wrapper-mini1 .absolute-area span {
+    font-size: 31px;
+    font-weight: bold;
+}
+</style>

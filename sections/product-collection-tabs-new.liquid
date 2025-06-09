@@ -1,0 +1,130 @@
+<div class="tabs-new">
+<h2 class="block-title">EXPLORE OUR BEST SELLERS</h2>
+	<ul class="tabs">
+		<li class="tab-link current" data-tab="tab-1">{{section.settings.title-one}}</li>
+		<li class="tab-link" data-tab="tab-2">{{section.settings.title-two}}</li>
+	</ul>
+  <div id="tab-1" class="tab-content current">
+    {%assign collection = section.settings.collection-1 %}
+    {% for product in collections[collection].products %}
+
+    <div class="product">
+      <a class="shop-now" href="{{ product.url }}"> 
+        <img class="main-image lazyload" data-src="{{ product.featured_image | product_img_url: '400x300' }}">
+      </a>
+      <div class="thumbanils-new center">
+        {% for image in product.images limit:3%}
+        <img class="lazyload" data-src="{{ image.src | product_img_url: '50x' }}">
+        {% endfor %}
+      </div>
+      <span class="title-coll">{{ product.title | escape  }}</span>
+      <span class="title-price">{{ product.price | money  }}</span>
+      {% comment %}Start automatically added Judge.me widget{% endcomment %}
+      {% include 'judgeme_widgets', widget_type: 'judgeme_preview_badge', concierge_install: true, product: product %}
+      {% comment %}End automatically added Judge.me widget{% endcomment %}
+    </div>
+    {% endfor %}	
+  </div>
+	<div id="tab-2" class="tab-content">
+      {%assign collection1 = section.settings.collection-2 %}
+      {% for product in collections[collection1].products %}
+
+      <div class="product">
+        <a class="shop-now" href="{{ product.url }}">
+          <img class="main-image lazyload"  data-src="{{ product.featured_image | product_img_url: '400x300' }}">
+        </a>
+        <div class="thumbanils-new center">
+          {% for image in product.images limit:3%}
+          <img class="lazyload"  data-src="{{ image.src | product_img_url: '50x' }}">
+          {% endfor %}
+        </div>
+        <span class="title-coll">{{ product.title | escape  }}</span>
+        <span class="title-price">{{ product.price | money  }}</span>
+        {% comment %}Start automatically added Judge.me widget{% endcomment %}
+        {% include 'judgeme_widgets', widget_type: 'judgeme_preview_badge', concierge_install: true, product: product %}
+        {% comment %}End automatically added Judge.me widget{% endcomment %}
+      </div>
+      {% endfor %}
+  </div>
+
+</div><!-- container -->
+{% schema %}
+ {
+  "name": "Product collection-tabs",
+  "class": "index-section",
+      "settings": [
+      
+      {
+          "type": "text",
+          "id": "title-one",
+          "label":"Title"
+        },
+         {
+          "type": "collection",
+          "id": "collection-1",
+          "label":"collection"
+        },
+    {
+          "type": "text",
+          "id": "title-two",
+          "label":"Title"
+        },
+         {
+          "type": "collection",
+          "id": "collection-2",
+          "label":"collection"
+        }
+      ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<script>
+  $(document).ready(function(){
+
+    $('ul.tabs li').click(function(){
+      var tab_id = $(this).attr('data-tab');
+
+      $('ul.tabs li').removeClass('current');
+      $('.tab-content').removeClass('current');
+
+      $(this).addClass('current');
+      $("#"+tab_id).addClass('current');
+      $('.tab-content').slick('refresh');
+    })
+
+  })
+</script>
+<style>
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			color: #222;
+			display: inline-block;
+			padding: 10px 15px;
+			cursor: pointer;
+		}
+
+		ul.tabs li.current{
+			background: #ededed;
+			color: #222;
+		}
+
+		.tab-content{
+			display: none;
+			background: #ededed;
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+</style>

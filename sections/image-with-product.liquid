@@ -1,0 +1,778 @@
+<style>
+  .btn.banner-btn {
+    line-height: normal;
+    min-height: unset;
+    margin: 0 auto;
+    display: block;
+    position: absolute;
+    bottom: 11%;
+    left: 50%;
+    transform: translate(-50%, 0px);
+}
+  .banner_content_block {
+    position: absolute;
+/*     top: 5%; */
+    left: 50%;
+    transform: translate(-50%, 0%);
+/*     font-weight: bold; */
+    width:100%;
+    bottom: 105px;
+}
+  .custom_image_block {
+    position: relative;
+}
+  .image_sub_title_head, .image_title_head
+  {
+        text-transform: uppercase;
+        font-weight: 300;
+    font-size: 25px;
+    line-height: 35px;
+  }
+/*   .btn.banner-btn:hover {
+    background-color: #000 !important;
+    border-color: #000 !important;
+} */
+  .block.banner_block
+  {
+    padding-right:20px;
+  }
+  .custom_block {
+    padding: 40px 0 !important;
+}
+  .custom_item {
+    padding: 0;
+}
+
+.custom__block-image-container {
+    overflow: hidden;
+}
+
+img.custom__block-image {
+    transform: unset;
+    object-fit: cover;
+    display: block;
+}
+  .banner-button {
+    border: 2px solid #ff6b00 !important;
+}
+
+  @media(max-width:768px)
+  {
+    .banner-section:first-child {
+      margin-bottom: 20px;
+    }
+    .block.banner_block
+    {
+          padding-right: 0px;
+    }
+    div.cart_price_btn {
+    position: unset !important;
+    }
+    .img_cont h2 {
+    color: #000 !important;
+}
+    .img_cont p {
+    color: #000 !important;
+}
+    .btn.banner-btn.banner-button {
+    color: #f60 !important;
+}
+    .grid-product-pro {
+    padding: unset !important;
+}
+      .block.banner_block.custom_block {
+    overflow: hidden;
+
+}
+    .product_title, .product_money {
+    font-size: 13px;
+    padding: 0 10px !important;
+    text-align: center !important;
+}
+  }
+  @media (max-width:480px)
+    {
+      .banner_content_block
+      {
+        top:0;
+      }
+      .image_sub_title_head 
+      {
+        font-size: 14px;
+      }
+      button#AddToCart {
+    font-size: 15px !important;
+}
+      .product_img_item {
+    padding: 0 !important;
+}
+    }
+  @media (max-width:414px)
+  {
+    .image_title_head {
+      font-size: 25px;
+    }
+    
+  }
+  @media(max-width:375px)
+    {
+      .image_title_head
+      {
+        margin-top:10px;
+      }
+    }
+</style>
+<div class="block banner_block custom_block"> 
+<div class="banner-section-outer custom_outer_section grid">   
+{% for block in section.blocks %}
+        {% case block.settings.width %}
+          {% when '25%' %}
+            {%- assign block_width = 'col-xs-12 col-md-3' -%}
+          {% when '33%' %}
+            {%- assign block_width = 'col-xs-12 col-md-4' -%}
+      	  {% when '41%' %}
+            {%- assign block_width = 'col-xs-12 col-md-5' -%}
+          {% when '50%' %}
+            {%- assign block_width = 'col-xs-12 col-md-6' -%}
+      	  {% when '58%' %}
+            {%- assign block_width = 'col-xs-12 col-md-7' -%}
+          {% when '66%' %}
+            {%- assign block_width = 'col-xs-12 col-md-8' -%}
+          {% when '75%' %}
+            {%- assign block_width = 'col-xs-12 col-md-9' -%}
+          {% when '100%' %}
+            {%- assign block_width = 'col-xs-12 col-md-12' -%}
+        {% endcase %}
+<div class="banner-section grid__item product_img_item custom_item custom__item--{{ block.id }} small--one-whole {{ block_width }} {% if block.settings.alignment %}align--{{ block.settings.alignment }}{% endif %}" {{ block.shopify_attributes }}>
+  <div class="custom__item-inner custom__item-inner--{{ block.type }}">
+      {% case block.type %}
+              {% when 'image' %}
+    {% if block.settings.image != blank %}
+    <div class="custom_image_block">
+      {% if block.settings.image_url != blank %}  <a href="{{ block.settings.image_url }}">{% endif %}
+      <div class="custom__block-image-container image-{{ forloop.index }}">
+        {% assign img_url = block.settings.image | img_url: 'master' | replace: '_original.', '_{width}x.' %}
+
+        <img class="custom__block-image lazyload"
+             data-src="{{ img_url }}"
+             data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+             data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+             data-sizes="auto"
+             alt="{{ block.settings.image.alt | escape }}" sizes="auto">                    
+        <noscript>
+          <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt | escape }}" class="custom__block-image">
+        </noscript>
+
+      </div>
+      {% if block.settings.image_title != blank or block.settings.image_sub_title != blank  or block.settings.image_short_desc != blank or block.settings.button_title != blank  %}
+      <div class="banner_content_block img_cont">
+        {% if block.settings.image_title != blank %} <h2 style="color:{{ block.settings.text_color}};" class="image_title_head {% if block.settings.alignment %}align--{{ block.settings.alignment }}{% endif %}">{{  block.settings.image_title }}</h2>{% endif %}
+        {% if block.settings.image_sub_title != blank %} <h4 style="color:{{ block.settings.text_color}};" class="image_sub_title_head {% if block.settings.alignment %}align--{{ block.settings.alignment }}{% endif %}">{{  block.settings.image_sub_title }}</h4>{% endif %}
+        {% if block.settings.image_short_desc != blank %} <p style="color:{{ block.settings.text_color}};" class="image_text {% if block.settings.alignment %}align--{{ block.settings.alignment }}{% endif %}">{{  block.settings.image_short_desc }}</p>{% endif %}       
+      </div>
+       {% if block.settings.button_title != blank %} <a style="border:1px solid {{ block.settings.button_bg }}; background-color:{{ block.settings.button_bg }}; color:{{ block.settings.button_color}};" class="{% if block.settings.alignment %}align--{{ block.settings.alignment }}{% endif %} btn banner-btn banner-button" href="{{ block.settings.button_link}}">{{  block.settings.button_title }}</a>{% endif %}
+      {% endif %}
+        {% if block.settings.image_url != blank %}  </a>{% endif %}     
+      </div>
+
+    {% else %}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+    {% endif %}
+        {% when 'Collection' %} 
+       <div id="tab{{ forloop.index }}" class="tab-content-fac">
+          {%- assign collection = collections[block.settings.collection] -%}
+          <div class="sec_fect">
+          <div class="grid--fac">
+          {% for product in collection.products limit: 2 %} 
+           <div class="grid-product-pro">
+              <a class="product_img_link" href="{{ product.url }}">
+                <div class="reveals">
+                  {% if product.compare_at_price > product.price and settings.promotion_tag %}
+                  <div class="product_discount" aria-hidden="true" accesskey>
+                    {% if settings.promo_text_or_pourc == '1' %}
+                      {{settings.promo_text}}
+                    {% else %}
+                      {% if product.compare_at_price_max != product.compare_at_price_min %}
+                        {% assign compare_old_count = 0 %}
+                        {% assign compare_new_count = 0 %}
+                        {% for variant in product.variants %}
+                          {% if variant.compare_at_price > variant.price %}
+                              {% capture compare_new_count %}{{ variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price| ceil }}{% endcapture %}
+                            <script>if({{compare_new_count}} > {{compare_old_count}}){ {% assign compare_old_count = compare_new_count %} }</script>
+                          {% endif %}
+                        {% endfor %}
+                        <span>{{ 'products.product.upto' | t }} -{{ compare_old_count | append: "%"}}</span>
+                      {% else %}
+                        <span>-{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | ceil }}%</span>
+                      {% endif %}
+                    {% endif %}
+                  </div>
+                {% endif %}
+                  {% if product.images.size > 1 %}
+                  <img class="product_img_new" src="{{ product.featured_image.src | img_url: 'original' }}">
+                  {% else %}
+                   <img src="{{ product.featured_image.src | img_url: 'original' }}" alt="{{ product.featured_image.alt | escape }}">
+            {% endif %}
+                </div>
+              </a>
+              <a class="product_title" href="{{ product.url }}">{{ product.title }}</a>
+              {% if product.available %}
+              <div class="product-card__price">
+                {% if product.compare_at_price > product.price %}
+                  {% if product.price_varies %}
+                    {% assign sale_price = product.price | money %}
+                    <span class="product-card__promo-price">{{ 'products.product.on_sale_from_html' | t: price: sale_price }}</span>
+                  {% else %}
+                    <span class="product-card__promo-price">{{ product.price | money }}</span>
+                    <s class="product-card__regular-price">{{ product.compare_at_price | money }}</s>
+                  {% endif %}
+                {% else %}
+                  {% if product.price_varies %}
+                    {% assign price = product.price | money %}
+                    {{ 'products.product.from_text_html' | t: price: price }}
+                  {% else %}
+                    {{ product.price | money }}
+                  {% endif %}
+                {% endif %}
+                {%- unless product.price_varies -%}
+                  {%- if current_variant.unit_price_measurement -%}
+                    {% include 'product-unit-price', product_variant: current_variant, wrapper_class: "product-card__unit-price" %}
+                  {%- endif -%}
+                {%- endunless -%}
+                <form class="productform_class">
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}" class="product-single__variants"/>
+           <select name="id" id="ProductSelect-{{ section.id }}" class="product-single__variants">
+              {% for variant in product.variants %}
+                {% if variant.available %}
+
+                  <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+
+                {% else %}
+                  <option disabled="disabled">
+                    {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                  </option>
+                {% endif %}
+              {% endfor %}
+            </select>
+            
+            <div class="product-single__quantity{% unless section.settings.product_quantity_enable %} is-hidden{% endunless %}">
+              <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+              <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector">
+            </div>
+         	
+            
+       
+         <div class="button-center  AddToCartButton">	 
+             <button   data-ge-show-countries="US"  type="submit" name="add" class="AddToCart" id="AddToCart" class="us-selected-country-us btn {% if current_variant.available and product.variants.size > 1 %}{% else %}sold_out_btn{% endif %} {{ btn_class }}{% if section.settings.enable_payment_button %} btn--secondary{% endif %}" data-price="{{ variant.price | money_without_currency |  plus: 0}}" style="display: block;">	
+                <span id="AddToCartText">    {% if product.variants.first.id.size > 1 %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>	
+                {{ variant.price | money }}	
+              </button> 
+           
+         
+              
+            </div>
+    	  
+
+          {% if section.settings.enable_payment_button %}
+            {{ form | payment_button }}
+          {% endif %}
+</form>
+              </div>
+            {% else %}
+              <div class="product-card__availability">
+                {{ 'products.product.sold_out' | t }}
+              </div>
+            {% endif %}
+
+            </div>
+          {%endfor%}
+          </div>
+          </div>
+        </div>
+     {% endcase %}
+  </div>
+</div>
+            
+  {% endfor %}
+</div>
+</div>
+  <style>
+    .grid--fac {
+    display: flex;
+}
+    .grid-product-pro {
+    width: 50%;
+    padding: 0 60px;
+}
+    img.custom__block-image {
+    background-image: linear-gradient(to bottom right, #fff , #000 50%);
+}
+    .grid-product-pro {
+    display: flex;
+    flex-direction: column;
+          text-align: center;
+}
+    .product-card__price {
+    margin-top: auto;
+}
+  .reveals {
+    width: 100%;
+    padding: 30px;
+}
+    
+  </style>
+{% schema %}
+  {
+    "name": "Image with product",
+    "settings": [],
+	"blocks":[
+	{
+      "type": "image",
+      "name": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "ms": "Imej",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      },
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": {
+            "da": "Billede",
+            "de": "Foto",
+            "en": "Image",
+            "es": "Imagen",
+            "fi": "Kuva",
+            "fr": "Image",
+            "hi": "इमेज",
+            "it": "Immagine",
+            "ja": "画像",
+            "ko": "이미지",
+            "ms": "Imej",
+            "nb": "Bilde",
+            "nl": "Afbeelding",
+            "pt-BR": "Imagem",
+            "pt-PT": "Imagem",
+            "sv": "Bild",
+            "th": "รูปภาพ",
+            "zh-CN": "图片",
+            "zh-TW": "圖片"
+          }
+        },
+		{
+			"type":"text",
+			"id":"image_title",
+			"label":"Title"
+		},
+				
+		{
+			"type":"text",
+			"id":"image_sub_title",
+			"label": "Sub Title"
+		},
+		{
+			"type":"textarea",
+			"id":"image_short_desc",
+			"label": "Short Description"
+		},
+		{
+			"type":"text",
+			"id":"button_title",
+			"label": "Button Text"
+		},
+		{
+			"type":"url",
+			"id":"button_link",
+			"label": "Button CTA Link"
+		},
+		{
+			"type":"color",
+			"id":"button_color",
+			"label": "Button Text Color"
+		},
+		{
+			"type":"color",
+			"id":"button_bg",
+			"label": "Button Background Color"
+		},
+		{
+			"type":"color",
+			"id":"text_color",
+			"label": "Text Color"
+		},
+		{
+			"type":"url",
+			"id":"image_url",
+			"label":"Slide CTA Link"
+		},
+        {
+          "type": "header",
+          "content": {
+            "da": "Layout",
+            "de": "Layout",
+            "en": "Layout",
+            "es": "Diseño",
+            "fi": "Asettelu",
+            "fr": "Mise en page",
+            "hi": "लेआउट",
+            "it": "Layout",
+            "ja": "レイアウト",
+            "ko": "레이아웃",
+            "ms": "Tata letak",
+            "nb": "Oppsett",
+            "nl": "Indeling",
+            "pt-BR": "Layout",
+            "pt-PT": "Esquema",
+            "sv": "Layout",
+            "th": "เลย์เอาต์",
+            "zh-CN": "布局",
+            "zh-TW": "版面配置"
+          }
+        },
+        {
+          "type": "select",
+          "id": "width",
+          "label": {
+            "da": "Containerbredde",
+            "de": "Breite des Elements",
+            "en": "Container width",
+            "es": "Ancho del contenedor",
+            "fi": "Säiliön leveys",
+            "fr": "Largeur du conteneur",
+            "hi": "कंटेनर की चौड़ाई",
+            "it": "Larghezza contenitore",
+            "ja": "コンテナーの幅",
+            "ko": "컨테이너 폭",
+            "ms": "Lebar bekas",
+            "nb": "Beholderbredde",
+            "nl": "Containerbreedte",
+            "pt-BR": "Largura do recipiente",
+            "pt-PT": "Largura do recipiente",
+            "sv": "Container-bredd",
+            "th": "ความกว้างของความจุ",
+            "zh-CN": "容器宽度",
+            "zh-TW": "容器寬度"
+          },
+          "default": "50%",
+          "options": [
+            {
+              "value": "25%",
+              "label": {
+                "da": "25 %",
+                "de": "25%",
+                "en": "25%",
+                "es": "25%",
+                "fi": "25 %",
+                "fr": "25 %",
+                "hi": "25%",
+                "it": "25%",
+                "ja": "25%",
+                "ko": "25%",
+                "ms": "25%",
+                "nb": "25 %",
+                "nl": "25%",
+                "pt-BR": "25%",
+                "pt-PT": "25%",
+                "sv": "25 %",
+                "th": "25%",
+                "zh-CN": "25％",
+                "zh-TW": "25%"
+              }
+            },
+            {
+              "value": "33%",
+              "label": {
+                "da": "33 %",
+                "de": "33%",
+                "en": "33%",
+                "es": "33%",
+                "fi": "33 %",
+                "fr": "33 %",
+                "hi": "33%",
+                "it": "33%",
+                "ja": "33%",
+                "ko": "33%",
+                "ms": "33%",
+                "nb": "33 %",
+                "nl": "33%",
+                "pt-BR": "33%",
+                "pt-PT": "33%",
+                "sv": "33 %",
+                "th": "33%",
+                "zh-CN": "33%",
+                "zh-TW": "33%"
+              }
+            },
+			 {
+              "value": "41%",
+              "label": "41%"
+            },
+            {
+              "value": "50%",
+              "label": {
+                "da": "50 %",
+                "de": "50%",
+                "en": "50%",
+                "es": "50%",
+                "fi": "50 %",
+                "fr": "50 %",
+                "hi": "50%",
+                "it": "50%",
+                "ja": "50%",
+                "ko": "50%",
+                "ms": "50%",
+                "nb": "50 %",
+                "nl": "50%",
+                "pt-BR": "50%",
+                "pt-PT": "50%",
+                "sv": "50 %",
+                "th": "50%",
+                "zh-CN": "50%",
+                "zh-TW": "50%"
+              }
+            },
+			 {
+              "value": "58%",
+              "label": "58%"
+            },
+            {
+              "value": "66%",
+              "label": {
+                "da": "66 %",
+                "de": "66%",
+                "en": "66%",
+                "es": "66%",
+                "fi": "66 %",
+                "fr": "66 %",
+                "hi": "66%",
+                "it": "66%",
+                "ja": "66%",
+                "ko": "66%",
+                "ms": "66%",
+                "nb": "66 %",
+                "nl": "66%",
+                "pt-BR": "66%",
+                "pt-PT": "66%",
+                "sv": "66 %",
+                "th": "66%",
+                "zh-CN": "66%",
+                "zh-TW": "66%"
+              }
+            },
+            {
+              "value": "75%",
+              "label": {
+                "da": "75 %",
+                "de": "75%",
+                "en": "75%",
+                "es": "75%",
+                "fi": "75 %",
+                "fr": "75 %",
+                "hi": "75%",
+                "it": "75%",
+                "ja": "75%",
+                "ko": "75%",
+                "ms": "75%",
+                "nb": "75 %",
+                "nl": "75%",
+                "pt-BR": "75%",
+                "pt-PT": "75%",
+                "sv": "75 %",
+                "th": "75%",
+                "zh-CN": "75%",
+                "zh-TW": "75%"
+              }
+            },
+            {
+              "value": "100%",
+              "label": {
+                "da": "100 %",
+                "de": "100%",
+                "en": "100%",
+                "es": "100%",
+                "fi": "100 %",
+                "fr": "100 %",
+                "hi": "100%",
+                "it": "100%",
+                "ja": "100%",
+                "ko": "100%",
+                "ms": "100%",
+                "nb": "100 %",
+                "nl": "100%",
+                "pt-BR": "100%",
+                "pt-PT": "100%",
+                "sv": "100 %",
+                "th": "100%",
+                "zh-CN": "100%",
+                "zh-TW": "100%"
+              }
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": {
+            "da": "Lodret justering",
+            "de": "Vertikale Ausrichtung",
+            "en": "Vertical alignment",
+            "es": "Alineación vertical",
+            "fi": "Pystysuuntainen tasaus",
+            "fr": "Alignement vertical",
+            "hi": "लंबवत पंक्तिबद्धता",
+            "it": "Allineamento verticale",
+            "ja": "垂直アラインメント",
+            "ko": "수직 정렬",
+            "ms": "Penjajaran menegak",
+            "nb": "Vertikal justering",
+            "nl": "Verticaal uitlijnen",
+            "pt-BR": "Alinhamento vertical",
+            "pt-PT": "Alinhamento vertical",
+            "sv": "Vertikal justering",
+            "th": "การจัดวางแนวตั้ง",
+            "zh-CN": "垂直对齐",
+            "zh-TW": "垂直對齊"
+          },
+          "info": {
+            "da": "Placering i forhold til andre indholdsblokke på samme række",
+            "de": "Position im Verhältnis zu anderen Inhaltsblöcken in derselben Zeile",
+            "en": "Position relative to other content blocks on the same row",
+            "es": "Posición relativa a otros bloques de contenido en la misma fila",
+            "fi": "Sijainti suhteessa muihin saman rivin sisältölohkoihin",
+            "fr": "Position par rapport à d'autres blocs de contenu sur la même rangée",
+            "hi": "एक ही पंक्ति पर अन्य सामग्री ब्लॉक के सापेक्ष स्थिति",
+            "it": "Posizione relativa ad altri blocchi di contenuto sulla stessa riga",
+            "ja": "同じ行の別のコンテンツブロックに対する相対的な位置",
+            "ko": "같은 열에 있는 다른 콘텐츠 블록과 관련된 위치",
+            "ms": "Kedudukan relatif kepada blok kandungan lain pada baris yang sama",
+            "nb": "Plassering i forhold til andre innholdsblokker på samme rad",
+            "nl": "Positie ten opzichte van andere inhoudsblokken in dezelfde rij",
+            "pt-BR": "Posição em relação a outros blocos de conteúdo na mesma linha",
+            "pt-PT": "Posição em relação a outros blocos de conteúdo na mesma linha",
+            "sv": "Position i förhållande till andra innehållsblock i samma rad",
+            "th": "ตำแหน่งที่สัมพันธ์กับชุดเนื้อหาอื่นในแถวเดียวกัน",
+            "zh-CN": "相对于同一行中其他内容块的位置",
+            "zh-TW": "和同一列其他內容區塊的相對位置"
+          },
+          "default": "center",
+          "options": [
+            {
+              "value": "top",
+              "label": {
+                "da": "Top",
+                "de": "Oben",
+                "en": "Top",
+                "es": "Superior",
+                "fi": "Ylös",
+                "fr": "En haut",
+                "hi": "सबसे ऊपर",
+                "it": "In alto",
+                "ja": "上",
+                "ko": "위쪽",
+                "ms": "Atas",
+                "nb": "Topp",
+                "nl": "Boven",
+                "pt-BR": "Acima",
+                "pt-PT": "Acima",
+                "sv": "Högst upp",
+                "th": "ด้านบน",
+                "zh-CN": "顶部",
+                "zh-TW": "頂部"
+              }
+            },
+            {
+              "value": "center",
+              "label": {
+                "da": "I midten",
+                "de": "Mitte",
+                "en": "Middle",
+                "es": "Al medio",
+                "fi": "Keskelle",
+                "fr": "Au milieu",
+                "hi": "मध्य में",
+                "it": "Al centro",
+                "ja": "中央",
+                "ko": "중간",
+                "ms": "Tengah",
+                "nb": "Midten",
+                "nl": "Midden",
+                "pt-BR": "Meio",
+                "pt-PT": "Meio",
+                "sv": "Mitten",
+                "th": "ตรงกลาง",
+                "zh-CN": "中间",
+                "zh-TW": "中央"
+              }
+            },
+            {
+              "value": "bottom",
+              "label": {
+                "da": "Bund",
+                "de": "Unten",
+                "en": "Bottom",
+                "es": "Inferior",
+                "fi": "Alas",
+                "fr": "En bas",
+                "hi": "नीचे का",
+                "it": "In basso",
+                "ja": "下",
+                "ko": "아래쪽",
+                "ms": "Bawah",
+                "nb": "Bunn",
+                "nl": "Onder",
+                "pt-BR": "Abaixo",
+                "pt-PT": "Abaixo",
+                "sv": "Längst ner",
+                "th": "ด้านล่าง",
+                "zh-CN": "底部",
+                "zh-TW": "底部"
+              }
+            }
+          ]
+        }
+		
+      ]
+    },
+      {
+        "type": "Collection",
+        "name": "Collection",
+        "settings": [
+              
+              {
+                "id": "collection",
+                "type": "collection",
+                "label": "Select Collection"
+              }
+            ]
+          }
+	],
+"presets": [
+    {
+      "name": "Image with product"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+

@@ -1,0 +1,1137 @@
+<div class="expanded">
+  <div class="container vertical_spec">
+    <div class="spec_header"><h3></h3>
+     {% for variant in product.variants %}
+       {% if current.sku contains '+' %}
+      <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+        {% assign first_SKU_Combination = variant.metafields.Stuhrling.SKU_Combination | split:"+" | first %}
+        {%if first_SKU_Combination != blank %} 
+        <h3>{{ first_SKU_Combination }}</h3>
+        {% endif %}
+      </span>    
+      {% else %}
+      {% if current.sku %}
+      <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="sku_modal {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} value-span">{% assign variant_sku = variant.sku %} <h3>{{ variant_sku }}</h3></span>
+     {% endif %}
+      {% endif %}
+      {%endfor%}  
+    </div>
+    <div class="stuhrling-product-info">
+      {% assign first_Caliber = variant.metafields.Stuhrling.Caliber | split:"+" | first %}
+      {% assign first_Movement_Description = variant.metafields.Stuhrling.Movement_Description | split:"+" | first %}
+      {% assign first_Power_Reserve = variant.metafields.Stuhrling.Power_Reserve | split:"+" | first %}
+      {% assign first_Caseback = variant.metafields.Stuhrling.Caseback | split:"+" | last %}
+      {% assign first_Movement_Jewels = variant.metafields.Stuhrling.Movement_Jewels | split:"+" | first %}
+      {% assign first_Date = variant.metafields.Stuhrling.Date | split:"+" | first %}
+      {% assign first_Water_Resistance = variant.metafields.Stuhrling.Water-Resistance | split:"+" | first %}
+      {% assign first_Dual_Time = variant.metafields.Stuhrling.Dual_Time | split:"+" | first %}
+      {% assign first_AM_PM_Indicator = variant.metafields.Stuhrling.AM_PM_Indicator | split:"+" | first %}
+      {% if first_Caliber != blank or first_Movement_Description != blank or first_Power_Reserve != blank or first_Caseback != blank or first_Movement_Jewels != blank or first_Date != blank or first_Water_Resistance != blank or last_Dual_Time != blank or first_AM_PM_Indicator != blank %}
+      
+      <div class="spec_content_box">
+      <div class="spec_inner_title">
+        <h5>Movement & Features</h5>
+      </div>
+      {% for variant in product.variants %}            
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {% if variant.metafields.Stuhrling.spec_Movement_image != blank %} 
+            <div class="spec_Movement_image"><img src="{{variant.metafields.Stuhrling.spec_Movement_image}}"></div> 
+            {% endif %}
+          </span>       
+      {% endfor %}  
+            
+      <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Caliber != blank %}
+        {% assign first_Caliber_new = variant.metafields.Stuhrling.Caliber | split:"+" | first %}
+        {%if first_Caliber_new != blank %} 
+        <li class="col-md-12 col-sm-12">        
+          {% for variant in product.variants %}  
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Calibre</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {{ variant.metafields.Stuhrling.Caliber  | split:"+" | first }}
+          </span>       
+          {% endfor %}
+        </li>
+        {% endif %}
+        {% endif %}
+        {% if current.metafields.Stuhrling.Movement_Description != blank %}
+        {% assign first_Movement_Description = variant.metafields.Stuhrling.Movement_Description | split:"+" | first %}
+        {%if first_Movement_Description != blank %} 
+        <li class="col-md-12 col-sm-12">          
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Movement Description</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">            
+            {{ variant.metafields.Stuhrling.Movement_Description | split:"+" | first }}
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+        {% endif %}
+        {% if current.metafields.Stuhrling.Power_Reserve != blank %}
+        {% assign first_Power_Reserve = variant.metafields.Stuhrling.Power_Reserve | split:"+" | first %}
+        {%if first_Power_Reserve != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Movement Power Reserve</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">             
+            {{ variant.metafields.Stuhrling.Power_Reserve | split:"+" | first }}           
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+        {% endif %}
+      </ul>
+      <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Caseback != blank %}
+        {% assign first_Caseback = variant.metafields.Stuhrling.Caseback | split:"+" | first %}
+        {%if first_Caseback != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}         
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Caseback</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">        
+            {{variant.metafields.Stuhrling.Caseback | split:"+" | first }}        
+          </span>
+          {% endfor %}
+        </li>
+        {% endif %} 
+        {% endif %}
+        {% if current.metafields.Stuhrling.Movement_Jewels != blank %}
+        {% assign first_Movement_Jewels = variant.metafields.Stuhrling.Movement_Jewels | split:"+" | first %}
+        {%if first_Movement_Jewels != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Movement Jewels</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">               
+            {{ variant.metafields.Stuhrling.Movement_Jewels | split:"+" | first }}
+          </span>
+          {% endfor %}        
+        </li> 
+        {%endif%}
+        {% endif %}
+        {% if current.metafields.Stuhrling.Date != blank %}
+        {% assign first_Date = variant.metafields.Stuhrling.Date | split:"+" | first %}
+        {%if first_Date != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Date</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.Date | split:"+" | first }}         
+          </span>
+          {% endfor %}
+        </li>
+        {%endif%}
+        {%endif%}
+      </ul>
+      <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Water-Resistance != blank %}
+        {% assign first_Water_Resistance = variant.metafields.Stuhrling.Water-Resistance | split:"+" | first %}
+        {%if first_Water_Resistance != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Water Resistant</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {{ variant.metafields.Stuhrling.Water-Resistance | split:"+" | first }}
+          </span>
+          {% endfor %}
+        </li>
+        {%endif%}
+        {%endif%}
+        {% if current.metafields.Stuhrling.Dual_Time != blank %}
+        {% assign first_Dual_Time = variant.metafields.Stuhrling.Dual_Time | split:"+" | first %}
+        {%if first_Dual_Time != blank %} 
+        <li class="col-md-12 col-sm-12">          
+          {% for variant in product.variants %}          
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Dual Time</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.Dual_Time | split:"+" | first }}       
+          </span>          
+          {% endfor %}
+        </li> 
+        {%endif%}
+        {%endif%}
+        {% if current.metafields.Stuhrling.AM_PM_Indicator != blank %}
+        {% assign first_AM_PM_Indicator = variant.metafields.Stuhrling.AM_PM_Indicator | split:"+" | first %}
+        {%if first_AM_PM_Indicator != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">AM/PM Sun Moon subdial</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.AM_PM_Indicator | split:"+" | first }}         
+          </span>
+          {% endfor %}
+        </li>
+        {%endif%}
+        {%endif%}
+      </ul>
+      </div>  
+      {% endif %}
+      
+      {% assign first_Bracelet_Strap = variant.metafields.Stuhrling.Bracelet_Strap | split:"+" | first %}
+      {% assign first_Case = variant.metafields.Stuhrling.Case | split:"+" | first %}
+      {% assign first_Crystal = variant.metafields.Stuhrling.Crystal | split:"+" | first %}
+      {% assign first_Strap_replacement_size = variant.metafields.Stuhrling.Strap_replacement_size | split:"+" | first %}
+      {% assign first_Slug_to_lug = variant.metafields.Stuhrling.Slug_to_lug | split:"+" | first %}
+      {% assign first_Gram_Weight = variant.metafields.Stuhrling.Gram_Weight | split:"+" | first %}
+      {% assign first_Case_Thickness = variant.metafields.Stuhrling.Case_Thickness | split:"+" | first %}
+      {% assign first_Crown = variant.metafields.Stuhrling.Crown | split:"+" | first %}
+      {% assign first_Buckle = variant.metafields.Stuhrling.Buckle | split:"+" | first %}
+      
+      {% assign first_Material_Composition = variant.metafields.Stuhrling.Material_Composition | split:"+" | first %}
+      {% assign first_CaseSizeField = variant.metafields.Stuhrling.CaseSizeField | split:"+" | first %}
+      {% assign first_Hands = variant.metafields.Stuhrling.Hands | split:"+" | first %}
+      
+      {% assign first_Bezel = variant.metafields.Stuhrling.Bezel | split:"+" | first %}
+
+
+      {% if first_Material_Composition!= blank or first_CaseSizeField != blank or first_Hands != blank or first_Bracelet_Strap != blank or first_Case != blank or first_Crystal != blank or first_Strap_replacement_size != blank or first_Slug_to_lug != blank or first_Gram_Weight != blank or first_Crown != blank or first_Case_Thickness != blank or first_Buckle != blank or first_Bezel != blank %}  
+      
+      <div class="spec_content_box">
+      <div class="spec_inner_title">
+      <h5>Bracelet & Case</h5>      
+      </div>
+      {% for variant in product.variants %}            
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {% if variant.metafields.Stuhrling.spec_Bracelet_image != blank %} 
+            <div class="spec_Movement_image"><img src="{{variant.metafields.Stuhrling.spec_Bracelet_image}}"></div> 
+            {% endif %}
+          </span>       
+      {% endfor %}
+      <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Bracelet_Strap != blank %}
+        {% assign first_Bracelet_Strap = variant.metafields.Stuhrling.Bracelet_Strap | split:"+" | first %}
+        {%if first_Bracelet_Strap != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Bracelet/Strap</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {{ variant.metafields.Stuhrling.Bracelet_Strap | split:"+" | first  }}            
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+        {% endif %}
+        {% if current.metafields.Stuhrling.Case != blank %}
+        {% assign first_Case = variant.metafields.Stuhrling.Case | split:"+" | first %}
+        {%if first_Case != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}          
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Case Diameter</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.Case | split:"+" | first }}        
+          </span>
+          {% endfor %}
+        </li>
+        {% endif %}
+        {% endif %}
+        {% if current.metafields.Stuhrling.Crystal != blank %}
+        {% assign first_Crystal = variant.metafields.Stuhrling.Crystal | split:"+" | first %}
+        {%if first_Crystal != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Crystal</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {%if variant.metafields.Stuhrling.Crystal != blank %}
+            {{ variant.metafields.Stuhrling.Crystal | split:"+" | first }}
+            {% endif %}
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+        {% endif %}
+      </ul>
+      <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Strap_replacement_size != blank %}
+        {% assign first_Strap_replacement_size = variant.metafields.Stuhrling.Strap_replacement_size | split:"+" | first %}
+        {%if first_Strap_replacement_size != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}         
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Between lugs (strap replacement size)</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">        
+            {{ variant.metafields.Stuhrling.Strap_replacement_size | split:"+" | first }}        
+          </span>         
+          {% endfor %}
+        </li>
+        {% endif %}
+        {% endif %}
+        {% if current.metafields.Stuhrling.Slug_to_lug != blank %}
+        {% assign first_Slug_to_lug = variant.metafields.Stuhrling.Slug_to_lug | split:"+" | first %}
+        {%if first_Slug_to_lug != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Lug to Lug</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {{ variant.metafields.Stuhrling.Slug_to_lug | split:"+" | first }}
+          </span>
+          {% endfor %}        
+        </li>
+        {% endif %}
+        {% endif %}
+        {% if current.metafields.Stuhrling.Gram_Weight != blank %}
+        {% assign first_Gram_Weight = variant.metafields.Stuhrling.Gram_Weight | split:"+" | first %}
+        {%if first_Gram_Weight != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}        
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Watch Weight</span>           
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.Gram_Weight | split:"+" | first }}         
+          </span>           
+          {% endfor %}
+        </li>
+        {% endif %}
+        {% endif %}
+      </ul>
+      <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Case_Thickness != blank %}
+        {% assign first_Case_Thickness = variant.metafields.Stuhrling.Case_Thickness | split:"+" | first %}
+        {%if first_Case_Thickness != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Case Thickness</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {{variant.metafields.Stuhrling.Case_Thickness | split:"+" | first}}
+          </span>
+          {% endfor %}
+        </li>
+        {% endif %}
+        {% endif %}
+        {% if current.metafields.Stuhrling.Crown != blank %}
+        {% assign first_Crown = variant.metafields.Stuhrling.Crown | split:"+" | first %}
+        {%if first_Crown != blank %} 
+        <li class="col-md-12 col-sm-12">          
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Crown</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.Crown | split:"+" | first  }}       
+          </span>
+          {% endfor %}
+        </li>  
+        {% endif %}
+        {%endif%}
+        {% if current.metafields.Stuhrling.Buckle != blank %}
+        {% assign first_Buckle = variant.metafields.Stuhrling.Buckle | split:"+" | first %}
+        {%if first_Buckle != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}        
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Clasp/Buckle</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.Buckle | split:"+" | first }}         
+          </span>        
+          {% endfor %}
+        </li>
+        {%endif%}
+        {% endif %}
+
+      </ul>
+            <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Material_Composition != blank %}
+          {% assign first_Material_Composition = variant.metafields.Stuhrling.Material_Composition | split:"+" | first %}
+          {%if first_Material_Composition != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}         
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Case Composition</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">        
+            {{variant.metafields.Stuhrling.Material_Composition | split:"+" | first}}        
+          </span>         
+          {% endfor %}
+        </li>
+          {% endif %}
+          {% endif %}
+          {% if current.metafields.Stuhrling.CaseSizeField != blank %}
+           {% assign first_CaseSizeField = variant.metafields.Stuhrling.CaseSizeField | split:"+" | first %}
+          {%if first_CaseSizeField != blank %} 
+          <li class="col-md-12 col-sm-12">
+            {% for variant in product.variants %}
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Case Size </span>
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+              {{ variant.metafields.Stuhrling.CaseSizeField | split:"+" | first }}
+            </span>
+            {% endfor %}        
+          </li>
+          {% endif %}
+          {% endif %}
+     {% if current.metafields.Stuhrling.Bezel != blank %}
+        {% assign first_Bezel = variant.metafields.Stuhrling.Bezel | split:"+" | first %}
+        {%if first_Bezel != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Bezel</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.Bezel | split:"+" | first }}         
+          </span>       
+          {% endfor %}
+        </li>
+        {%endif%}
+        {%endif%}
+      </ul>
+      </div>
+      
+      {% endif %}
+      {% assign first_Dial = variant.metafields.Stuhrling.Dial | split:"+" | first %}
+      {% assign first_Markers = variant.metafields.Stuhrling.Markers | split:"+" | first %}
+      {% assign first_Luminosity = variant.metafields.Stuhrling.Luminosity | split:"+" | first %}
+      {% assign first_Hands = variant.metafields.Stuhrling.Hands | split:"+" | first %}
+
+       {% if first_Dial != blank or first_Luminosity != blank or first_Markers != blank or first_Hands != blank %}
+      
+      <div class="spec_content_box">
+      <div class="spec_inner_title">
+      <h5>Dial</h5>
+      </div>
+      {% for variant in product.variants %}            
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {% if variant.metafields.Stuhrling.spec_Dial_image != blank %}
+            <div class="spec_Movement_image"><img src="{{variant.metafields.Stuhrling.spec_Dial_image}}"></div>
+            {% endif %}
+          </span>       
+      {% endfor %} 
+      <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Dial != blank  %}
+        {% assign first_Dial = variant.metafields.Stuhrling.Dial | split:"+" | first %}
+        {%if first_Dial != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}          
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Dial</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">           
+            {{ variant.metafields.Stuhrling.Dial | split:"+" | first }}            
+          </span>          
+          {% endfor %}
+        </li> 
+        {% endif %}
+        {%endif%}
+        {% if current.metafields.Stuhrling.Markers != blank %}
+        {% assign first_Markers = variant.metafields.Stuhrling.Markers | split:"+" | first %}
+        {%if first_Markers != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Index/Markers</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">            
+            {{variant.metafields.Stuhrling.Markers | split:"+" | first }}            
+          </span>
+          {% endfor %}        
+        </li>
+        {% endif %}
+        {%endif%}
+        {% if current.metafields.Stuhrling.Luminosity != blank %}
+       <li class="col-md-12 col-sm-12">
+         {% assign first_Luminosity = variant.metafields.Stuhrling.Luminosity | split:"+" | first %}
+         {%if first_Luminosity != blank %} 
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Luminous</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">             
+            {{ variant.metafields.Stuhrling.Luminosity | split:"+" | first }}            
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+        {%endif%}
+        {% if current.metafields.Stuhrling.Hands != blank %}
+        {% assign first_Hands = variant.metafields.Stuhrling.Hands | split:"+" | last %}
+        {%if first_Hands != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}        
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Hands</span>           
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.Hands | split:"+" | last  }}         
+          </span>           
+          {% endfor %}
+        </li>
+        {% endif %}
+        {% endif %}
+      </ul> 
+      </div>
+      
+     {%endif%}    
+      {% assign first_ManualEnglish =  product.metafields.Stuhrling.ManualEnglish | split:"+" | first %}
+      {% assign first_ManualFrench =  product.metafields.Stuhrling.ManualFrench | split:"+" | first %}
+      {% assign first_ManualSpanish =  product.metafields.Stuhrling.ManualSpanish | split:"+" | first %}
+      {% assign first_ManualItalian =  product.metafields.Stuhrling.ManualItalian | split:"+" | first %}
+      {% assign first_ManualGerman =  product.metafields.Stuhrling.ManualGerman | split:"+" | first %}
+      {% if first_ManualEnglish != blank or first_ManualFrench != blank or first_ManualSpanish != blank or first_ManualItalian != blank or first_ManualGerman != blank %}
+       <div class="spec_inner_head">
+      <h5>Download Watch Manual</h5>
+        <hr>
+      </div>
+      <div class="stuhrling-product-info stuh_instruction_manual free-space_new">        
+        <ul class="Manuals-span">
+          {% if product.metafields.Stuhrling.ManualEnglish != blank %}
+          {% assign first_ManualEnglish =  product.metafields.Stuhrling.ManualEnglish | split:"+" | first %}
+         {%if first_ManualEnglish != blank %} 
+          <li class="col-md-4 col-sm-6">            
+            <a class="imlink product-info-value" target="_blank" href="{{ first_ManualEnglish }}">Instruction Manual</a>
+          </li>
+          {% endif %}
+          {% endif %}
+          {% if product.metafields.Stuhrling.ManualFrench != blank %}
+          {% assign first_ManualFrench =  product.metafields.Stuhrling.ManualFrench | split:"+" | first %}
+          {%if first_ManualFrench != blank %} 
+          <li class="col-md-4 col-sm-6">
+            <a class="imlink product-info-value" target="_blank" href="{{first_ManualFrench }}">Instruction Manual (French)</a>        
+          </li>
+          {% endif %}
+          {% endif %}
+          {% if product.metafields.Stuhrling.ManualSpanish != blank %}
+          {% assign first_ManualSpanish =  product.metafields.Stuhrling.ManualSpanish | split:"+" | first %}
+         {%if first_ManualSpanish != blank %} 
+          <li class="col-md-4 col-sm-6">
+            <a class="imlink product-info-value" target="_blank" href="{{product.metafields.Stuhrling.ManualSpanish | split:"+" | first }}">Instruction Manual (Spanish)</a>
+          </li>
+          {% endif %}
+          {% endif %}
+          {% if product.metafields.Stuhrling.ManualItalian != blank %}
+         {% assign first_ManualItalian =  product.metafields.Stuhrling.ManualItalian | split:"+" | first %}
+         {%if first_ManualItalian != blank %} 
+          <li class="col-md-4 col-sm-6">
+            <a class="imlink product-info-value" target="_blank" href="{{ first_ManualItalian }}">Instruction Manual (Italian)</a>        
+          </li>
+          {% endif %}
+          {% endif %}
+          {% if product.metafields.Stuhrling.ManualGerman != blank %}
+          {% assign first_ManualGerman =  product.metafields.Stuhrling.ManualGerman | split:"+" | first %}
+          {%if first_ManualGerman != blank %} 
+          <li class="col-md-4 col-sm-6">
+            <a class="imlink product-info-value" target="_blank" href="{{first_ManualGerman }}">Instruction Manual (German)</a>
+          </li>
+          {% endif %}
+          {% endif %}
+        </ul>
+      </div>
+      {% endif %}
+  </div>
+</div>
+</div>
+
+  {% if current.sku contains '+' %}
+<div class="expanded">
+  <div class="container vertical_spec">
+    <div class="spec_header"><h3></h3>
+     {% for variant in product.variants %}
+       {% if current.sku contains '+' %}
+      <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+        {% assign first_SKU_Combination = variant.metafields.Stuhrling.SKU_Combination | split:"+" | last %}
+        {%if first_SKU_Combination != blank %} 
+        <h3>{{ first_SKU_Combination }}</h3>
+        {% endif %}
+      </span>    
+      {% else %}
+      {% if current.sku %}
+      <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="sku_modal {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} value-span">{% assign variant_sku = variant.sku %} <h3>{{ variant_sku }}</h3></span>
+     {% endif %}
+      {% endif %}
+      {%endfor%}  
+    </div>
+    <div class="stuhrling-product-info">
+      {% assign first_Caliber = variant.metafields.Stuhrling.Caliber | split:"+" | last %}
+      {% assign first_Movement_Description = variant.metafields.Stuhrling.Movement_Description | split:"+" | last %}
+      {% assign first_Power_Reserve = variant.metafields.Stuhrling.Power_Reserve | split:"+" | last %}
+      {% assign first_Caseback = variant.metafields.Stuhrling.Caseback | split:"+" | last %}
+      {% assign first_Movement_Jewels = variant.metafields.Stuhrling.Movement_Jewels | split:"+" | last %}
+      {% assign first_Date = variant.metafields.Stuhrling.Date | split:"+" | last %}
+      {% assign first_Water_Resistance = variant.metafields.Stuhrling.Water-Resistance | split:"+" | last %}
+      {% assign last_Dual_Time = variant.metafields.Stuhrling.Dual_Time | split:"+" | last %}
+      {% assign first_AM_PM_Indicator = variant.metafields.Stuhrling.AM_PM_Indicator | split:"+" | last %}
+      {% if first_Caliber != blank or first_Movement_Description != blank or first_Power_Reserve != blank or first_Caseback != blank or first_Movement_Jewels != blank or first_Date != blank or first_Water_Resistance != blank or last_Dual_Time != blank or first_AM_PM_Indicator != blank %}
+    
+      <div class="spec_inner_title">
+      <h5>Movement & Features</h5>
+      </div>
+      {% for variant in product.variants %}            
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            <div class="spec_Movement_image"><img src="{{variant.metafields.Stuhrling.spec_Movement_image}}"></div> 
+          </span>       
+      {% endfor %}
+      <ul class="free-space_second free-space_new row">
+        {% if current.metafields.Stuhrling.Caliber != blank %}
+         {% assign first_Caliber = current.metafields.Stuhrling.Caliber | split:"+" | last %}
+         {%if first_Caliber != blank %} 
+        <li class="col-md-12 col-sm-12">        
+          {% for variant in product.variants %}  
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Calibre</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {{variant.metafields.Stuhrling.Caliber | split:"+" | last }}
+          </span>       
+          {% endfor %}
+        </li>
+        {% endif %}
+        {% endif %}
+        {% if current.metafields.Stuhrling.Movement_Description != blank %}
+         {% assign first_Movement_Description = variant.metafields.Stuhrling.Movement_Description | split:"+" | last %}
+         {%if first_Movement_Description != blank %} 
+        <li class="col-md-12 col-sm-12">          
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Movement Description</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">            
+            {{ variant.metafields.Stuhrling.Movement_Description | split:"+" | last  }}
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+        {% endif %}
+        {% if current.metafields.Stuhrling.Power_Reserve != blank %}
+        {% assign first_Power_Reserve = variant.metafields.Stuhrling.Power_Reserve | split:"+" | last %}
+         {%if first_Power_Reserve != blank %} 
+       <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Movement Power Reserve</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">             
+            {{ variant.metafields.Stuhrling.Power_Reserve | split:"+" | last }}           
+          </span>
+          {% endfor %}        
+        </li> 
+         {% endif %}
+        {% endif %}
+      </ul>
+        <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Caseback != blank %}
+        {% assign first_Caseback = variant.metafields.Stuhrling.Caseback | split:"+" | last %}
+        {%if first_Caseback != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}         
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Caseback</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">        
+            {{variant.metafields.Stuhrling.Caseback | split:"+" | last }}        
+          </span>
+          {% endfor %}
+        </li>
+        {% endif %} 
+        {% endif %}
+          {% if current.metafields.Stuhrling.Movement_Jewels != blank %}
+          {% assign first_Movement_Jewels = variant.metafields.Stuhrling.Movement_Jewels | split:"+" | last %}
+          {%if first_Movement_Jewels != blank %} 
+          <li class="col-md-12 col-sm-12">
+            {% for variant in product.variants %}
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Movement Jewels</span>
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">               
+              {{ variant.metafields.Stuhrling.Movement_Jewels | split:"+" | last }}
+            </span>
+            {% endfor %}        
+          </li> 
+          {%endif%}
+          {% endif %}
+          {% if current.metafields.Stuhrling.Date != blank %}
+          {% assign first_Date = variant.metafields.Stuhrling.Date | split:"+" | last %}
+          {%if first_Date != blank %} 
+          <li class="col-md-12 col-sm-12">
+            {% for variant in product.variants %}
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Date</span>
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+              {{ variant.metafields.Stuhrling.Date | split:"+" | last }}         
+            </span>
+            {% endfor %}
+          </li>
+          {%endif%}
+          {%endif%}
+      </ul>
+       <ul class="free-space_second row">
+         {% if current.metafields.Stuhrling.Water-Resistance != blank %}
+         {% assign first_Water_Resistance = variant.metafields.Stuhrling.Water-Resistance | split:"+" | last %}
+          {%if first_Water_Resistance != blank %} 
+         <li class="col-md-12 col-sm-12">
+           {% for variant in product.variants %}
+           <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Water Resistant</span>
+           <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+             {{ variant.metafields.Stuhrling.Water-Resistance | split:"+" | last }}
+           </span>
+           {% endfor %}
+         </li>
+         {%endif%}
+         {%endif%}
+         {% if current.metafields.Stuhrling.Dual_Time != blank %}
+         {% assign last_Dual_Time = variant.metafields.Stuhrling.Dual_Time | split:"+" | last %}
+          {%if last_Dual_Time != blank %} 
+        <li class="col-md-12 col-sm-12">          
+          {% for variant in product.variants %}          
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Dual Time</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.Dual_Time | split:"+" | last }}       
+          </span>          
+          {% endfor %}
+        </li> 
+         {%endif%}
+        {%endif%}
+        {% if current.metafields.Stuhrling.AM_PM_Indicator != blank %}
+         {% assign first_AM_PM_Indicator = variant.metafields.Stuhrling.AM_PM_Indicator | split:"+" | last %}
+          {%if first_AM_PM_Indicator != blank %} 
+        <li class="col-md-12 col-sm-12">
+        {% for variant in product.variants %}
+        <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">AM/PM Sun Moon subdial</span>
+        <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+        {{ variant.metafields.Stuhrling.AM_PM_Indicator | split:"+" | last }}         
+        </span>
+        {% endfor %}
+      </li>
+      {%endif%}
+      {%endif%}
+      </ul>
+    {% endif %}
+      {% assign first_Bracelet_Strap = variant.metafields.Stuhrling.Bracelet_Strap | split:"+" | last %}
+      {% assign first_Case = variant.metafields.Stuhrling.Case | split:"+" | last %}
+      {% assign first_Crystal = variant.metafields.Stuhrling.Crystal | split:"+" | last %}
+      {% assign first_Strap_replacement_size = variant.metafields.Stuhrling.Strap_replacement_size | split:"+" | last %}
+      {% assign first_Slug_to_lug = variant.metafields.Stuhrling.Slug_to_lug | split:"+" | last %}
+      {% assign first_Gram_Weight = variant.metafields.Stuhrling.Gram_Weight | split:"+" | last %}
+      {% assign first_Case_Thickness = variant.metafields.Stuhrling.Case_Thickness | split:"+" | last %}
+      {% assign first_Crown = variant.metafields.Stuhrling.Crown | split:"+" | last %}
+      {% assign first_Buckle = variant.metafields.Stuhrling.Buckle | split:"+" | last %}
+           
+      {% assign first_Material_Composition = variant.metafields.Stuhrling.Material_Composition | split:"+" | last %}
+      {% assign first_CaseSizeField = variant.metafields.Stuhrling.CaseSizeField | split:"+" | last %}
+      {% assign first_Hands = variant.metafields.Stuhrling.Hands | split:"+" | last %}
+      {% assign first_Bezel = variant.metafields.Stuhrling.Bezel | split:"+" | last %}
+
+
+      {% if first_Bracelet_Strap != blank or first_Case != blank or first_Crystal != blank or first_Strap_replacement_size != blank or first_Slug_to_lug != blank or first_Gram_Weight != blank or first_Crown != blank or first_Case_Thickness != blank or first_Buckle != blank or first_Bezel != blank %}
+      <div class="spec_inner_title">
+      <h5>Bracelet & Case</h5>
+      </div>
+      {% for variant in product.variants %}            
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            <div class="spec_Movement_image"><img src="{{variant.metafields.Stuhrling.spec_Movement_image_2}}"></div> 
+          </span>       
+      {% endfor %}
+      <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Bracelet_Strap != blank %}
+        {% assign first_Bracelet_Strap = variant.metafields.Stuhrling.Bracelet_Strap | split:"+" | last %}
+          {%if first_Bracelet_Strap != blank %} 
+       <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Bracelet/Strap</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {{ variant.metafields.Stuhrling.Bracelet_Strap | split:"+" | last }}            
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+        {% endif %}
+        {% if current.metafields.Stuhrling.Case != blank %}
+        {% assign first_Case = variant.metafields.Stuhrling.Case | split:"+" | last %}
+          {%if first_Case != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}          
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Case Diameter</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.Case | split:"+" | last }}        
+          </span>
+          {% endfor %}
+        </li>
+        {% endif %}
+        {% endif %}
+        {% if current.metafields.Stuhrling.Crystal != blank %}
+        {% assign first_Crystal = variant.metafields.Stuhrling.Crystal | split:"+" | last %}
+          {%if first_Crystal != blank %} 
+       <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Crystal</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {%if variant.metafields.Stuhrling.Crystal != blank %}
+            {{ variant.metafields.Stuhrling.Crystal | split:"+" | last }}
+            {% endif %}
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+        {% endif %}
+      </ul>
+        <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Strap_replacement_size != blank %}
+          {% assign first_Strap_replacement_size = variant.metafields.Stuhrling.Strap_replacement_size | split:"+" | last %}
+          {%if first_Strap_replacement_size != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}         
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Between lungs (strap replacement size)</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">        
+            {{ variant.metafields.Stuhrling.Strap_replacement_size | split:"+" | last }}        
+          </span>         
+          {% endfor %}
+        </li>
+          {% endif %}
+          {% endif %}
+          {% if current.metafields.Stuhrling.Slug_to_lug != blank %}
+           {% assign first_Slug_to_lug = variant.metafields.Stuhrling.Slug_to_lug | split:"+" | last %}
+          {%if first_Slug_to_lug != blank %} 
+          <li class="col-md-12 col-sm-12">
+            {% for variant in product.variants %}
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Lug to Lug</span>
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+              {{ variant.metafields.Stuhrling.Slug_to_lug | split:"+" | last }}
+            </span>
+            {% endfor %}        
+          </li>
+          {% endif %}
+          {% endif %}
+          {% if current.metafields.Stuhrling.Gram_Weight != blank %}
+          {% assign first_Gram_Weight = variant.metafields.Stuhrling.Gram_Weight | split:"+" | last %}
+          {%if first_Gram_Weight != blank %} 
+          <li class="col-md-12 col-sm-12">
+            {% for variant in product.variants %}        
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Watch Weight</span>           
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+              {{ variant.metafields.Stuhrling.Gram_Weight | split:"+" | last }}         
+            </span>           
+            {% endfor %}
+          </li>
+          {% endif %}
+          {% endif %}
+      </ul>
+       <ul class="free-space_second row">
+         {% if current.metafields.Stuhrling.Case_Thickness != blank %}
+         {% assign first_Case_Thickness = variant.metafields.Stuhrling.Case_Thickness | split:"+" | last %}
+         {%if first_Case_Thickness != blank %} 
+         <li class="col-md-12 col-sm-12">
+           {% for variant in product.variants %}
+           <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Case Thickness</span>
+           <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+             {{ variant.metafields.Stuhrling.Case_Thickness | split:"+" | last }}
+           </span>
+           {% endfor %}
+         </li>
+         {% endif %}
+         {% endif %}
+         {% if current.metafields.Stuhrling.Crown != blank %}
+         {% assign first_Crown = variant.metafields.Stuhrling.Crown | split:"+" | last %}
+         {%if first_Crown != blank %} 
+        <li class="col-md-12 col-sm-12">          
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Crown</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.Crown | split:"+" | last }}       
+          </span>
+          {% endfor %}
+        </li>  
+        {% endif %}
+         {%endif%}
+         {% if current.metafields.Stuhrling.Buckle != blank %}
+         {% assign first_Buckle = variant.metafields.Stuhrling.Buckle | split:"+" | last %}
+         {%if first_Buckle != blank %} 
+         <li class="col-md-12 col-sm-12">
+           {% for variant in product.variants %}        
+           <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Clasp/Buckle</span>
+           <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+             {{ variant.metafields.Stuhrling.Buckle | split:"+" | last }}         
+           </span>        
+           {% endfor %}
+         </li>
+       {%endif%}
+       {% endif %}
+        
+      </ul>
+       <ul class="free-space_second row">
+        
+        {% if current.metafields.Stuhrling.Material_Composition != blank %}
+          {% assign first_Material_Composition = variant.metafields.Stuhrling.Material_Composition | split:"+" | last %}
+          {%if first_Material_Composition != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}         
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Case Composition</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">        
+            {{ variant.metafields.Stuhrling.Material_Composition | split:"+" | last }}        
+          </span>         
+          {% endfor %}
+        </li>
+          {% endif %}
+          {% endif %}
+          {% if current.metafields.Stuhrling.CaseSizeField != blank %}
+           {% assign first_CaseSizeField = variant.metafields.Stuhrling.CaseSizeField | split:"+" | last %}
+          {%if first_CaseSizeField != blank %} 
+          <li class="col-md-12 col-sm-12">
+            {% for variant in product.variants %}
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Case Size </span>
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+              {{ variant.metafields.Stuhrling.CaseSizeField | split:"+" | last }}
+            </span>
+            {% endfor %}        
+          </li>
+          {% endif %}
+          {% endif %}
+     {% if current.metafields.Stuhrling.Bezel != blank %}
+        {% assign first_Bezel = variant.metafields.Stuhrling.Bezel | split:"+" | last %}
+        {%if first_Bezel != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Bezel</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.Bezel | split:"+" | last }}         
+          </span>       
+          {% endfor %}
+        </li>
+        {%endif%}
+        {%endif%}
+      </ul>
+     
+      {% endif %}
+      
+      {% assign first_Dial = variant.metafields.Stuhrling.Dial | split:"+" | last %}
+      {% assign first_Markers = variant.metafields.Stuhrling.Markers | split:"+" | last %}
+      {% assign first_Luminosity = variant.metafields.Stuhrling.Luminosity | split:"+" | last %}
+      {% assign first_Hands = variant.metafields.Stuhrling.Hands | split:"+" | last %}
+
+       {% if first_Dial != blank or first_Luminosity != blank or first_Markers != blank or first_Hands != blank %}
+      <div class="spec_inner_title">
+      <h5>Dial</h5>
+      </div>
+      {% for variant in product.variants %}            
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            <div class="spec_Movement_image"><img src="{{variant.metafields.Stuhrling.spec_Movement_image_3}}"></div> 
+          </span>       
+      {% endfor %} 
+      <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Dial != blank  %}
+        {% assign first_Dial = variant.metafields.Stuhrling.Dial | split:"+" | last %}
+        {%if first_Dial != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}          
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Dial</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">           
+            {{ variant.metafields.Stuhrling.Dial | split:"+" | last }}            
+          </span>          
+          {% endfor %}
+        </li> 
+        {% endif %}
+        {%endif%}
+        {% if current.metafields.Stuhrling.Markers != blank %}
+        {% assign first_Markers = variant.metafields.Stuhrling.Markers | split:"+" | last %}
+        {%if first_Markers != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Index/Markers</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">            
+            {{variant.metafields.Stuhrling.Markers | split:"+" | last }}            
+          </span>
+          {% endfor %}        
+        </li>
+        {% endif %}
+        {%endif%}
+        {% if current.metafields.Stuhrling.Luminosity != blank %}
+       <li class="col-md-12 col-sm-12">
+         {% assign first_Luminosity = variant.metafields.Stuhrling.Luminosity | split:"+" | last %}
+         {%if first_Luminosity != blank %} 
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Luminous</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">             
+            {{ variant.metafields.Stuhrling.Luminosity | split:"+" | last }}            
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+        {%endif%}
+        {% if current.metafields.Stuhrling.Hands != blank %}
+        {% assign first_Hands = variant.metafields.Stuhrling.Hands | split:"+" | last %}
+        {%if first_Hands != blank %} 
+        <li class="col-md-12 col-sm-12">
+          {% for variant in product.variants %}        
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Hands</span>           
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{ variant.metafields.Stuhrling.Hands | split:"+" | last }}         
+          </span>           
+          {% endfor %}
+        </li>
+        {% endif %}
+        {% endif %}
+      </ul> 
+    
+     {%endif%}     
+      
+      {% assign first_ManualEnglish =  product.metafields.Stuhrling.ManualEnglish | split:"+" | last %}
+      {% assign first_ManualFrench =  product.metafields.Stuhrling.ManualFrench | split:"+" | last %}
+      {% assign first_ManualSpanish =  product.metafields.Stuhrling.ManualSpanish | split:"+" | last %}
+      {% assign first_ManualItalian =  product.metafields.Stuhrling.ManualItalian | split:"+" | last %}
+      {% assign first_ManualGerman =  product.metafields.Stuhrling.ManualGerman | split:"+" | last %}
+
+      {% if first_ManualEnglish != blank or first_ManualFrench != blank or first_ManualSpanish != blank or first_ManualItalian != blank or first_ManualGerman != blank %}
+       <div class="spec_inner_head">
+      <h5>Download Watch Manual</h5>
+        <hr>
+      </div>
+      <div class="stuhrling-product-info stuh_instruction_manual free-space_new">        
+        <ul class="Manuals-span">
+          {% if product.metafields.Stuhrling.ManualEnglish != blank %}
+          {% assign first_ManualEnglish =  product.metafields.Stuhrling.ManualEnglish | split:"+" | last %}
+         {%if first_ManualEnglish != blank %} 
+          <li class="col-md-4 col-sm-6">            
+            <a class="imlink product-info-value" target="_blank" href="{{ first_ManualEnglish }}">Instruction Manual</a>
+          </li>
+          {% endif %}
+          {% endif %}
+          {% if product.metafields.Stuhrling.ManualFrench != blank %}
+          {% assign first_ManualFrench =  product.metafields.Stuhrling.ManualFrench | split:"+" | last %}
+          {%if first_ManualFrench != blank %} 
+          <li class="col-md-4 col-sm-6">
+            <a class="imlink product-info-value" target="_blank" href="{{first_ManualFrench }}">Instruction Manual (French)</a>        
+          </li>
+          {% endif %}
+          {% endif %}
+          {% if product.metafields.Stuhrling.ManualSpanish != blank %}
+          {% assign first_ManualSpanish =  product.metafields.Stuhrling.ManualSpanish | split:"+" | last %}
+         {%if first_ManualSpanish != blank %} 
+          <li class="col-md-4 col-sm-6">
+            <a class="imlink product-info-value" target="_blank" href="{{ first_ManualSpanish  }}">Instruction Manual (Spanish)</a>
+          </li>
+          {% endif %}
+           {% endif %}
+          {% if product.metafields.Stuhrling.ManualItalian != blank %}
+         {% assign first_ManualItalian =  product.metafields.Stuhrling.ManualItalian | split:"+" | last %}
+         {%if first_ManualItalian != blank %} 
+          <li class="col-md-4 col-sm-6">
+            <a class="imlink product-info-value" target="_blank" href="{{ first_ManualItalian }}">Instruction Manual (Italian)</a>        
+          </li>
+          {% endif %}
+          {% endif %}
+          {% if product.metafields.Stuhrling.ManualGerman != blank %}
+          {% assign first_ManualGerman =  product.metafields.Stuhrling.ManualGerman | split:"+" | last %}
+          {%if first_ManualGerman != blank %} 
+          <li class="col-md-4 col-sm-6">
+            <a class="imlink product-info-value" target="_blank" href="{{first_ManualGerman }}">Instruction Manual (German)</a>
+          </li>
+          {% endif %}
+          {% endif %}
+        </ul>
+      </div>
+      {% endif %}
+  </div>
+</div>
+</div>
+{% endif %}
+<style>
+  .stuhrling-product-info .variant_label.product-info-name {
+    width: auto;
+    text-transform: capitalize !important;
+    letter-spacing: 0px;
+    font-size: 16px !important;
+	line-height: 18px;
+	color: #484848;
+	font-weight: 900;
+	font-family: "Lato";
+}
+  .stuhrling-product-info ul li .product-info-value {
+    font-size: 16px !important;
+	line-height: normal;
+	color: #606060;
+	font-weight: 300;
+	font-family: "Lato";
+    width: auto;
+}
+ 
+  .stuhrling-product-info ul li {
+    padding: 10px 15px;
+}
+  .stuhrling-product-info ul
+  {
+    column-count: inherit;
+  }
+
+  .spec_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 900;
+    text-transform: uppercase;
+    width: 100%;
+    margin: 0 auto;
+}
+  .spec_header h3 {
+    font-weight: 700;
+}
+  .spec_inner_head h5 {
+    width: 25%;
+    border-bottom:0px;
+    font-size: 18px;
+	line-height: 43px;
+	color: #484848;
+	font-weight: 900;
+	font-family: "Lato";
+}
+  .spec_inner_head {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+}
+  .spec_inner_head hr {
+    border-color: #ccc;
+    display: block;
+    margin: 0 auto;
+    padding: 0px;
+    width: 100%;
+    border-width: 2px;
+}
+  
+
+.vertical_spec .stuhrling-product-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+.vertical_spec .spec_content_box {
+  width: 33.33%;
+  padding: 8px 9px;
+}  
+  
+.vertical_spec .Manuals-span a:hover {
+  color: #ff5100 !important;
+}
+  
+.vertical_spec .Manuals-span {
+  width: 85%;
+  margin: 0 auto;
+}
+  
+.expanded .vertical_spec h5 {
+    border-bottom: unset;
+  	font-size: 24px;
+    line-height: 43px;
+    color: #484848;
+    font-weight: 600;
+}  
+.vertical_spec .stuhrling-product-info ul li {
+    padding: 5px;
+}  
+.vertical_spec .spec_Movement_image img {
+  max-width: 100%;
+  width: 100%;
+}  
+.vertical_spec .spec_header {
+    display: unset;
+}  
+.vertical_spec .spec_header h3 {
+    font-size: 30px;
+    line-height: 43px;
+    color: #ff6b00;
+    font-weight: 900;
+} 
+.vertical_spec .spec_Movement_image {
+    padding-bottom: 10px;
+}  
+.vertical_spec .stuhrling-product-info ul {
+    padding-bottom: 0;
+} 
+
+@media only screen and (max-width:1024px){  
+.expanded .vertical_spec h5 {
+    font-size: 16px;         
+}  
+}
+  
+@media only screen and (max-width:768px){ 
+/*specificetion */
+    .vertical_spec .spec_content_box {
+        width: 100%;
+        padding-right: 0;
+    }
+}  
+  
+  @media(max-width:480px)
+    {
+      .spec_header, .spec_inner_head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .spec_inner_head h5 {
+        width: 100%;
+        border-bottom: 0px;
+        padding: 0px !important;
+      }
+    }
+</style>
+
+
+<script>
+  
+</script>

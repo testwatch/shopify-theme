@@ -1,0 +1,301 @@
+<div class="expanded">
+  
+  <div class="container">
+    <div class="spec_header"><h3></h3>
+     {% for variant in product.variants %}
+      {% if current.sku %}
+      <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="sku_modal {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} value-span">{% assign variant_sku = variant.sku %} <h3>{{ variant_sku }}</h3></span>
+     {% endif %}
+      {%endfor%}  
+    </div>
+    <div class="stuhrling-product-info">
+      
+      <div class="spec_inner_head">
+      <h5>Size</h5>
+        <hr>
+      </div>
+      <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Strap_lug_Width != blank %}
+        <li class="col-md-4 col-sm-6">        
+          {% for variant in product.variants %}          
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Strap Lug Width</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {%if variant.metafields.Stuhrling.Strap_lug_Width != blank %} 
+            {{variant.metafields.Stuhrling.Strap_lug_Width}}
+            {% endif %}
+          </span>          
+          {% endfor %}
+        </li>
+        {% endif %}
+        {% if current.metafields.Stuhrling.strap_Length_with_case != blank %}
+        <li class="col-md-4 col-sm-6">          
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Strap Length with case</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {%if variant.metafields.Stuhrling.strap_Length_with_case != blank %}
+            {{variant.metafields.Stuhrling.strap_Length_with_case}}
+            {% endif %}
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+        {% if current.metafields.Stuhrling.strap_Length_without_case != blank %}
+       <li class="col-md-4 col-sm-6">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Strap Length without case</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {%if variant.metafields.Stuhrling.strap_Length_without_case != blank %}
+            {{variant.metafields.Stuhrling.strap_Length_without_case}}
+            {% endif %}
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+      </ul>
+        <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Buckle_Size != blank %}
+        <li class="col-md-4 col-sm-6">
+          {% for variant in product.variants %}
+          {%if variant.metafields.Stuhrling.Buckle_Size != blank %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Buckle Size</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">        
+            {{variant.metafields.Stuhrling.Buckle_Size}}        
+          </span>
+          {% endif %}
+          {% endfor %}
+        </li>
+        {% endif %}
+          {% if current.metafields.Stuhrling.Buckle_Design != blank %}
+          <li class="col-md-4 col-sm-6">
+            {% for variant in product.variants %}
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Buckle Design</span>
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+              {%if variant.metafields.Stuhrling.Buckle_Design != blank %}
+              {{variant.metafields.Stuhrling.Buckle_Design}}
+              {% endif %}
+            </span>
+            {% endfor %}        
+          </li> 
+          {%endif%}
+          
+      </ul>
+      
+   
+     
+      {% if current.metafields.Stuhrling.Material_Composition != blank or current.metafields.Stuhrling.strap_design != blank or current.metafields.Stuhrling.Strap_Waterproof != blank or current.metafields.Stuhrling.Buckle_Type != blank or current.metafields.Stuhrling.Padding != blank or current.metafields.Stuhrling.Gram_Weight != blank or current.metafields.Stuhrling.Case_Thickness != blank or current.metafields.Stuhrling.Crown != blank or current.metafields.Stuhrling.Buckle != blank or current.metafields.Stuhrling.Bezel != blank %}
+      <div class="spec_inner_head">
+      <h5>Material</h5>
+        <hr>
+      </div>
+      
+      <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Material_Composition != blank %}
+       <li class="col-md-4 col-sm-6">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Material Composition</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {%if variant.metafields.Stuhrling.Material_Composition != blank %}
+            {{variant.metafields.Stuhrling.Material_Composition}}
+            {% endif %}
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+        {% if current.metafields.Stuhrling.strap_design != blank %}
+        <li class="col-md-4 col-sm-6">
+          {% for variant in product.variants %}          
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Strap Design</span>
+         {%if variant.metafields.Stuhrling.strap_design != blank %} 
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{variant.metafields.Stuhrling.strap_design}}        
+          </span>
+          {%endif%}
+          {% endfor %}
+        </li>
+        {% endif %}
+        {% if current.metafields.Stuhrling.Strap_Waterproof != blank %}
+       <li class="col-md-4 col-sm-6">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Strap Waterproof</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {%if variant.metafields.Stuhrling.Strap_Waterproof != blank %}
+            {{variant.metafields.Stuhrling.Strap_Waterproof}}
+            {% endif %}
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+      </ul>
+        <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Buckle_Type != blank %}
+        <li class="col-md-4 col-sm-6">
+          {% for variant in product.variants %}         
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Buckle Type</span>
+           {%if variant.metafields.Stuhrling.Buckle_Type != blank %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">        
+            {{variant.metafields.Stuhrling.Buckle_Type}}        
+          </span>
+          {% endif %}
+          {% endfor %}
+        </li>
+          {% endif %}
+          {% if current.metafields.Stuhrling.Padding != blank %}
+          <li class="col-md-4 col-sm-6">
+            {% for variant in product.variants %}
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Padding</span>
+            <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+              {%if variant.metafields.Stuhrling.Padding != blank %}
+              {{variant.metafields.Stuhrling.Padding}}
+              {% endif %}
+            </span>
+            {% endfor %}        
+          </li>
+          {% endif %}
+          
+      </ul>
+        
+      {% endif %}
+       
+      {% if current.metafields.Stuhrling.strap_color != blank or current.metafields.Stuhrling.Buckle_Color != blank or current.metafields.Stuhrling.Strap_Gloss_Level_Color != blank or current.metafields.Stuhrling.Buckle_Type != blank or current.metafields.Stuhrling.Padding != blank or current.metafields.Stuhrling.Gram_Weight != blank or current.metafields.Stuhrling.Case_Thickness != blank or current.metafields.Stuhrling.Crown != blank or current.metafields.Stuhrling.Buckle != blank or current.metafields.Stuhrling.Bezel != blank %}
+      <div class="spec_inner_head">
+      <h5>Color</h5>
+        <hr>
+      </div>
+      
+      <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.strap_color != blank %}
+       <li class="col-md-4 col-sm-6">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Strap Color</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {%if variant.metafields.Stuhrling.strap_color != blank %}
+            {{variant.metafields.Stuhrling.strap_color}}
+            {% endif %}
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+        {% if current.metafields.Stuhrling.Buckle_Color != blank %}
+        <li class="col-md-4 col-sm-6">
+          {% for variant in product.variants %}          
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Buckle Color</span>
+         {%if variant.metafields.Stuhrling.Buckle_Color != blank %} 
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">         
+            {{variant.metafields.Stuhrling.Buckle_Color}}        
+          </span>
+          {%endif%}
+          {% endfor %}
+        </li>
+        {% endif %}
+        {% if current.metafields.Stuhrling.Strap_Gloss_Level_Color != blank %}
+       <li class="col-md-4 col-sm-6">
+          {% for variant in product.variants %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Strap Gloss Level Color</span>
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span"> 
+            {%if variant.metafields.Stuhrling.Strap_Gloss_Level_Color != blank %}
+            {{variant.metafields.Stuhrling.Strap_Gloss_Level_Color}}
+            {% endif %}
+          </span>
+          {% endfor %}        
+        </li> 
+        {% endif %}
+      </ul>
+        <ul class="free-space_second row">
+        {% if current.metafields.Stuhrling.Stitching != blank %}
+        <li class="col-md-4 col-sm-6">
+          {% for variant in product.variants %}         
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="variant_label {%if current.id == variant.id %}active_title{% endif %} {{variant.id}} product-info-name">Stitching</span>
+           {%if variant.metafields.Stuhrling.Stitching != blank %}
+          <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="product-info-value {{variant.id}} value-span">        
+            {{variant.metafields.Stuhrling.Stitching}}        
+          </span>
+          {% endif %}
+          {% endfor %}
+        </li>
+          {% endif %}
+         
+          
+      </ul>
+        
+      {% endif %}
+      
+      
+  </div>
+</div>
+</div>
+<style>
+  .stuhrling-product-info .variant_label.product-info-name {
+    width: auto;
+    text-transform: capitalize !important;
+    letter-spacing: 0px;
+    font-size: 16px !important;
+	line-height: 18px;
+	color: #484848;
+	font-weight: 900;
+	font-family: "Lato";
+    
+}
+  .stuhrling-product-info ul li .product-info-value {
+    font-size: 16px !important;
+	line-height: 43px;
+	color: #606060;
+	font-weight: 300;
+	font-family: "Lato";
+    width: auto;
+}
+  .stuhrling-product-info ul li {
+    padding: 10px 0px;
+}
+  .stuhrling-product-info ul
+  {
+    column-count: inherit;
+  }
+
+  .spec_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 900;
+    text-transform: uppercase;
+    width: 100%;
+    margin: 0 auto;
+}
+  .spec_header h3 {
+    font-weight: 700;
+}
+  .spec_inner_head h5 {
+    width: 25%;
+    border-bottom:0px;
+    font-size: 18px;
+	line-height: 43px;
+	color: #484848;
+	font-weight: 900;
+	font-family: "Lato";
+}
+  .spec_inner_head {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+}
+  .spec_inner_head hr {
+    border-color: #ccc;
+    display: block;
+    margin: 0 auto;
+    padding: 0px;
+    width: 100%;
+    border-width: 2px;
+}
+  @media(max-width:480px)
+    {
+      .spec_header, .spec_inner_head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .spec_inner_head h5 {
+        width: 100%;
+        border-bottom: 0px;
+        padding: 0px !important;
+      }
+    }
+</style>

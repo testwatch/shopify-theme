@@ -1,0 +1,70 @@
+{% unless current_collection == blank %}
+  {% assign current_collection = collection %}
+{% endunless %}
+
+{% assign on_sale = false %}
+{% assign sale_text = 'products.product.sale' | t %}
+{% if featured.compare_at_price > featured.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% assign sold_out_text = 'products.product.sold_out' | t %}
+{% if featured.available %}
+  {% assign sold_out = false %}
+{% endif %}
+
+{% if featured.title == '' %}
+  {% comment %}add default state for product block in storefront editor{% endcomment %}
+  {% capture product_title %}{{ 'home_page.onboarding.product_title' | t }}{% endcapture %}
+{% else %}
+  {% capture product_title %}{{ featured.title | escape }}{% endcapture %}
+{% endif %}
+
+<div class="{% if sold_out %} sold-out{% endif %}{% if on_sale %} on-sale{% endif %}" sa-swatch-root="true">
+ {% render 'starapps-product-json', product: product %}
+  <a href="{{ featured.url | within: collection }}" class="grid-link{% if section.settings.center_grid_link %} text-center{% endif %}">
+    <span class="grid-link__image grid-link__image--loading{% if section.settings.show_sold_out_circle %} grid-link__image-sold-out{% endif %} grid-link__image--product" data-image-wrapper>
+      {% if on_sale and section.settings.show_sale_circle %}
+        <span class="badge badge--sale">
+          <span class="badge__text{% if sale_text.size > 7 %} badge__text--small{% endif %}">{{ 'products.product.sale' | t }}</span>
+        </span>
+      {% endif %}
+      {% if sold_out and section.settings.show_sold_out_circle %}
+        <span class="badge badge--sold-out">
+          <span class="badge__text{% if sold_out_text.size > 9 %} badge__text--small{% endif %}">{{ 'products.product.sold_out' | t }}</span>
+        </span>
+      {% endif %}
+      <span class="grid-link__image-centered">
+     {% for image in product.images limit:1 %}
+    <img src="{{ image.src | product_img_url: 'medium' }}">
+{% endfor %}
+      </span>
+    </span>
+   
+  </a>
+   <div class="thumbanils">
+   {% for variant in product.variants %}
+     <img src="{{ variant.image.src | product_img_url: '400x300' }}">
+     {% endfor %}
+   </div>
+    <span class="title-coll">{{ product.title | escape  }}</span>
+  <div class="spf-product-card__price-wrapper">
+    {% if product.compare_at_price > product.price %}
+    <div class="spf-product-card__price-wrapper">
+      <span class="spf-product-card__saleprice money">{{ product.price | money }}</span>
+      <span class="spf-product-card__oldprice money"  style='color:#000;text-decoration:line-through'><span style='color:#000'>{{ product.compare_at_price | money }}</span></span>
+    </div>
+    {% else %}
+
+    <div class="nosale">                                    
+      <span class="spf-product-card__price money">{{ product.price | money }}</span>
+
+    </div>
+    {% endif %}
+  </div>
+<div class="msrp-part">
+      {%if product.metafields.Stuhrling.MSRP != blank %}   <span data-href="https://stuhrling-evan.myshopify.com/{{product.url}}" class="price-review">MSRP: {{product.metafields.Stuhrling.MSRP}}</span>{%endif%}
+
+    </div>
+  </div>

@@ -1,0 +1,166 @@
+<div class="block-section story-banner">
+<div class="block">
+  <div class="images-section" style="background-image: url({{ section.settings.image | img_url:'master'}});">
+  <div class="wrapper-mini">
+    {%if section.settings.Title != blank %}<h2 class="banner-title">{{section.settings.Title}}</h2>{%endif%}
+    {%if section.settings.data != blank or section.settings.url-one  != blank%}
+    <div class="line-paragraph">
+      {{section.settings.data}} 
+      {% if section.settings.url-one %}
+      <a href="{{section.settings.url-one}}" class="continue-reading">{{section.settings.text}}</a>
+      {% endif %}
+    </div>
+    {%endif%}
+  </div>
+</div>
+</div>
+</div>
+<div class="story-main-content">
+<div class="container mini-wrapper">
+  {% if section.blocks.size > 0%}
+  {% for block in section.blocks %}
+  {% case block.type %}
+  {% when 'text' %}
+  <div class="outer-block grid">
+    {% if block.settings.title != blank %}
+    <h2 class="head--block text-center title">{{ block.settings.title }}</h2>
+    {% endif %}
+    <div class="inner-content-block grid__item text-block post-large--one-half medium--one-half">
+      {% if block.settings.description %}
+      <div class="content--block">{{ block.settings.description }}</div>
+      {% endif %}
+    </div>
+    <div class="inner-content-block grid__item text-block post-large--one-half medium--one-half">
+      {% if block.settings.description2 %}
+      <div class="content--block">{{ block.settings.description2 }}</div>
+      {% endif %}
+    </div>
+  </div>
+  
+    {% when 'video' %}
+  <div class="video block">
+      <div class="video-blocks">
+        <h2 class="title">{{block.settings.title}}</h2>
+        {% if section.settings.id == 'one' %}
+        <div class="videosrc"><img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if block.settings.image != blank %}{{block.settings.image | img_url:'master'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/883-lifestyle-homepage-video-thumbnail.png?v=1582608360{%endif%}">
+          <img class="videoplayer lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://cdn.shopify.com/s/files/1/0333/0936/0264/files/Video.png?v=1582608417">
+        </div>
+        {% elsif block.settings.id == 'two' %}
+        {% if block.settings.data2 != blank  %}
+        <video width="100%" controls>
+          <source src="{{block.settings.data2}}" type="video/mp4">
+        </video>
+        {% elsif block.settings.iframe_video != blank  %}
+        <iframe src="https://www.youtube.com/embed/{{ block.settings.iframe_video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {% endif %}
+        {% endif %}
+      </div>
+  </div>
+  {% endcase %}
+{% endfor %}
+{% endif %}
+</div>
+</div>
+{% schema %}
+  {
+    "name": "Our Story Section",
+    "settings": [
+          {
+          "type":"header",
+          "content":"Banner"
+          },
+          {			
+          "type": "text",
+          "id": "Title",
+          "label":"Title"
+          },
+          {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Banner Image"
+          },
+          {
+          "type": "textarea",
+          "id": "data",
+          "label":"Text"
+          },
+          {
+          "type": "text",
+          "id": "text",
+          "label":"Text"
+          },
+          {
+          "type": "url",
+          "id": "url-one",
+          "label":"URL"
+          }
+
+],
+   "blocks":[
+          {
+            "type":"text",
+            "name":"Our Story Text Block",
+            "settings": [
+            {
+            "type":"text",
+            "id":"title",
+            "label":"Heading"
+            },
+            {
+            "type":"richtext",
+            "id":"description",
+            "label":"Content"
+            },
+            {
+            "type":"richtext",
+            "id":"description2",
+            "label":"Content"
+            }
+            ]
+          },
+          {
+          "type":"video",
+          "name":"Our Story Video Block",
+              "settings": [
+                {
+                "type": "text",
+                "id": "title",
+                "label":"Title"
+                },
+                {
+                "type": "radio",
+                "id":   "id",
+                "label": "Text",
+                "options": [
+                { "value": "one", "label": "image" },
+                { "value": "two", "label": "video" }
+                ],
+                "default":"one",
+                "info":   "Image"
+                },
+                {
+                "type": "image_picker",
+                "id": "image",
+                "label":"Content"
+                },
+                {
+                "type": "textarea",
+                "id": "data2",
+                "label":"Video URL for Video/mp4"
+                },
+                {
+                "type": "textarea",
+                "id": "iframe_video",
+                "label":"Video KEY for Iframe"
+                }
+              ]
+          }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

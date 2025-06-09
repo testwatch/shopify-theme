@@ -1,0 +1,109 @@
+<div class="collection-area block col-block">
+  <div class="wrapper-mini">
+    <div class="collection-grid row">
+      <div class="collection-div col-md-6 col-sm-6 col-xs-12">
+        <div class="collection-area test">
+          <a href="{%if section.settings.url-one != blank %} {{section.settings.url-one}} {%else%}collections/men-watches{%endif%}">
+            <img loading="lazy" data-src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" src="{%if section.settings.image-one != blank %}{{section.settings.image-one | img_url:'600x300'}}{%endif%}"></a>
+          <div class="absolute-area">  
+            <span> {%if section.settings.text-one != blank %} {{section.settings.text-one}} {%else%}Men's Watches{%endif%}</span>
+            <a href="{%if section.settings.url-one != blank %} {{section.settings.url-one}} {%else%}collections/men-watches{%endif%}">SHOP NOW</a>
+          </div>
+        </div>
+      </div>
+      <div class="collection-div second-coll col-md-6 col-sm-6 col-xs-12">
+        <div class="collection-area">
+          <a href="{%if section.settings.url-two != blank %} {{section.settings.url-two}} {%else%}collections/womens-watches{%endif%}">
+            <img loading="lazy" data-src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" src="{%if section.settings.image-two != blank %}{{section.settings.image-two | img_url:'600x300'}}{%endif%}"></a>
+          <div class="absolute-area">  
+            <span> {%if section.settings.text-two != blank %} {{section.settings.text-two}} {%else%}Women's Watches{%endif%}</span>
+            <a href="{%if section.settings.url-two != blank %} {{section.settings.url-two}} {%else%}collections/womens-watches{%endif%}">SHOP NOW</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="watch-wrapper">
+  <div class="collection-area block">
+    <div class="wrapper-mini">
+      <div class="watch-features ">
+        <div class="watch row">
+          <div class="heading-watch col-sm-3 col-md-3 col-xs-12"><h2>Watch Features:</h2></div>
+          <div class="center-watch col-sm-9 col-md-9 col-xs-12">
+            <ul>
+              {% for link in linklists.collections.links %}
+              <li {% if link.active %} class="active-cls"{%endif%}> <a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured-collection",
+  "class": "index-section",
+      "settings": [
+      
+      {
+          "type": "image_picker",
+          "id": "image-one",
+          "label":"Image"
+        },
+  {
+          "type": "text",
+          "id": "text-one",
+          "label":"Text"
+        },
+ {
+          "type": "url",
+          "id": "url-one",
+          "label":"url"
+        },
+          {
+          "type": "image_picker",
+          "id": "image-two",
+          "label":"Image"
+        },
+ {
+          "type": "text",
+          "id": "text-two",
+          "label":"Text"
+        },
+ {
+          "type": "url",
+          "id": "url-two",
+          "label":"url"
+        }
+      ],
+  "presets": [
+    {
+      "name": "Home Featured-collection",
+      "category": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    }
+  ]
+}
+{% endschema %}

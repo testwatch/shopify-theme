@@ -1,0 +1,101 @@
+{%if product.metafields.Stuhrling.Customer_Name_1 or product.metafields.Stuhrling.Customer_Name_2 or product.metafields.Stuhrling.Customer_Name_3 or product.metafields.Stuhrling.Customer_Name_4 or product.metafields.Stuhrling.Customer_Name_5 != blank %}
+ 
+<div class='reviews_slider jdgm-carousel-wrapper'
+data-from-snippet='{% if concierge_install != nil %}{{ concierge_install }}{% else %}true{% endif %}'
+data-auto-install='{% if auto_install != nil %}{{ auto_install }}{% else %}false{% endif %}' >
+  <div class="jdgm-carousel-title-and-link">
+    <h2 class='jdgm-carousel-title custom_overall_review'>{{ shop.metafields.judgeme.all_reviews_rating | round: 1 }}</h2>
+    <span class="jdgm-all-reviews-rating-wrapper" href="javascript:void(0)">
+      <span style="display:block"  data-score='{{ shop.metafields.judgeme.all_reviews_rating }}' class='jdgm-all-reviews-rating' aria-label='{{ shop.metafields.judgeme.all_reviews_rating }} stars' tabindex='0'></span>
+      <div class="star-review mobile-review product_reviews">
+        {% comment %}Start automatically added Judge.me widget{% endcomment %}
+        {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: true, product: product %}
+        {% comment %}End automatically added Judge.me widget{% endcomment %}
+      </div>
+</span>  </div>
+
+</div>
+<div class="custom_review_slider">
+  {%if product.metafields.Stuhrling.Customer_Name_1 or product.metafields.Stuhrling.Review_Title_1 or product.metafields.Stuhrling.Review_Message_1 != blank %}
+  <div class="item custom_review_inner_block">
+    {%if product.metafields.Stuhrling.Customer_Name_1  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_1 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Customer_Name_1  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+     {%if product.metafields.Stuhrling.Review_Title_1  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_1 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Review_Message_1  != blank %} <div class="review_message">{{ product.metafields.Stuhrling.Review_Message_1 }}</div>{% endif %}
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_2 or product.metafields.Stuhrling.Review_Title_2  or product.metafields.Stuhrling.Review_Message_2 != blank %}
+  <div class="item custom_review_inner_block">
+    {%if product.metafields.Stuhrling.Customer_Name_2 != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_2 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Customer_Name_2 != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+     {%if product.metafields.Stuhrling.Review_Title_2  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_2 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Review_Message_2  != blank %} <div class="review_message">{{ product.metafields.Stuhrling.Review_Message_2 }}</div>{% endif %}
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_3 or product.metafields.Stuhrling.Review_Title_3  or product.metafields.Stuhrling.Review_Message_3 != blank %}
+  <div class="item custom_review_inner_block">
+    {%if product.metafields.Stuhrling.Customer_Name_3  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_3 }}</div>{% endif %}
+   {%if product.metafields.Stuhrling.Customer_Name_3  != blank %} <div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+     {%if product.metafields.Stuhrling.Review_Title_3  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_3 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Review_Message_3  != blank %} <div class="review_message">{{ product.metafields.Stuhrling.Review_Message_3 }}</div>{% endif %}
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_4 or product.metafields.Stuhrling.Review_Title_4  or product.metafields.Stuhrling.Review_Message_4 != blank %}
+  <div class="item custom_review_inner_block">
+    {%if product.metafields.Stuhrling.Customer_Name_4  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_4 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Customer_Name_4  != blank %}  <div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+     {%if product.metafields.Stuhrling.Review_Title_4  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_4 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Review_Message_4  != blank %} <div class="review_message">{{ product.metafields.Stuhrling.Review_Message_4 }}</div>{% endif %}
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_5 or product.metafields.Stuhrling.Review_Title_5  or product.metafields.Stuhrling.Review_Message_5 != blank %}
+  <div class="item custom_review_inner_block">
+    {%if product.metafields.Stuhrling.Customer_Name_5  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_5 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Customer_Name_5  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+     {%if product.metafields.Stuhrling.Review_Title_5  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_5 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Review_Message_5  != blank %} <div class="review_message">{{ product.metafields.Stuhrling.Review_Message_5 }}</div>{% endif %}
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_6 or product.metafields.Stuhrling.Review_Title_6 or product.metafields.Stuhrling.Review_Message_6 != blank %}
+   <div class="item custom_review_inner_block">
+    {%if product.metafields.Stuhrling.Customer_Name_6  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_6 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Customer_Name_6  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+     {%if product.metafields.Stuhrling.Review_Title_6  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_6 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Review_Message_6  != blank %} <div class="review_message">{{ product.metafields.Stuhrling.Review_Message_6 }}</div>{% endif %}
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_7 or product.metafields.Stuhrling.Review_Title_7 or product.metafields.Stuhrling.Review_Message_7 != blank %}
+   <div class="item custom_review_inner_block">
+    {%if product.metafields.Stuhrling.Customer_Name_7  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_7 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Customer_Name_7  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+     {%if product.metafields.Stuhrling.Review_Title_7  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_7 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Review_Message_7  != blank %} <div class="review_message">{{ product.metafields.Stuhrling.Review_Message_7 }}</div>{% endif %}
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_8 or product.metafields.Stuhrling.Review_Title_8 or product.metafields.Stuhrling.Review_Message_8 != blank %}
+   <div class="item custom_review_inner_block">
+    {%if product.metafields.Stuhrling.Customer_Name_8  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_8 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Customer_Name_8  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+     {%if product.metafields.Stuhrling.Review_Title_8  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_8 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Review_Message_8  != blank %} <div class="review_message">{{ product.metafields.Stuhrling.Review_Message_8 }}</div>{% endif %}
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_9 or product.metafields.Stuhrling.Review_Title_9 or product.metafields.Stuhrling.Review_Message_9 != blank %}
+   <div class="item custom_review_inner_block">
+    {%if product.metafields.Stuhrling.Customer_Name_9  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_9 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Customer_Name_9  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+     {%if product.metafields.Stuhrling.Review_Title_9  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_9 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Review_Message_9  != blank %} <div class="review_message">{{ product.metafields.Stuhrling.Review_Message_9 }}</div>{% endif %}
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_10 or product.metafields.Stuhrling.Review_Title_10 or product.metafields.Stuhrling.Review_Message_10 != blank %}
+   <div class="item custom_review_inner_block">
+    {%if product.metafields.Stuhrling.Customer_Name_10  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_10 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Customer_Name_10  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+     {%if product.metafields.Stuhrling.Review_Title_10  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_10 }}</div>{% endif %}
+    {%if product.metafields.Stuhrling.Review_Message_10  != blank %} <div class="review_message">{{ product.metafields.Stuhrling.Review_Message_10 }}</div>{% endif %}
+  </div>
+  {% endif %}
+
+</div>
+{% endif %}

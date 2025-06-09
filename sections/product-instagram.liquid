@@ -1,0 +1,91 @@
+{%if product.metafields.Stuhrling.image_one != blank and product.metafields.Stuhrling.image_two != blank and product.metafields.Stuhrling.image_three != blank and product.metafields.Stuhrling.image_four != blank %}
+<div class="block-section">
+  <div class="block">
+    <h2 class="block-title">OUR TOP SHOTS</span></h2>
+    <div class="wrapper-m">
+      <div class="row instagram-slider">
+        <div class="col-md-3 col-xs-12 col-sm-3">
+          <div class="images-power">
+          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if product.metafields.Stuhrling.image_one != blank %}{{product.metafields.Stuhrling.image_one}}{%endif%}">
+          </div>
+        </div>
+        <div class="col-md-3 col-xs-12 col-sm-3">
+          <div class="images-power">
+          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if product.metafields.Stuhrling.image_two != blank %}{{product.metafields.Stuhrling.image_two}}{%endif%}">
+          </div>
+        </div>
+        <div class="col-md-3 col-xs-12 col-sm-3">
+          <div class="images-power">
+          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if product.metafields.Stuhrling.image_three != blank %}{{product.metafields.Stuhrling.image_three}}{%endif%}">
+          </div>
+        </div>
+        <div class="col-md-3 col-xs-12 col-sm-3">
+          <div class="images-power">
+          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if product.metafields.Stuhrling.image_four != blank %}{{product.metafields.Stuhrling.image_four}}{%endif%}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endif%}
+{% schema %}
+{
+  "name":"Product instagram",
+  "class": "index-section",
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+},
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product instagram",
+      "category": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      },
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

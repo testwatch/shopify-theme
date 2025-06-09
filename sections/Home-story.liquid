@@ -1,0 +1,69 @@
+<div class="block-section home_story_block">
+<div class="block">
+  <div class="images-section">
+  <div class="wrapper-mini">
+    {%if section.settings.Title != blank %}<h2 class="block-title">{{section.settings.Title}}</h2>{%endif%}
+    <div class="line-paragraph">
+    {%if section.settings.data != blank %} {{section.settings.data}} {%endif%}
+     
+      <a href="{{section.settings.url-one}}" class="continue-reading">{{section.settings.text}}</a>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+{% schema %}
+{
+  "name": "Home-Story",
+  "class": "index-section",
+      "settings": [
+		{			
+          "type": "text",
+          "id": "Title",
+          "label":"Title"
+        },
+         {
+          "type": "textarea",
+          "id": "data",
+          "label":"Text"
+	        },
+		{
+          "type": "text",
+          "id": "text",
+          "label":"Text"
+        },
+	     {
+          "type": "url",
+          "id": "url-one",
+          "label":"URL"
+        }
+ 	
+      ],
+  "presets": [
+    {
+      "name": "Home-Story",
+      "category": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    }
+  ]
+}
+{% endschema %}

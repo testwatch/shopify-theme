@@ -1,0 +1,194 @@
+<div class="contact_form_box_container">
+  <div class="contact_form_row">
+    <div class="form__boxes_size lt_sd_form_detail">
+    	<div class="form_detail_box">
+            <h2 class="form_detail_title">{{ section.settings.title }}</h2>
+            <p class="form_detail_des">{{ section.settings.text }}</p>
+        </div>
+    </div>
+    <div class="form__boxes_size rt_sd_form">
+      <div class="corporate_form_box">
+    	{% form 'contact' %}
+
+        {% if form.posted_successfully? %}
+          <p class="note form-success">
+            {{ 'contact.form.post_success' | t }}
+          </p>
+        {% endif %}
+
+        {{ form.errors | default_errors }}
+  		
+        <input type="text" id="Company" name="contact[Company]" placeholder="COMPANY" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+
+        {% assign name_attr = 'contact.form.name' | t | handle %}
+        
+        <input type="text" id="ContactFormName" name="contact[ Your Name]" placeholder=" YOUR NAME " autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+
+        
+        <input type="email" id="Email" name="contact[email]" placeholder="*YOUR EMAIL" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+
+        <input type="hidden" id="mesage" name="contact[mesage]" value="Corporate Page Attn Marty">
+        
+        <div class="submit_btn_align"><input type="submit" class="btn submit__btn" id="corporate_submit_btn" value="Submit"></div>
+
+      {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Contact Form",
+    "settings": [
+			{
+              "type": "text",
+              "id": "title",
+              "label": "Title",
+              "default": "Title"
+           },
+		   {
+              "type": "textarea",
+              "id": "text",
+              "label": "Description",
+              "default": "Description"
+           }
+],
+"presets": [
+	  {
+		"name": "Contact Form With Description"
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+<style>
+.contact_form_box_container {
+    background-color: #000;
+}
+.contact_form_row {
+    display: flex;
+    flex-wrap: wrap;
+  	justify-content: center;
+    align-items: center;
+  	padding: 40px 0;
+  border-radius: 999px;
+}  
+.form__boxes_size {
+    width: 50%;
+}  
+.form_detail_box .form_detail_title {
+    font-size: 60px;
+    letter-spacing: 9px;
+    color: #f2f2f2;
+    font-weight: 400;
+    text-transform: uppercase;
+  border-radius: 999px;
+}  
+.form_detail_box .form_detail_des {
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 24px;
+    color: #f2f2f2;
+    font-weight: 300;
+  	padding-top: 16px;
+  border-radius: 999px;
+}  
+.contact_form_row .lt_sd_form_detail {
+    padding: 0 72px;
+  border-radius: 999px;
+} 
+.contact_form_row .rt_sd_form {
+    background-color: #1d1d1d;
+}  
+.corporate_form_box {
+    padding: 62px 54px;
+  border-radius: 999px;
+}  
+.corporate_form_box input {
+    background-color: #000 !important;
+    padding: 6px 15px;
+    font-size: 22px;
+    color: #fff;
+    font-weight: 400;
+  	margin-bottom: 44px;
+  border-radius: 999px;
+}  
+.submit_btn_align {
+    text-align: center;
+}  
+.btn.submit__btn {
+    color: #000;
+    background-color: #fff !important;
+    padding: 0 50px;
+    font-weight: 900;
+    letter-spacing: 8px;
+    border-radius: 999px;
+}  
+#corporate_submit_btn {
+    margin-bottom: 0;
+} 
+.corporate_form_box form {
+    margin-bottom: 0;
+}  
+.corporate_form_box input::placeholder {
+    color: #fff;
+}
+#corporate_submit_btn:hover {
+    color: black;
+}  
+  
+  
+@media only screen and (max-width: 1200px) {  
+.form_detail_box .form_detail_title {
+    font-size: 42px;
+}  
+}  
+  
+@media only screen and (max-width: 768px) {   
+.form__boxes_size {
+    width: 100%;
+}  
+.form_detail_box {
+    padding-bottom: 14px;
+}    
+}  
+  
+@media only screen and (max-width: 480px) { 
+.form_detail_box .form_detail_title {
+    font-size: 28px;
+}  
+.form_detail_box .form_detail_des {
+    padding-top: 10px;
+}  
+.contact_form_row .lt_sd_form_detail {
+    padding: 0 25px;
+}  
+.submit_btn_align {
+    padding-top: 14px;
+}
+.contact_form_row {
+    padding: 40px 0 0;
+}  
+.corporate_form_box {
+    padding: 62px 25px;
+}  
+}  
+  
+@media only screen and (max-width: 375px) { 
+.form_detail_box .form_detail_title {
+    font-size: 24px;
+}  
+.corporate_form_box input {
+    font-size: 16px;
+    margin-bottom: 24px;
+}  
+}  
+  
+</style>

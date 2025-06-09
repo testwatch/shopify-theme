@@ -1,0 +1,235 @@
+{%if product.metafields.Stuhrling.Customer_Name_1 or product.metafields.Stuhrling.Customer_Name_2 or product.metafields.Stuhrling.Customer_Name_3 or product.metafields.Stuhrling.Customer_Name_4 or product.metafields.Stuhrling.Customer_Name_5 != blank %}
+ 
+<div class='reviews_slider jdgm-carousel-wrapper new--design-review'
+data-from-snippet='{% if concierge_install != nil %}{{ concierge_install }}{% else %}true{% endif %}'
+data-auto-install='{% if auto_install != nil %}{{ auto_install }}{% else %}false{% endif %}' >
+  <div class="jdgm-carousel-title-and-link">
+    <h2 class='jdgm-carousel-title custom_overall_review'>{{ shop.metafields.judgeme.all_reviews_rating | round: 1 }}</h2>
+    <span class="jdgm-all-reviews-rating-wrapper" href="javascript:void(0)">
+      <span style="display:block"  data-score='{{ shop.metafields.judgeme.all_reviews_rating }}' class='jdgm-all-reviews-rating' aria-label='{{ shop.metafields.judgeme.all_reviews_rating }} stars' tabindex='0'></span>
+      <div class="star-review mobile-review product_reviews">
+        {% comment %}Start automatically added Judge.me widget{% endcomment %}
+        {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: true, product: product %}
+        {% comment %}End automatically added Judge.me widget{% endcomment %}
+      </div>
+</span>  </div>
+
+</div>
+<div class="custom_review_slider new--design-review-slider">
+  {%if product.metafields.Stuhrling.Customer_Name_1 or product.metafields.Stuhrling.Review_Title_1 or product.metafields.Stuhrling.Review_Message_1 != blank %}
+  <div class="item custom_review_inner_block">
+    <div class="star_box">
+      {%if product.metafields.Stuhrling.Customer_Name_1  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_1 }}</div>{% endif %}
+      {%if product.metafields.Stuhrling.Customer_Name_1  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+    </div>
+<!--      {%if product.metafields.Stuhrling.Review_Title_1  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_1 }}</div>{% endif %} -->
+    {%if product.metafields.Stuhrling.Review_Message_1  != blank %} <div class="review_message addReadMore showlesscontent">{{ product.metafields.Stuhrling.Review_Message_1 }}</div>{% endif %}
+<!--     <div class="read_more_btn"><a href="https://stuhrling.com/pages/reviews">Read More <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a></div> -->
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_2 or product.metafields.Stuhrling.Review_Title_2  or product.metafields.Stuhrling.Review_Message_2 != blank %}
+  <div class="item custom_review_inner_block">
+    <div class="star_box">
+      {%if product.metafields.Stuhrling.Customer_Name_2 != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_2 }}</div>{% endif %}
+      {%if product.metafields.Stuhrling.Customer_Name_2 != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+    </div>  
+<!--      {%if product.metafields.Stuhrling.Review_Title_2  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_2 }}</div>{% endif %} -->
+    {%if product.metafields.Stuhrling.Review_Message_2  != blank %} <div class="review_message addReadMore showlesscontent">{{ product.metafields.Stuhrling.Review_Message_2 }}</div>{% endif %}
+<!--     <div class="read_more_btn"><a href="https://stuhrling.com/pages/reviews">Read More <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a></div> -->
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_3 or product.metafields.Stuhrling.Review_Title_3  or product.metafields.Stuhrling.Review_Message_3 != blank %}
+  <div class="item custom_review_inner_block">
+    <div class="star_box">
+      {%if product.metafields.Stuhrling.Customer_Name_3  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_3 }}</div>{% endif %}
+      {%if product.metafields.Stuhrling.Customer_Name_3  != blank %} <div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+    </div> 
+<!--      {%if product.metafields.Stuhrling.Review_Title_3  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_3 }}</div>{% endif %} -->
+    {%if product.metafields.Stuhrling.Review_Message_3  != blank %} <div class="review_message addReadMore showlesscontent">{{ product.metafields.Stuhrling.Review_Message_3 }}</div>{% endif %}
+<!--     <div class="read_more_btn"><a href="https://stuhrling.com/pages/reviews">Read More <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a></div> -->
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_4 or product.metafields.Stuhrling.Review_Title_4  or product.metafields.Stuhrling.Review_Message_4 != blank %}
+  <div class="item custom_review_inner_block">
+    <div class="star_box">
+      {%if product.metafields.Stuhrling.Customer_Name_4  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_4 }}</div>{% endif %}
+      {%if product.metafields.Stuhrling.Customer_Name_4  != blank %}  <div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+    </div>  
+<!--      {%if product.metafields.Stuhrling.Review_Title_4  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_4 }}</div>{% endif %} -->
+    {%if product.metafields.Stuhrling.Review_Message_4  != blank %} <div class="review_message addReadMore showlesscontent">{{ product.metafields.Stuhrling.Review_Message_4 }}</div>{% endif %}
+<!--     <div class="read_more_btn"><a href="https://stuhrling.com/pages/reviews">Read More <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a></div> -->
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_5 or product.metafields.Stuhrling.Review_Title_5  or product.metafields.Stuhrling.Review_Message_5 != blank %}
+  <div class="item custom_review_inner_block">
+    <div class="star_box">
+      {%if product.metafields.Stuhrling.Customer_Name_5  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_5 }}</div>{% endif %}
+      {%if product.metafields.Stuhrling.Customer_Name_5  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+    </div>  
+<!--      {%if product.metafields.Stuhrling.Review_Title_5  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_5 }}</div>{% endif %} -->
+    {%if product.metafields.Stuhrling.Review_Message_5  != blank %} <div class="review_message addReadMore showlesscontent">{{ product.metafields.Stuhrling.Review_Message_5 }}</div>{% endif %}
+<!--     <div class="read_more_btn"><a href="https://stuhrling.com/pages/reviews">Read More <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a></div> -->
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_6 or product.metafields.Stuhrling.Review_Title_6 or product.metafields.Stuhrling.Review_Message_6 != blank %}
+   <div class="item custom_review_inner_block">
+    <div class="star_box">
+      {%if product.metafields.Stuhrling.Customer_Name_6  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_6 }}</div>{% endif %}
+      {%if product.metafields.Stuhrling.Customer_Name_6  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+    </div>  
+<!--      {%if product.metafields.Stuhrling.Review_Title_6  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_6 }}</div>{% endif %} -->
+    {%if product.metafields.Stuhrling.Review_Message_6  != blank %} <div class="review_message addReadMore showlesscontent">{{ product.metafields.Stuhrling.Review_Message_6 }}</div>{% endif %}
+<!--      <div class="read_more_btn"><a href="https://stuhrling.com/pages/reviews">Read More <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a></div> -->
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_7 or product.metafields.Stuhrling.Review_Title_7 or product.metafields.Stuhrling.Review_Message_7 != blank %}
+   <div class="item custom_review_inner_block">
+    <div class="star_box">
+      {%if product.metafields.Stuhrling.Customer_Name_7  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_7 }}</div>{% endif %}
+      {%if product.metafields.Stuhrling.Customer_Name_7  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+    </div>  
+<!--      {%if product.metafields.Stuhrling.Review_Title_7  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_7 }}</div>{% endif %} -->
+    {%if product.metafields.Stuhrling.Review_Message_7  != blank %} <div class="review_message addReadMore showlesscontent">{{ product.metafields.Stuhrling.Review_Message_7 }}</div>{% endif %}
+<!--      <div class="read_more_btn"><a href="https://stuhrling.com/pages/reviews">Read More <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a></div> -->
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_8 or product.metafields.Stuhrling.Review_Title_8 or product.metafields.Stuhrling.Review_Message_8 != blank %}
+   <div class="item custom_review_inner_block">
+    <div class="star_box"> 
+      {%if product.metafields.Stuhrling.Customer_Name_8  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_8 }}</div>{% endif %}
+      {%if product.metafields.Stuhrling.Customer_Name_8  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+    </div>  
+<!--      {%if product.metafields.Stuhrling.Review_Title_8  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_8 }}</div>{% endif %} -->
+    {%if product.metafields.Stuhrling.Review_Message_8  != blank %} <div class="review_message addReadMore showlesscontent">{{ product.metafields.Stuhrling.Review_Message_8 }}</div>{% endif %}
+<!--      <div class="read_more_btn"><a href="https://stuhrling.com/pages/reviews">Read More <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a></div> -->
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_9 or product.metafields.Stuhrling.Review_Title_9 or product.metafields.Stuhrling.Review_Message_9 != blank %}
+   <div class="item custom_review_inner_block">
+     <div class="star_box">
+      {%if product.metafields.Stuhrling.Customer_Name_9  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_9 }}</div>{% endif %}
+      {%if product.metafields.Stuhrling.Customer_Name_9  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+   </div>   
+<!--      {%if product.metafields.Stuhrling.Review_Title_9  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_9 }}</div>{% endif %} -->
+    {%if product.metafields.Stuhrling.Review_Message_9  != blank %} <div class="review_message addReadMore showlesscontent">{{ product.metafields.Stuhrling.Review_Message_9 }}</div>{% endif %}
+<!--     <div class="read_more_btn"><a href="https://stuhrling.com/pages/reviews">Read More <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a></div>  -->
+  </div>
+  {% endif %}
+  {%if product.metafields.Stuhrling.Customer_Name_10 or product.metafields.Stuhrling.Review_Title_10 or product.metafields.Stuhrling.Review_Message_10 != blank %}
+   <div class="item custom_review_inner_block">
+    <div class="star_box"> 
+      {%if product.metafields.Stuhrling.Customer_Name_10  != blank %} <div class="customer_name">{{ product.metafields.Stuhrling.Customer_Name_10 }}</div>{% endif %}
+      {%if product.metafields.Stuhrling.Customer_Name_10  != blank %}<div class="jdgm-carousel-item__review-rating" tabindex="0" aria-label="5 stars"> <a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a><a class="jdgm-star jdgm--on"></a> </div>{% endif %}
+    </div>  
+<!--      {%if product.metafields.Stuhrling.Review_Title_10  != blank %} <div class="review_title">{{ product.metafields.Stuhrling.Review_Title_10 }}</div>{% endif %} -->
+    {%if product.metafields.Stuhrling.Review_Message_10  != blank %} <div class="review_message addReadMore showlesscontent">{{ product.metafields.Stuhrling.Review_Message_10 }}</div>{% endif %}
+<!--     <div class="read_more_btn"><a href="https://stuhrling.com/pages/reviews">Read More <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a></div> -->
+  </div>
+  {% endif %}
+
+</div>
+{% endif %}
+
+<style>
+/*-- Review section --*/
+.new--design-review-slider .star_box {
+    display: flex;
+    justify-content: space-between;
+  	align-items: center;
+}  
+.new--design-review-slider .review_message {
+    text-align: left;
+  	padding-top: 10px;
+  	font-size: 16px;
+    letter-spacing: 0px;
+    line-height: 24px;
+    color: #606060;
+    font-weight: 300;
+}  
+.new--design-review-slider .custom_review_inner_block {
+    padding: 25px;
+}  
+.new--design-review-slider .jdgm-carousel-item__review-rating {
+    font-size: 92%;
+}  
+.new--design-review-slider .customer_name {
+    font-size: 16px;
+    color: #484848;
+    font-weight: 900;
+}  
+.new--design-review-slider .read_more_btn {
+    text-align: left;
+}  
+.read_more_btn a {
+    font-size: 16px; 
+    line-height: 38px;
+    color: #6d6d6d;
+    font-weight: 700;
+}  
+.read_more_btn i.fa.fa-angle-down {
+    padding-left: 3px;
+} 
+.read_more_btn a:focus {
+    outline: unset;
+    outline-offset: unset;
+}   
+.new--design-review-slider .slick-prev, .slick-next {
+    color: #848484;
+    z-index: 999;
+  	font-size: 34px;
+}
+.new--design-review-slider .slick-prev {
+    left: -25px !important;
+}
+.new--design-review-slider .slick-next {
+    right: -25px !important;
+}  
+.new--design-review-slider .slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
+    color: #d1d1d1;
+}  
+.new--design-review-slider .slick-slide>div {
+    margin: 10px;
+}   
+.new--design-review-slider ul.slick-dots {
+    display: none !important;
+}  
+.new--design-review-slider .slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
+    color: #848484;
+}  
+
+/*-- review section readmore btn  --*/
+.addReadMore.showlesscontent .SecSec,
+.addReadMore.showlesscontent .readLess {
+    display: none;
+}
+
+.addReadMore.showmorecontent .readMore {
+    display: none;
+}
+
+.addReadMore .readMore,
+.addReadMore .readLess {
+    margin-left: 2px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 38px;
+    color: #ff6b00;
+    font-weight: 700; 
+}
+
+.addReadMoreWrapTxt.showmorecontent .SecSec,
+.addReadMoreWrapTxt.showmorecontent .readLess {
+    display: block;
+}  
+  
+ 
+  
+@media only screen and (max-width:768px){  
+.new--design-review-slider .slick-prev {
+    left: -15px !important;
+}
+.new--design-review-slider .slick-next {
+    right: -15px !important;
+}  
+}  
+</style>

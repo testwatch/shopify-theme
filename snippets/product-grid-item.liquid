@@ -1,0 +1,188 @@
+{% unless current_collection == blank %}
+  {% assign current_collection = collection %}
+{% endunless %}
+
+{% assign on_sale = false %}
+{% assign sale_text = 'products.product.sale' | t %}
+{% if featured.compare_at_price > featured.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% assign sold_out_text = 'products.product.sold_out' | t %}
+{% if featured.available %}
+  {% assign sold_out = false %}
+{% endif %}
+
+{% if featured.title == '' %}
+  {% comment %}add default state for product block in storefront editor{% endcomment %}
+  {% capture product_title %}{{ 'home_page.onboarding.product_title' | t }}{% endcapture %}
+{% else %}
+  {% capture product_title %}{{ featured.title | escape }}{% endcapture %}
+{% endif %}
+
+<div class="test collection-grid-pr {% if sold_out %} sold-out{% endif %}{% if on_sale %} on-sale{% endif %}" sa-swatch-root="true">
+ {% render 'starapps-product-json', product: product %}
+  <a href="{{ featured.url | within: collection }}" class="grid-link{% if section.settings.center_grid_link %} text-center{% endif %}">
+    <span class="grid-link__image {% if section.settings.show_sold_out_circle %} grid-link__image-sold-out{% endif %} grid-link__image--product" data-image-wrapper>
+      {% if on_sale and section.settings.show_sale_circle %}
+        <span class="badge badge--sale">
+          <span class="badge__text{% if sale_text.size > 7 %} badge__text--small{% endif %}">{{ 'products.product.sale' | t }}</span>
+        </span>
+      {% endif %}
+{% comment %}
+<p><span class="spf-product__label spf-product__label-sale sale-percent new-first-product">NEW</span></p>
+{% endcomment %}
+
+
+{% if sold_out and section.settings.show_sold_out_text %}
+<span class="spf-product__label spf-product__label-sale sale-percent sold-out-tag-collection-page-pg">Sold Out</span>
+{% else %}
+       {%if product.compare_at_price > product.price %}
+          <div class="grid-product__on-sale">
+            {% assign price_difference = product.compare_at_price  | minus: product.price %}
+            {% assign after_convert = price_difference | money_without_currency %}
+            {% assign calc_price = after_convert %}
+            {% assign compare_at_price = product.compare_at_price | money_without_currency %}
+            {% assign price_amount = calc_price | divided_by:compare_at_price  %}         
+            <p><span class="spf-product__label spf-product__label-sale sale-percent sss">{% if product.compare_at_price_max > product.price %}{{ product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0'}}% OFF{% endif %}
+ </span></p>  
+          </div>
+          {%endif%}
+
+{% endif %}
+      {% if sold_out and section.settings.show_sold_out_circle %}
+        <span class="badge badge--sold-out">
+          <span class="badge__text{% if sold_out_text.size > 9 %} badge__text--small{% endif %}">{{ 'products.product.sold_out' | t }}</span>
+        </span>
+      {% endif %}
+      <span class="grid-link__image-centered">
+        {% if featured.title != '' %}
+          {% unless featured.featured_image == blank %}
+            {% capture img_id %}ProductImage-{{ featured.featured_image.id }}{% endcapture %}
+            {% capture wrapper_id %}ProductImageWrapper-{{ featured.featured_image.id }}{% endcapture %}
+            {%- assign img_url = featured.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            {% include 'image-style' with image: featured.featured_image, width: product_width, height: 480, wrapper_id: wrapper_id, img_id: img_id %}
+            <div id="{{ wrapper_id }}" class="product__img-wrapper supports-js" >
+              {% if product.images.size > 1 %}
+
+              <div style="padding-top:{{ 1 | divided_by: featured.featured_image.aspect_ratio | times: 100}}%;" class="hover-first-image">
+                <img id="{{ img_id }}"
+                     alt="{{ featured.featured_image.alt | escape }}"
+                     class="product__img lazyload" loading="lazy"
+                     data-src="{{ img_url }}"
+                     data-widths="[150, 220, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
+                     data-aspectratio="{{ featured.featured_image.aspect_ratio }}"
+                     data-sizes="auto"
+                     data-image>
+              </div>
+              <div style="padding-top:{{ 1 | divided_by: product.images[1].aspect_ratio | times: 100}}%;" class="hover-second-image">
+                <img id="{{ img_id }}"
+                     alt="{{ product.featured_image.altt | escape }}"
+                     class="product__img lazyload" loading="lazy"
+                     data-src="{{ product.images[1] | img_url: 'large' }}"
+                     data-widths="[150, 220, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
+                     data-aspectratio="{{ product.images[1].aspect_ratio }}"
+                     data-sizes="auto"
+                     data-image>
+              </div>
+              {% else %}
+              <div style="padding-top:{{ 1 | divided_by: featured.featured_image.aspect_ratio | times: 100}}%;" class="">
+                <img id="{{ img_id }}"
+                     alt="{{ featured.featured_image.alt | escape }}"
+                     class="product__img lazyload" loading="lazy"
+                     data-src="{{ img_url }}"
+                     data-widths="[150, 220, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
+                     data-aspectratio="{{ featured.featured_image.aspect_ratio }}"
+                     data-sizes="auto"
+                     data-image>
+              </div>
+              {% endif %}
+{% comment %} 
+<div class="quickview_overlay  collection-page-quickview-overlay">
+            <a title="Quick view" href="javascript:;" onclick="globofilter.quickView('{{product.url}}')" class="open-quick-view upsells_quick_view">Quick View</a>
+          </div>
+          {% include 'product_gf_new_quickview'  %}
+{% endcomment %}               
+              
+            </div>
+          {% else %}
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" loading="lazy" data-src="{{ featured.featured_image.src | img_url: 'large' }}" alt="{{ featured.featured_image.alt | escape }}" class="product__img" data-image>
+          {% endunless %}
+          <noscript>
+            <img src="{{ featured.featured_image.src | img_url: 'large' }}" alt="{{ featured.featured_image.alt | escape }}" class="product__img" loading="lazy">
+          </noscript>
+        {% else %}
+          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+          {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </span>
+    </span>
+   
+  </a>
+  {% comment %}{% if product.variants.size > 1 %}
+
+   <div class="thumbanils">
+   {% for variant in product.variants %}
+     <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" loading="lazy" data-src="{{ variant.image.src | product_img_url: '400x300' }}">
+     {% endfor %}
+   </div>
+  {%endif%}
+  {% endcomment %}
+<a href="{{ product.url }}">
+    <span class="title-coll">{{ product.title | escape  }}</span>
+</a>
+  
+ <div class="reviews">
+        {% comment %}Start automatically added Judge.me widget{% endcomment %}
+        {% include 'judgeme_widgets', widget_type: 'judgeme_preview_badge', concierge_install: true, product: product %}
+        {% comment %}End automatically added Judge.me widget{% endcomment %}
+      </div>
+<a href="{{ product.url }}">
+  <div class="spf-product-card__price-wrapper">
+    {% if product.compare_at_price > product.price %}
+     <div class="spf-product-card__price-wrapper">
+    <span class="spf-product-card__saleprice money">{{ product.price | money }}</span>    
+    <span class="spf-product-card__oldprice money"  style='color:#000;text-decoration:line-through'><span style='color:#000'>{{ product.compare_at_price | money }}</span></span>
+    
+</div>
+    {% else %}
+
+    <div class="nosale">                                    
+      <span class="spf-product-card__price money color-orange">{{ product.price | money }}</span>
+
+    </div>
+    {% endif %}
+    </div>
+</a>
+{% comment %}
+     <div class="msrp-part">
+      {%if product.metafields.Stuhrling.MSRP != blank %}   <span data-href="{{product.url}}" class="price-review testing">MSRP: {{product.metafields.Stuhrling.MSRP}}</span>{%endif%}
+     </div>
+{% endcomment %}
+  </div>
+
+<!-- Upsells New Code End -->
+<script>
+  $('.quickview_overlay a').click(function(){
+    $(this).parent('.quickview_overlay').next().show();
+    setTimeout(function() {
+      $('.gfqv-product-thumbnails .gfqv-thumbnails').slick({
+        infinite: true,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        "prevArrow": "<div class='slick-prev slick-arrow new-homepage-slick'> <i class='fa fa-angle-left' aria-hidden='true'></i></div>", 
+        "nextArrow": "<div class='slick-next slick-arrow new-homepage-slick'> <i class='fa fa-angle-right' aria-hidden='true'></i></div>", 
+      });
+ 
+    }, 10);
+   setTimeout(function() {
+    $('.gfqv-thumbnails .slick-next.slick-arrow.new-homepage-slick i.fa.fa-angle-right').click();
+    }, 500);
+  })
+  $('.gfqv-close-modal').click(function(){
+    $(this).parents('.gfqv-modal').hide();
+     
+  })
+</script>

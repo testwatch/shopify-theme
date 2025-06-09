@@ -1,0 +1,42 @@
+{% if section.blocks.size > 0%}
+{% for block in section.blocks %}
+<div class="inner-block">
+  {% if block.settings.title %}
+  <h4 class="head--block">{{ block.settings.title }}</h4>
+    {% endif %}
+    {% if block.settings.return_desc %}
+    <div class="content--block">{{ block.settings.return_desc }}</div>
+    {% endif %}
+    </div>
+{% endfor %}
+{% endif %}
+{% schema %}
+  {
+    "name": "Terms & Conditions",
+    "settings": [],
+   "blocks":[
+      {
+      "type":"text",
+      "name":"Terms & Conditions Block",
+      "settings": [
+        {
+        "type":"text",
+        "id":"title",
+        "label":"Heading"
+        },
+        {
+        "type":"richtext",
+        "id":"return_desc",
+        "label":"Content"
+        }
+      ]
+  }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,383 @@
+<div class="block-section story-banner blogs_banner">
+  <div class="block">
+    <div class="images-section">
+  <picture>
+    <source srcset="{{ section.settings.image | img_url: '1400x600' | replace: '.jpg', '.webp' }}" type="image/webp">
+    <img
+      src="{{ section.settings.image | img_url: '1400x600' }}"
+      width="1400"
+      height="600"
+      alt="{{ section.settings.Title | escape }}"
+      class="blog-banner-img"
+    >
+  </picture>
+  <div class="wrapper-mini"></div>
+  <div class="blog_overlay"></div>
+</div>  
+    <div class="blog_banner_content">
+      {%if section.settings.Title != blank %}<h2 class="banner-title">{{section.settings.Title}}</h2>{%endif%}
+      {%if section.settings.data != blank or section.settings.url-one  != blank%}
+      <div class="line-paragraph">
+        {{section.settings.data}} 
+        {% if section.settings.url-one %}
+        <a href="{{section.settings.url-one}}" class="continue-reading">{{section.settings.text}}</a>
+        {% endif %}
+      </div>
+      {%endif%}
+    </div>
+  </div>
+
+
+</div>
+<div class="container">
+    <div class="rte">
+<div class="grid all_blogs_outer">
+  <aside class="sidebar grid__item post-large--one-fifth">
+    {% include 'blog-home-sidebar' %}
+  </aside>
+
+
+  <div class="blogs_block grid__item post-large--four-fifths">
+
+    <div class="grid">
+      <div class="outer_blog grid__item post-large--one-whole">
+
+        {% comment %}{% include 'breadcrumb' %}{% endcomment %}
+        {% for block in section.blocks %}
+        {%- assign blog = blogs[block.settings.blog] -%}
+        <!--         <header class="section-header">
+<h1 class="section-header__title h3 text-center">
+{% if current_tags %}
+{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}
+{% else %}
+{{ blog.title }}
+{% endif %}
+</h1>
+
+</header>
+-->
+
+        {% for article in blogs[blog.handle].articles limit:30 %}
+        <div class="grid__item side_blog post-large--one-half">
+          <div class="grid blog_inner one-whole">
+            
+            <p class="blog-date">
+              <time datetime="{{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' }}">{{ article.published_at | date: format: 'date' }}</time>
+              {% if section.settings.blog_author_enable %}
+              <span class="meta-sep">&#8226;</span>
+              {{ article.author }}
+              {% endif %}           
+            </p>
+
+            {% comment %}
+            Add a surrounding div with class 'rte' to anything that will come from the rich text editor.
+            Since this is just a listing page, you can either use the excerpt or truncate the full article.
+            {% endcomment %}
+            
+              {% if article.image %}
+              {% capture img_id %}ArticleImage-{{ section.id }}--{{ article.image.id }}{% endcapture %}
+              {% capture wrapper_id %}ArticleImageWrapper-{{ section.id }}--{{ article.image.id }}{% endcapture %}
+              {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+              {%- assign image_alt = article.title | escape -%}
+              {% include 'image-style' with image: article.image, width: 845, height: 1024, wrapper_id: wrapper_id, img_id: img_id %}
+			
+              <div id="{{ wrapper_id }}" class="article__image-wrapper supports-js one-half">
+                <div style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;">
+                  <a href="{{ article.url }}">
+                  <img id="{{ img_id }}"
+                       class="article__image lazyload"
+                       src="{{ article.image | img_url: '300x300' }}"
+                       data-src="{{ img_url }}"
+                       data-widths="[90, 120, 150, 180, 360, 480, 600, 750, 940, 1080, 1296]"
+                       data-aspectratio="{{ article.image.aspect_ratio }}"
+                       data-sizes="auto"
+                       alt="{{ image_alt }}">
+                  </a>
+                </div>
+              </div>
+            
+
+
+              <noscript>
+                <p>{{ article | img_url: '1024x1024' | img_tag: image_alt, 'article__image' | link_to: article.url }}</p>
+              </noscript>
+              {% endif %}
+            
+            <div class="article_info_block right_side_blog one-half">
+              <h4 class="blog_content_block"><a href="{{ article.url }}">{{ article.title }}</a></h4>
+              {% if article.excerpt.size > 0 %}
+              <p class="blog_content_block">{{ article.excerpt | truncatewords: 15 }}</p>
+              {% else %}
+              <p class="blog_content_block">{{ article.content | strip_html | truncatewords: 15 }}</p>
+              {% endif %}
+            
+
+            <p class="blog_content_block"><a href="{{ article.url }}">{{ 'blogs.article.read_more' | t }} &rarr;</a></p>
+            </div>
+
+          </div>
+        </div>
+        {% endfor %}
+
+        {% if paginate.pages > 1 %}
+        <div class="text-center blog_pagination">
+          {% include 'pagination-custom' %}
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+
+
+
+{% schema %}
+    {
+    "name": {
+    "da": "Blogopslag",
+    "de": "Blogposts",
+    "en": "Blog posts",
+    "es": "Artículos del blog",
+    "fi": "Blogijulkaisut",
+    "fr": "Articles de blog",
+    "hi": "ब्लॉग पोस्ट",
+    "it": "Articoli del blog",
+    "ja": "ブログ記事",
+    "ko": "블로그 게시물",
+    "nb": "Blogginnlegg",
+    "nl": "Blogberichten",
+    "pt-BR": "Posts do blog",
+    "pt-PT": "Publicações no blogue",
+    "sv": "Blogginlägg",
+    "th": "โพสต์บล็อก",
+    "zh-CN": "博客文章",
+    "zh-TW": "部落格文章"
+    },
+    "class": "index-section",
+    "settings": [
+    {
+    "type":"header",
+    "content":"Sidebar Block"
+    },
+    {
+    "type":"text",
+    "id":"sidebar_menu_title",
+    "label":"Enter Title for Sidebar"
+    },
+    {
+    "type":"link_list",
+    "id":"custom_menu_linklist",
+    "label":"Choose Sidebar Menu"
+    },
+    {
+    "type": "checkbox",
+    "id": "toggle",
+    "label": "Toggle sidebar content",
+    "default": false
+    },
+    {
+    "type":"header",
+    "content":"Banner"
+    },
+    {			
+    "type": "text",
+    "id": "Title",
+    "label":"Title"
+    },
+    {
+    "type":"image_picker",
+    "id":"image",
+    "label":"Banner Image"
+    },
+    {
+    "type": "textarea",
+    "id": "data",
+    "label":"Text"
+    },
+    {
+    "type": "text",
+    "id": "text",
+    "label":"Text"
+    },
+    {
+    "type": "url",
+    "id": "url-one",
+    "label":"URL"
+    }
+
+    ],
+    "blocks": [
+    {
+    "type": "blog",
+    "name":"blog",
+    "settings": [
+    {
+    "id": "blog",
+    "type": "blog",
+    "label":"Blog"
+    },
+    {
+    "type": "range",
+    "id": "post_limit",
+    "label": {
+    "da": "Opslag",
+    "de": "Posts",
+    "en": "Posts",
+    "es": "Publicaciones",
+    "fi": "Julkaisut",
+    "fr": "Articles",
+    "hi": "पोस्ट",
+    "it": "Articoli",
+    "ja": "投稿",
+    "ko": "게시물",
+    "nb": "Innlegg",
+    "nl": "Berichten",
+    "pt-BR": "Posts",
+    "pt-PT": "Publicações",
+    "sv": "Inlägg",
+    "th": "โพสต์",
+    "zh-CN": "文章",
+    "zh-TW": "貼文"
+    },
+    "min": 1,
+    "max": 4,
+    "step": 1,
+    "default": 3
+    },
+    {
+    "type": "checkbox",
+    "id": "blog_show_date",
+    "label": {
+    "da": "Vis dato",
+    "de": "Datum anzeigen",
+    "en": "Show date",
+    "es": "Mostrar fecha",
+    "fi": "Näytä päivämäärä",
+    "fr": "Afficher la date",
+    "hi": "दिनांक दिखाएं",
+    "it": "Mostra data",
+    "ja": "日付を表示する",
+    "ko": "날짜 표시",
+    "nb": "Vis dato",
+    "nl": "Datum weergeven",
+    "pt-BR": "Exibir data",
+    "pt-PT": "Mostrar data",
+    "sv": "Visa datum",
+    "th": "แสดงวันที่",
+    "zh-CN": "显示日期",
+    "zh-TW": "顯示日期"
+    },
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "blog_show_author",
+    "label": {
+    "da": "Vis forfatter",
+    "de": "Verfasser anzeigen",
+    "en": "Show author",
+    "es": "Mostrar autor",
+    "fi": "Näytä tekijä",
+    "fr": "Afficher l'auteur",
+    "hi": "लेखक दिखाएं",
+    "it": "Mostra autore",
+    "ja": "執筆者を表示する",
+    "ko": "작성자 표시",
+    "nb": "Vis forfatter",
+    "nl": "Auteur weergeven",
+    "pt-BR": "Exibir autor",
+    "pt-PT": "Mostrar autor",
+    "sv": "Visa författare",
+    "th": "แสดงผู้เขียน",
+    "zh-CN": "显示作者",
+    "zh-TW": "顯示作者"
+    },
+    "default": false
+    },
+    {
+    "type": "checkbox",
+    "id": "blog_show_image",
+    "label": {
+    "da": "Vis coverbillede",
+    "de": "Titelbild anzeigen",
+    "en": "Show cover image",
+    "es": "Mostrar imagen de portada",
+    "fi": "Näytä kansikuva",
+    "fr": "Afficher l'image de couverture",
+    "hi": "कवर इमेज दिखाएं",
+    "it": "Mostra immagine di copertina",
+    "ja": "表紙画像を表示する",
+    "ko": "커버 이미지 표시",
+    "nb": "Vis forsidebilde",
+    "nl": "Coverafbeelding weergeven",
+    "pt-BR": "Exibir imagem da capa",
+    "pt-PT": "Mostrar imagem da capa",
+    "sv": "Visa omslagsbild",
+    "th": "แสดงรูปภาพหน้าปก",
+    "zh-CN": "显示封面图片",
+    "zh-TW": "顯示封面圖片"
+    },
+    "default": false
+    },
+    {
+    "type": "checkbox",
+    "id": "blog_show_excerpt",
+    "label": {
+    "da": "Vis uddrag",
+    "de": "Auszug anzeigen",
+    "en": "Show excerpt",
+    "es": "Mostrar extracto",
+    "fi": "Näytä ote",
+    "fr": "Afficher l'extrait",
+    "hi": "अंश दिखाएं",
+    "it": "Mostra riassunto",
+    "ja": "抜粋を表示する",
+    "ko": "요약 표시",
+    "nb": "Vis utdrag",
+    "nl": "Uittreksel weergeven",
+    "pt-BR": "Exibir resumo",
+    "pt-PT": "Mostrar resumo",
+    "sv": "Visa utdrag",
+    "th": "แสดงเนื้อหาบางส่วน",
+    "zh-CN": "显示摘录",
+    "zh-TW": "顯示摘要"
+    },
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_view_all",
+    "label": {
+    "da": "Vis knappen \"Se flere\"",
+    "de": "Schaltfläche \"Alle anzeigen\" anzeigen",
+    "en": "Show 'View all' button",
+    "es": "Mostrar el botón 'Ver todo'",
+    "fi": "Näytä \"Näytä kaikki\" -painike",
+    "fr": "Afficher le bouton « Tout afficher »",
+    "hi": "'सभी देखें' बटन दिखाएं",
+    "it": "Mostra il pulsante \"Visualizza tutto\"",
+    "ja": "「すべて表示」ボタンを表示する",
+    "ko": "'모두 보기' 버튼 표시",
+    "nb": "Vis «Se alle»-knapp",
+    "nl": "Knop 'Alles weergeven' weergeven",
+    "pt-BR": "Exibir botão \"Visualizar tudo\"",
+    "pt-PT": "Mostrar botão 'Ver tudo'",
+    "sv": "Visa \"Visa alla\"-knappen",
+    "th": "แสดงปุ่ม 'ดูทั้งหมด'",
+    "zh-CN": "显示“查看全部”按钮",
+    "zh-TW": "顯示「檢視全部」按鈕"
+    },
+    "default": false
+    }
+    ]
+    }
+    ]
+
+    }
+{% endschema %}

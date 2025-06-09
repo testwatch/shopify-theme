@@ -1,0 +1,247 @@
+<style>
+  #product-selection-form {
+    padding: 10px;
+  }
+  .radio-item, .product-crt {
+    width: 24%;
+    float: left; 
+    vertical-align: top; 
+    margin: 5px 0px;
+    display: inline-block; 
+    box-sizing: border-box;
+  }
+  .source.wo-fm {
+	min-height: 150px;
+  }
+  #custom-product-form input {
+    margin: 10px 0px;
+  }
+  #custom-product-form {
+    max-width: 1370px;
+    margin: auto;
+  }
+  #custom-product-form label {
+    padding-left: 10px;
+    font-size: 20px;
+    color: #6A6A6A;
+    font-weight: 600;
+  }
+  input:checked + label {
+    color: #FF6600 !important;
+  }
+  h2 {
+    font-size: 40px;
+    line-height: 48px;
+    color: #FF6B00;
+    padding: 10px;
+  }
+  .prt-add {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    background-color: #FF6600;
+    border: none !important;
+    padding: 16px 34px;
+   margin: 50px 10px;
+  }
+ #customImage {
+	border: 2px dashed #6A6A6A;
+	padding: 40px 20px;
+}
+.mg-upl {
+	max-width: 500px;
+    padding-top: 80px;
+}
+.upper-top {
+  border-top: 1px solid #fff;
+  text-align: center;
+  background-color: #000;
+  padding: 80px 20px;
+}
+.upper-top h2 {
+  text-transform: uppercase;
+} 
+.upper-top p {
+  color: #fff;
+  font-size: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+@media only screen and (max-width: 767px) {
+    h2 {
+      font-size: 26px;
+      line-height: 32px;
+      padding: 10px;
+    }
+}
+@media only screen and (max-width: 1024px) {
+  .radio-item, .product-crt {
+    width: 100%;
+  }
+  .lef-check {
+   margin-left: 10px; 
+}
+  .leftt-check {
+   margin-left: 15px; 
+}
+  .hdng-enhance h2 {
+    margin-top: 40px;
+  }
+  .products-list-warranty {
+    margin-left: -10px; 
+  }
+}
+@media only screen and (min-width: 1024px) {
+.products-list-warranty .product-crt:nth-child(3) {
+    margin-left: -24px;
+  }
+.products-list-warranty .product-crt:nth-child(4) {
+    margin-top: -15px;
+    margin-left: -6px;
+  }
+.lef-check {
+   margin-left: -10px; 
+}
+.left-check {
+   margin-left: -20px; 
+}
+.left-checks {
+   margin-left: -7px; 
+}
+.products-list-warranty {
+  margin-left: -15px;
+  }
+}
+</style>
+
+<div class="upper-top">
+  <h2> Warranty Service Overview </h2>
+  <p>We're committed to ensuring your Stuhrling watch stays in perfect condition. Whether you're within your warranty period or require out-of-warranty service, we're here to help. For warranty coverage, remember to register your watch within 30 days of purchase. Let’s keep your timepiece ticking perfectly.</p>
+</div>
+
+
+<div id="product-selection-form">
+  <form id="custom-product-form" enctype="multipart/form-data">
+    <h2>Repair Services Checklist</h2>
+    
+<div class="source wo-fm">
+    <div class="radio-item">
+      <input type="checkbox" name="repair_services" value="Movement" id="movement" checked>
+      <label for="movement">Movement</label>
+    </div>
+    <div class="radio-item">
+      <input type="checkbox" name="repair_services" value="Battery" id="battery">
+      <label for="battery">Battery</label>
+    </div>
+    <div class="radio-item lef-check">
+      <input type="checkbox" name="repair_services" value="Hands" id="hands">
+      <label for="hands">Hands</label>
+    </div>
+    <div class="radio-item leftt-check">
+      <input type="checkbox" name="repair_services" value="Dial" id="dial">
+      <label for="dial">Dial</label>
+    </div>
+    <div class="radio-item">
+      <input type="checkbox" name="repair_services" value="Rotor" id="rotor">
+      <label for="rotor">Rotor</label>
+    </div>
+    <div class="radio-item">
+      <input type="checkbox" name="repair_services" value="Crown" id="crown">
+      <label for="crown">Crown/Stem</label>
+    </div>
+    <div class="radio-item  left-check">
+      <input type="checkbox" name="repair_services" value="Calender" id="calender">
+      <label for="calender">Calender</label>
+    </div>
+    <div class="radio-item left-checks ">
+      <input type="checkbox" name="repair_services" value="Strap Pin Loose" id="loose">
+      <label for="loose">Strap Pin Loose</label>
+    </div>
+    <div class="radio-item">
+      <input type="checkbox" name="repair_services" value="Other" id="other">
+      <label for="other">Other</label>
+    </div>
+</div>
+
+    <div class="hdng-enhance">
+      <h2>Enhance your watch’s appearance or functionality</h2>
+    </div>
+    
+    <div class="products-list-warranty">
+    {% for product in collections['Repair'].products %}
+      {% for variant in product.variants %}
+        <div class="product-crt">
+          <input type="checkbox" id="variant_{{ variant.id }}" name="product" value="{{ variant.id }}"> <label for="variant_{{ variant.id }}">{{ product.title }} - {{ product.price | money }} </label>
+        </div>
+      {% endfor %}
+    {% endfor %}
+    </div>
+
+    
+    <div class="mg-upl">
+      <h2>Image Upload</h2>
+        <input type="file" id="customImage" name="properties[Custom Image]"> 
+      <h4>Help us assess your repair needs better by uploading clear images of your watch.</h4>
+    </div>
+    
+    <button type="submit" class="prt-add">Proceed to Repair Form</button>
+  </form>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#custom-product-form').on('submit', function(e) {
+        e.preventDefault();
+
+        // Get the selected product elements
+        var selectedProducts = $('input[name="product"]:checked');
+        var customerNames = $('input[name="repair_services"]:checked');
+        var customerNameValues = Array.from(customerNames).map(cb => cb.value);
+        var file = document.getElementById('customImage').files[0];
+        var customerNamesString = customerNameValues.join(', ');
+        sessionStorage.setItem('repairServices', customerNamesString);
+
+        // Create a FormData object to hold the form data including the image
+        var formData = new FormData();
+
+        // Append each selected product to the FormData
+        Array.from(selectedProducts).forEach((productItem, index) => {
+            formData.append(`items[${index}][id]`, productItem.value);
+            formData.append(`items[${index}][quantity]`, 1);
+            formData.append(`items[${index}][properties][Custom Name]`, customerNamesString);
+            
+            if (file) {
+                formData.append(`items[${index}][properties][Uploaded Image]`, file);
+            }
+        });
+
+        // Check if there are selected products
+        if (selectedProducts.length > 0) {
+            // Add the products to the cart
+            $.ajax({
+                type: 'POST',
+                url: '/cart/add.js',
+                data: formData,
+                contentType: false, // Set contentType to false when using FormData
+                processData: false, // Set processData to false when using FormData
+                dataType: 'json',
+                success: function(response) {
+                    const url = '/pages/repair-request';
+                    window.location.href = url;
+                },
+                error: function(error) {
+                    alert('There was an error adding the products to the cart.');
+                    console.log(error);
+                }
+            });
+        } else {
+            const url = '/pages/repair-request';
+            window.location.href = url;
+        }
+    });
+});
+</script>

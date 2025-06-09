@@ -1,0 +1,62 @@
+{% if collections[featured] == empty %}
+  {% comment %}add default state for collection block in storefront editor{% endcomment %}
+  {% capture collection_title %}{{ 'home_page.onboarding.collection_title' | t }}{% endcapture %}
+{% else %}
+  {% capture collection_title %}{{ collections[featured].title | escape }}{% endcapture %}
+  {% capture collection_description %}{{ collections[featured].description | escape }}{% endcapture %}
+{% endif %}
+
+<a href="{{ collections[featured].url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid-link{% if settings.collections_center_grid_link %} text-center{% endif %}">
+  <div class="grid-link__image grid-link__image--collection collection_img">
+    <span class="grid-link__image-centered">
+      {% if collections[featured] == empty %}
+        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+        {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+      {% else %}
+
+
+
+          <div id="{{ img_wrapper_id }}" class="collection__grid-image-wrapper supports-js">
+            <div style="padding-top:{{ 1 | divided_by: collection_image.aspect_ratio | times: 100}}%;">
+              <img id="{{ img_id }}"
+                   class="lazyload"
+                   src="{{ block.settings.collection_image  | img_url: 'master' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 235, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ collection_image.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ collection_image.alt  }}">
+            </div>
+          </div>
+      
+
+      {% endif %}
+    </span>
+  </div>
+  <div class="collection_details">
+     <h2 class="grid-link__title collection__title">{{ block.settings.collections-title-txt }}</h2>
+  <p class="grid-link__detail">{{ block.settings.collections-title-sub-txt |truncate: 80 }}</p>
+    <span>Shop All</span>
+  </div>
+ 
+</a>
+
+<style>
+  @media only screen and (max-width: 768px) {
+    .collection_details .grid-link__detail
+    {
+      display: none;
+    }
+    .collection_details span{
+      background: #ff6600 !important;
+      color: #fff !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+  }
+  .collection_details span:hover {
+    background: #ff6600 !important;
+    color: #fff !important;
+}
+</style>

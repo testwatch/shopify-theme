@@ -1,0 +1,115 @@
+{% assign file_extension = 'png' %}
+
+{% if swatch == blank %}
+  <div class="swatch error">
+    <p>You must include the snippet swatch.liquid with the name of a product option.</p> 
+    <p>Use: <code>{% raw %}{% include 'swatch' with 'name of your product option here' %}{% endraw %}</code></p>
+    <p>Example: <code>{% raw %}{% include 'swatch' with 'Color' or 'Material' %}{% endraw %}</code></p>
+</div>
+{% else %} 
+
+{% assign found_option = false %}
+{% assign is_color = false %}
+{% assign option_index = 0 %}
+
+{% assign option_styles = '' %}
+{% assign option_scripts = '' %}
+
+{% for option in product.options %}
+    {% if option == swatch %}
+    {% assign found_option = true %}
+    {% assign option_index = forloop.index0 %}
+    
+    {% capture option_style %}
+    label[for="product-select-option-{{ option_index }}"] { display: none; }
+    #product-select-option-{{ option_index }} { display: none; }
+    #product-select-option-{{ option_index }} + .custom-style-select-box { display: none !important; }
+    {% endcapture %}
+    {% assign option_styles = option_styles | append: option_style %}
+    
+    {% capture option_script %}$('.selector-wrapper:eq({{ option_index }})').hide();{% endcapture %}
+    {% assign option_scripts = option_scripts | append: option_script %}
+    
+    {% assign downcased_option = swatch | downcase %}
+    {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+      {% assign is_color = true %}
+	{% else %}
+	  {% assign is_material = true %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% if option_styles != blank %}
+<style>
+  {{ option_styles }}
+</style>
+{% endif %}
+{% if option_scripts != blank %}
+<script>
+  window.addEventListener('load', (event) => {
+    {{ option_scripts }}
+  })
+</script>
+{% endif %}
+
+{% unless found_option %}
+{% else %}
+<div class="swatch clearfix swatches-mobile-scroll get" data-option-index="{{ option_index }}">
+  <div class="header">{{ swatch }}</div>
+  {% assign available_variants_scripts = '' %}
+  {% assign values = '' %}
+  {% for variant in product.variants %}
+    {% assign value = variant.options[option_index] %}
+    {% unless values contains value %}
+      {% assign values = values | join: ',' %}
+      {% assign values = values | append: ',' | append: value %} 
+      {% assign values = values | split: ',' %}
+   {% assign current_variant = product.selected_or_first_available_variant %}
+
+      <div data-mob-bg-image="{{ variant.metafields.Stuhrling.Product_Main_Mobile_BG_Banner }}" 
+           data-mob-feature-image="{{ variant.metafields.Stuhrling.feature_sec_mob_image }}" 
+           data-bg-image="{{ variant.metafields.Stuhrling.Product_Main_BG_Banner }}" 
+           data-bg-gallery-1="{{ variant.metafields.Stuhrling.Product_Gallery_BG_Image }}" 
+           data-bg-gallery-2="{{ variant.metafields.Stuhrling.Product_Gallery_BG_Image_2 }}" 
+           data-variant-gallery="{{ variant.metafields.Stuhrling.Variant_Gallery_Images }}"
+           
+           data-mobile-img-one="{{ variant.metafields.Stuhrling.Product_gallery_mobileBg }}"
+           data-mobile-img-two="{{ variant.metafields.Stuhrling.feature_sec_image2 }}" 
+           data-mobile-img-three="{{ variant.metafields.Stuhrling.mobile_desc_img }}"
+           data-mobile-img-three_bg ="{{ variant.metafields.Stuhrling.Product_gallery2_mobileBg }}"
+           data-mobile-img-four ="{{ variant.metafields.Stuhrling.Mobile_Variant_Gallery_Images }}"           
+           
+           data-index="{{ forloop.index }}" 
+           data-rel="" data-price="{{ variant.price | money }}" 
+           data-href="{{variant.url}}" data-value="{{ value | escape }}" class="{%if variant.id == current_variant.id%}swatch-one{%endif%} swatch-var-{{ forloop.index }} swatch-element {% if is_color %}color {% endif %}{{ value | handle }} {% if variant.available %}available{% else %}soldout{% endif %} {% unless variant.available %}disabled1{% endunless %} ">
+        {% if is_color or is_material %}
+        <div class="tooltip">{{ value }}</div>
+        {% endif %}
+        <input id="swatch-{{ option_index }}-{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if forloop.first %} checked{% endif %} />
+        {% if is_color or is_material  %}
+        <label class="variant_outer_image" for="swatch-{{ option_index }}-{{ value | handle }}" data-image="{{variant.image | img_url:'master'}}" {% if template.suffix contains 'advanced_product_template' %}{% else %}style="background-image: url({{variant.image | img_url:'master'}})"{% endif %}>
+{% if template.suffix contains 'advanced_product_template' %}<img class="variant_image" src="{{variant.image | img_url:'100x'}}" loading="lazy"/>{% endif %}
+          <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}" />
+        </label>
+        {% else %}
+        <label for="swatch-{{ option_index }}-{{ value | handle }}">
+          {{ value }}
+          <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}" />
+        </label>
+        {% endif %}
+      </div>
+    {% endunless %}
+    {% if variant.available %}
+      {% capture available_variants_script %}jQuery('.swatch[data-option-index="{{ option_index }}"] .{{ value | handle }}').removeClass('soldout').addClass('available').find(':radio').removeAttr('disabled');{% endcapture %}
+      {% assign available_variants_scripts = available_variants_scripts | append: available_variants_script %}
+    {% endif %}
+  {% endfor %}
+
+  {% if available_variants_scripts != blank %}
+  <script>{{ available_variants_scripts }}</script>
+  {% endif %}
+</div>
+
+{% endunless %}
+
+{% endif %}

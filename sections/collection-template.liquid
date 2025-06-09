@@ -1,0 +1,639 @@
+{% assign limit =  %}
+{% if collection.title == 'Strap' %}
+{% assign limit = '30' %}
+{% else %}
+{% assign limit = '20' %}
+{% endif %}
+{% render 'collection-sparq' %}
+
+
+
+{% schema %}
+{
+  "name": {
+    "da": "Kollektionssider",
+    "de": "Kategorie-Seiten",
+    "en": "Collection pages",
+    "es": "Páginas de colección",
+    "fi": "Kokoelman sivut",
+    "fr": "Pages de collections",
+    "hi": "कलेक्शन पेज",
+    "it": "Pagine di collezioni",
+    "ja": "コレクションページ",
+    "ko": "컬렉션 페이지",
+    "nb": "Samlingssider",
+    "nl": "Collectiepagina's",
+    "pt-BR": "Páginas de coleções",
+    "pt-PT": "Páginas de Coleções",
+    "sv": "Produktseriesidor",
+    "th": "หน้าคอลเลกชัน",
+    "zh-CN": "产品系列页面",
+    "zh-TW": "商品系列頁面"
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "vendor_enable",
+      "label": {
+        "da": "Vis produktleverandør",
+        "de": "Produktverkäufer anzeigen",
+        "en": "Show product vendor",
+        "es": "Mostrar proveedor del producto",
+        "fi": "Näytä tuotteen myyjä",
+        "fr": "Afficher le distributeur du produit",
+        "hi": "उत्पाद विक्रेता दिखाएं",
+        "it": "Mostra fornitore prodotto",
+        "ja": "商品の販売元を表示する",
+        "ko": "제품 공급 업체 표시",
+        "nb": "Vis produktleverandør",
+        "nl": "Productleverancier weergeven",
+        "pt-BR": "Exibir o fornecedor do produto",
+        "pt-PT": "Mostrar o fornecedor do produto",
+        "sv": "Visa produktsäljare",
+        "th": "แสดงผู้ขายสินค้า",
+        "zh-CN": "显示产品厂商",
+        "zh-TW": "顯示產品廠商"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sale_circle",
+      "label": {
+        "da": "Vis udsalgscirkel for produkt",
+        "de": "Kreis bei Produkten im Angebot anzeigen",
+        "en": "Show product sale circle",
+        "es": "Mostrar el círculo de oferta del producto",
+        "fi": "Näytä tuotteen alennusmyyntiympyrä",
+        "fr": "Afficher la vignette produit en réduction",
+        "hi": "उत्पाद बिक्री सर्कल दिखाएं",
+        "it": "Mostra cerchio \"In Offerta\" sul prodotto",
+        "ja": "商品のセールを丸で囲んで表示する",
+        "ko": "제품 판매 서클 표시",
+        "nb": "Vis sirkel for produktsalg",
+        "nl": "Toon de cirkel voor de verkoop van producten",
+        "pt-BR": "Exibir círculo de produto em oferta",
+        "pt-PT": "Mostrar círculo de oferta de produtos",
+        "sv": "Visa produktförsäljningscirkel",
+        "th": "แสดงวงกลมที่ระบุว่าสินค้าลดราคา",
+        "zh-CN": "显示产品销售圆圈",
+        "zh-TW": "顯示產品特價圓圈"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sold_out_circle",
+      "label": {
+        "da": "Vis udsolgt-cirkel for produkt",
+        "de": "Kreis bei ausverkauften Produkte anzeigen",
+        "en": "Show product sold out circle",
+        "es": "Mostrar el círculo de agotado del producto",
+        "fi": "Näytä tuotteen loppuunmyyty-ympyrä",
+        "fr": "Afficher la vignette produit épuisé",
+        "hi": "उत्पाद बेचा गया सर्कल दिखाएं",
+        "it": "Mostra cerchio \"Esaurito\" sul prodotto",
+        "ja": "丸で囲んだ売り切れを表示する",
+        "ko": "매진 제품 서클 표시",
+        "nb": "Vis sirkel for utsolgte produkter",
+        "nl": "Toon de cirkel van de uitverkochte producten",
+        "pt-BR": "Exibir círculo de produto esgotado",
+        "pt-PT": "Mostrar círculo de produto esgotado",
+        "sv": "Visa cirkel för utsåld produkt",
+        "th": "แสดงวงกลมที่ระบุว่าสินค้าหมด",
+        "zh-CN": "显示产品售罄圆圈",
+        "zh-TW": "顯示產品售罄圓圈"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "sort_enable",
+      "label": {
+        "da": "Aktivér sortering af kollektioner",
+        "de": "Kategoriesortierung aktivieren",
+        "en": "Enable collection sorting",
+        "es": "Habilitar la función ordenar colecciones",
+        "fi": "Ota kokoelman lajittelu käyttöön",
+        "fr": "Activer le tri de la collection",
+        "hi": "कलेक्शन क्रमबद्ध करना सक्षम करें",
+        "it": "Abilita ordinamento collezione",
+        "ja": "コレクションの並べ替えを有効にする",
+        "ko": "컬렉션 정렬 사용",
+        "nb": "Aktiver sortering av samlinger",
+        "nl": "Sorteren op collectie inschakelen",
+        "pt-BR": "Habilitar a organização de coleções",
+        "pt-PT": "Ativar a ordenação de coleções",
+        "sv": "Aktivera produktseriesortering",
+        "th": "เปิดใช้การเรียงลำดับคอลเลกชัน",
+        "zh-CN": "启用产品系列排序",
+        "zh-TW": "啟用商品系列排序功能"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "tags_enable",
+      "label": {
+        "da": "Aktivér filtrering efter produkttag",
+        "de": "Filterung nach Produkt-Tag aktivieren",
+        "en": "Enable filtering by product tag",
+        "es": "Habilitar filtro por etiqueta de producto",
+        "fi": "Ota suodatus tuotetunnisteen perusteella käyttöön",
+        "fr": "Activer le filtrage par balise de produit",
+        "hi": "उत्पाद टैग द्वारा फ़िल्टर लगाना सक्षम करें",
+        "it": "Abilita filtri per tag di prodotto",
+        "ja": "商品タグによる絞り込みを有効にする",
+        "ko": "제품 태그별로 필터링 사용",
+        "nb": "Aktiver filtrering etter produkttagg",
+        "nl": "Schakel filteren in per producttag",
+        "pt-BR": "Habilitar filtragem por tag de produto",
+        "pt-PT": "Ativar filtragem por etiqueta de produto",
+        "sv": "Aktivera filtrering efter produkttagg",
+        "th": "เปิดใช้การกรองตามแท็กสินค้า",
+        "zh-CN": "启用按产品标记筛选",
+        "zh-TW": "啟用產品標籤篩選功能"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "center_grid_link",
+      "label": {
+        "da": "Centrer tekst under produktbilleder",
+        "de": "Text unter Produktbildern zentrieren",
+        "en": "Center text below product images",
+        "es": "Centrar el texto debajo de las imágenes del producto",
+        "fi": "Keskitä teksti tuotekuvien alla",
+        "fr": "Centrer le texte sous les images des produits",
+        "hi": "उत्पाद इमेज के नीचे केंद्रित टेक्स्ट",
+        "it": "Centra il testo sotto le immagini di prodotto",
+        "ja": "商品画像下のテキストを中央に寄せる",
+        "ko": "제품 이미지 아래 가운데 텍스트",
+        "nb": "Sentrer tekst under produktbilder",
+        "nl": "Centreer de tekst onder de productafbeeldingen",
+        "pt-BR": "Centralizar texto abaixo das imagens do produto",
+        "pt-PT": "Centrar texto abaixo das imagens de produto",
+        "sv": "Centrera text under produktbilder",
+        "th": "จัดข้อความใต้ภาพสินค้าให้อยู่ตรงกลาง",
+        "zh-CN": "使产品图片下方的文本居中显示",
+        "zh-TW": "將文字置中並置於產品圖片下方"
+      }
+    }
+  ]
+}
+{% endschema %}
+<script>
+$(".video_play-coll").click(function(){
+   $(this).next('.video-wrapper').show();
+  $("#video--1")[0].src += "?autoplay=1";
+});
+  
+$(".video_play-coll-1").click(function(){
+   $(this).next('.video-wrapper').show();
+  $("#video--2")[0].src += "?autoplay=1";
+});  
+</script>  
+
+<script>
+function searchFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue, li_old;
+  input = document.getElementById('search_input');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("gf-products");
+
+  li = ul.getElementsByClassName('filter_product');
+//   alert(li_old);
+//   li = li_old.getElementsByClassName('spf-product-card__title');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByClassName("spf-product-card__title")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
+
+<style>
+
+.spf-product-card__price-wrapper span
+  {
+    color: #ff6b00;
+  }
+
+#shopify-section-collection-template .grid-link:hover .grid-link__image, .grid-link:active .grid-link__image, .grid-link--focus:hover .grid-link__image, .grid-link--focus:active .grid-link__image
+{
+     opacity: unset; 
+}
+  
+  #CollectionSection .test.collection-grid-pr span.spf-product-card__saleprice span {
+    color: #ff6b00 !important;
+}
+  
+
+  
+#CollectionSection span.spf-product-card__price.money.color-orange span.money {
+    color: #ff6b00;
+} 
+  
+  
+.grid__item.wide--one-quarter.large--one-quarter.medium-down--one-half:first-child span.spf-product__label.spf-product__label-sale.sale-percent.new-first-product {
+    display: block;
+    background-color: #ff6b00;
+    padding: 5px 25px;
+} 
+
+
+.grid__item.wide--one-quarter.large--one-quarter.medium-down--one-half:first-child span.spf-product__label.spf-product__label-sale.sale-percent.sss 
+{
+  display: none;
+}
+  
+span.spf-product__label.spf-product__label-sale.sale-percent.new-first-product
+  {
+    display: none;
+  }
+
+.video-collection-page a#click_video-coll {
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    right: 40%;
+    cursor: pointer;
+}
+
+.video-collection-pg-img {
+    background-size: cover;
+    background-position: center;
+    height: 530px;
+    position: relative;
+}
+
+.template-collection span.spf-product__label
+  {
+    top: 0;
+  }
+  
+.template-collection span.grid-link__image-centered {
+    padding-top: 30px;
+}  
+
+.template-collection span.spf-product__label.spf-product__label-sale
+{
+background: #000;
+}  
+
+.template-collection .video-collection-page .video-wrapper
+  {
+    height: 550px;
+    display: none;
+  }
+
+ #search_input {
+    border-color: rgba(0,0,0,0.09);
+    background-position: 99% 50%;
+    color: #000 !important;
+    border-radius: 99px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    padding: 0 .75em;
+    height: 2.507em;
+    font-size: .97em;    
+    max-width: 100%;
+    width: 100%;
+    vertical-align: middle;
+    background-color: #fff;
+    color: #333;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    transition: color .3s,border .3s,background .3s,opacity .3s;
+    border-radius: 50px;
+    outline: none;
+}
+  .collection_search {
+    position: relative;
+    display: block;
+    clear: both;
+}
+  .search_icon
+  {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translate(0px, -50%);
+  }
+  
+/* Collection page filter  */
+  
+#gf-controls-container {
+    padding-top: 40px !important;
+} 
+.gf-filter-contents {
+    position: relative !important;
+    margin-bottom: 40px !important;
+}  
+.gf-block-content {
+    margin-top: 0 !important;
+}  
+.gf-top_one #gf-tree {
+    border-bottom: none !important;
+} 
+
+#shopify-section-collection-template {
+    background-color: #f5f5f5;
+    padding-bottom: 20px;
+}  
+.collection-grid-pr {
+    background-color: #fff;
+}
+.collection-grid-pr {
+    margin-bottom: 20px;
+}
+  
+@media only screen and (max-width: 479px){  
+.video-collection-pg-img {
+    height: 360px;
+}
+ 
+    .video-collection-page a#click_video-coll {
+    text-align: center;
+    position: absolute;
+    top: 31%;
+    right: 125px;
+    cursor: pointer;
+}
+  .test.collection-grid-pr .reviews
+  {
+    position: unset;
+  }
+  
+  span.spf-product-card__saleprice span
+  {
+    padding-right: 0px;
+  }
+  
+.test.collection-grid-pr .reviews
+  {
+    position: unset !important;
+  }
+
+#CollectionSection #gf-products .grid__item {
+    padding-left: 5px !important;
+    padding-bottom: 20px;
+}
+  
+} 
+  
+@media only screen and (min-width: 480px){  
+.gf-top_one .gf-block-content {
+    width: 430px;
+}  
+ 
+}
+  
+@media only screen and (min-width: 480px) and (max-width: 768px)  {
+#gf-controls-container .globo-selected-items, .gf-top_one #gf-tree .globo-selected-items {
+    display: unset;
+}  
+.gf-top_one .gf-option-block .gf-block-title h3 {
+    padding: 7px 21px !important;
+}  
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px){ 
+
+  .video-collection-pg-img
+  {
+    height: 430px;
+  }
+  
+  .video-collection-page a#click_video-coll {
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    right: 22%;
+    cursor: pointer;
+}
+
+span.spf-product-card__saleprice span {
+    padding-right: 0px;
+    padding-left: 10px;
+}
+
+.test.collection-grid-pr .reviews {
+    position: unset !important;
+    padding-bottom: 5px;
+    display: block;
+    top: 4px;
+    right: 10px;
+}
+
+.test.collection-grid-pr span.title-coll {
+  width: 100% !important;
+}
+
+  span.title-coll {
+    font-size: 13px !important;
+}
+  
+
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1355px){ 
+
+  .video-collection-pg-img
+  {
+    height: 500px;
+  }
+  
+  .video-collection-page a#click_video-coll {
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    right: 22%;
+    cursor: pointer;
+}
+.test.collection-grid-pr span.title-coll
+  {
+    width: 96% !important;
+  }
+
+
+}
+
+@media only screen and (min-width: 1356px) and (max-width: 1442px){ 
+.test.collection-grid-pr {
+    height: 535px;
+}
+  }
+.collection-images
+{
+  padding-bottom: 70px;
+}
+
+span.title-coll
+{
+  font-size: 15px;
+}
+
+#CollectionSection #gf-products .grid-link
+{
+  padding-bottom: 10px;
+}
+
+.test.collection-grid-pr
+{
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.test.collection-grid-pr .desktop_review
+{ 
+    margin: 0 auto;
+}
+ 
+.test.collection-grid-pr span.title-coll
+{
+  marging-bottom: 15px;
+  margin: 0 auto;
+  width: 90%;
+  padding-right: 10px;
+  padding-left: 10px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    overflow: hidden;
+}
+}
+
+.test.collection-grid-pr .desktop_review .jdgm-prev-badge__text
+{
+  display: block;
+}
+
+.test.collection-grid-pr .reviews
+{
+  padding-bottom: 5px;
+  position: absolute;
+  top: 4px;
+  right: 10px;
+}
+
+.hover-second-image
+{
+  display: none;
+}
+
+.test.collection-grid-pr:hover {
+    box-shadow: rgb(0 0 0 / 24%) 3px 3px 8px;
+}
+
+/* .product__img-wrapper:hover .hover-first-image
+ {
+   display: none;
+ }
+
+.product__img-wrapper:hover .hover-second-image
+ {
+   display: block;
+ } */
+
+div#gf-products {
+    float: left;
+    flex-wrap: wrap;
+    margin: 0px 30px 0px 0px;
+}
+
+.spf-product-card__price-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+span.spf-product-card__oldprice:after {
+    content: "";
+    width: 75px;
+    height: 2px;
+    top: 50%;
+    background: red;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.collection-grid-pr .spf-product-card__oldprice.money
+{
+  text-decoration: none !important;
+}
+
+@media screen and (min-width: 1600px) 
+{
+
+div#CollectionSection {
+    max-width: 1440px;
+    margin: auto;
+}
+
+.test.collection-grid-pr, .video-collection-pg-img {
+    height: 565px;
+}
+
+}
+
+@media screen and (max-width: 768px) 
+{
+#CollectionSection #gf-products .grid__item
+{
+  padding-left: 25px;
+}
+
+.medium-down--one-half {
+    width: 49%;
+
+}
+
+.test.collection-grid-pr span.title-coll
+{
+ 
+  width: 100%;
+
+    
+} 
+
+.test.collection-grid-pr.on-sale .spf-product-card__oldprice span, .test.collection-grid-pr.on-sale  span.spf-product-card__saleprice span, #CollectionSection span.spf-product-card__price span.money
+
+{
+    font-size: 13px !important;
+}
+
+#CollectionSection .jdgm-prev-badge {
+    font-size: 12px;
+}
+  
+ #shopify-section-collection-template span.title-coll {
+    font-size: 10px;
+}
+
+#CollectionSection .grid-uniform
+{
+  margin: 0px 2px;
+}
+
+span.spf-product-card__oldprice:after {
+    content: "";
+    width: 75px;
+    height: 2px;
+    top: 60%;
+    background: red;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+} 
+
+
+
+    
+  
+</style>

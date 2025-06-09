@@ -1,0 +1,92 @@
+<div id="product-selection-form">
+  <form id="custom-product-form" enctype="multipart/form-data">
+    <h3>Select a Product:</h3>
+    {% for product in collections['Repair'].products %}
+      {% for variant in product.variants %}
+        <div>
+          <input type="radio" id="variant_{{ variant.id }}" name="product" value="{{ variant.id }}">
+          <label for="variant_{{ variant.id }}">{{ product.title }} - {{ product.price | money }} </label>
+        </div>
+      {% endfor %}
+    {% endfor %}
+
+<div class="source wo-fm">
+    <div class="radio-item">
+      <input type="radio" name="repair_services" value="Movement" id="movement" checked><label for="movement">Movement</label>
+      </div>
+          <div class="radio-item">
+      <input type="radio" name="repair_services" value="Battery" id="battery"><label for="battery">Battery</label>
+      </div>
+          <div class="radio-item">
+      <input type="radio" name="repair_services" value="Hands" id="hands"><label for="hands">Hands</label>
+      </div>
+          <div class="radio-item">
+      <input type="radio" name="repair_services" value="Dial" id="dial"><label for="dial">Dial</label>
+      </div>
+          <div class="radio-item">
+      <input type="radio" name="repair_services" value="Rotor" id="rotor"><label for="rotor">Rotor</label>
+      </div>
+          <div class="radio-item">
+      <input type="radio" name="repair_services" value="Crown" id="crown"><label for="crown">Crown</label>
+      </div>
+          <div class="radio-item">
+      <input type="radio" name="repair_services" value="Calender" id="calender"><label for="calender">Calender</label>
+      </div>
+          <div class="radio-item">
+      <input type="radio" name="repair_services" value="Strap Pin Loose" id="loose"><label for="loose">Strap Pin Loose</label>
+      </div>
+          <div class="radio-item">
+      <input type="radio" name="repair_services" value="Other" id="other"><label for="other">Other</label>
+      </div>
+    </div>
+      <input type="file" id="customImage" name="properties[Custom Image]" required> 
+    
+    <button type="submit">Add to Cart</button>
+  </form>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  $('#custom-product-form').on('submit', function(e) {
+    e.preventDefault();
+
+    // Get the selected product ID
+    var selectedProduct = $('input[name="product"]:checked').val();
+    const customerName = $('input[name="repair_services"]:checked').val();
+    const file = document.getElementById('customImage').files[0];
+
+    // Create a FormData object to hold the form data
+    var formData = new FormData();
+    formData.append('id', selectedProduct);
+    formData.append('quantity', 1); // Quantity of the product
+    formData.append('properties[Custom Name]', customerName); // Add customer name as a property
+    formData.append('properties[Uploaded Image]', file); // Add file as a property
+
+    if (selectedProduct) {
+      // Add the product to the cart
+      $.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        data: formData,
+        contentType: false, // Set contentType to false when using FormData
+        processData: false, // Set processData to false when using FormData
+        dataType: 'json',
+        success: function(response) {
+          alert('Product added to cart!');
+          console.log(response);
+        },
+        error: function(error) {
+          alert('There was an error adding the product to the cart.');
+          console.log(error);
+        }
+      });
+    } else {
+      alert('Please select a product.');
+    }
+  });
+});
+
+
+</script>

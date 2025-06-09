@@ -1,0 +1,449 @@
+<div class="help-center">
+  <div class="miniwrapper">
+    <div class="row">
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <h2 class="products-heading">Topics</h2>
+<ul id="tabs-titles">
+  <li class="current">{%if section.settings.leftHeading-1 != blank %}{{section.settings.leftHeading-1}}{%else%}Product{%endif%}</li>
+  <li>{%if section.settings.leftHeading-2 != blank %}{{section.settings.leftHeading-2}}{%else%}Shopping & Ordering{%endif%}</li>
+  <li>{%if section.settings.leftHeading-3 != blank %}{{section.settings.leftHeading-3}}{%else%}Payment{%endif%}</li>
+  <li>{%if section.settings.leftHeading-4 != blank %}{{section.settings.leftHeading-4}}{%else%}Shipping & Delivery{%endif%}</li>
+  <li>{%if section.settings.leftHeading-5 != blank %}{{section.settings.leftHeading-5}}{%else%}Returns & Exchanges{%endif%}</li>
+  <li>{%if section.settings.leftHeading-6 != blank %}{{section.settings.leftHeading-6}}{%else%}Warranty & Repairs{%endif%}</li>
+  <li>{%if section.settings.leftHeading-7 != blank %}{{section.settings.leftHeading-7}}{%else%}Clyde Protection Plans{%endif%}</li>
+  
+</ul>
+        <div class="help-questions-links">
+          <ul>
+           {% for link in linklists[section.settings.menu].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+          </ul>
+        </div>
+        
+      </div>
+      <div class="col-md-8 col-sm-8 col-xs-12">
+          <h2 class="products-heading">Product</h2>
+<ul id="tabs-contents">
+  
+ <li class="thisisactive {%if section.settings.leftHeading-1 != blank %}{{section.settings.leftHeading-1}}{%else%}Product{%endif%}">
+        <div class="content">
+          <div class="accordion_container">
+            {% for block in section.blocks %}
+  {% if block.type == 'Product' %}
+            <div class="accordion_head1">{{block.settings.Heading}}<span class="plusminus"><i class="fa fa-angle-down"></i>
+</span></div>
+            <div class="accordion_body1" style="display: none;">
+              {{block.settings.content}}
+            </div>
+            {%endif%}
+            {%endfor%}
+          </div>
+
+      </div>
+    </li>
+    <li class="{{section.settings.leftHeading-2}}">
+        <div class="content">
+       <div class="accordion_container">
+            {% for block in section.blocks %}
+  {% if block.type == 'ShoppingOrdering' %}
+            <div class="accordion_head1">  {{block.settings.Heading-1}}<span class="plusminus"><i class="fa fa-angle-down"></i>
+</span></div>
+            <div class="accordion_body1" style="display: none;">
+           {{block.settings.content-1}}
+            </div>
+            {%endif%}
+            {%endfor%}
+          </div>
+
+      </div>
+    </li>
+     <li class="{{section.settings.leftHeading-3}}">
+    <div class="content">
+       <div class="accordion_container">
+            {% for block in section.blocks %}
+  {% if block.type == 'Payment' %}
+            <div class="accordion_head1">  {{block.settings.Heading-2}}<span class="plusminus"><i class="fa fa-angle-down"></i>
+</span></div>
+            <div class="accordion_body1" style="display: none;">
+           {{block.settings.content-2}}
+            </div>
+            {%endif%}
+            {%endfor%}
+          </div>
+
+      </div>
+    </li>
+   <li class="{{section.settings.leftHeading-4}}">
+        <div class="content">
+       <div class="accordion_container">
+            {% for block in section.blocks %}
+  {% if block.type == 'ShippingDelivery' %}
+            <div class="accordion_head1">  {{block.settings.Heading-3}}<span class="plusminus"><i class="fa fa-angle-down"></i>
+</span></div>
+            <div class="accordion_body1" style="display: none;">
+           {{block.settings.content-3}}
+            </div>
+            {%endif%}
+            {%endfor%}
+          </div>
+
+      </div>
+    </li>
+   <li class="{{section.settings.leftHeading-5}}">
+          <div class="content">
+       <div class="accordion_container">
+            {% for block in section.blocks %}
+  {% if block.type == 'ReturnsExchanges' %}
+            <div class="accordion_head1">  {{block.settings.Heading-4}}<span class="plusminus"><i class="fa fa-angle-down"></i>
+</span></div>
+            <div class="accordion_body1" style="display: none;">
+           {{block.settings.content-4}}
+            </div>
+            {%endif%}
+            {%endfor%}
+          </div>
+
+      </div>
+    </li>
+   <li class="{{section.settings.leftHeading-6}}">
+         <div class="content">
+       <div class="accordion_container">
+            {% for block in section.blocks %}
+  {% if block.type == 'WarrantyRepairs' %}
+            <div class="accordion_head1">  {{block.settings.Heading-5}}<span class="plusminus"><i class="fa fa-angle-down"></i>
+</span></div>
+            <div class="accordion_body1" style="display: none;">
+           {{block.settings.content-5}}
+            </div>
+            {%endif%}
+            {%endfor%}
+          </div>
+
+      </div>
+    </li>
+     <li class="{{section.settings.leftHeading-7}}">
+         <div class="content">
+       <div class="accordion_container">
+            {% for block in section.blocks %}
+  {% if block.type == 'ClydeProtectionPlans' %}
+            <div class="accordion_head1">  {{block.settings.Heading-6}}<span class="plusminus"><i class="fa fa-angle-down"></i>
+</span></div>
+            <div class="accordion_body1" style="display: none;">
+           {{block.settings.content-6}}
+            </div>
+            {%endif%}
+            {%endfor%}
+          </div>
+
+      </div>
+    </li>
+</ul>
+</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Help center",
+ "settings": [
+        {
+          "type": "text",
+          "id": "leftHeading-1",
+          "label": "Heading one"
+        },
+         {
+          "type": "text",
+          "id": "leftHeading-2",
+          "label": "Heading two"
+        },
+ 		{
+          "type": "text",
+          "id": "leftHeading-3",
+          "label": "Heading Three"
+        },
+ 		{
+          "type": "text",
+          "id": "leftHeading-4",
+          "label": "Heading Four"
+        },
+ 		{
+          "type": "text",
+          "id": "leftHeading-5",
+          "label": "Heading Five"
+        },
+		{
+          "type": "text",
+          "id": "leftHeading-6",
+          "label": "Heading Six"
+        },
+		{
+          "type": "text",
+          "id": "leftHeading-7",
+          "label": "Heading Seven"
+        },
+{
+          "type": "link_list",
+          "id": "menu",
+          "label": "Bottom Menu"
+        }
+      ],
+  "blocks": [
+    {
+      "type": "Product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "text",
+          "id": "Heading",
+          "label": "Heading"
+        },
+         {
+          "type": "textarea",
+          "id": "content",
+          "label": "content"
+        }
+      ]
+    },
+    {
+      "type": "ShoppingOrdering",
+      "name": "Shopping & Ordering",
+      "settings": [
+        {
+          "type": "text",
+          "id": "Heading-1",
+          "label": "Heading"
+        },
+         {
+          "type": "textarea",
+          "id": "content-1",
+          "label": "content"
+        }
+      ]
+    },
+    {
+      "type": "Payment",
+      "name": "Payment",
+      "settings": [
+        {
+          "type": "text",
+          "id": "Heading-2",
+          "label": "Heading-2"
+        },
+         {
+          "type": "textarea",
+          "id": "content-2",
+          "label": "content-2"
+        }
+      ]
+    },
+    {
+      "type": "ShippingDelivery",
+      "name": "Shipping & Delivery",
+      "settings": [
+        {
+          "type": "text",
+          "id": "Heading-3",
+          "label": "Heading-3"
+        },
+         {
+          "type": "textarea",
+          "id": "content-3",
+          "label": "content-3"
+        }
+      ]
+    },
+     {
+      "type": "ReturnsExchanges",
+      "name": "Returns & Exchanges",
+      "settings": [
+        {
+          "type": "text",
+          "id": "Heading-4",
+          "label": "Heading-4"
+        },
+         {
+          "type": "textarea",
+          "id": "content-4",
+          "label": "content-4"
+        }
+      ]
+    },
+{
+      "type": "WarrantyRepairs",
+      "name": "Warranty & Repairs",
+      "settings": [
+        {
+          "type": "text",
+          "id": "Heading-5",
+          "label": "Heading-5"
+        },
+         {
+          "type": "textarea",
+          "id": "content-5",
+          "label": "content-5"
+        }
+      ]
+    },
+	{
+      "type": "ClydeProtectionPlans",
+      "name": "Clyde Protection Plans",
+      "settings": [
+        {
+          "type": "text",
+          "id": "Heading-6",
+          "label": "Heading"
+        },
+         {
+          "type": "textarea",
+          "id": "content-6",
+          "label": "content"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  $(document).ready(function(){
+  var tabs = $('#tabs-titles li'); //grab tabs
+var contents = $('#tabs-contents'); //grab contents
+
+tabs.bind('click', function () {
+ //   contents.hide(); //hide all contents
+    tabs.removeClass('current'); //remove 'current' classes
+    $(contents[$(this).index()]).show(); //show tab content that matches tab title index
+    $(this).addClass('current'); //add current class on clicked tab title
+});
+     //toggle the component with class accordion_body
+  $(".accordion_head1").click(function() {
+      $('.accordion_head1').removeClass('activecolor');
+        $(this).addClass('activecolor');
+    if ($('.accordion_body1').is(':visible')) {
+
+      $(".accordion_body1").slideUp(300);
+      $(".plusminus").html('<i class="fa fa-angle-down"></i>');
+    }
+    if ($(this).next(".accordion_body1").is(':visible')) {
+       $(this).addClass('activecolor');
+      $(this).next(".accordion_body1").slideUp(300);
+      $(this).children(".plusminus").html('<i class="fa fa-angle-down"></i>');
+    } else {
+      $(this).next(".accordion_body1").slideDown(300);
+      $(this).children(".plusminus").html('<i class="fa fa-angle-up"></i>');
+    }
+  });
+    
+    $('#tabs-titles li').click(function(){
+var text = $(this).text();
+$('#tabs-contents li').each(function(){
+if($(this).hasClass(text)){
+$(this).removeClass('hideone');
+$(this).addClass('thisisactive');
+}
+else{
+$(this).addClass('hideone');
+$(this).removeClass('thisisactive');
+}
+})
+});
+    
+  })
+</script>
+<style>
+  #tabs-contents {
+width:100%;
+    z-index: 1;
+    margin-left:-2px;
+    display: block;
+    float:left;
+    padding:5px;
+}
+
+#tabs-contents li {
+
+    display:none;
+
+}
+.accordion_head1.activecolor {
+    border-color: #FD6C00 !important;
+    color: #fd6c00;
+    font-weight: bold;
+    background: #f7f7f7;
+}
+.thisisactive {
+    display: block !important;
+}
+
+.hideone {
+    display: none;
+}
+
+#tabs-titles {
+
+    float:left;
+
+}
+.accordion_head1 .plusminus {
+    display: block;
+}
+#tabs-titles li {
+cursor: pointer;
+    transition: color .3s, opacity .3s, transform .3s;
+    font-size: 110%;
+    padding: .3em 0;
+    display: block;
+    position: relative;
+    margin-bottom: 0px;
+    max-width: 240px;
+    margin-left: 0px !important;
+
+}
+
+#tabs-titles li.current {
+
+        color: #FD6C00;
+    font-weight: bold;
+
+}
+  .content h2 {
+    font-size: 20px !important;
+}
+
+.content .accordion_head1 {
+    font-size: 20px;
+}
+
+.accordion_body1 {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+#tabs-titles li {
+    font-size: 20px;
+}
+.content .accordion_head1:not(:last-child) {
+    border-top: 1px solid #a9a9a9;
+}
+.accordion_head1 {
+  color: #000;
+  cursor: pointer;
+  margin: 0 0 1px 0;
+  padding: 7px 0px;
+  
+}
+.miniwrapper {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+.accordion_body1 p {
+  padding: 18px 5px;
+  margin: 0px;
+}
+
+.plusminus {
+  float: right;
+}
+</style>

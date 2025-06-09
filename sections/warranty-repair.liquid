@@ -1,0 +1,177 @@
+{% if section.blocks.size > 0%}
+{% for block in section.blocks %}
+<div class="inner-block">
+  {% if block.settings.title %}
+  <h4 class="head--block warranty-repair-head">{{ block.settings.title }}</h4>
+    {% endif %}
+    {% if block.settings.return_desc %}
+    <div class="content--block warranty-repair-desc">{{ block.settings.return_desc }}</div>
+    {% endif %}
+</div>
+{% endfor %}
+
+
+
+{% form 'contact', id: 'waranty-request-form' %}
+
+
+<div class="warranty-repair-button-container-locations">
+  <div class="warranty-repair-button-div-locations">
+    <input type="radio" name="location" value="USA" id="USA" checked><label for="USA">USA</label><br>
+    <p>Stührling Original Service Center<br>
+      449 20th st<br>
+      Brooklyn, NY 11215-6247 </p>
+  </div>
+{% comment %}  
+  <div class="warranty-repair-button-div-locations">
+   <input type="radio" name="location" value="UK" id="UK"><label for="UK">UK</label><br>
+    <p>Stührling Original Drop-off Center<br>
+      37 Rothesay Road<br>
+      Manchester M8 4JA</p>
+  </div>
+ 
+  <div class="warranty-repair-button-div-locations">
+    <input type="radio" name="location" value="China" id="China"><label for="China">China</label><br>
+    <p>Stührling Original Service Center <br>
+       Room B, 20/F, Yally Industrial Building <br> 
+      6 Yip Fat Street, Wong Chuk Hang</p>
+  </div>
+{% endcomment %}   
+</div>
+
+<div class="location-USA">
+  {% assign manufacturer_warrant_claim_usa = all_products['manufacturer-warranty-claim'] %}
+{% assign quartz_out_of_warranty_repair_usa = all_products['quartz-out-of-warranty-repair'] %}
+{% assign automatic_out_of_warranty_repair_usa = all_products['automatic-out-of-warranty-repair'] %}
+{% assign complications_out_of_warranty_repair_usa = all_products['complications-watch-out-of-warranty-repair'] %}
+<div class="warranty-repair-button-container">
+  <div class="warranty-repair-button-div">
+    <a data-address="Stührling Original Service Center, 449 20th st , Brooklyn, NY 11215-6247" data-price="{{ manufacturer_warrant_claim_usa.price | money_with_currency  }}" data-title="{{ manufacturer_warrant_claim_usa.title }}" data-location="United States" data-id="{{ manufacturer_warrant_claim_usa.selected_or_first_available_variant.id }}" class="warranty-repair-button">Manufacturer Warranty Claim</a>
+  </div>
+  
+  <div class="warranty-repair-button-div">
+    <a data-address="Stührling Original Service Center, 449 20th st , Brooklyn, NY 11215-6247" data-price="{{ quartz_out_of_warranty_repair_usa.price | money  }}" data-title="{{ quartz_out_of_warranty_repair_usa.title }}" data-location="United States" data-id="{{ quartz_out_of_warranty_repair_usa.selected_or_first_available_variant.id }}" class="warranty-repair-button">Quartz Out of Warranty Repair</a>
+  </div>
+  
+  <div class="warranty-repair-button-div">
+    <a data-address="Stührling Original Service Center, 449 20th st , Brooklyn, NY 11215-6247" data-price="{{ automatic_out_of_warranty_repair_usa.price | money  }}" data-title="{{ automatic_out_of_warranty_repair_usa.title }}" data-location="United States" data-id="{{ automatic_out_of_warranty_repair_usa.selected_or_first_available_variant.id }}" class="warranty-repair-button">Automatic Out of Warranty Repair </a>
+  </div>
+  <div class="warranty-repair-button-div">
+    <a data-address="Stührling Original Service Center, 449 20th st , Brooklyn, NY 11215-6247" data-price="{{ complications_out_of_warranty_repair_usa.price | money }}" data-title="{{ complications_out_of_warranty_repair_usa.title }}" data-location="United States" data-id="{{ complications_out_of_warranty_repair_usa.selected_or_first_available_variant.id }}" class="warranty-repair-button">Complications Out of Warranty Repair</a>
+  </div>
+</div>    
+</div>  
+{% comment %}
+<div class="location-UK" style="display:none;">
+  {% assign manufacturer_warrant_claim_uk = all_products['international-warranty-claim-service-charge'] %}
+{% assign quartz_out_of_warranty_repair_uk = all_products['quartz-out-of-warranty-repair-uk'] %}
+{% assign automatic_out_of_warranty_repair_uk = all_products['automatic-watch-out-of-warranty-repair-uk'] %}
+{% assign complications_out_of_warranty_repair_uk = all_products['complications-watch-out-of-warranty-repair-uk'] %}
+<div class="warranty-repair-button-container">
+  <div class="warranty-repair-button-div">
+    <a data-address="Stührling Original Drop-off Center,37 Rothesay Road,Manchester M8 4JA" data-price="{{ manufacturer_warrant_claim_uk.price | money  }}" data-title="{{ manufacturer_warrant_claim_uk.title }}" data-location="United Kingdom" data-id="{{ manufacturer_warrant_claim_uk.selected_or_first_available_variant.id }}" class="warranty-repair-button">Manufacturer Warranty Claim</a>
+  </div>
+  
+  <div class="warranty-repair-button-div">
+    <a data-address="Stührling Original Drop-off Center,37 Rothesay Road,Manchester M8 4JA" data-price="{{ quartz_out_of_warranty_repair_uk.price | money  }}" data-title="{{ quartz_out_of_warranty_repair_uk.title }}" data-location="United Kingdom" data-id="{{ quartz_out_of_warranty_repair_uk.selected_or_first_available_variant.id }}" class="warranty-repair-button">Quartz Out of Warranty Repair</a>
+  </div>
+  
+  <div class="warranty-repair-button-div">
+    <a data-address="Stührling Original Drop-off Center,37 Rothesay Road,Manchester M8 4JA" data-price="{{ automatic_out_of_warranty_repair_uk.price | money  }}" data-price="{{ automatic_out_of_warranty_repair_uk.price | money  }}" data-title="{{ automatic_out_of_warranty_repair_uk.title }}" data-location="United Kingdom" data-id="{{ automatic_out_of_warranty_repair_uk.selected_or_first_available_variant.id }}" class="warranty-repair-button">Automatic Out of Warranty Repair </a>
+  </div>
+  <div class="warranty-repair-button-div">
+    <a data-address="Stührling Original Drop-off Center,37 Rothesay Road,Manchester M8 4JA" data-price="{{ complications_out_of_warranty_repair_uk.price | money  }}" data-title="{{ complications_out_of_warranty_repair_uk.title }}" data-location="United Kingdom" data-id="{{ complications_out_of_warranty_repair_uk.selected_or_first_available_variant.id }}" class="warranty-repair-button">Complications Out of Warranty Repair</a>
+  </div>    
+</div>  
+</div>  
+{% endcomment %}
+<div class="location-China" style="display:none;">
+  {% assign manufacturer_warrant_claim_china = all_products['manufacturer-warranty-claim'] %}
+{% assign quartz_out_of_warranty_repair_china = all_products['quartz-out-of-warranty-repair'] %}
+{% assign automatic_out_of_warranty_repair_china = all_products['automatic-out-of-warranty-repair'] %}
+{% assign complications_out_of_warranty_repair_china = all_products['complications-watch-out-of-warranty-repair'] %}
+<div class="warranty-repair-button-container">
+  <div class="warranty-repair-button-div">
+    <a data-address="Stührling Original Service Center,Room B, 20/F, Yally Industrial Building,6 Yip Fat Street, Wong Chuk Hang" data-price="{{ manufacturer_warrant_claim_china.price | money  }}" data-title="{{ manufacturer_warrant_claim_china.title }}" data-location="China" data-id="{{ manufacturer_warrant_claim_china.selected_or_first_available_variant.id }}" class="warranty-repair-button">Manufacturer Warranty Claim</a>
+  </div>
+  
+  <div class="warranty-repair-button-div">
+    <a data-address="Stührling Original Service Center,Room B, 20/F, Yally Industrial Building,6 Yip Fat Street, Wong Chuk Hang" data-price="{{ quartz_out_of_warranty_repair_china.price | money  }}" data-title="{{ quartz_out_of_warranty_repair_china.title }}" data-location="China" data-id="{{ quartz_out_of_warranty_repair_china.selected_or_first_available_variant.id }}" class="warranty-repair-button">Quartz Out of Warranty Repair</a>
+  </div>
+  
+  <div class="warranty-repair-button-div">
+    <a data-address="Stührling Original Service Center,Room B, 20/F, Yally Industrial Building,6 Yip Fat Street, Wong Chuk Hang" data-price="{{ automatic_out_of_warranty_repair_china.price | money  }}" data-title="{{ automatic_out_of_warranty_repair_china.title }}" data-location="China" data-id="{{ automatic_out_of_warranty_repair_china.selected_or_first_available_variant.id }}" class="warranty-repair-button">Automatic Out of Warranty Repair </a>
+  </div>
+  <div class="warranty-repair-button-div">
+    <a data-address="Stührling Original Service Center,Room B, 20/F, Yally Industrial Building,6 Yip Fat Street, Wong Chuk Hang" data-price="{{ complications_out_of_warranty_repair_china.price | money  }}" data-title="{{ complications_out_of_warranty_repair_china.title }}" data-location="China" data-id="{{ complications_out_of_warranty_repair_china.selected_or_first_available_variant.id }}" class="warranty-repair-button">Complications Out of Warranty Repair</a>
+  </div>    
+</div>  
+</div>  
+ {% endform %}
+
+{% endif %}
+{% schema %}
+  {
+    "name": "Warranty & Repairs",
+    "settings": [],
+   "blocks":[
+      {
+      "type":"text",
+      "name":"Warranty & Repair",
+      "settings": [
+        {
+        "type":"text",
+        "id":"title",
+        "label":"Heading"
+        },
+        {
+        "type":"richtext",
+        "id":"return_desc",
+        "label":"Content"
+        }
+      ]
+  }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<script>
+
+$( document ).ready(function() {
+         $('.location-USA').css('display', 'block');
+         $('.location-UK').css('display', 'none');
+         $('.location-China').css('display', 'none');
+});
+
+
+
+ $('#waranty-request-form input').on('change', function() {
+   var location = $('input[name=location]:checked', '#waranty-request-form').val(); 
+      if (location == 'USA') 
+       {
+         $('.location-USA').css('display', 'block');
+         $('.location-UK').css('display', 'none');
+         $('.location-China').css('display', 'none');
+       }
+      else if (location == 'UK') 
+      {
+         $('.location-UK').css('display', 'block');
+         $('.location-USA').css('display', 'none');
+         $('.location-China').css('display', 'none');
+      } 
+      else 
+      {
+         $('.location-China').css('display', 'block');
+         $('.location-USA').css('display', 'none');
+         $('.location-UK').css('display', 'none');
+      }
+
+
+
+});
+</script>  

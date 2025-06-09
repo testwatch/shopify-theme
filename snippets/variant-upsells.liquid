@@ -1,0 +1,270 @@
+<!-- Add the Code where you want to see Upsell Structure -->
+
+
+<!-- Upsells New Code with Metafields Start -->
+<div class="free-space_new">
+{% for variant in product.variants %}
+{% if variant.metafields.Stuhrling.upsell_product_1 != blank %}
+<div data-var-price="{{ variant.price | money_without_currency }}" class="extra_product_outer_list loop-{{ forloop.index }} row {{variant.id}} value-span" {%if current.id == variant.id %}{%else%}style="display:none"{%endif%}>
+  {% assign product_id_1 , product_id_2 , product_id_3, product_id_4 = ''%}
+  {% assign total_price =  %}
+  
+  <div class="main_head_block section-header text-left"><h4>Complete the Look</h4></div>
+  <div class="extra_product_inner_list mobile-full upsell_carousel">
+    
+    {% assign product_handle = variant.metafields.Stuhrling.upsell_product_1 %}
+    
+    {% if product_handle != blank %}
+    {% if product_handle contains '?variant=' %}
+    {% assign product_handle1 = product_handle | split: '?variant=' | first %}  
+    {% assign product_handles = all_products[product_handle1] %}
+    {% assign total_price =   product_handles.price | plus : total_price %} 
+    {% assign product_id_1 = product_handle | split: '?variant=' | last %} 
+    
+    {% else %}
+    {% assign product_handles = all_products[product_handle] %}
+    {% assign total_price =   product_handles.price | plus : total_price %} 
+    {% assign product_id_1 = product_handles.selected_or_first_available_variant.id %} 
+    {% endif %}
+    <div data-product-id="{{ product_id_1 }}" data-index="1" class="item product-details product_cards product desktop-3{% cycle ' first', '', '', ' last' %} tablet-half mobile-half">
+      {% assign product_id_1 = product_id_1 %}
+      <input data-variant-id="{{ product_id_1 }}" type="checkbox" id="product_1_{{ forloop.index }}" hidden-data="Your-name" name="upsells" value="{{ product_handles.title }}">
+      <label for="product_1_{{ forloop.index }}">
+        <div class="product_single_image"> 
+          {% if product_handle contains '?variant=' %}
+          {% for variant in product_handles.variants %}
+          {% assign product_id_1 =product_id_1 | plus:0 %}
+          {% if product_id_1 == variant.id %}
+           <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ variant.image | img_url:'90x'}}"/>
+          {% endif %}
+          {% endfor %}
+          {% else %}
+          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ product_handles.featured_image.src | img_url:'90x'}}"/>
+         {% endif %}
+          
+          {% comment %}
+          <div class="quickview_overlay">
+            <a title="Quick view" href="javascript:;" onclick="globofilter.quickView('{{root_url}}{{product_handles.url}}')" class="open-quick-view upsells_quick_view">Quick View</a>
+          </div>
+          
+          {% include 'product_gf_quickview'  %}
+          {% endcomment %}
+          
+        </div>
+        <div class="bottom_title_price">  
+          <div class="price">
+            {% if product_handles.price < product_handles.compare_at_price %}
+            <div class="onsale original_price">{{ product_handles.price | money }}</div>
+            <div class="was-listing">{{ product_handles.compare_at_price | money }}</div>
+            {% else %}
+            <div class="prod-price original_price" data-price="{{ product_handles.price | money_without_currency |  plus: 0 }}">{% if product_handles.price_varies %}{% comment %} {{ 'products.general.from' | t }}{% endcomment %} {{ product.price_min | money }} - {{ product.price_max | money }} {% else %}{{ product.price | money }}{% endif %}</div>
+            {% endif %}	
+          </div>
+          <h4 class="pro_title">{{ product_handles.title | truncate:'30' }}</h4>
+          <div class="pro_price text-center">{{ product_handles.price | money }}</div>
+          {% if settings.vendor %}<h4>{{ product.vendor }}</h4>{% endif %}
+          {% if product_handles.available %}<div class="add_block"> + Add</div>{% else %} <div class="upsell_sold_out">Sold Out</div>{% endif %} 
+          <div class="added_block"><i class="fa fa-check" aria-hidden="true"></i>  Added</div>
+          
+        </div>  
+      </label>
+       
+    </div>
+    
+    {% endif %}
+    {% assign product_handle = variant.metafields.Stuhrling.upsell_product_2 %}
+    
+    {% if product_handle != blank %}
+    {% if product_handle contains '?variant=' %}
+    {% assign product_handle1 = product_handle | split: '?variant=' | first %}  
+    {% assign product_handles = all_products[product_handle1] %}
+    {% assign total_price =   product_handles.price | plus : total_price %} 
+    {% assign product_id_2 = product_handle | split: '?variant=' | last %} 
+    
+    {% else %}
+    {% assign product_handles = all_products[product_handle] %}
+    {% assign total_price =   product_handles.price | plus : total_price %} 
+    {% assign product_id_2 = product_handles.selected_or_first_available_variant.id %} 
+    {% endif %}
+   
+    
+    <div data-product-id="{{ product_id_2 }}" data-index="2" class="item product-details product_cards product desktop-3{% cycle ' first', '', '', ' last' %} tablet-half mobile-half">
+      <input data-variant-id="{{ product_id_2 }}" type="checkbox" id="product_2_{{ forloop.index }}" hidden-data="Your-name" name="upsells" value="{{ product_handles.title }}">
+      <label for="product_2_{{ forloop.index }}">
+        <div class="product_single_image">
+		 {% if product_handle contains '?variant=' %}
+          {% for variant in product_handles.variants %}
+          {% assign product_id_2 =product_id_2 | plus:0 %}
+          {% if product_id_2 == variant.id %}
+           <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ variant.image | img_url:'90x'}}"/>
+          {% endif %}
+          {% endfor %}
+          {% else %}
+          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ product_handles.featured_image.src | img_url:'90x'}}"/>
+          {% endif %}
+          
+          {% comment %}
+          <div class="quickview_overlay">
+            <a title="Quick view" href="javascript:;" onclick="globofilter.quickView('{{root_url}}{{product_handles.url}}')" class="open-quick-view upsells_quick_view">Quick View</a>
+          </div>
+          {% include 'product_gf_quickview'  %}
+          {% endcomment %}
+        </div>
+
+        <div class="bottom_title_price">  
+
+          <div class="price">
+            {% if product.price < product_handles.compare_at_price %}
+            <div class="onsale original_price">{{ product_handles.price | money }}</div>
+            <div class="was-listing">{{ product_handles.compare_at_price | money }}</div>
+            {% else %}
+            <div class="prod-price original_price" data-price="{{ product_handles.price | money_without_currency |  plus: 0 }}">{% if product_handles.price_varies %}{% comment %} {{ 'products.general.from' | t }}{% endcomment %} {{ product_handles.price_min | money }} - {{ product_handles.price_max | money }} {% else %}{{ product_handles.price | money }}{% endif %}</div>
+            {% endif %}	
+          </div>
+
+          <h4 class="pro_title">{{ product_handles.title | truncate:'28' }}</h4> 
+          <div class="pro_price text-center">{{ product_handles.price | money }}</div>
+          {% if settings.vendor %}<h4>{{ product_handles.vendor }}</h4>{% endif %} 
+         {% if product_handles.available %}<div class="add_block"> + Add</div>{% else %} <div class="upsell_sold_out">Sold Out</div>{% endif %} 
+          <div class="added_block"><i class="fa fa-check" aria-hidden="true"></i>  Added</div>
+        </div> 
+      </label>
+    </div>
+      
+    {% endif %}
+    {% assign product_handle = variant.metafields.Stuhrling.upsell_product_3 %}
+
+    {% if product_handle != blank %}
+    {% if product_handle contains '?variant=' %}
+    {% assign product_handle1 = product_handle | split: '?variant=' | first %}  
+    {% assign product_handles = all_products[product_handle1] %}
+    {% assign total_price =   product_handles.price | plus : total_price %} 
+    {% assign product_id_3 = product_handle | split: '?variant=' | last %} 
+    
+    {% else %}
+    {% assign product_handles = all_products[product_handle] %}
+    {% assign total_price =   product_handles.price | plus : total_price %} 
+    {% assign product_id_3 = product_handles.selected_or_first_available_variant.id %} 
+    {% endif %}
+    
+    
+    <div data-product-id="{{ product_id_3 }}" data-index="3" class="item product-details product_cards product desktop-3{% cycle ' first', '', '', ' last' %} tablet-half mobile-half">
+      <input data-variant-id="{{ product_id_3 }}" type="checkbox" id="product_3_{{ forloop.index }}" hidden-data="Your-name" name="upsells" value="{{ product_handles.title }}">
+      <label for="product_3_{{ forloop.index }}">
+        <div class="product_single_image">
+ 		  {% if product_handle contains '?variant=' %}
+          {% for variant in product_handles.variants %}
+          {% assign product_id_3 =product_id_3 | plus:0 %}
+          {% if product_id_3 == variant.id %}
+           <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ variant.image | img_url:'90x'}}"/>
+          {% endif %}
+          {% endfor %}
+          {% else %}
+          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ product_handles.featured_image.src | img_url:'90x'}}"/>
+          {% endif %}
+          
+          {% comment %}
+          <div class="quickview_overlay">
+            <a title="Quick view" href="javascript:;" onclick="globofilter.quickView('{{root_url}}{{product_handles.url}}')" class="open-quick-view upsells_quick_view">Quick View</a>
+          </div>
+          {% include 'product_gf_quickview'  %}
+          {% endcomment %}
+          
+        </div>
+
+        <div class="bottom_title_price">  
+
+          <div class="price">
+            {% if product.price < product_handles.compare_at_price %}
+            <div class="onsale original_price">{{ product_handles.price | money }}</div>
+            <div class="was-listing">{{ product_handles.compare_at_price | money }}</div>
+            {% else %}
+            <div class="prod-price original_price" data-price="{{ product_handles.price | money_without_currency |  plus: 0 }}">{% if product_handles.price_varies %}{% comment %} {{ 'products.general.from' | t }}{% endcomment %} {{ product_handles.price_min | money }} - {{ product_handles.price_max | money }} {% else %}{{ product_handles.price | money }}{% endif %}</div>
+            {% endif %}	
+          </div>
+
+          <h4 class="pro_title">{{ product_handles.title | truncate:'38' }}</h4>  
+          <div class="pro_price text-center">{{ product_handles.price | money }}</div>
+          {% if settings.vendor %}<h4>{{ product_handles.vendor }}</h4>{% endif %} 
+          {% if product_handles.available %}<div class="add_block"> + Add</div>{% else %} <div class="upsell_sold_out">Sold Out</div>{% endif %} 
+          <div class="added_block"><i class="fa fa-check" aria-hidden="true"></i>  Added</div>
+        </div> 
+      </label> 
+    </div>
+    
+    {% endif %}
+    {% assign product_handle = variant.metafields.Stuhrling.upsell_product_4 %}
+    
+    {% if product_handle != blank %}
+    {% if product_handle contains '?variant=' %}
+    {% assign product_handle1 = product_handle | split: '?variant=' | first %}  
+    {% assign product_handles = all_products[product_handle1] %}
+    {% assign total_price =   product_handles.price | plus : total_price %} 
+    {% assign product_id_4 = product_handle | split: '?variant=' | last %} 
+    
+    {% else %}
+    {% assign product_handles = all_products[product_handle] %}
+    {% assign total_price =   product_handles.price | plus : total_price %} 
+    {% assign product_id_4 = product_handles.selected_or_first_available_variant.id %} 
+    {% endif %}
+   
+    
+    <div data-product-id="{{ product_id_4 }}" data-index="4" class="item product-details product_cards product desktop-3{% cycle ' first', '', '', ' last' %} tablet-half mobile-half">
+      <input data-variant-id="{{ product_id_4 }}" type="checkbox" id="product_4_{{ forloop.index }}" hidden-data="Your-name" name="upsells" value="{{ product_handles.title }}">
+        <label for="product_4_{{ forloop.index }}">
+      <div class="product_single_image"> 
+         {% if product_handle contains '?variant=' %}
+          {% for variant in product_handles.variants %}
+          {% assign product_id_4 =product_id_4 | plus:0 %}
+          {% if product_id_4 == variant.id %}
+           <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ variant.image | img_url:'90x'}}"/>
+          {% endif %}
+          {% endfor %}
+          {% else %}
+          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ product_handles.featured_image.src | img_url:'90x'}}"/> 
+        {% endif %}
+        
+        {% comment %}
+        <div class="quickview_overlay">
+          <a title="Quick view" href="javascript:;" onclick="globofilter.quickView('{{root_url}}{{product_handles.url}}')" class="open-quick-view upsells_quick_view">Quick View</a>
+        </div>
+           {% include 'product_gf_quickview'  %}
+		{% endcomment %}
+        
+      </div>
+
+      <div class="bottom_title_price">  
+          <div class="price">
+            {% if product.price < product_handles.compare_at_price %}
+            <div class="onsale original_price">{{ product_handles.price | money }}</div>
+            <div class="was-listing">{{ product_handles.compare_at_price | money }}</div>
+            {% else %}
+            <div class="prod-price original_price" data-price="{{ product_handles.price | money_without_currency |  plus: 0 }}">{% if product_handles.price_varies %}{% comment %} {{ 'products.general.from' | t }}{% endcomment %} {{ product_handles.price_min | money }} - {{ product_handles.price_max | money }} {% else %}{{ product_handles.price | money }}{% endif %}</div>
+            {% endif %}	
+          </div>
+        
+        <h4 class="pro_title">{{ product_handles.title | truncate:'38' }}</h4>
+        <div class="pro_price text-center">{{ product_handles.price | money }}</div>
+        {% if settings.vendor %}<h4>{{ product_handles.vendor }}</h4>{% endif %} 
+        {% if product_handles.available %}<div class="add_block"> + Add</div>{% else %} <div class="upsell_sold_out">Sold Out</div>{% endif %} 
+          <div class="added_block"><i class="fa fa-check" aria-hidden="true"></i>  Added</div>
+      </div> 
+      </label>
+    </div>  
+   {% endif %}
+  </div>  
+  </div>
+  {% endif %}
+ 
+{% endfor %}
+</div>
+
+<!-- Upsells New Code End -->
+<script>
+  $('.extra_product_inner_list .quickview_overlay a').click(function(){
+    $(this).parent('.quickview_overlay').next().show();
+  })
+  $('.extra_product_inner_list .gfqv-close-modal').click(function(){
+    $(this).parents('.gfqv-modal').hide();
+  })
+</script>

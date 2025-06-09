@@ -1,0 +1,24 @@
+{% comment %}
+  The contents of the product.liquid template can be found in /sections/product-template.liquid
+{% endcomment %}
+{%if product.tags contains 'Flash'%}
+{%if settings.checkproduct %}
+{% section 'flash-sale'%}
+{%endif%}
+{%endif%} 
+{% section 'product-371-advanced-template' %} 
+
+{%if product.metafields.Stuhrling.MSRP != blank %} 
+<div class="metafieldss" style="display:none;">MSRP:{{ product.metafields.Stuhrling.MSRP }}</div>
+{%endif%}
+{%section 'product-instagram'%}
+
+{%comment%}
+<div class="small--hide">
+{%section'product-collection-tabs-new'%}
+</div> 
+
+{% section 'product-recommendations' %}
+{%endcomment%}
+{%section'Home-icons'%}
+{% section 'skafos-product-recommender' %}

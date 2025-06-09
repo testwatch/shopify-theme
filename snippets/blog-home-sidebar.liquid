@@ -1,0 +1,68 @@
+{% if section.settings.custom_menu_linklist != blank %}
+  <div class="sidebar four columns toggle-all--{{ section.settings.toggle }}">
+   
+      <div {{ section.shopify_attributes }}>
+        
+          {% assign sidebar_menu = linklists[section.settings.custom_menu_linklist] %}
+          {% if sidebar_menu != blank %}
+            <h4 class="toggle left_heading" aria-haspopup="true" aria-expanded="true">{{ section.settings.sidebar_menu_title }}</h4>
+            <ul class="blog_list toggle_list" style="display:block;">
+              {% for link in sidebar_menu.links %}
+                <li>
+                  <a class="heading_title {% if link.active or link.child_active %}active_class{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+
+                  {% if link.links != blank %}
+                  <div class="accordion_head_blog"><span class="plusminus_blog">+</span></div>
+                   
+
+                    <ul class="accordion_body_blog" style="display: none;">
+                      {% for sub_link in link.links %}
+                        <li class="sub-menu {% if sub_link.active or sub_link.child_active %}active{% endif %}">
+                          <a {% if sub_link.active %}class="active"{% endif %} href="{{ sub_link.url }}">{{ sub_link.title }}</a>
+
+                          {% if sub_link.links != blank %}
+                            <span class="menu-toggle icon-arrow-down {% if sub_link.active or sub_link.child_active %}active{% endif %}" aria-haspopup="true" aria-expanded="{% if sub_link.active or sub_link.child_active %}true{% else %}false{% endif %}"> </span>
+
+                            <ul class="{% if sub_link.active or sub_link.child_active %}active{% endif %}">
+                              {% for sub_sub_link in sub_link.links %}
+                                <li class="sub-menu">
+                                  <a {% if sub_sub_link.active %}class="active"{% endif %} href="{{ sub_sub_link.url }}">{{ sub_sub_link.title }}</a>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          {% endif %}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <h4 class="toggle" aria-haspopup="true" aria-expanded="false"><span>+</span>Menu title</h4>
+            <ul class="blog_list toggle_list content_block">
+              <li><p>{{ 'homepage.onboarding.no_content' | t }}</p></li>
+            </ul>
+          {% endif %}                    
+      </div>   
+  </div>
+{% endif %}
+<script>
+  $(document).ready(function() {
+  //toggle the component with class accordion_body
+  $(".accordion_head_blog").click(function() {
+    if ($('.accordion_body_blog').is(':visible')) {
+      $(".accordion_body_blog").slideUp(300);
+      $(".plusminus_blog").text('+');
+    }
+    if ($(this).next(".accordion_body_blog").is(':visible')) {
+      $(this).next(".accordion_body_blog").slideUp(300);
+      $(this).children(".plusminus_blog").text('+');
+    } else {
+      $(this).next(".accordion_body_blog").slideDown(300);
+      $(this).children(".plusminus_blog").text('-');
+    }
+  });
+});
+
+</script>

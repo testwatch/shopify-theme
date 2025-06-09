@@ -1,0 +1,360 @@
+ <div class="{% if section.settings.enable_description %}col-md-4 col-sm-4{% else %}col-md-12 col-sm-12{% endif %} col-xs-12 padding-free">
+             
+            <div class="secondpart">
+             <ul class="free-space col-md-4 col-sm-4 sol-xs-12">
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> MSRP:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.MSRP.MSRP }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Model Number:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Model_Number.Model_Number }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+               <li>  
+                 {% for variant in product.variants %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Collection:</span>
+                 {% assign product_collection = product.collections.first %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span"> {{ product_collection.title }}</span>
+                 {%endfor%}
+               </li>
+                  <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Gender:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Gender.Gender }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Style:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Style.Style }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Dial:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Dial.Dial }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> UPC:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.barcode }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Band:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Band.Band }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Hands:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Hands.Hands }}</span>
+                 {% endfor %}
+               </li>
+                    <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Markers:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Markers.Markers  }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Bezel:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Bezel.Bezel }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Case:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Case.Case }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Case Size:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Case_Size.Case_Size }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Case Thickness:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Case_Thickness.Case_Thickness }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Caseback:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Caseback.Caseback }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Crown:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Crown.Crown }}</span>
+                 {% endfor %}
+               </li>
+                    <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Water-Resistance:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Water-Resistance.Water-Resistance }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Buckle:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Buckle.Buckle }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Movement:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Movement.Movement }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Caliber:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Caliber.Caliber }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Luminosity:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Luminosity.Luminosity }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Strap Width:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Strap_Width.Strap_Width }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Strap Length:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Strap_Length.Strap_Length }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Product Dimensions:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Dimensions.Dimensions }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Calendar:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Calendar.Calendar }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Chronograph:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Chronograph.Chronograph }}</span>
+                 {% endfor %}
+               </li>
+                              <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> AM/PM Indicator:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Indicator.Indicator }}</span>
+                 {% endfor %}
+               </li>
+                              <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Regulator:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Regulator.Regulator }}</span>
+                 {% endfor %}
+               </li>
+               <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Dual Time :</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Time.Time  }}</span>
+                 {% endfor %}
+               </li>
+                                      <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Sun/Moon Phase  :</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Phase.Phase  }}</span>
+                 {% endfor %}
+               </li>
+                                      <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> 360 Video :</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.360_Video.360_Video  }}</span>
+                 {% endfor %}
+               </li>
+                                      <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Lifestyle Video :</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Lifestyle_Video.Lifestyle_Video  }}</span>
+                 {% endfor %}
+               </li>
+                                           <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Style Image :</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Style_Image.Style_Image }}</span>
+                 {% endfor %}
+               </li>
+                                           <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Lifestyle Video :</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Lifestyle_Video.Lifestyle_Video  }}</span>
+                 {% endfor %}
+               </li>
+                                           <li>
+                 {% for variant in product.variants %}
+                 {% assign current = product.selected_or_first_available_variant %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}"> Lifestyle Video :</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">  {{ variant.metafields.Lifestyle_Video.Lifestyle_Video  }}</span>
+                 {% endfor %}
+               </li>
+               
+           
+                <li>  
+                 {% for variant in product.variants %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Shipping Weight:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">{% assign theweight = variant.weight | weight_with_unit %}{{theweight}}</span>
+                 {% endfor %}
+               </li>
+                <li> 
+                 {% for variant in product.variants %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Material:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span Material">{{ variant.metafields.Material.Material }}</span>
+                 {% endfor %}
+               </li>
+               <li>  
+                 {% for variant in product.variants %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">ASIN:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{%if current.id == variant.id %}active_title{% endif %} {{variant.id}} value-span">{{ variant.barcode }}</span>
+                 {% endfor %}
+               </li>
+               <li>  
+                 {% for variant in product.variants %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Variant Title: </span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span metafield_title">{{  variant.metafields.variant_title.variant_title }}</span>
+                 {% endfor %}
+               </li>
+               </ul>
+                 <ul class="free-space col-md-4 col-sm-4 sol-xs-12">
+                <li>  
+                 {% for variant in product.variants %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Product Name:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">{{ variant.metafields.Product_Name.Product_Name}}</span>
+                 {% endfor %}</li>
+              
+<!--                <li>  
+                 {% for variant in product.variants %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Design:</span>
+
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span Design"> {{ variant.metafields.global.Design }}</span>
+                 {% endfor %}</li> -->
+      
+                   <li class="colors-meta">  
+                     {% for variant in product.variants %}
+                     <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Color:</span>
+                     <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">{{ variant.metafields.global.Product_Colors }}</span>
+                     {% endfor %}
+                   </li>
+				</ul>
+                <ul class="free-space col-md-4 col-sm-4 sol-xs-12">
+                  <li>  
+                    {% for variant in product.variants %}
+                    <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Total Units: </span>
+                    <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">{{ variant.metafields.Total_Units.Total_Units}}</span>
+                    {% endfor %}
+                  </li>
+                  <li>  
+                    {% for variant in product.variants %}
+                    <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Units Per Case:</span>
+                    <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">{{ variant.metafields.Units_Per_Pack.Units_Per_Pack }}</span>
+                    {% endfor %}
+                  </li>
+                  <li>  
+                    {% for variant in product.variants %}
+                    <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Total Packs:</span>
+                    <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">{{ variant.metafields.Total_Packs.Total_Packs }}</span>
+                  
+                    {% endfor %}
+                  </li>
+
+<!--                <li>  
+                 {% for variant in product.variants %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Weight:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">{{ variant.metafields.global.Weight }}</span>
+                 {% endfor %}</li> -->
+              
+               
+                
+<!--                  <li>  
+                 {% for variant in product.variants %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Item Type:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">{{ variant.metafields.global.Item_type }}</span>
+                 {% endfor %}</li>
+               <li>  
+                 {% for variant in product.variants %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">UNITS TO A CASE :</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">{{ variant.metafields.global.unit_case }}</span>
+                 {% endfor %}</li>
+                
+                <li>  
+                 {% for variant in product.variants %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">UNIT PACK :</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span">{{ variant.metafields.global.unit_pack }}</span>
+                 {% endfor %}</li> -->
+           
+               
+               
+               {%comment%}
+
+               Dont Delete
+
+               {%endcomment%}
+               <li style="display:none;">  
+                 {% for variant in product.variants %}
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}}">Varaint Title:</span>
+                 <span {%if current.id == variant.id %}{%else%}style="display:none" {%endif%} class="{{variant.id}} value-span Variant_title">{{ variant.metafields.global.Variant_title }}</span>
+                 {% endfor %}</li>
+               
+            </ul>
+          </div>
+            </div>

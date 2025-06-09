@@ -1,0 +1,284 @@
+<footer id="footer" class="footer-wrapper">
+  <div class="wrapper-mini">
+  <div class="footer-widgets footer footer-2 dark">
+    <div class="row dark large-columns-6 mb-0">
+      
+       <div id="block_widget-7" class="col pb-0 widget block_widget desktop"> 
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.image != blank %}{{section.settings.image | img_url:'master'}}{%endif%}">
+        <div class="whatsapp_number">
+          </span> 
+          <span>
+          </span>
+        </div>
+        <div>
+          <span class="footer-phone-icon" style="float: left; margin-right:18px; margin-top:8px;"><i class="fa fa-phone" style="font-size: 30px"></i></span> 
+          <span>
+            <div style="font-size:14px; font-weight:600; letter-spacing: .05em; color: #6a6a6a;"><a href="tel:{{section.settings.phone-number}}">{{section.settings.phone-number}}</a> / <a href="tel:{{section.settings.phone-number-2}}">{{section.settings.phone-number-2}}</a></div>
+            <div style="font-size: .8em; margin-top:-3px; color:#000;">.</div> 
+          </span>
+        </div>
+        <div class="email_block">
+          <p style="font-size:14px; font-weight:600; letter-spacing: .05em;margin-top:10px;">
+            <i class="fa fa-envelope-o footer-email-icon" style="font-size:25px; margin-right: 14px;"></i><a href="mailto:{{section.settings.email}}" class="emails">EMAIL US</a>
+          </p>
+        </div>
+        
+      </div>
+      <div id="block_widget-5" class="col pb-0 widget block_widget desktop">
+        <span class="widget-title">Signup for <span class="sign-up-newsletter-title-our">Our </span>Newsletter</span>
+        <div class="is-divider small"></div>
+        <p style="">Get the latest news, invites and exclusive offers straight to your inbox.</p>
+           <div class="newsletter-content">
+        {% form 'customer' %}
+          {{ form.errors | default_errors }}
+          {% if form.posted_successfully? %}
+            <p class="note form-success">{{ 'general.newsletter_form.confirmation' | t }}</p>
+          {% else %}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="input-group">
+              <label for="Email" class="visually-hidden">{{ 'contact.form.email' | t }}</label>
+              <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="contact[email]" id="Email" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
+              <span class="input-group-btn">
+                <button type="submit" class="btn" name="commit" id="subscribe">{{ 'general.newsletter_form.submit' | t }}</button>
+              </span>
+            </div>
+          {% endif %}
+        {% endform %}
+      </div>
+        <br>
+     <div class="social-icons follow-icons full-width text-left">
+       <ul class="inline-list social-icons">
+         <li>
+           <a class="icon-fallback-text" target="_blank" href="{{ settings.social_facebook_link | escape }}">
+           <i class="fa fa-facebook-f"></i>
+           </a>
+         </li>
+         <li>
+           <a class="icon-fallback-text" target="_blank" href="{{ settings.social_instagram_link | escape }}">
+           <i class="fa fa-instagram" aria-hidden="true"></i>
+           </a>
+         </li>
+         <li>
+            <a class="icon-fallback-text" target="_blank" href="{{ settings.social_twitter_link | escape }}">
+           <i class="fa fa-twitter" aria-hidden="true"></i>
+           </a>
+         </li>
+         <li>
+             <a class="icon-fallback-text" target="_blank" href="{{ settings.social_pinterest_link | escape }}">
+           <i class="fa fa-pinterest-p"></i>
+           </a>
+         </li>
+         <li>    <a class="icon-fallback-text" target="_blank" href="{{ settings.social_rss_link | escape }}">
+           <i class="fa fa-linkedin-square"></i>
+           </a>
+         </li>
+         <li>
+            <a class="icon-fallback-text" target="_blank" href="{{ settings.social_youtube_link | escape }}">
+           <i class="fa fa-youtube-play"></i>
+           </a>
+         </li>
+       </ul>
+
+      </div>
+      </div>
+      <div id="nav_menu-6" class="col pb-0 widget widget_nav_menu">
+        <div class="accordion_head widget-title">Shop<span class="plusminus"><i class="fa fa-angle-down"></i></span></div>
+        <div class="accordion_body menu-footer-shop-container" style="display: none;">
+          <ul id="menu-footer-shop" class="menu">
+            {% for link in linklists[section.settings.menu_1].links %}
+            <li id="menu-item-31507" class="menu-item">
+                <a href="{{ link.url }}">
+                  {% assign lowerCaseTitle = link.title | downcase %}
+                  {% if lowerCaseTitle == 'mens' %}
+                    MEN'S
+                  {% else %}
+                    {{ link.title }}
+                  {% endif %}
+                </a>
+            </li>
+             {%endfor%}
+          </ul>
+        </div>
+      </div>
+      <div id="nav_menu-7" class="col pb-0 widget widget_nav_menu">
+           <div class="accordion_head widget-title">Services<span class="plusminus"><i class="fa fa-angle-down"></i></span></div>
+          <div class="accordion_body menu-footer-services-container" style="display: none;">
+         <ul id="menu-footer-shop" class="menu">
+        {% for link in linklists[section.settings.menu_2].links %}
+          <li id="menu-item-31507" class="menu-item">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </li>
+        {%endfor%}
+          </ul>
+        </div>
+      </div>
+      <div id="nav_menu-8" class="col pb-0 widget widget_nav_menu">
+        <div class="accordion_head widget-title">Brand<span class="plusminus"><i class="fa fa-angle-down"></i></span></div>
+
+        <div class="accordion_body menu-footer-brand-container" style="display: none;">
+          <ul id="menu-footer-shop" class="menu">
+          {% for link in linklists[section.settings.menu_3].links %}
+            <li id="menu-item-31507" class="menu-item">
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            </li>
+          {%endfor%}
+          </ul>
+        </div>
+      </div>
+     
+      <div id="block_widget-9" class="col pb-0 widget block_widget mobile">
+        <div class="footer-mobile-bottom show-for-medium">
+          <div class="row row-collapse align-left row-divided" id="row-104213437">
+            <div class="col medium-7 small-12 large-7 simple-cls">
+              <div class="col-inner" style="padding:0px 0px 0px 0px;">
+                <p style="font-weight: 600; line-height: 1.05; letter-spacing: .05em; margin-bottom:12px;margin-top: 2%;">SIGNUP FOR OUR NEWSLETTER</p>
+                <div class="newsletter-content">
+                  {% form 'customer' %}
+                  {{ form.errors | default_errors }}
+                  {% if form.posted_successfully? %}
+                  <p class="note form-success">{{ 'general.newsletter_form.confirmation' | t }}</p>
+                  {% else %}
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  <div class="input-group">
+                    <label for="Email" class="visually-hidden">{{ 'contact.form.email' | t }}</label>
+                    <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="contact[email]" id="Email" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
+                    <span class="input-group-btn">
+                      <button type="submit" class="btn" name="commit" id="subscribe">{{ 'general.newsletter_form.submit' | t }}</button>
+                    </span>
+                  </div>
+                  {% endif %}
+                  {% endform %}
+                </div>
+                <div class="social-icons follow-icons full-width text-left">
+                  <ul class="inline-list social-icons">
+                  <li>
+                    <a class="icon-fallback-text" target="_blank" href="{{ settings.social_facebook_link | escape }}">
+                    <i class="fa fa-facebook-f"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="icon-fallback-text" target="_blank" href="{{ settings.social_instagram_link | escape }}">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li>
+                      <a class="icon-fallback-text" target="_blank" href="{{ settings.social_twitter_link | escape }}">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li>
+                      <a class="icon-fallback-text" target="_blank" href="{{ settings.social_pinterest_link | escape }}">
+                    <i class="fa fa-pinterest-p"></i>
+                    </a>
+                  </li>
+                  <li>    <a class="icon-fallback-text" target="_blank" href="{{ settings.social_rss_link | escape }}">
+                    <i class="fa fa-linkedin-square"></i>
+                    </a>
+                  </li>
+                  <li>
+                      <a class="icon-fallback-text" target="_blank" href="{{ settings.social_youtube_link | escape }}">
+                    <i class="fa fa-youtube-play"></i>
+                    </a>
+                  </li>
+                </ul>
+
+                </div>
+              </div>
+            </div>
+            <div class="col footer-mobile-contact-col test-1234 show-for-medium hide-for-small medium-5 small-12 large-5 desktop">
+              <div class="col-inner" style="padding:0px 0px 0px 20px;">
+                <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if section.settings.image != blank %}{{section.settings.image | img_url:'master'}}{%else%}https://btiwe3du61r38ffz43cak8rb-wpengine.netdna-ssl.com/wp-content/uploads/StuhrlingLogoTransparent.png{%endif%}">
+                  </div>
+                <div>
+                  <span class="footer-phone-icon" style="float: left; margin-right:18px; margin-top:8px;"><i class="fa fa-phone "></i></span> 
+                  <span>
+                    <div style="font-size:16px; font-weight:600; letter-spacing: .05em;"><a href="tel:{{section.settings.phone-number}}">{{section.settings.phone-number}}</a></div>
+                    <div style="font-size: .8em; margin-top:-3px;"> or <a href="tel:{{section.settings.phone-number-2}}">{{section.settings.phone-number-2}}</a></div> 
+                  </span>
+                </div>
+                <p style="font-size:16px; font-weight:600; letter-spacing: .05em;margin-top:10px;">
+                  <i class="far fa-envelope-o footer-email-icon" style="font-size:25px; margin-right: 14px;"></i>
+                  <a href="mailto:{{section.settings.email}}" class="emails">EMAIL US</a>
+                </p>
+              </div>
+            </div>
+            <style scope="scope"></style>
+          </div>
+          <div class="footer-mobile-bottom-buttons show-for-small mobile" style="text-align:center; width:100%; margin-top:20px; margin-bottom:10px;"> 
+            <a href="tel:{{section.settings.phone-number}}" target="_self" class="button primary is-outline is-large lowercase footer-mobile-contact-button">
+              <i class="fa fa-phone phone-number" style="font-size: 30px"></i>
+              <span style="text-transform: uppercase;">Tap here to call us</span> 
+            </a> 
+            <a href="mailto:{{section.settings.email}}" target="_self" class="button primary is-outline is-large lowercase footer-mobile-contact-button">
+              <i class="fa fa-envelope-o footer-email-icon phone-number" style="font-size:25px; margin-right: 14px;"></i>
+              <span style="text-transform: uppercase;">Tap here to email us</span> 
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+ </div>
+    <div class="absolute-footer dark medium-text-center text-center">
+      <div class="container clearfix">
+        <div class="footer-primary pull-left">{{section.settings.menu_Right}}</div>
+      </div>
+    </div> 
+    <a href="#top" class="back-to-top button invert plain is-outline hide-for-medium icon circle fixed bottom z-1 active" id="top-link"><i class="icon-angle-up"></i></a>
+  </footer>
+
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_methods_of_payment",
+      "label": "show_methods_of_payment"
+    },
+  		{
+          "type": "link_list",
+          "id": "menu_1",
+          "label": "Menu"
+        },
+ 		{
+          "type": "link_list",
+          "id": "menu_2",
+          "label": "Menu"
+        },
+ 		{
+          "type": "link_list",
+          "id": "menu_3",
+          "label": "Menu"
+        },
+		{
+          "type": "image_picker",
+          "id": "image",
+          "label": "image"
+        },
+		{
+          "type": "text",
+          "id": "phone-number",
+          "label": "Phone"
+        },
+		{
+          "type": "text",
+          "id": "phone-number-2",
+          "label": "Phone"
+        },
+			{
+          "type": "text",
+          "id": "email",
+          "label": "Email"
+        },               
+        {
+          "type": "textarea",
+          "id": "menu_Right",
+          "label": "Copy Right Menu"
+        }
+
+  ]
+  
+}
+{% endschema %}

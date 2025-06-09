@@ -1,0 +1,77 @@
+{% comment %}
+  The contents of the collection.liquid template can be found in /sections/collection-template.liquid
+{% endcomment %}
+<div class="collection-images">
+  {% if collection.metafields.Collection_Banner.Collection_Banner != blank %}
+  <img class="desktop-div lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ collection.metafields.Collection_Banner.Collection_Banner }}"  alt="{{ collection.title | escape }}"  />
+  <img class="mobile-div lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ collection.metafields.Mobile_banner.Mobile_banner }}"  alt="{{ collection.title | escape }}"  />
+
+  <div class="mobile-div  {% if collection.metafields.Mobile_banner.Mobile_banner != blank %}exist-desc{%else%}no-img{%endif%}" style="display:none;"> 
+    {%if collection.description contains '<!-- split -->'%}
+       <div class="collec-desc">{{collection.description | split: '<!-- split -->' | last}}</div>
+      {%else%}
+        <p class="collec-desc">{{collection.description}}</p>
+     {%endif%}
+  </div>
+{% endif %} 
+  <div class="collection-description  {% if collection.metafields.Collection_Banner.Collection_Banner != blank  %}exist-desc{%else%}no-img{%endif%}">
+    <div class="collection-details">
+      <h2 class="tb-title-collection">{{ collection.title }}</h2>
+      <hr class="desc">
+        {%if collection.description contains '<!-- split -->'%}
+       <p class="collec-desc">{{collection.description | split: '<!-- split -->' | first}}</p>
+      {%else%}
+    <div class="collec-desc">{{collection.description }}</div>
+     {%endif%}
+    </div>
+  </div>
+</div>
+<div class="wrapper-collection">
+{% section 'collection-template' %}
+ {% comment %}{%section 'Featured-Collection-Page'%}{% endcomment %}
+  <!--   Featured Collections through Metafields Code START -->
+  {% if collection.metafields.Right_Bottom_Banner.Right_Bottom_Banner or collection.metafields.Left_Bottom_Banner.Left_Bottom_Banner %}
+  <div class="collection-area block">
+  <div class="wrapper-mini1">
+    <div class="collection-grid row">
+      
+  <div class="collection-div col-md-6 col-sm-6 col-xs-12">
+    <div class="collection-area">
+      <a href="{{ collection.metafields.Left_Banner_URL.Left_Banner_URL }}">
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src=" {% if collection.metafields.Left_Bottom_Banner.Left_Bottom_Banner %}{{ collection.metafields.Left_Bottom_Banner.Left_Bottom_Banner }}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/mens.jpg{%endif%}">
+        <div class="absolute-area ">
+          {% if collection.metafields.Left_Banner_Title.Left_Banner_Title %} <span> {{ collection.metafields.Left_Banner_Title.Left_Banner_Title }}</span>{% else %} BRANDS{% endif %}
+          <span class="col-banner-title">View Collection</span>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="collection-div col-md-6 col-sm-6 col-xs-12">
+    <div class="collection-area">
+      <a href=" {{ collection.metafields.Right_Banner_URL.Right_Banner_URL }}"> 
+        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src=" {% if collection.metafields.Right_Bottom_Banner.Right_Bottom_Banner %}{{ collection.metafields.Right_Bottom_Banner.Right_Bottom_Banner }}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/mens.jpg{%endif%}">
+        <div class="absolute-area second-area">
+          {% if collection.metafields.Right_Banner_Title.Right_Banner_Title %} <span> {{ collection.metafields.Right_Banner_Title.Right_Banner_Title }}</span>{% else %} GMT {% endif %}
+          <span class="col-banner-title">View Collection</span>
+        </div>
+      </a>
+    </div>
+  </div>
+  </div>
+  </div>
+</div>
+  {% endif %}
+  
+<!--   Featured Collections through Metafields Code END -->
+ 
+  {%section 'Home-instagram'%}
+  {%section 'Home-icons'%}
+</div>
+<script>
+  // Override default values of shop.strings for each template.
+  // Alternate product templates can change values of
+  // 
+  theme.productStrings = {
+    sortBy: '{{ collection.sort_by | default: collection.default_sort_by }}'
+  }
+</script>

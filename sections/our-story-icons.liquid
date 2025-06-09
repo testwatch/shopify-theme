@@ -1,0 +1,228 @@
+<div class="full-wrapper">
+  <div class="block container" style="background-color: {{ section.settings.bg-color }}">
+    <h2 class="title">{{ section.settings.title }}</h2>
+    <div class="mini-wrapper">
+      <div class="row get-row">
+        {% for block in section.blocks %}
+        <div class="col-md-4 col-sm-4 col-xs-12 icons-text">
+          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{block.settings.image | img_url:'master'}}">
+          <span class="label-span">{{block.settings.cta_label}}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+.label-span {
+  font-size: {{section.settings.title-Size}}px;
+  color: {{section.settings.title-color}};
+  padding-left: 10px;
+}
+
+.full-wrapper {background: {{section.settings.bg-color}};}
+</style>
+
+{% schema %}
+{
+  "name": "Icons",
+  "class": "index-section index-icons",
+  "max_blocks": 6,
+  "settings": [
+    
+      {
+      "type":"header",
+      "content":"Icon Typo"
+      },
+      {
+      "type":"color",
+      "id":"bg-color",
+      "label":"Background Color"
+      },
+      {
+      "type":"color",
+      "id":"title-color",
+      "label":"Color"
+      },
+      {
+      "type":"text",
+      "id":"title-Size",
+      "label":"Size"
+      },
+	  {
+      "type":"header",
+      "content":"Section Title"
+      },
+	  {
+		"type":"text",
+		"id":"title",
+		"label":"Title",
+		"default":"WHAT THEY’RE SAYING"
+	  }
+    
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "ms": "Imej",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      },
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": {
+            "da": "Billede",
+            "de": "Foto",
+            "en": "Image",
+            "es": "Imagen",
+            "fi": "Kuva",
+            "fr": "Image",
+            "hi": "इमेज",
+            "it": "Immagine",
+            "ja": "画像",
+            "ko": "이미지",
+            "ms": "Imej",
+            "nb": "Bilde",
+            "nl": "Afbeelding",
+            "pt-BR": "Imagem",
+            "pt-PT": "Imagem",
+            "sv": "Bild",
+            "th": "รูปภาพ",
+            "zh-CN": "图片",
+            "zh-TW": "圖片"
+          }
+        },
+        
+        
+        {
+          "type": "header",
+          "content": {
+            "da": "Tekst",
+            "de": "Text",
+            "en": "Text",
+            "es": "Texto",
+            "fi": "Teksti",
+            "fr": "Texte",
+            "hi": "टेक्स्ट",
+            "it": "Testo",
+            "ja": "テキスト",
+            "ko": "텍스트",
+            "ms": "Teks",
+            "nb": "Tekst",
+            "nl": "Tekst",
+            "pt-BR": "Texto",
+            "pt-PT": "Texto",
+            "sv": "Text",
+            "th": "ข้อความ",
+            "zh-CN": "文本",
+            "zh-TW": "文字"
+          }
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": {
+            "da": "Billedtekst",
+            "de": "Unterschrift",
+            "en": "Caption",
+            "es": "Leyenda",
+            "fi": "Kuvateksti",
+            "fr": "Légende",
+            "hi": "कैप्शन",
+            "it": "Didascalia",
+            "ja": "キャプション",
+            "ko": "캡션",
+            "ms": "Capsyen",
+            "nb": "Bildetekst",
+            "nl": "Bijschrift",
+            "pt-BR": "Legenda",
+            "pt-PT": "Legenda",
+            "sv": "Rubrik",
+            "th": "คำบรรยาย",
+            "zh-CN": "字幕",
+            "zh-TW": "說明"
+          },
+          "default": {
+            "da": "Fortæl om dit brand",
+            "de": "Über Ihre Marke sprechen",
+            "en": "Talk about your brand",
+            "es": "Habla de tu marca",
+            "fi": "Kerro brändistäsi",
+            "fr": "Parlez de votre marque",
+            "hi": "अपने ब्रांड के बारे में बात करें",
+            "it": "Parla del tuo brand",
+            "ja": "あなたのブランドについて語る",
+            "ko": "브랜드에 대해 이야기하기",
+            "ms": "Bercakap tentang jenama anda",
+            "nb": "Snakk om merkevaren din",
+            "nl": "Vertel over uw merk",
+            "pt-BR": "Fale sobre a sua marca",
+            "pt-PT": "Fale sobre a sua marca",
+            "sv": "Prata om ditt varumärke",
+            "th": "พูดถึงแบรนด์ของคุณ",
+            "zh-CN": "介绍您的品牌",
+            "zh-TW": "描述您的品牌"
+          }
+        }
+        
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icons",
+      "category": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "ms": "Imej",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      },
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

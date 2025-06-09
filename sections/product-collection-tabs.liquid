@@ -1,0 +1,97 @@
+<div class="wrapper-mini">
+<h2 class="block-title">EXPLORE OUR <span class="colors">BEST SELLERS</span></h2>
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">{{section.settings.title-one}}</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">{{section.settings.title-two}}</button>
+</div>
+
+<div id="London" class="tabcontent">
+  {%assign collection = section.settings.collection-1 %}
+  {% for product in collections[collection].products %}
+
+ <div class="product">
+   <a class="shop-now" href="{{ product.url }}">
+    <img class="main-image" src="{{ product.featured_image | product_img_url: 'master' }}">
+     </a>
+    <span class="title-coll">{{ product.title | escape  }}</span>
+    <span class="title-price">{{ product.price | money  }}</span>
+   {% comment %}Start automatically added Judge.me widget{% endcomment %}
+  {% include 'judgeme_widgets', widget_type: 'judgeme_preview_badge', concierge_install: true, product: product %}
+{% comment %}End automatically added Judge.me widget{% endcomment %}
+  </div>
+{% endfor %}
+
+</div>
+
+<div id="Paris" class="tabcontent">
+   {%assign collection1 = section.settings.collection-2 %}
+  {% for product in collections[collection1].products %}
+
+ <div class="product">
+   <a class="shop-now" href="{{ product.url }}">
+    <img class="main-image" src="{{ product.featured_image | product_img_url: 'master' }}">
+   </a>
+
+    <span class="title-coll">{{ product.title | escape  }}</span>
+  <span class="title-price">{{ product.price | money  }}</span>
+   {% comment %}Start automatically added Judge.me widget{% endcomment %}
+  {% include 'judgeme_widgets', widget_type: 'judgeme_preview_badge', concierge_install: true, product: product %}
+{% comment %}End automatically added Judge.me widget{% endcomment %}
+  </div>
+{% endfor %}
+</div>
+</div>
+
+{% schema %}
+{
+  "name": "Product collection-tabs",
+  "class": "index-section",
+      "settings": [
+      
+      {
+          "type": "text",
+          "id": "title-one",
+          "label":"Title"
+        },
+         {
+          "type": "collection",
+          "id": "collection-1",
+          "label":"collection"
+        },
+    {
+          "type": "text",
+          "id": "title-two",
+          "label":"Title"
+        },
+         {
+          "type": "collection",
+          "id": "collection-2",
+          "label":"collection"
+        }
+      ]
+}
+{% endschema %}
+<script>
+window.addEventListener('load', (event) => {
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+ 
+  $('.slick-next').trigger('click');
+  $('.thumbanils .slick-next').trigger('click');
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+});
+</script>

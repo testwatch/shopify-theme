@@ -1,0 +1,55 @@
+{% comment %}
+  The contents of the product.liquid template can be found in /sections/product-template.liquid
+{% endcomment %}
+{%if product.tags contains 'Flash'%}
+{%if settings.checkproduct %}
+{% section 'flash-sale'%}
+{%endif%}
+{%endif%} 
+{% section 'product-main-section' %}
+
+{%if product.metafields.Stuhrling.MSRP != blank %} 
+<div class="metafieldss" style="display:none;">MSRP:{{ product.metafields.Stuhrling.MSRP }}</div>
+{%endif%}
+{%comment%}
+{%section 'product-instagram'%}
+{% section 'skafos-product-recommender' %} 
+{%endcomment%}
+{%comment%}
+<div class="small--hide">
+{%section'product-collection-tabs-new'%}
+</div> 
+
+{% section 'product-recommendations' %}
+{%endcomment%}
+{%comment%}
+{%section'Home-icons'%}
+{% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true, auto_install: true, product: product %}
+
+{%endcomment%}
+{% comment %}
+  The contents of the product.liquid template can be found in /sections/product-template.liquid
+
+{%if product.tags contains 'Flash'%}
+{%if settings.checkproduct %}
+{% section 'flash-sale'%}
+{%endif%}
+{%endif%} 
+{% section 'product-template' %}
+
+{%if product.metafields.Stuhrling.MSRP != blank %} 
+<div class="metafieldss" style="display:none;">MSRP:{{ product.metafields.Stuhrling.MSRP }}</div>
+{%endif%}
+{%section 'product-instagram'%}
+{% section 'skafos-product-recommender' %} 
+
+{%comment%}
+<div class="small--hide">
+{%section'product-collection-tabs-new'%}
+</div> 
+
+{% section 'product-recommendations' %}
+{%endcomment%}
+{%section'Home-icons'%}
+{% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true, auto_install: true, product: product %}
+{% endcomment %}

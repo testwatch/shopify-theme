@@ -1,0 +1,196 @@
+
+{% comment %}
+{% if false %}
+reverting...
+/* <![CDATA[ */
+	(function(){if(window.voyage)return;window.voyage={q:[]};var fns=['init', 'track'];
+							for(var i=0;i<fns.length;i++){(function(fn){window.voyage[fn]=function(){
+								this.q.push([fn,arguments]);}})(fns[i])}})();voyage.init('75573862db', { popup: true });
+	/* ]]> */
+<script async src="https://assets.voyagetext.com/voyage.production.js"></script>
+<!-- SPLITIT MESSAGE START -->
+<script>
+	(function(i,s,o,g,r,a,m){i['SplititObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+													})(window, document, 'script', '//upstream.production.splitit.com/v1/dist/upstream-messaging.js?v='+(Math.ceil(new Date().getTime()/100000)), 'splitit');
+	splitit('init', { apiKey: '3da9c599-3b48-4759-9ad1-c830e219e708', lang: '{{ shop.locale }}', currency: '{{ cart.currency.iso_code }}', currencySymbol: '{{ cart.currency.symbol }}', debug: false });
+</script>
+<!-- SPLITIT MESSAGE  END -->
+<!--    Choozle Code Start  -->
+<script type="text/javascript" src="//nexus.ensighten.com/choozle/12927/Bootstrap.js"></script>
+<!--    Choozle Code End  -->
+<!-- Extend -- Add necessary SDK script tags and configure the store -->
+<script src="https://sdk.helloextend.com/extend-sdk-client/v1/extend-sdk-client.min.js"></script>  
+<script src="https://sdk.helloextend.com/extend-sdk-client-shopify-addon/v1/extend-sdk-client-shopify-addon.min.js"></script>  
+<script>Extend.config({ storeId: '65f9968c-3953-494d-8b24-5282c6bc8cf1', environment: 'production' })</script>
+{% endif %}
+{% endcomment %}
+
+
+
+{% if request.page_type contains 'search' %}
+<script type="text/javascript">globofilter.collection.sort = 'best-selling';</script>
+{% endif %} 
+
+{% render 'js_lib' %}
+<script src="{{ 'slick.js' | asset_url }}" ></script>
+<!-- Extend -- Add necessary SDK script tags and configure the store -->
+<script src="{{ 'extend-sdk-client.min.js' | asset_url }}"></script>  
+<script src="{{ 'extend-sdk-client-shopify-addon.min.js' | asset_url }}"></script>  
+<script>Extend.config({ storeId: '65f9968c-3953-494d-8b24-5282c6bc8cf1', environment: 'production' })</script>
+
+<script>
+	window.theme = window.theme || {};
+
+	var theme = {
+		strings: {
+			addToCart: {{ 'products.product.add_to_cart' | t | json }},
+			soldOut: {{ 'products.product.sold_out' | t | json }},
+			unavailable: {{ 'products.product.unavailable' | t | json }},
+			zoomClose: {{ "products.zoom.close" | t | json }},
+			zoomPrev: {{ "products.zoom.prev" | t | json }},
+			zoomNext: {{ "products.zoom.next" | t | json }},
+			addressError: {{ 'map.errors.address_error' | t | json }},
+			addressNoResults: {{ 'map.errors.address_no_results' | t | json }},
+			addressQueryLimit: {{ 'map.errors.address_query_limit_html' | t | json }},
+			authError: {{ 'map.errors.auth_error_html' | t | json }}
+		},
+		settings: {
+			// Adding some settings to allow the editor to update correctly when they are changed
+			enableWideLayout: {{ settings.enable_wide_layout }},
+			typeAccentTransform: {{ settings.type_accent_transform }},
+			typeAccentSpacing: {{ settings.type_accent_spacing }},
+			baseFontSize: '{{ settings.type_base_size }}',
+			headerBaseFontSize: '{{ settings.type_header_size }}',
+			accentFontSize: '{{ settings.type_accent_size }}'
+		},
+		variables: {
+			mediaQueryMedium: 'screen and (max-width: 768px)',
+			bpSmall: false
+		},
+		moneyFormat: {{ shop.money_format | json }}
+	}
+
+	document.documentElement.className = document.documentElement.className.replace('no-js', 'supports-js');
+
+	document.addEventListener("StartKernelLoading", function(event) {
+		// Google Tag Manager
+		(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-WVP4JT9');
+
+		loadJS("//nexus.ensighten.com/choozle/12927/Bootstrap.js"); //seems like there is issue related to checkToken.js
+		// SPLITIT MESSAGE START
+	(function(i,s,o,g,r,a,m){i['SplititObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+													})(window, document, 'script', '//upstream.production.splitit.com/v1/dist/upstream-messaging.js?v='+(Math.ceil(new Date().getTime()/100000)), 'splitit');
+	splitit('init', { apiKey: '3da9c599-3b48-4759-9ad1-c830e219e708', lang: '{{ shop.locale }}', currency: '{{ cart.currency.iso_code }}', currencySymbol: '{{ cart.currency.symbol }}', debug: false });
+	// SPLITIT MESSAGE  END
+
+		{% if template != 'index' or template != 'collection' %}
+		loadCSS("https://cdn.judge.me/shopify_v2.css");
+		{% endif %}
+	});
+
+	document.addEventListener("StartOtherLoading", function(event) {
+	loadJS("{{ 'cj-event-storage2.js' | asset_url }}");
+
+	// <![CDATA[
+	if (window.voyage) return;
+	window.voyage = {
+			q: []
+	};
+	var fns = ['init', 'track'];
+	for (var i = 0; i < fns.length; i++) {
+		(function(fn) {
+				window.voyage[fn] = function() {
+						this.q.push([fn, arguments]);
+				}
+		})(fns[i])
+	}
+	voyage.init('75573862db', {popup: true});
+	// ]]>
+	loadJS("https://assets.voyagetext.com/voyage.production.js");
+	});
+</script>
+
+{% capture asyncLoad %}
+window.addEventListener('load', function load(event){setTimeout(function(){ asyncLoad(); document.dispatchEvent(new CustomEvent('StartAppLoading'));}, 4000)},false);
+document.addEventListener("StartAsyncLoading", function(event){
+  document.dispatchEvent(new CustomEvent('StartKLoad'));
+});
+{% endcapture %}
+
+{% capture KernalHead %}
+  document.addEventListener('StartKernelLoading', function() { var customDocumentWrite = 
+{% endcapture %}
+
+{% capture KernalFooter %}
+  loadJS(eventsListenerScript.src); });
+{% endcapture %}
+
+{% capture content_header %}
+  {{
+    content_for_header
+  | replace: ' x.parentNode.insertBefore(s, x)', 'loadJS(urls[i])' 
+  | remove: "window.attachEvent('onload', asyncLoad)" 
+  | replace: "window.addEventListener('load', asyncLoad, false);", asyncLoad 
+  | replace: 'var customDocumentWrite = ', KernalHead 
+  | replace: "document.getElementsByTagName('head')[0].appendChild(eventsListenerScript);", KernalFooter
+  | replace: "DOMContentLoaded", 'StartKLoad'
+  }}
+{% endcapture %}
+
+{{ content_header }}
+
+{% comment %}
+<!-- Currently, no use of this lib anywhere in the store -->
+<script src="{{ 'player.js' | asset_url }}"></script>
+{% endcomment %}
+
+<script src="{{ 'lazysizes.min.js' | asset_url }}" async></script>
+ 
+{% comment %}<script src="{{ 'slick.js' | asset_url }}" ></script>{% endcomment %}
+
+<script src="{{ 'custom-cart-js.js' | asset_url }}" async></script>
+
+{% if template contains 'product' %}
+	<script src="{{ 'elevatezoom.js' | asset_url }}" async></script>
+{% endif %}
+
+{%if template contains 'product'%}
+<script src="{{ 'video.popup.js' | asset_url }}" defer></script>
+{%endif%}
+
+{% if request.page_type contains 'customers/' %}
+	{{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+{% endif %}
+
+{% if template != 'index' %}
+	{% capture judgeme_core %}
+	{% include 'judgeme_core' %}
+	{% endcapture %}
+	{% assign judgeme = judgeme_core | split: '<link rel="stylesheet"' | first %}
+	{{ judgeme | replace: ' async', ' defer' }}
+{% endif %}
+
+{% if request.page_type == 'product' or request.page_type == 'index' %}
+	{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+{% endif %}
+
+{% include '_cart_discount' %}
+
+	<!-- ReSci start (Inserted on: 2021-01-06 15:38:36 UTC) -->
+{% render 'resci-main.v1' %}
+	<!-- ReSci end -->
+{% if template contains 'product' template contains 'page.landing-collection' or template contains 'page.mens-fashion' or template contains 'page.women-bestseller' or template contains 'product.gift_card' or template contains 'page.legacy-bestsellers' %}
+	<script src="{{ 'owl.carousel.js' | asset_url }}"></script>	
+{% endif %}
+
+<!--START Lightbox Javascript-->
+<script async type='text/javascript' src='https://www.lightboxcdn.com/vendor/4a4a74cc-ef15-4ff0-8e5b-29180a5b80ef/lightbox_inline.js'></script>
+<!--END Lightbox Javascript-->

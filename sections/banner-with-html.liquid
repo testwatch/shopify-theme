@@ -1,0 +1,131 @@
+<div class="banner banner-{{ section.id }} new_home_banner">
+  <div class="banner-image">
+    <a href="{%if section.settings.link != blank %}{{section.settings.link}}{%endif%}">
+      <picture>
+  <source srcset="{{ section.settings.image | img_url: '1400x600' | replace: '.jpg', '.webp' }}" type="image/webp">
+  <img class="desktop lazyload"
+       src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+       data-src="{{ section.settings.image | img_url: '1400x600' }}"
+       width="1400"
+       height="600"
+       alt="{{ section.settings.main_heading | escape }}">
+</picture>
+
+      <picture>
+  <source srcset="{{ section.settings.Mobile_image | img_url: '500x500' | replace: '.jpg', '.webp' }}" type="image/webp">
+  <img class="mobile lazyload"
+       src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+       data-src="{{ section.settings.Mobile_image | img_url: '500x500' }}"
+       width="500"
+       height="500"
+       alt="Mobile banner">
+</picture>
+      <div class="content-area {% if section.settings.text_layout == 'left'%}content_left {% elsif section.settings.text_layout == 'center'%}content_center{% elsif section.settings.text_layout == 'right' %}content_right{% endif %}">
+        <div class="moon-area">
+          {% if section.settings.main_heading != blank %} <h3 class="main_heading">{{section.settings.main_heading}}</h3>{% endif %}
+          {% if section.settings.sub_heading != blank %} <h3 class="sub_heading"><span class="moon_Area">{{section.settings.sub_heading}}</span></h3>{% endif %}
+		      {% if section.settings.button_text != blank %}
+          <a class="btn banner-btn" href="{%if section.settings.link != blank %}{{section.settings.link }}{%else%}collections/modena{%endif%}">{{  section.settings.button_text }}</a>
+          {% endif %}
+          {% if section.settings.bottom_description != blank %} <div class="bottom_line">{{ section.settings.bottom_description }}</div>{% endif %}
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Banner with HTML",
+  "class": "index-section",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+		{
+          "type": "image_picker",
+          "id": "Mobile_image",
+          "label": "Mobile Image"
+        },
+     	{
+          "type": "textarea",
+          "id": "main_heading",
+          "label":"Heading"
+        },
+		{
+          "type": "textarea",
+          "id": "sub_heading",
+          "label":"Sub Heading"
+        },
+		{
+			"type":"text",
+			"id":"button_text",
+			"label":"Button Label",
+			"default":"Shop The Sale"
+		},
+		
+        {
+          "type": "url",
+          "id": "link",
+          "label":"link"
+        },
+		{
+			"type":"text",
+			"id":"bottom_description",
+			"label":"Bottom Description"
+		},
+		{
+			"type":"header",
+			"content":"Text Layout"
+		},
+		 {
+        "type": "select",
+        "id": "text_layout",
+        "label":"Choose Text Layout",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+		  },
+		  {
+            "value": "center",
+            "label": "Center"
+		  },
+		 {
+            "value": "right",
+            "label": "Right"
+		  }
+			
+		]
+			
+		}
+      ],
+  "presets": [
+    {
+      "name": "Banner with HTML",
+      "category": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    }
+  ]
+}
+{% endschema %}

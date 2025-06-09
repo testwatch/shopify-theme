@@ -1,0 +1,287 @@
+<div class="warranty-card">
+<div class="warranty-section">
+  <div class="section-image" style="background-image: url({%if section.settings.bg-img != blank %}{{section.settings.bg-img | img_url:'master'}}{%else%}https://btiwe3du61r38ffz43cak8rb-wpengine.netdna-ssl.com/wp-content/uploads/warranty-banner-w-text.jpg{%endif%});">
+ {%if section.settings.title != blank %}   <p class="heading-content">{{section.settings.title}}</p>{%endif%}
+    <div class="row">
+       {% for block in section.blocks %}
+   <div class="col-md-4 col-sm-4 col-xs-12">
+     <div class="dummy-area">
+       <h2>{{block.settings.title-one}}</h2>
+       <h3>{{block.settings.title-two}}</h3>
+     </div>
+      </div>
+      {%endfor%}
+    </div>
+  </div>
+  </div>
+ <div class="form-area">
+    <!-- Uncommented Klaviyo form -->
+    <div class="klaviyo-form-Qc9AXT"></div>
+    
+    <!-- The following sections are commented out -->
+    <!-- <div id="lightbox-inline-form-a9eb58e0-d91b-4eeb-a946-7354df7e90cb"></div> -->
+    <!--START Lightbox Javascript-->
+    <!-- <script async type='text/javascript' src='https://www.lightboxcdn.com/vendor/4a4a74cc-ef15-4ff0-8e5b-29180a5b80ef/lightbox_inline.js'></script> -->
+    <!--END Lightbox Javascript-->
+    <!-- <div class="klaviyo-form-SBqvfS"></div> -->
+</div>
+
+</div>
+
+{% schema %}
+{
+  "name": "warranty",
+  "settings": [
+    
+ {
+"type":"header",
+"content":"Banner"
+},
+{
+"type":"image_picker",
+"id":"bg-img",
+"label":"Background image"
+},
+{
+"type":"image_picker",
+"id":"mbg-img",
+"label":"Mobile Background image"
+},
+{
+"type":"text",
+"id":"title",
+"label":"Heading"
+} 
+    
+    
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Content Area",
+      "settings": [
+        {
+"type":"text",
+"id":"title-one",
+"label":"Heading One"
+},
+{
+"type":"text",
+"id":"title-two",
+"label":"Heading Two"
+}
+        
+        
+        
+        
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "warranty",
+      "category": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "ms": "Imej",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      },
+      "blocks": [
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<style>
+  .section-image {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+}
+  .section-image {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.heading-content {
+    color: #fff;
+    display: block;
+    font-size: 30px;
+}
+
+.dummy-area {
+    background: #FFFFFF;
+    text-align: center;
+    padding: 20px 5px;
+}
+
+.dummy-area h2 {
+    color: #FFFFFF;
+    font-size: 20px;
+    margin: 0;
+    padding: 0 0 15px 0;
+    font-weight: bold;
+}
+.one-column {
+    flex: 0 0 50%;
+}
+
+.one-column:first-child {
+    padding-right: 5px;
+}
+.dummy-area h3 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.section-image .row {
+    width: 100%;
+    padding: 0 10px;
+}
+  .section-image {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.heading-content {
+    color: #fff;
+    display: block;
+    font-size: 30px;
+}
+
+.dummy-area {
+    background: #e6e6e6;
+    text-align: center;
+    padding: 20px 5px;
+}
+
+.dummy-area h2 {
+    color: #e76023;
+    font-size: 20px;
+    margin: 0;
+    padding: 0 0 15px 0;
+    font-weight: bold;
+}
+
+.dummy-area h3 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.section-image .row {
+    width: 100%;
+    padding: 0 10px;
+}
+
+.form-area {
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+h2.heading-form {
+    font-size: 19px;
+    color: rgb(0, 0, 0);
+}
+
+label.label- {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0px;
+    padding-top: 10px;
+}
+
+.flex-column {
+    display: flex;
+}
+  .flex-column select,select#Purchase, select#Purchase1 {border: 1px solid #000;}
+
+.form-area input {
+    border: 1px solid #000;
+}
+
+.btn-WATCH {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1;
+    white-space: normal;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    border: none !important;
+    text-align: center;
+    word-break: break-word;
+    font-weight: bold !important;
+    align-self: flex-end;
+    cursor: pointer;
+    background: rgb(253, 108, 0) !important;
+    border-radius: 5px;
+    border-style: none;
+    border-color: rgb(170, 170, 170);
+    border-width: 0px;
+}
+  
+  
+  
+  
+  @media screen and (max-width:767px){
+    
+    
+  .heading-content {
+    font-size: 17px;
+    text-align: center;
+    padding-top: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.dummy-area {margin: 2px;}
+
+.dummy-area h2 {
+    font-size: 15px;
+}
+
+.dummy-area h3 {
+    font-size: 14px;
+}
+
+.section-image {
+  height:100%;
+    display: block;
+    padding-bottom: 50px;
+  background-image: url({%if section.settings.mbg-img != blank %}{{section.settings.mbg-img | img_url:'master'}}{%else%}//cdn.shopify.com/s/files/1/0333/0936/0264/files/warranty_banner_2.jpg?v=1585500386{%endif%}) !important;
+
+}
+
+.form-area {
+    width: 100%;
+    padding: 0 20px;
+}
+  }
+  .section-image {
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+}
+</style>

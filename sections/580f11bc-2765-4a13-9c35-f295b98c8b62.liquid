@@ -1,0 +1,31 @@
+
+{%comment%}
+v0.1
+This snippet is created by Skafos.ai.
+We'll overwrite this file as and when we push updates.
+So, please don't modify this file, since it'll get overwritten when we push our update.
+{%endcomment%}
+
+<div class='skafos-featured-products-recommender-580f11bc-2765-4a13-9c35-f295b98c8b62' data-featured-products-type='manual' data-shop-id="gid://shopify/Shop/{{shop.id}}"></div>
+<script type="module">
+    (function () { 
+        const featuredProductsFunc = async () => {
+            try {
+                let { setupSkafosFeaturedProductsByClassName } = await import('https://hosted.skafos.ai/assets/scripts/skafos-iframe-messenger.js');
+                setupSkafosFeaturedProductsByClassName('skafos-featured-products-recommender-580f11bc-2765-4a13-9c35-f295b98c8b62', null, {"app":{"desktop_display_size":8,"mobile_display_size":4,"collection_match":"any","num_new_products":2,"head_content":"<style> body {padding-top: 60px;} .skafos-title {margin: auto;} .skafos-title h5 {font-family: Lato,sans-serif; text-transform: uppercase; font-size: 45px; font-weight: 500; line-height: 1.1;} .skafos-title h5::after {display: block; content: ''; background: #decccc; height: 4px; margin: 10px auto;} .skafos-interactions div button:hover {background-color: #ff6b00;}.skafos-animated-interaction-button {background: #ff6b00;}.skafos-add-to-cart-button{background: #ff6b00;}.skafos-add-to-cart-button:hover{color: #ff6b00;}@keyframes checkCircleAnimation {0% {  fill: #ff6b00;  background: none;}20% {  fill: #ff6b00;  background: none;  box-shadow: inset 0 0 0 2px #ffb580;  transform: scale(.9);}40% {  fill: #ff6b00;  background: none;  box-shadow: inset 0 0 0 2px #e7b1cb, 0 0 0 2px #ffb580;  transform: scale(1);}60% {  fill: #ff6b00;  background: none;  box-shadow: inset 0 0 0 2px #ffb580;  transform: scale(.9);}80% {  fill: #ff6b00;  background: none;  box-shadow: inset 0 0 0 2px #e7b1cb, 0 0 0 2px #ffb580;  transform: scale(1);}100% {  fill: #ff6b00;  background: none;  box-shadow: inset 0 0 0 2px #ffb580;  transform: scale(.9);}}svg[data-testid='CheckCircleOutlineIcon'] {  background: #ff6b00;  animation: checkCircleAnimation 4s 1;} @media only screen and (max-width: 767px){ .skafos-title h5.css-1ii9rk0 {font-size: 22px;} body {padding-top: 0px;} } </style>","currency_code":"USD","currency_formats":{"money_format":"${\{amount}\}"},"solution_id":"gid://shopify/Shop/33309360264-weighted-similarity"},"theme":{"fontFamily":"Roboto","palette":{"titleColor":"#444444","primaryColor":"#444444","backgroundColor":"#FFFFFF","buttonBackgroundColor":"#FFFFFF"}},"views":{"title":"Featured Products ","upvoteText":"More Like This","downvoteText":"Not My Style","addToCart":"Add To Cart","upvoteDisabledTooltip":"Sorry! There are no more available items like this one.","card":{"price":true,"product_name":true,"variant_images":false},"addToCartText":"Add To Cart","soldOutText":"Sold Out"},"language":{"default":"en","detectBrowserLanguage":false},"ais":{"initialization_type":"manual","interaction_weights":{"upvote_weight":1,"downvote_weight":-0.5},"models":{"image-similarity":0.7,"text-similarity":0.3},"upvotes_only":["text-similarity"],"initialization_data":["gid://shopify/Product/7344490217638","gid://shopify/Product/7344654385318","gid://shopify/Product/7344640229542","gid://shopify/Product/7344630399142","gid://shopify/Product/7369576087718","gid://shopify/Product/7344819765414","gid://shopify/Product/7344667918502","gid://shopify/Product/7344849223846"]}}, 'production')
+            } catch {
+                setTimeout(() => {
+                    featuredProductsFunc()
+                }, 100);
+            }    
+        }
+        featuredProductsFunc()
+    })();
+</script>
+
+{% schema %}
+{
+  "name": "Skafos Featured Products",
+  "settings": []
+}
+{% endschema %}

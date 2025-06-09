@@ -1,0 +1,710 @@
+{% comment %} Please don’t update this content {% endcomment %}
+
+{% layout none %}
+{
+  "product":
+    {
+      "id":{{ product.id }},
+      "metafields":[
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_collection = product.metafields.customAttributes["collection"] %}
+              {% if v_collection != blank %}
+                {
+                  "namespace": "customAttributes",
+                  "key": "collection",
+                  "value": {{ v_collection | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_dial-color = product.metafields.customAttributes["dial-color"] %}
+              {% if v_dial-color != blank %}
+                {
+                  "namespace": "customAttributes",
+                  "key": "dial-color",
+                  "value": {{ v_dial-color | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_gender = product.metafields.customAttributes["gender"] %}
+              {% if v_gender != blank %}
+                {
+                  "namespace": "customAttributes",
+                  "key": "gender",
+                  "value": {{ v_gender | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_movement-type = product.metafields.customAttributes["movement-type"] %}
+              {% if v_movement-type != blank %}
+                {
+                  "namespace": "customAttributes",
+                  "key": "movement-type",
+                  "value": {{ v_movement-type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_strap-material = product.metafields.customAttributes["strap-material"] %}
+              {% if v_strap-material != blank %}
+                {
+                  "namespace": "customAttributes",
+                  "key": "strap-material",
+                  "value": {{ v_strap-material | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_style = product.metafields.customAttributes["style"] %}
+              {% if v_style != blank %}
+                {
+                  "namespace": "customAttributes",
+                  "key": "style",
+                  "value": {{ v_style | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_water-resistance = product.metafields.customAttributes["water-resistance"] %}
+              {% if v_water-resistance != blank %}
+                {
+                  "namespace": "customAttributes",
+                  "key": "water-resistance",
+                  "value": {{ v_water-resistance | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_AM_PM_Indicator = product.metafields.Stuhrling["AM_PM_Indicator"] %}
+              {% if v_AM_PM_Indicator != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "AM_PM_Indicator",
+                  "value": {{ v_AM_PM_Indicator | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Band = product.metafields.Stuhrling["Band"] %}
+              {% if v_Band != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Band",
+                  "value": {{ v_Band | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Band__Color = product.metafields.Stuhrling["Band _Color"] %}
+              {% if v_Band__Color != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Band _Color",
+                  "value": {{ v_Band__Color | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Bezel = product.metafields.Stuhrling["Bezel"] %}
+              {% if v_Bezel != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Bezel",
+                  "value": {{ v_Bezel | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Bezel_Material = product.metafields.Stuhrling["Bezel_Material"] %}
+              {% if v_Bezel_Material != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Bezel_Material",
+                  "value": {{ v_Bezel_Material | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Bezel_Rotation = product.metafields.Stuhrling["Bezel_Rotation"] %}
+              {% if v_Bezel_Rotation != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Bezel_Rotation",
+                  "value": {{ v_Bezel_Rotation | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Buckle = product.metafields.Stuhrling["Buckle"] %}
+              {% if v_Buckle != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Buckle",
+                  "value": {{ v_Buckle | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Calendar = product.metafields.Stuhrling["Calendar"] %}
+              {% if v_Calendar != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Calendar",
+                  "value": {{ v_Calendar | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Calendar_Date_Magnifier = product.metafields.Stuhrling["Calendar_Date_Magnifier"] %}
+              {% if v_Calendar_Date_Magnifier != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Calendar_Date_Magnifier",
+                  "value": {{ v_Calendar_Date_Magnifier | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Calendar_Date_Quick-Set_Date = product.metafields.Stuhrling["Calendar_Date_Quick-Set Date"] %}
+              {% if v_Calendar_Date_Quick-Set_Date != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Calendar_Date_Quick-Set Date",
+                  "value": {{ v_Calendar_Date_Quick-Set_Date | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Calendar_Day_of_Month = product.metafields.Stuhrling["Calendar_Day_of_Month"] %}
+              {% if v_Calendar_Day_of_Month != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Calendar_Day_of_Month",
+                  "value": {{ v_Calendar_Day_of_Month | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Calendar_Month = product.metafields.Stuhrling["Calendar_Month"] %}
+              {% if v_Calendar_Month != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Calendar_Month",
+                  "value": {{ v_Calendar_Month | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_CalendarDayofMonth = product.metafields.Stuhrling["CalendarDayofMonth"] %}
+              {% if v_CalendarDayofMonth != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "CalendarDayofMonth",
+                  "value": {{ v_CalendarDayofMonth | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_CalendarDayofWeek = product.metafields.Stuhrling["CalendarDayofWeek"] %}
+              {% if v_CalendarDayofWeek != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "CalendarDayofWeek",
+                  "value": {{ v_CalendarDayofWeek | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Caliber = product.metafields.Stuhrling["Caliber"] %}
+              {% if v_Caliber != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Caliber",
+                  "value": {{ v_Caliber | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_CaliberField = product.metafields.Stuhrling["CaliberField"] %}
+              {% if v_CaliberField != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "CaliberField",
+                  "value": {{ v_CaliberField | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Case = product.metafields.Stuhrling["Case"] %}
+              {% if v_Case != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Case",
+                  "value": {{ v_Case | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Case_Back_Material = product.metafields.Stuhrling["Case_Back_Material"] %}
+              {% if v_Case_Back_Material != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Case_Back_Material",
+                  "value": {{ v_Case_Back_Material | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Case_Back_Style = product.metafields.Stuhrling["Case_Back_Style"] %}
+              {% if v_Case_Back_Style != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Case_Back_Style",
+                  "value": {{ v_Case_Back_Style | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Case_Shape = product.metafields.Stuhrling["Case_Shape"] %}
+              {% if v_Case_Shape != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Case_Shape",
+                  "value": {{ v_Case_Shape | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Case_Thickness = product.metafields.Stuhrling["Case_Thickness"] %}
+              {% if v_Case_Thickness != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Case_Thickness",
+                  "value": {{ v_Case_Thickness | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Caseback = product.metafields.Stuhrling["Caseback"] %}
+              {% if v_Caseback != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Caseback",
+                  "value": {{ v_Caseback | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_CaseComposition = product.metafields.Stuhrling["CaseComposition"] %}
+              {% if v_CaseComposition != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "CaseComposition",
+                  "value": {{ v_CaseComposition | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_CaseField = product.metafields.Stuhrling["CaseField"] %}
+              {% if v_CaseField != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "CaseField",
+                  "value": {{ v_CaseField | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_CaseSize = product.metafields.Stuhrling["CaseSize"] %}
+              {% if v_CaseSize != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "CaseSize",
+                  "value": {{ v_CaseSize | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Chronograph = product.metafields.Stuhrling["Chronograph"] %}
+              {% if v_Chronograph != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Chronograph",
+                  "value": {{ v_Chronograph | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Clasp = product.metafields.Stuhrling["Clasp"] %}
+              {% if v_Clasp != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Clasp",
+                  "value": {{ v_Clasp | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Crown = product.metafields.Stuhrling["Crown"] %}
+              {% if v_Crown != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Crown",
+                  "value": {{ v_Crown | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Crown_Style = product.metafields.Stuhrling["Crown_Style"] %}
+              {% if v_Crown_Style != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Crown_Style",
+                  "value": {{ v_Crown_Style | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Crystal = product.metafields.Stuhrling["Crystal"] %}
+              {% if v_Crystal != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Crystal",
+                  "value": {{ v_Crystal | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Dial = product.metafields.Stuhrling["Dial"] %}
+              {% if v_Dial != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Dial",
+                  "value": {{ v_Dial | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Dimensions = product.metafields.Stuhrling["Dimensions"] %}
+              {% if v_Dimensions != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Dimensions",
+                  "value": {{ v_Dimensions | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Dimensions_(w/Crown) = product.metafields.Stuhrling["Dimensions_(w/Crown)"] %}
+              {% if v_Dimensions_(w/Crown) != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Dimensions_(w/Crown)",
+                  "value": {{ v_Dimensions_(w/Crown) | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_DimensionsField = product.metafields.Stuhrling["DimensionsField"] %}
+              {% if v_DimensionsField != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "DimensionsField",
+                  "value": {{ v_DimensionsField | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Dual_Time = product.metafields.Stuhrling["Dual_Time"] %}
+              {% if v_Dual_Time != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Dual_Time",
+                  "value": {{ v_Dual_Time | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Gender = product.metafields.Stuhrling["Gender"] %}
+              {% if v_Gender != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Gender",
+                  "value": {{ v_Gender | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_GMT = product.metafields.Stuhrling["GMT"] %}
+              {% if v_GMT != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "GMT",
+                  "value": {{ v_GMT | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Hands = product.metafields.Stuhrling["Hands"] %}
+              {% if v_Hands != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Hands",
+                  "value": {{ v_Hands | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Luminosity = product.metafields.Stuhrling["Luminosity"] %}
+              {% if v_Luminosity != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Luminosity",
+                  "value": {{ v_Luminosity | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Markers = product.metafields.Stuhrling["Markers"] %}
+              {% if v_Markers != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Markers",
+                  "value": {{ v_Markers | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Movement = product.metafields.Stuhrling["Movement"] %}
+              {% if v_Movement != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Movement",
+                  "value": {{ v_Movement | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Power_Reserve = product.metafields.Stuhrling["Power_Reserve"] %}
+              {% if v_Power_Reserve != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Power_Reserve",
+                  "value": {{ v_Power_Reserve | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Regulator = product.metafields.Stuhrling["Regulator"] %}
+              {% if v_Regulator != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Regulator",
+                  "value": {{ v_Regulator | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Strap_Length = product.metafields.Stuhrling["Strap_Length"] %}
+              {% if v_Strap_Length != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Strap_Length",
+                  "value": {{ v_Strap_Length | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Strap_Width = product.metafields.Stuhrling["Strap_Width"] %}
+              {% if v_Strap_Width != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Strap_Width",
+                  "value": {{ v_Strap_Width | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Sun_Moon_Phase = product.metafields.Stuhrling["Sun_Moon_Phase"] %}
+              {% if v_Sun_Moon_Phase != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Sun_Moon_Phase",
+                  "value": {{ v_Sun_Moon_Phase | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Tachymeter = product.metafields.Stuhrling["Tachymeter"] %}
+              {% if v_Tachymeter != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Tachymeter",
+                  "value": {{ v_Tachymeter | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Water-Resistance = product.metafields.Stuhrling["Water-Resistance"] %}
+              {% if v_Water-Resistance != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "Water-Resistance",
+                  "value": {{ v_Water-Resistance | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_World_Timer = product.metafields.Stuhrling["World_Timer"] %}
+              {% if v_World_Timer != blank %}
+                {
+                  "namespace": "Stuhrling",
+                  "key": "World_Timer",
+                  "value": {{ v_World_Timer | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_AM_PM_Indicator = product.metafields.Sturhling["AM_PM_Indicator"] %}
+              {% if v_AM_PM_Indicator != blank %}
+                {
+                  "namespace": "Sturhling",
+                  "key": "AM_PM_Indicator",
+                  "value": {{ v_AM_PM_Indicator | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_Dual_Time = product.metafields.Sturhling["Dual_Time"] %}
+              {% if v_Dual_Time != blank %}
+                {
+                  "namespace": "Sturhling",
+                  "key": "Dual_Time",
+                  "value": {{ v_Dual_Time | json }}
+                },
+              {% endif %}
+        
+      ]
+    }
+}
+
+ {% section 'skafos-product-recommender' %} 

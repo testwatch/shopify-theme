@@ -1,0 +1,627 @@
+<div class="contact_main_template">
+{% assign display_map = false %}
+{%- if section.settings.api_key != blank and section.settings.map_address -%}
+{% assign display_map = true %}
+{%- endif -%}
+
+<style>
+  {% unless section.settings.image == blank %}
+  .map-section__image--{{ section.id }} {
+    background-position: {{ section.settings.position }};
+  }
+  @media screen and (max-width: 749px) {
+    .map-section__image--{{ section.id }} {
+      padding-top: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100}}%;
+    }
+  }
+  {% endunless %}
+</style>{% if section.settings.image %}
+<div class="contact-banner-img large--one-whole" style="background-image:url({{ section.settings.image | img_url:'original' }})">
+
+  <div class="section-header banner_caption container">
+    <h1 class="section-header--title text-center">{{ page.title }}</h1>
+  </div>
+  {% if section.settings.text != blank %}
+  <div class="topbar_text large--one-whole text-center clearfix banner_caption container">
+    {{ section.settings.text | escape_html }}
+  </div>
+  {% endif %}
+
+</div>
+{% endif %}
+
+<div class="grid container text-center large--one-whole">
+  {% if section.settings.icon_head != blank or section.settings.icon_info != blank %}
+  <div class="top_icon_block large--one-whole">
+    {% if section.settings.icon_head != blank %} 
+    <h2>{{ section.settings.icon_head }}</h2>
+    {% endif %}
+    {% if section.settings.icon_info != blank %} 
+    <h3>{{ section.settings.icon_info }}</h3>
+    {% endif %}
+  </div>
+  {% endif %}
+  <div class="page-width">  
+    <div class="contact-section large--one-whole medium--one-whole sixteen columns grid">
+      {% if section.settings.email_icon != blank or section.settings.email_label != blank or section.settings.email_msg != blank %}
+      <div class="col-sm-4 col-md-4 col-xs-12 grid__item">
+        <div class="contact-block ">
+          {% if section.settings.email_icon != blank %}     
+          <div class="icon-block">{{ section.settings.email_icon | escape_html }}</div>      
+          {% endif %}
+          {% if section.settings.email_label != blank %}
+          <div class="icon-label-block">{{ section.settings.email_label }}</div>
+          {% endif %}
+          {% if section.settings.email_msg != blank %}
+          <div class="icon-msg-block">{{ section.settings.email_msg | escape_html }}</div>  
+          {% endif %}
+          {% if section.settings.button_text_1 != blank %}
+          <a class="btn contact_btn" href="{{ section.settings.button_link_1 }}">{{ section.settings.button_text_1 }}</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+      {% if section.settings.tel_icon != blank or section.settings.tel_label != blank or section.settings.tel_msg != blank %}
+      <div class="lcol-sm-4 col-md-4 col-xs-12 grid__item">
+        <div class="contact-block ">
+          {% if section.settings.tel_icon != blank %}      
+          <div class="icon-block">{{ section.settings.tel_icon |escape_html }}</div>      
+          {% endif %}
+          {% if section.settings.tel_label != blank %}
+          <div class="icon-label-block">{{ section.settings.tel_label }}</div>
+          {% endif %}
+          {% if section.settings.tel_msg != blank %}
+          <div class="icon-msg-block">{{ section.settings.tel_msg |escape_html }}</div>  
+          {% endif %}
+          {% if section.settings.button_text_2 != blank %}
+          <a class="btn contact_btn" href="{{ section.settings.button_link_2 }}">{{ section.settings.button_text_2 }}</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+      {% if section.settings.adress_icon != blank or section.settings.adress_label != blank or section.settings.adress_msg  != blank %} 
+      <div class="col-sm-4 col-md-4 col-xs-12 grid__item">
+        <div class="contact-block">
+          {% if section.settings.adress_icon != blank %}      
+          <div class="icon-block">{{ section.settings.adress_icon |escape_html }}</div>     
+          {% endif %}
+          {% if section.settings.adress_label != blank %}
+          <div class="icon-label-block">{{ section.settings.adress_label }}</div>
+          {% endif %}
+          {% if section.settings.adress_msg  != blank %}
+          <div class="icon-msg-block">{{ section.settings.adress_msg | escape_html }}</div>  
+          {% endif %}
+          {% if section.settings.button_text_3 != blank %}
+          <a class="btn contact_btn" href="{{ section.settings.button_link_3 }}">{{ section.settings.button_text_3 }}</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+
+</div>
+<hr class="faded_line" style="margin-top: 0px; margin-bottom: 20px;">
+<div class="grid contact_bottom container">
+  <div class="grid__item bottom_contact_block post-large--one-half">
+    <div class="grid__item contact_block_inner post-large--one-half">
+      {% if section.settings.heading_1 !=blank %} <h3 class="heading_block">{{ section.settings.heading_1 }}</h3>{% endif %}
+      {% if section.settings.caption_1 !=blank %} <div class="bottom_caption_block">{{ section.settings.caption_1 }}</div>{% endif %}
+      <div class="contact_block_inner">
+        {% if section.settings.heading_2 !=blank %} <h3 class="heading_block">{{ section.settings.heading_2 }}</h3>{% endif %}
+        {% if section.settings.caption_2 !=blank %} <div class="bottom_caption_block">{{ section.settings.caption_2 }}</div>{% endif %}
+      </div>
+    </div>
+
+    <div class="grid__item contact_block_inner post-large--one-half">
+      {% if section.settings.heading_3 !=blank %} <h3 class="heading_block">{{ section.settings.heading_3 }}</h3>{% endif %}
+      {% if section.settings.caption_3 !=blank %} <div class="bottom_caption_block">{{ section.settings.caption_3 }}</div>{% endif %}
+    </div>
+  </div>
+  <div class="grid__item bottom_contact_block post-large--one-half">
+    {% if display_map %}
+    <div class="map-section{% if display_map %} map-section--display-map{% endif %}" data-section-id="{{ section.id }}" data-section-type="map-section" data-api-key="{{ section.settings.api_key }}">
+      <div class="map-section__wrapper">
+        <div class="map-section__content map-section__background-wrapper">
+          {% if section.settings.image %}
+          <div class="map-section__image map-section__image--{{ section.id }} supports-js lazyload"
+               data-bgset="{% include 'bgset', image: section.settings.map_image %}"
+               data-sizes="auto"
+               data-parent-fit="cover">
+          </div>
+          <noscript>
+            <div class="map-section__image  map-section__image--{{ section.id }}" style="background-image: url({{ section.settings.map_image | img_url: '400x400'}});"></div>
+          </noscript>
+          {% else %}
+          <div class="map-section__placeholder">
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+          {% endif %}
+          {% if display_map %}
+          <div class="map-section__container"
+               id="Map-{{ section.id }}"
+               data-address-setting="{{ section.settings.map_address | escape }}">
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3026.7415286921023!2d-73.98747948453686!3d40.65762767933795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25ae0663238d1%3A0xd6654e43537d731d!2sST%C3%9CHRLING+ORIGINAL!5e0!3m2!1sen!2sus!4v1533243292159" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+    {% endif %}
+  </div>
+</div>
+</div>
+<div class="container product_enquiry_outer">
+  <div class="contact_form_header">
+    <h3 class="text-center">PRODUCT INQUIRY</h3>
+  </div>
+  <hr>
+  <div class="post-large--one-half">    
+  <p>For commonly asked questions, please check our<a style="color:#FD6C00;" href="https://stuhrling.com/pages/help-center"> Help Center</a>.
+  <p>If you don't see your question, contact us below:</p>
+{% form 'contact' %}
+
+        {% if form.posted_successfully? %}
+          <p class="note form-success">
+            {{ 'contact.form.post_success' | t }}
+          </p>
+        {% endif %}
+
+        {{ form.errors | default_errors }}
+
+       
+
+        <label for="ContactFormEmail" class="contact_email">{{ 'contact.form.email' | t }}</label>
+        <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+		
+  		 {% assign name_attr = 'contact.form.number' | t | handle %}
+        <label for="ContactFormNumber" class="contact_number">{{ 'contact.form.number' | t }}</label>
+        <input type="text" id="ContactFormNumber" name="contact[{{ 'contact.form.number' | t }}]" placeholder="{{ 'contact.form.number' | t }}" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ order.number }}{% endif %}">
+		 <label for="product_enquiry" class="contact_topic">{{ 'contact.form.topic' | t }}</label>  		
+  		<select id="product_enquiry" name="contact[{{ 'contact.form.topic' | t }}]" class="select_block product_inquiry" aria-required="true" aria-invalid="false">
+          
+          <option value="Adjusting A Link Bracelet" data-faq-id="50" data-faq-category="product">Adjusting A Link Bracelet</option>
+          <option value="Can't Pull The Crown Out" data-faq-id="46" data-faq-category="product">Can't Pull The Crown Out</option>
+          <option value="Water-Resistant Watch Care" data-faq-id="53" data-faq-category="product">Water-Resistant Watch Care</option>
+          <option value="Setting My Automatic Watch" data-faq-id="55" data-faq-category="product">Setting My Automatic Watch</option>
+          <option value="Setting The Day Or Date" data-faq-id="65" data-faq-category="product">Setting The Day Or Date</option>
+          <option value="Replacement Strap" data-faq-id="14" data-faq-category="shopping">Replacement Strap</option>
+          <option value="Other" data-faq-id="0" data-faq-category="">Other</option></select>
+
+        <label for="ContactFormMessage" class="contact_message">{{ 'contact.form.message' | t }}</label>
+        <textarea rows="10" id="ContactFormMessage" name="contact[{{ 'contact.form.message' | t }}]" placeholder="">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+
+        <input type="submit" class="btn left contact_form_btn" value="{{ 'contact.form.send' | t }}">
+
+      {% endform %}
+    <div style="margin:0 auto;" id="customform_data" data-id="0b03f99119614da3f72210"></div>
+</div>
+</div>
+<div class="container purchase">
+   <div class="contact_form_header">
+    <h3 class="text-center">PURCHASE QUESTION</h3>
+    </div>
+    <hr>
+  <div class="post-large--one-half">   
+  <p>For commonly asked questions, please check our<a style="color:#FD6C00;" href="https://stuhrling.com/pages/help-center"> Help Center</a>.
+  <p>If you don't see your question, contact us below:</p>
+{% form 'contact' %}
+
+        {% if form.posted_successfully? %}
+          <p class="note form-success">
+            {{ 'contact.form.post_success' | t }}
+          </p>
+        {% endif %}
+
+        {{ form.errors | default_errors }}
+
+       
+
+        <label for="ContactFormEmail" class="contact_email">{{ 'contact.form.email' | t }}</label>
+        <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+		
+  		 {% assign name_attr = 'contact.form.number' | t | handle %}
+        <label for="ContactFormNumber" class="contact_number">{{ 'contact.form.number' | t }}</label>
+        <input type="text" id="ContactFormNumber" name="contact[{{ 'contact.form.number' | t }}]" placeholder="{{ 'contact.form.number' | t }}" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ order.number }}{% endif %}">
+		 <label for="purchase_enquiry" class="contact_topic">{{ 'contact.form.topic' | t }}</label>
+  		<select id="purchase_enquiry" name="contact[{{ 'contact.form.topic' | t }}]" class="select_block purchase_inquiry" aria-required="true" aria-invalid="false">
+          
+          <option value="Accepted Payment Options" data-faq-id="58" data-faq-category="payment">Accepted Payment Options</option>
+          <option value="Changing/Cancelling My Order" data-faq-id="11" data-faq-category="shopping">Changing/Cancelling My Order</option>
+          <option value="Tracking My Order" data-faq-id="32" data-faq-category="shipping">Tracking My Order</option>
+          <option value="Changing My Delivery Address" data-faq-id="28" data-faq-category="shipping">Changing My Delivery Address</option>
+          <option value="International Taxes and Duties" data-faq-id="24" data-faq-category="shipping">International Taxes and Duties</option>
+          <option value="Coupon Code Isn't Working" data-faq-id="17" data-faq-category="shopping">Coupon Code Isn't Working</option>
+          <option value="No Confirmation Email" data-faq-id="12" data-faq-category="shopping">No Confirmation Email</option>
+          <option value="Other" data-faq-id="0" data-faq-category="">Other</option>
+  		</select>
+  		
+
+        <label for="ContactFormMessage" class="contact_message">{{ 'contact.form.message' | t }}</label>
+        <textarea rows="10" id="ContactFormMessage" name="contact[{{ 'contact.form.message' | t }}]" placeholder="">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+        <input type="submit" class="btn left contact_form_btn" value="{{ 'contact.form.send' | t }}">
+
+      {% endform %}
+</div>
+</div>
+<div class="container post_purchase">
+  <div class="contact_form_header">
+    <h3 class="text-center">POST-PURCHASE QUESTION</h3>
+    </div>
+    <hr>
+  <div class="post-large--one-half">    
+  <p>For commonly asked questions, please check our<a style="color:#FD6C00;" href="https://stuhrling.com/pages/help-center"> Help Center</a>.
+  <p>If you don't see your question, contact us below:</p>
+{% form 'contact' %}
+
+        {% if form.posted_successfully? %}
+          <p class="note form-success">
+            {{ 'contact.form.post_success' | t }}
+          </p>
+        {% endif %}
+
+        {{ form.errors | default_errors }}
+
+       
+
+        <label for="ContactFormEmail" class="contact_email">{{ 'contact.form.email' | t }}</label>
+        <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+		
+  		 {% assign name_attr = 'contact.form.number' | t | handle %}
+        <label for="ContactFormNumber" class="contact_number">{{ 'contact.form.number' | t }}</label>
+        <input type="text" id="ContactFormNumber" name="contact[{{ 'contact.form.number' | t }}]" placeholder="{{ 'contact.form.number' | t }}" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ order.number }}{% endif %}">
+    <label for="where-did-you-purchase" class="contact_purchase">{{ 'contact.form.purchase' | t }}</label>
+    <select id="where-did-you-purchase" name="contact[{{ 'contact.form.purchase' | t }}]" class="select_block">
+     <option value="Stuhrling.com">Stuhrling.com</option>
+      <option value="Amazon">Amazon</option><option value="Cruise Line">Cruise Line</option>
+      <option value="Duty Free">Duty Free</option><option value="Overstock">Overstock</option>
+      <option value="Groupon">Groupon</option><option value="eBay">eBay</option>
+      <option value="Other">Other</option>
+    </select>
+		 <label for="post_purchase_enquiry" class="contact_topic">{{ 'contact.form.topic' | t }}</label>
+  		<select id="post_purchase_enquiry" name="contact[{{ 'contact.form.topic' | t }}]" class="select_block purchase_inquiry" aria-required="true" aria-invalid="false">
+        
+          <option value="Accepted Payment Options" data-faq-id="58" data-faq-category="payment">Accepted Payment Options.</option>
+          <option value="Changing/Cancelling My Order" data-faq-id="11" data-faq-category="shopping">Changing/Cancelling My Order.</option>
+          <option value="Tracking My Order" data-faq-id="32" data-faq-category="shipping">Tracking My Order.</option>
+          <option value="Changing My Delivery Address" data-faq-id="28" data-faq-category="shipping">Changing My Delivery Address.</option>
+          <option value="International Taxes and Duties" data-faq-id="24" data-faq-category="shipping">International Taxes and Duties.</option>
+          <option value="Coupon Code Isn't Working" data-faq-id="17" data-faq-category="shopping">Coupon Code Isn't Working.</option>
+          <option value="No Confirmation Email" data-faq-id="12" data-faq-category="shopping">No Confirmation Email.</option>
+          <option value="Other" data-faq-id="0" data-faq-category="">Other.</option>
+  		</select>
+  		
+
+        <label for="ContactFormMessage" class="contact_message">{{ 'contact.form.message' | t }}</label>
+        <textarea rows="10" id="ContactFormMessage" name="contact[{{ 'contact.form.message' | t }}]" placeholder="">{% if form.body %}{{ form.body }}{% endif %}</textarea>		
+        <input type="submit" class="btn left contact_form_btn" value="{{ 'contact.form.send' | t }}">
+
+      {% endform %}
+</div>
+</div>
+<script>
+  var href=window.location.href;
+  if(href.indexOf('contact-us-cat=purchase')>1)
+  {
+    $('.contact_main_template').hide();
+    $('.product_enquiry_outer').hide();
+    $('.post_purchase').hide();
+    $('.purchase').show();
+
+  }
+  else if(href.indexOf('contact-us-cat=product')>1)
+  {
+
+    $('.contact_main_template').hide();
+    $('.purchase').hide();
+    $('.post_purchase').hide();
+    $('.product_enquiry_outer').show();
+  }
+  else if(href.indexOf('contact-us-cat=post-purchase')>1)
+  {
+
+    $('.contact_main_template').hide();
+    $('.purchase').hide(); 
+    $('.product_enquiry_outer').hide();
+	$('.purchase').hide();
+    $('.post_purchase').show();
+  }
+  else
+  {
+    $('.contact_main_template').show();
+    $('.product_enquiry_outer').hide();
+    $('.post_purchase').hide();
+    $('.purchase').hide();
+  }
+</script>
+<style>
+  .select_block
+  {
+    margin-bottom: 1em;
+    font-weight:bold;
+  }
+  form#contact_form {
+    display: block;
+    float: left;
+    width: 100%;
+}
+  form .contact_form_btn {
+    margin-top: 20px;
+}
+  .topbar_text {
+    font-size: 25px;
+  }
+  .contact-section {
+    text-align: center;
+  }
+  .contact-block .icon-block i {
+    font-size: 6em;
+    color: #5b5b5b;
+  }
+  .btn.contact_btn {
+    border: 1px solid rgba(102,102,102,0.85);
+    padding: 8px 5px;
+    text-align: center;
+    width: auto;
+    display: inline-block;
+    font-size: 1.2em;
+    text-align: center;
+    background: transparent;
+    color: #000;
+    border-radius: 0px;
+    margin: 20px 0px;
+    text-transform: capitalize;
+    padding: 10px 20px;
+    border-radius: 999px;
+  }
+  .contact-banner-img {
+    background-size: cover;
+    padding: 3%;
+    margin-bottom: 2%;
+  }
+  .banner_caption {
+    color: #fff;
+  }
+  hr.faded_line {
+    margin: 25px 5%;
+    height: 2px;
+    border: 0;
+    opacity: 1;
+    background: black;
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(white), color-stop(50%, black));
+  }
+  .icon-label-block {
+    color: #333333;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 10px 0px;
+  }
+  .icon-msg-block {
+    color: #000;
+    font-size: 16px;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  .btn.contact_btn:hover {
+    border: 1px solid #ff6b00;
+  }
+  .bottom_caption_block a {
+    display: block;
+    margin-bottom: 10px;
+    color: #FF6B00;
+  }
+  .bottom_caption_block a:hover {
+
+    color: #000;
+  }
+  .bottom_caption_block {
+    font-size: 16px;
+  }
+  .heading_block {
+    font-weight: bold;
+  }
+  .contact_bottom {
+    margin-top: 4%;
+    margin-bottom: 3%;
+  }
+  .contact_bottom  .heading_block
+  {
+    margin-top:0px;
+  }
+  .contact_block_inner .contact_block_inner {
+    margin-top: 20%;
+  }
+  .top_icon_block h3 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+  .section-header.banner_caption h1 {
+    font-weight: bold;
+    font-size: 4em;
+}
+  
+
+</style>
+
+{% schema %}
+  {
+    "name": "Contact Page",
+    "settings": [
+		{
+			"type":"image_picker",
+			"id":"image",
+			"label":"Image"
+		},
+		{
+			"type":"textarea",
+			"id":"text",
+			"label":"Topbar Text"
+		},
+		{	
+			"type":"text",
+			"id":"icon_head",
+			"label":"Icon Block Heading",
+			"default":"WHAT CAN WE HELP YOU WITH?"
+		},
+		{	
+			"type":"textarea",
+			"id":"icon_info",
+			"label":"Icon Block Caption",
+			"default":"Please select the category that best describes your question."
+		},		
+		
+		{
+			"type":"textarea",
+			"id":"email_icon",
+			"label":"Product Icon"
+		},		
+		{	
+			"type":"text",
+			"id":"email_label",
+			"label":"Product Title"
+		},
+		
+		{
+			"type":"textarea",	
+			"id":"email_msg",
+			"label":"Product Description"
+		},
+		{
+			"type":"text",	
+			"id":"button_text_1",
+			"label":"Button Label",
+			"default":"Product Inquiry"
+		},
+		{
+			"type":"url",	
+			"id":"button_link_1",
+			"label":"Button Link"
+		},
+		{
+			"type":"textarea",
+			"id":"tel_icon",
+			"label":"Purchase Icon"
+		},		
+		{	
+			"type":"text",
+			"id":"tel_label",
+			"label":"Purchase Title"
+		},
+		{
+			"type":"textarea",	
+			"id":"tel_msg",
+			"label":"Purchase Description"
+		},
+		{
+			"type":"text",	
+			"id":"button_text_2",
+			"label":"Button Label",
+			"default":"Purchase Question"
+		},
+		{
+			"type":"url",	
+			"id":"button_link_2",
+			"label":"Button Link"
+		},
+		{
+			"type":"textarea",
+			"id":"adress_icon",
+			"label":"Post-Purchase Icon"
+		},
+		{	
+			"type":"text",
+			"id":"adress_label",
+			"label":"Post-Purchase Title"
+		},
+		{
+			"type":"textarea",	
+			"id":"adress_msg",
+			"label":"Post-Purchase Description"
+		},
+		{
+			"type":"text",	
+			"id":"button_text_3",
+			"label":"Button Label",
+			"default":"Post-Purchase"
+		},
+		{
+			"type":"url",	
+			"id":"button_link_3",
+			"label":"Button Link"
+		},
+		{
+			"type":"header",
+			"content":"Map Block with Address"
+		},
+		{
+			"type":"text",
+			"id":"heading_1",
+			"label":"Address Heading"
+		},
+		{
+			"type":"textarea",
+			"id":"caption_1",
+			"label":"Address Information"
+		},
+		{
+			"type":"text",
+			"id":"heading_2",
+			"label":"Address Heading"
+		},
+		{
+			"type":"textarea",
+			"id":"caption_2",
+			"label":"Address Information"
+		},
+		{
+			"type":"text",
+			"id":"heading_3",
+			"label":"Address Heading"
+		},
+		{
+			"type":"textarea",
+			"id":"caption_3",
+			"label":"Address Information"
+		},
+		{
+			"type":"header",
+			"content":"Map Information"
+		},
+	    {
+      		"id": "map_address",
+     		 "type": "text",
+			"label":"Map Address"
+		},
+		{
+     		 "type": "text",
+     		 "id": "button",
+			"label" :"Map link label"
+		},
+		{
+      		"id": "show_pin",
+     		 "type": "checkbox",
+     		 "label": "Show Pin"
+		},
+		{
+      		"id": "api_key",
+      		"type": "text",
+     		 "label": "Enter API KEY"
+		},
+		{
+     		 "type": "image_picker",
+      			"id": "map_image",
+			"label":"Map Image"
+		}
+		
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

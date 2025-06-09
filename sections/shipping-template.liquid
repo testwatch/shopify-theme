@@ -1,0 +1,67 @@
+<div class="inner-block">
+  {% if section.settings.title %}
+  <h2 class="heading">{{ section.settings.title }}</h2>
+  {% endif %}
+  {% if section.settings.ship_desc %}
+  <div class="content--block">{{ section.settings.ship_desc }}</div>
+  {% endif %}
+</div>
+<div class="section-header">
+  <h1 class="section-header--title heading">{{ page.title }}</h1>
+</div>
+
+{% if section.blocks.size > 0%}
+{% for block in section.blocks %}
+<div class="inner-block">
+  {% if block.settings.title %}
+  <h3 class="head--block">{{ block.settings.title }}</h3>
+  {% endif %}
+  {% if block.settings.ship_desc %}
+  <div class="content--block">{{ block.settings.ship_desc }}</div>
+  {% endif %}
+</div>
+{% endfor %}
+{% endif %}
+{% schema %}
+  {
+    "name": "Shipping Policy Section",
+    "settings": [
+      {
+      "type":"text",
+      "id":"title",
+      "label":"Heading",
+		"default":"COVID-19 SHIPPING UPDATES"
+      },
+      {
+      "type":"richtext",
+      "id":"ship_desc",
+      "label":"Content"
+      }
+
+],
+   "blocks":[
+      {
+      "type":"text",
+      "name":"Shipping Policy Block",
+      "settings": [
+        {
+        "type":"text",
+        "id":"title",
+        "label":"Heading"
+        },
+        {
+        "type":"textarea",
+        "id":"ship_desc",
+        "label":"Content"
+        }
+      ]
+  }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

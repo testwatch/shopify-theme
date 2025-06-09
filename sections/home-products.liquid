@@ -1,0 +1,86 @@
+<div class="wrapper-mini">
+<div class="tab">
+  <button class="tablinks active"  id="defaultOpen">{{section.settings.title-one}}</button>
+<!--   <button class="tablinks" onclick="openCity(event, 'Paris')">{{section.settings.title-two}}</button> -->
+</div>
+
+<div id="London" class="tabcontent" style="display:block;">
+  {%assign collection = section.settings.collection-1 %}
+  {% for product in collections[collection].products %}
+
+ <div class="product">
+  <a class="shop-now" href="{{ product.url }}"><img class="main-image lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ product.featured_image | product_img_url: '400x300' }}"></a>
+  <div class="thumbanils-set">
+    {% if product.variants.size >= 1 %}
+    <div class="thumbanils home_thumbs">
+    {% for variant in product.variants %}
+      <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ variant.image.src | product_img_url: '400x300' }}">
+      {% endfor %}
+    </div>
+    {% endif %}
+    <span class="title-coll">{{ product.title | escape  }}</span>
+    <div class="spf-product-card__price-wrapper">
+    {% if product.compare_at_price > product.price %}
+      <div class="spf-product-card__price-wrapper">
+        <span class="spf-product-card__saleprice money">{{ product.price | money }}</span>
+        <span class="spf-product-card__oldprice money"  style='color:#000;text-decoration:line-through'><span style='color:#000'>{{ product.compare_at_price | money }}</span></span>
+      </div>
+    {% else %}
+      <div class="nosale">                                    
+        <span class="spf-product-card__price money">{{ product.price | money }}</span>
+      </div>
+    {% endif %}
+    </div>
+    <div class="msrp-part">
+      {%if product.metafields.Stuhrling.MSRP != blank %}<span data-href="https://stuhrling-evan.myshopify.com/{{product.url}}" class="price-review">MSRP: {{product.metafields.Stuhrling.MSRP}}</span>{%endif%}
+    </div>
+   </div>
+  </div>
+{% endfor %}
+</div>
+</div>
+
+{% schema %}
+{
+  "name": "HomePage Products",
+  "class": "index-section",
+      "settings": [
+      
+      {
+          "type": "text",
+          "id": "title-one",
+          "label":"Title"
+        },
+         {
+          "type": "collection",
+          "id": "collection-1",
+          "label":"collection"
+        }    
+      ],
+  "presets": [
+    {
+      "name": "HomePage Products",
+      "category": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    }
+  ]
+}
+{% endschema %}

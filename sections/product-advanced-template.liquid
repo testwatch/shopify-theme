@@ -1,0 +1,1745 @@
+{{ 'advanced_product_design.css' | asset_url | stylesheet_tag }}
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+<style>
+    form#justuno_form {
+      display: none;
+  }
+    div.product_desc1
+    {
+      background-image:url({%if product.metafields.Stuhrling.Product_Gallery_BG_Image %}{{ product.metafields.Stuhrling.Product_Gallery_BG_Image }}{% else %}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/Product_desc_back1.jpg{% endif %});
+    }
+    div.product_desc2
+    {
+      background-image:url({%if product.metafields.Stuhrling.Product_Gallery_BG_Image2 %}{{ product.metafields.Stuhrling.Product_Gallery_BG_Image2 }}{% else %}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/Product_desc_back2.jpg{% endif %});
+    }
+    div.product_desc1.product_gallery_3
+    {
+      background-image:url({%if product.metafields.Stuhrling.Product_Gallery3_BG_Image %}{{ product.metafields.Stuhrling.Product_Gallery3_BG_Image }}{% else %}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/Product_desc_back1.jpg{% endif %});
+    }
+    {% for variant in product.variants %}
+    {% assign current = product.selected_or_first_available_variant %}
+    {%if current.id == variant.id %}
+    @media(min-width:768px)
+    {
+      .product_outer_background.advanced_product_design
+      {
+        background-color:#000;
+        background-image:url({{ variant.metafields.Stuhrling.Product_Main_BG_Banner }});
+        background-repeat: no-repeat;
+      }
+      .medium--hide--title {
+        display: none;
+      }
+    }
+    @media(max-width:767px)
+    {
+      .product_outer_background.advanced_product_design
+      {
+        background-color:#000;
+        background-image:url({% if variant.metafields.Stuhrling.Product_Main_Mobile_BG_Banner %}{{ variant.metafields.Stuhrling.Product_Main_Mobile_BG_Banner }}{% else %}{{ variant.metafields.Stuhrling.Product_Main_BG_Banner }}{% endif %});
+        background-size: cover;
+        background-repeat: no-repeat;
+
+      }
+      div.product-head {
+        padding-top: 160.18px;
+      }
+      .mobile_heading {
+        color: #fff;
+        font-size: 20px;
+        padding-top: 20px;
+        margin-top: 0px;
+        text-align: center;
+      }
+
+
+      .quant-buy-contain div.cart_price_btn
+      {
+        display:block;
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        left: 0;
+        z-index: 9;
+        margin: 0 auto;
+        }
+
+
+    }
+    {% endif %}
+    {% endfor %}
+
+    @media(max-width:767px)
+    {
+      div#shopify-section-product-advanced-template div.product_desc1
+      {
+        background-image:url({{ product.metafields.Sturhling.Product_gallery_mobileBg }});
+      }
+      div#shopify-section-product-advanced-template div.product_desc2
+      {
+        background-image:url({{ product.metafields.Sturhling.Product_gallery2_mobileBg }});
+        max-height: 450px;
+      }
+      div#shopify-section-product-advanced-template div.product_desc1.product_gallery_3
+      {
+        background-image:url({{ product.metafields.Sturhling.Product_gallery3_mobileBg }});
+      }
+
+    }
+     @media only screen and (min-width: 481px) and (max-width: 768px)
+       {
+       div#shopify-section-product-advanced-template div.product_outer_background.advanced_product_design{
+         min-height: 1200px;
+         max-height: 1200px;
+       }
+         div.product_video_cont.mobile>div.video_thumb {
+           min-height: 400px;
+         }
+         div.product_desc1 {
+           background-position: top center;
+         }
+         div#shopify-section-product-advanced-template div.product_desc1 div.desc-wrap.desc2
+         {
+           padding: 230px 0 60px 0;
+         }
+         div#shopify-section-product-advanced-template div.product_desc1 div.desc-wrap.desc1 {
+           padding: 330px 0 50px 0;
+         }
+
+         div#shopify-section-product-advanced-template div.product_desc2 img.mobile_img {
+           display: block;
+           width: 100%;
+           margin: 0 auto;
+           text-align: center;
+         }
+       }
+    @media (max-width:375px)
+      {
+        div.product-head>div.product-content-sec div.swatch {
+          padding-top: 0px;
+        }
+        .swatch .swatch-element {
+          max-width: 70px;
+          height: 70px;
+        }
+        .msrp_mobile_price .product--value
+        {
+          font-size:14px !important;
+        }
+        div.product-head>div.product-content-sec .price_part, .price_part #ComparePrice
+        {
+          font-size:20px !Important;
+
+        }
+      }
+    @media(max-width:360px)
+      {
+        div.product-head {
+          padding-top: 140.18px;
+        }
+      }
+</style>
+
+<!-- Product Details with Background Variant Image - Start -->
+<div class="product_outer_background advanced_product_design">
+  <div class="wrapper-mini">
+    <div
+      itemscope
+      itemtype="http://schema.org/Product"
+      class="product_top_part advacnced_product_block"
+      id="ProductSection"
+      data-section-id="{{ section.id }}"
+      data-section-type="product-template"
+      data-image-zoom-type="{{ section.settings.product_image_zoom_type }}"
+      data-show-extra-tab="{{ section.settings.show_extra_tab }}"
+      data-extra-tab-content="{{ section.settings.extra_tab_content }}"
+      data-enable-history-state="true"
+    >
+      {% case section.settings.add_to_cart_width %}
+        {% when 'small' %}
+          {%- assign btn_class = 'btn--wide' -%}
+          {%- assign productform_class = 'product-form--wide' -%}
+        {% when 'medium' %}
+          {%- assign btn_class = 'btn--wide' -%}
+          {%- assign productform_class = 'product-form--wide' -%}
+        {% when 'large' %}
+          {%- assign btn_class = 'btn--full' -%}
+          {%- assign productform_class = 'product-form--full' -%}
+      {% endcase %}
+
+      {% if section.settings.add_to_cart_width != 'small' %}
+        <style>
+          @media screen and (min-width: 769px){
+            .single-option-selector,
+            .quantity-selector {
+              {% if section.settings.add_to_cart_width == 'medium' %}
+              min-width: 50%;
+              {% else %}
+              min-width: 100%;
+              {% endif %}
+            }
+          }
+        </style>
+      {% endif %}
+
+      <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+      <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
+
+      <div class="product-single">
+        <div class="medium--hide--title mobile_produ_info">
+          <h2 class="mobile_heading advanced_product_title product-single__title" itemprop="name">
+            {{ product.title }}
+          </h2>
+        </div>
+        <div class="product-head">
+          <div class="product-content-sec">
+            <h1 class="small--hide advanced_product_title product-single__title" itemprop="name">
+              {{ product.title }}
+            </h1>
+            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+              {% assign variant = product.selected_or_first_available_variant %}
+              <meta itemprop="priceCurrency" content="{{ cart.currency.iso_code }}">
+              <link
+                itemprop="availability"
+                href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
+              >
+
+              <div
+                class="small--hide price_part {% if product.available and product.variants.size > 1 %}mob-hidden{% endif %}"
+                data-price="{{ variant.price | money_without_currency }}"
+              >
+                <span class="price_update">{{ variant.price | money }} </span>
+                {% if variant.compare_at_price %}
+                  <span id="ComparePrice" class="product-single__sale-price">
+                    {{- variant.compare_at_price_max | money -}}
+                  </span>
+                {% endif %}
+                {% if product.metafields.Stuhrling.MSRP != blank %}
+                  <span class="product--value">MSRP: {{ product.metafields.Stuhrling.MSRP }}</span>
+                {% endif %}
+
+                {% if product.metafields.Stuhrling.MSRP_IN_EURO %}
+                  <span class="product--value euro_msrp_metafield">
+                    {{- product.metafields.Stuhrling.MSRP_IN_EURO -}}
+                  </span>
+                {% endif %}
+                {% comment %}
+                  {%if variant.compare_at_price > variant.price %}
+                  <div class="grid-product__on-sale">
+                    {% capture saved_amount %}{{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price | round }}{% endcapture %}
+                    {% capture saved_amounts %}{{ product.compare_at_price | minus: variant.price }}{% endcapture %}
+                    <p>You save {{saved_amounts | money }} ({{ saved_amount }}% off)<span class="price_Sale_discount">Discounted price cannot be combined with other offers.</span></p>
+                  </div>
+                  {%endif%}
+                {% endcomment %}
+              </div>
+              <div class="small--hide interest_message">4 interest-free payments of $98.75. Klarna. Learn more</div>
+              <div class="small--hide product-single__prices{% if shop.taxes_included or shop.shipping_policy.body != blank %} product-single__prices--policy-enabled{% endif %}">
+                <span id="PriceA11y" class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                <span id="ProductPrice" class="product-single__price">{{ variant.price | money }}</span>
+                {% include 'product-unit-price', variant: variant, available: true %}
+
+                <!-- Placement v2 -->
+                <klarna-placement
+                  class="klarna_dynamic_msg"
+                  data-key="credit-promotion-small"
+                  data-locale="en-US"
+                  data-purchase-amount=""
+                ></klarna-placement>
+                <!-- end Placement -->
+              </div>
+
+              <div class="small--hide star-review desktop_review star_rating">
+                {% comment %}Start automatically added Judge.me widget{% endcomment %}
+                {% include 'judgeme_widgets',
+                  widget_type: 'judgeme_preview_badge',
+                  concierge_install: true,
+                  product: product
+                %}
+                {% comment %}End automatically added Judge.me widget{% endcomment %}
+              </div>
+
+              <!--
+                <p class="affirm-as-low-as" data-page-type="product" data-amount="{{ current_variant.price | money }}"></p>
+              -->
+              <!--
+                <a class="description_toggle_head {% if product.available and product.variants.size > 1 %}mob-hidden{% endif %}">View Product Features</a>
+              -->
+              <div
+                class="product-des cription rte description_toggle {% if product.available and product.variants.size > 1 %}mob-hidden{% endif %}"
+                itemprop="description"
+                style="display:none;"
+              >
+                {{ product.description }}
+              </div>
+              {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+                <div class="hide product-single__policies{% if product.has_only_default_variant and section.settings.product_quantity_enable == false %} product__policies--no-dropdowns{% endif %} rte">
+                  {%- if shop.taxes_included -%}
+                    {{ 'products.general.include_taxes' | t }}
+                  {%- endif -%}
+                  {%- if shop.shipping_policy.body != blank -%}
+                    {{ 'products.general.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+              {% form 'product', product, class: productform_class %}
+                <select name="id" id="ProductSelect-{{ section.id }}" class="product-single__variants">
+                  {% for variant in product.variants %}
+                    {% if variant.available %}
+                      <option
+                        {% if variant == product.selected_or_first_available_variant %}
+                          selected="selected"
+                        {% endif %}
+                        data-sku="{{ variant.sku }}"
+                        value="{{ variant.id }}"
+                      >
+                        {{ variant.title }} - {{ variant.price | money_with_currency }}
+                      </option>
+
+                    {% else %}
+                      <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+                {% assign current_variant = product.selected_or_first_available_variant %}
+                <div
+                  class="small--hide price_part desk-hidden mobile_cart_price"
+                  data-price="{{ variant.price | money_without_currency }}"
+                >
+                  <span class="price_update">{{ variant.price | money }} </span>
+                  {% if variant.compare_at_price %}
+                    <span id="ComparePrice" class="product-single__sale-price">
+                      {{- variant.compare_at_price_max | money -}}
+                    </span>
+                  {% endif %}
+
+                  {% if product.metafields.Stuhrling.MSRP != blank %}
+                    <span class="product--value">MSRP: {{ product.metafields.Stuhrling.MSRP }}</span>
+                  {% endif %}
+                  {% if product.metafields.Stuhrling.MSRP_IN_EURO %}
+                    <span class="product--value">{{ product.metafields.Stuhrling.MSRP_IN_EURO }}</span>
+                  {% endif %}
+
+                  {% if variant.compare_at_price > variant.price %}
+                    <div class="grid-product__on-sale">
+                      {% capture saved_amount %}{{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price | round }}{% endcapture %}
+                      {% capture saved_amounts %}{{ product.compare_at_price | minus: variant.price }}{% endcapture %}
+                      <p>
+                        You save {{ saved_amounts | money }} ({{ saved_amount }}% off)<span class="price_Sale_discount"
+                          >Discounted price cannot be combined with other offers.</span
+                        >
+                      </p>
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="{{current_variant.id}}"></div>
+                {% if product.available and product.variants.size > 1 %}
+                  <div class="small--hide button-center cart_price_btn_1 cart_fixed_btn">
+                    <button
+                      type="submit"
+                      name="add"
+                      id="AddToCart"
+                      class="{% if current_variant.available and product.variants.size > 1 %}{% else %}sold_out_btn{% endif %} cart_fixed_add_to_cart btn {{ btn_class }}{% if section.settings.enable_payment_button %} btn--secondary{% endif %}"
+                      data-price="{{ variant.price | money_without_currency |  plus: 0}}"
+                    >
+                      <span id="AddToCartText">
+                        {%- if current_variant.available and product.variants.size > 1 -%}
+                          {{- 'products.product.add_to_cart' | t -}}
+                        {%- else -%}
+                          {{- 'products.product.sold_out' | t -}}
+                        {%- endif -%}
+                      </span>
+                      {{ variant.price | money }}
+                    </button>
+                  </div>
+                {% endif %}
+
+                <div class="mobile_bottom_content">
+                  {% if product.available and product.variants.size > 1 %}
+                    <div class="price_part desk-hidden" data-price="{{ variant.price | money_without_currency }}">
+                      <div class="orginal_mobile_price">
+                        <span class="price_update">{{ variant.price | money }} </span>
+                        {% if variant.compare_at_price %}
+                          |
+                          <span id="ComparePrice" class="product-single__sale-price">
+                            {{- variant.compare_at_price_max | money -}}
+                          </span>
+                        {% endif %}
+
+                        <div class="msrp_mobile_price">
+                          {% if product.metafields.Stuhrling.MSRP != blank %}
+                            <span class="product--value">MSRP: {{ product.metafields.Stuhrling.MSRP }}</span>
+                          {% endif %}
+                          {% if product.metafields.Stuhrling.MSRP_IN_EURO %}
+                            <span class="product--value euro_msrp_metafield">
+                              {{- product.metafields.Stuhrling.MSRP_IN_EURO -}}
+                            </span>
+                          {% endif %}
+                        </div>
+                      </div>
+                      {% if variant.compare_at_price > variant.price %}
+                        <div class="grid-product__on-sale">
+                          {% capture saved_amount %}{{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price | round }}{% endcapture %}
+                          {% capture saved_amounts %}{{ product.compare_at_price | minus: variant.price }}{% endcapture %}
+                          <p>
+                            You save {{ saved_amounts | money }} ({{ saved_amount }}% off)<span class="price_Sale_discount"
+                              >Discounted price cannot be combined with other offers.</span
+                            >
+                          </p>
+                        </div>
+                      {% endif %}
+                    </div>
+                    <a class="small--hide description_toggle_head desk-hidden">View Product Features</a>
+                    <div
+                      class="product-description rte description_toggle desk-hidden"
+                      itemprop="description"
+                      style="display:none;"
+                    >
+                      {{ product.description }}
+                    </div>
+                  {% endif %}
+
+                  <div class="mobile_info_outer">
+                    <div class="mobile_info">
+                      <div class="star-review mobile_review star_rating text-center">
+                        {% comment %}Start automatically added Judge.me widget{% endcomment %}
+                        {% include 'judgeme_widgets',
+                          widget_type: 'judgeme_preview_badge',
+                          concierge_install: true,
+                          product: product
+                        %}
+                        {% comment %}End automatically added Judge.me widget{% endcomment %}
+                      </div>
+
+                      <div class="quant-buy-contain static_bar">
+                        <div class="static_btn">
+                          <button
+                            data-ge-hide-countries="{% if product.tags contains 'Blocked_KW' %}KW US{% elsif product.tags contains 'Blocked_KW_US_AU_NZ' %}KW US AU NZ {% elsif product.tags contains 'Blocked_AU_NZ' %} AU NZ US{% elsif product.tags contains 'Blocked_ALL' %}ALL US{% else %}US{% endif %}"
+                            type="submit"
+                            name="add"
+                            id="AddToCart"
+                            class="btn {% if current_variant.available and product.variants.size > 1 %}{% else %}sold_out_btn{% endif %} {{ btn_class }}{% if section.settings.enable_payment_button %} btn--secondary{% endif %}"
+                            data-price="{{ variant.price | money_without_currency |  plus: 0}}"
+                          >
+                            <span id="AddToCartText">
+                              {% if current_variant.available and product.variants.size > 1 -%}
+                                {{- 'products.product.add_to_cart' | t -}}
+                              {%- else -%}
+                                {{- 'products.product.sold_out' | t -}}
+                              {%- endif -%}
+                            </span>
+                            {{ variant.price | money }}
+                          </button>
+                          <button
+                            data-ge-show-countries="US"
+                            type="submit"
+                            name="add"
+                            id="AddToCart"
+                            class="btn {% if current_variant.available and product.variants.size > 1 %}{% else %}sold_out_btn{% endif %} {{ btn_class }}{% if section.settings.enable_payment_button %} btn--secondary{% endif %}"
+                            data-price="{{ variant.price | money_without_currency |  plus: 0}}"
+                          >
+                            <span id="AddToCartText">
+                              {% if current_variant.available and product.variants.size > 1 -%}
+                                {{- 'products.product.add_to_cart' | t -}}
+                              {%- else -%}
+                                {{- 'products.product.sold_out' | t -}}
+                              {%- endif -%}
+                            </span>
+                            {{ variant.price | money }}
+                          </button>
+                          <button
+                            disabled
+                            data-ge-show-countries="{% if product.tags contains 'Blocked_KW' %}KW{% elsif product.tags contains 'Blocked_KW_US_AU_NZ' %}KW US AU NZ {% elsif product.tags contains 'Blocked_AU_NZ' %} AU NZ  {% elsif product.tags contains 'Blocked_ALL' %}ALL{% endif %}"
+                            type="submit"
+                            name="add"
+                            id="AddToCart"
+                            class="btn {% if current_variant.available and product.variants.size > 1 %}{% else %}sold_out_btn{% endif %} {{ btn_class }}{% if section.settings.enable_payment_button %} btn--secondary{% endif %}"
+                            data-price="{{ variant.price | money_without_currency |  plus: 0}}"
+                          >
+                            <span id="AddToCartText">
+                              {% if current_variant.available and product.variants.size > 1 -%}
+                                {{- 'products.product.add_to_cart' | t -}}
+                              {%- else -%}
+                                {{- 'products.product.sold_out' | t -}}
+                              {%- endif -%}
+                            </span>
+                            {{ variant.price | money }}
+                          </button>
+                          <div
+                            class="error_message"
+                            style="color:red; font-weight:600;"
+                            data-ge-show-countries="{% if product.tags contains 'Blocked_KW' %}KW{% elsif product.tags contains 'Blocked_KW_US_AU_NZ' %}KW US AU NZ {% elsif product.tags contains 'Blocked_AU_NZ' %} AU NZ {% elsif product.tags contains 'Blocked_ALL' %}ALL{% endif %}"
+                          >
+                            <i class="fa fa-times-circle"></i> We are sorry, but you are unable to purchase this product
+                            in the selected country due to restrictions.
+                          </div>
+                        </div>
+                        <div class="button-center cart_price_btn fixed_btn ">
+                          <button
+                            data-ge-hide-countries="{% if product.tags contains 'Blocked_KW' %}KW US{% elsif product.tags contains 'Blocked_KW_US_AU_NZ' %}KW US AU NZ {% elsif product.tags contains 'Blocked_AU_NZ' %} AU NZ US{% elsif product.tags contains 'Blocked_ALL' %}ALL US{% else %}US{% endif %}"
+                            type="submit"
+                            name="add"
+                            id="AddToCart"
+                            class="btn {% if current_variant.available and product.variants.size > 1 %}{% else %}sold_out_btn{% endif %} {{ btn_class }}{% if section.settings.enable_payment_button %} btn--secondary{% endif %}"
+                            data-price="{{ variant.price | money_without_currency |  plus: 0}}"
+                            style="display:none;"
+                          >
+                            <span id="AddToCartText">
+                              {% if current_variant.available and product.variants.size > 1 -%}
+                                {{- 'products.product.add_to_cart' | t -}}
+                              {%- else -%}
+                                {{- 'products.product.sold_out' | t -}}
+                              {%- endif -%}
+                            </span>
+                            {{ variant.price | money }}
+                          </button>
+                          <button
+                            data-ge-show-countries="US"
+                            type="submit"
+                            name="add"
+                            id="AddToCart"
+                            class="btn {% if current_variant.available and product.variants.size > 1 %}{% else %}sold_out_btn{% endif %} {{ btn_class }}{% if section.settings.enable_payment_button %} btn--secondary{% endif %}"
+                            data-price="{{ variant.price | money_without_currency |  plus: 0}}"
+                          >
+                            <span id="AddToCartText">
+                              {% if current_variant.available and product.variants.size > 1 -%}
+                                {{- 'products.product.add_to_cart' | t -}}
+                              {%- else -%}
+                                {{- 'products.product.sold_out' | t -}}
+                              {%- endif -%}
+                            </span>
+                            {{ variant.price | money }}
+                          </button>
+                          <button
+                            disabled
+                            data-ge-show-countries="{% if product.tags contains 'Blocked_KW' %}KW{% elsif product.tags contains 'Blocked_KW_US_AU_NZ' %}KW US AU NZ {% elsif product.tags contains 'Blocked_AU_NZ' %} AU NZ  {% elsif product.tags contains 'Blocked_ALL' %}ALL{% endif %}"
+                            type="submit"
+                            name="add"
+                            id="AddToCart"
+                            class="btn {% if current_variant.available and product.variants.size > 1 %}{% else %}sold_out_btn{% endif %} {{ btn_class }}{% if section.settings.enable_payment_button %} btn--secondary{% endif %}"
+                            data-price="{{ variant.price | money_without_currency |  plus: 0}}"
+                            style="display:none;"
+                          >
+                            <span id="AddToCartText">
+                              {% if current_variant.available and product.variants.size > 1 -%}
+                                {{- 'products.product.add_to_cart' | t -}}
+                              {%- else -%}
+                                {{- 'products.product.sold_out' | t -}}
+                              {%- endif -%}
+                            </span>
+                            {{ variant.price | money }}
+                          </button>
+                          <div
+                            class="error_message"
+                            style="color:red; font-weight:600;"
+                            data-ge-show-countries="{% if product.tags contains 'Blocked_KW' %}KW{% elsif product.tags contains 'Blocked_KW_US_AU_NZ' %}KW US AU NZ {% elsif product.tags contains 'Blocked_AU_NZ' %} AU NZ {% elsif product.tags contains 'Blocked_ALL' %}ALL{% endif %}"
+                            style="display:none;"
+                          >
+                            <i class="fa fa-times-circle"></i> We are sorry, but you are unable to purchase this product
+                            in the selected country due to restrictions.
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        id="splitit-container"
+                        data-splitit="true"
+                        data-splitit-amount="{{ current_variant.price | divided_by: 100.0 | json }}"
+                        data-splitit-num-installments="5"
+                        data-splitit-type="product-description"
+                        class="interest_message splitt_message"
+                      ></div>
+                    </div>
+                    {% render 'swatch' with 'Color' as swatch %}
+                  </div>
+                </div>
+                <div class="shipping-Strap">
+                  {% if product.tags contains 'Strap' %}
+                    {% include 'strap_text' %}
+                  {% endif %}
+                </div>
+
+                {% if section.settings.enable_payment_button %}
+                  {{ form | payment_button }}
+                {% endif %}
+              {% endform %}
+
+              {% unless section.settings.show_extra_tab == false
+                or pages[section.settings.extra_tab_content] == empty
+              %}
+                <div class="tabs">
+                  <ul class="tab-switch__nav">
+                    <li>
+                      <a href="#description" data-link="description" class="tab-switch__trigger h3">
+                        {{- 'products.product.description' | t -}}
+                      </a>
+                    </li>
+                    <li class="extra_tab">
+                      <a href="#extra" data-link="extra" class="tab-switch__trigger h3">
+                        {{- pages[section.settings.extra_tab_content].title -}}
+                      </a>
+                    </li>
+                  </ul>
+                  <div id="description" class="tab-switch__content" data-content="description">
+                    <div class="product-description rte" itemprop="description">{{ product.description }}</div>
+                  </div>
+                  <div id="extra" class="tab-switch__content" data-content="extra">
+                    <div class="rte">{{ pages[section.settings.extra_tab_content].content }}</div>
+                  </div>
+                </div>
+              {% else %}
+
+              {% endunless %}
+
+              {% if section.settings.social_sharing %}
+                <hr class="hr--clear hr--small">
+                <h2 class="h4">{{ 'products.general.share_title' | t }}</h2>
+                {% include 'social-sharing' %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="product-media-sec"></div>
+        </div>
+        <div class="product_features product_features_desktop">
+          <div class="feature-col1"></div>
+          <div class="feature-col2">
+            {{ product.metafields.Stuhrling.Product_Features }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Product Details with Background Variant Image - End -->
+
+<!-- Product Page Features Section Mobile - Start -->
+<section class="feature_sec_mobile mobile_only">
+  {% for variant in product.variants %}
+    {% assign current = product.selected_or_first_available_variant %}
+    {% if current.id == variant.id %}
+      <div class="top_img">
+        <img src="{{ variant.metafields.Stuhrling.feature_sec_mob_image }}">
+      </div>
+    {% endif %}
+  {% endfor %}
+  <div class="product_features">
+    <div class="feature-col2">
+      {{ product.metafields.Stuhrling.Product_Features }}
+    </div>
+  </div>
+</section>
+
+<!-- Product Page Video Section - Start -->
+<div class="product_video_cont">
+  <div
+    class="video_thumb"
+    style="background-image:url('{%if product.metafields.Stuhrling.Product_Video_Poster != blank %}{{ product.metafields.Stuhrling.Product_Video_Poster }}{% else %}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/video_thumb_new.jpg');{% endif %}"
+  >
+    <a
+      class="video_play"
+      id="click_video"
+      video-url="{% if product.metafields.Stuhrling.Product_Video_Link != blank  %}{{ product.metafields.Stuhrling.Product_Video_Link }}{% else %}https://youtu.be/TCpa9-jQ7y4{% endif %}"
+    >
+      <img
+        class="play_icon"
+        src="https://cdn.shopify.com/s/files/1/0333/0936/0264/files/Play_Icon_718d24d5-8b02-4fef-96fe-368a1d8cf295.png"
+      >
+    </a>
+    <div class="video_outer_wrapper">
+      <span class="videopopupjs__close close_block"></span
+      ><iframe
+        style="height: 815px; width: 100%;"
+        class="videoIframe js-videoIframe"
+        src="{% if product.metafields.Stuhrling.Product_Video_Link %}{{ product.metafields.Stuhrling.Product_Video_Link }}{% else %}https://www.youtube.com/embed/TCpa9-jQ7y4{% endif %}"
+        frameborder="0"
+        allowTransparency="true"
+        allowfullscreen
+        data-src=""
+        autoplay
+      ></iframe>
+    </div>
+  </div>
+</div>
+<div class="product_video_cont mobile">
+  <div
+    class="video_thumb"
+    style="background-image:url('{%if product.metafields.Sturhling.mobile_Vid_Poster != blank %}{{ product.metafields.Sturhling.mobile_Vid_Poster }}{% else %}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/video_thumb_new.jpg');{% endif %}"
+  >
+    <a
+      class="video_play"
+      id="click_video"
+      video-url="{% if product.metafields.Stuhrling.Product_Video_Link != blank  %}{{ product.metafields.Stuhrling.Product_Video_Link }}{% else %}https://youtu.be/TCpa9-jQ7y4{% endif %}"
+    >
+    </a>
+    <div class="video_outer_wrapper">
+      <span class="videopopupjs__close close_block"></span
+      ><iframe
+        style="height: 815px; width: 100%;"
+        class="videoIframe js-videoIframe"
+        src="{% if product.metafields.Stuhrling.Product_Video_Link %}{{ product.metafields.Stuhrling.Product_Video_Link }}{% else %}https://www.youtube.com/embed/TCpa9-jQ7y4{% endif %}"
+        frameborder="0"
+        allowTransparency="true"
+        allowfullscreen
+        data-src=""
+        autoplay
+      ></iframe>
+    </div>
+  </div>
+</div>
+<!-- Product Page Video Section - End -->
+
+<!-- Product Page Image with Text Info - Start -->
+<div class="product_desc1">
+  <div class="wrapper-mini">
+    {% if product.metafields.Stuhrling.Product_Gallery_Info1 %}
+      <div class="desc-wrap desc1">
+        <div class="desc-col desc-data">
+          {{ product.metafields.Stuhrling.Product_Gallery_Info1 }}
+        </div>
+        <div class="desc-col"></div>
+      </div>
+    {% endif %}
+    {% if product.metafields.Stuhrling.Product_Gallery_Info2 %}
+      <div class="desc-wrap desc2">
+        <div class="desc-col"></div>
+        <div class="desc-col desc-data">
+          {{ product.metafields.Stuhrling.Product_Gallery_Info2 }}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Product Page Rotating undirectional Section Mobile - Start -->
+<section class="feature_sec_mobile feat2">
+  <div class="top_img">
+    <img src="{{ product.metafields.Sturhling.feature_sec_image2 }}">
+  </div>
+  <br>
+  <div class="product_features">
+    <div class="feature-col2">
+      {% if product.metafields.Stuhrling.Product_Gallery_Info3 %}
+        <div class="desc-wrap desc1">
+          <div class="desc-col desc-data text-center">
+            {{ product.metafields.Stuhrling.Product_Gallery_Info3 }}
+          </div>
+          <div class="desc-col"></div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+<!-- Product Page Rotating undirectional Section Mobile - End -->
+<div class="product_desc2">
+  <div class="wrapper-mini">
+    {% if product.metafields.Stuhrling.Product_Gallery_Info3 %}
+      <div class="desc-wrap desc1">
+        <div class="desc-col desc-data">
+          {{ product.metafields.Stuhrling.Product_Gallery_Info3 }}
+        </div>
+        <div class="desc-col"></div>
+      </div>
+    {% endif %}
+    {% if product.metafields.Stuhrling.Product_Gallery_Info4 %}
+      <div class="desc-wrap desc2">
+        <div class="desc-col"></div>
+        <div class="desc-col desc-data">
+          {{ product.metafields.Stuhrling.Product_Gallery_Info4 }}
+        </div>
+      </div>
+    {% endif %}
+    <img class="mobile_img img-responsive" src="{{ product.metafields.Sturhling.mobile_desc_img }}">
+  </div>
+</div>
+<!-- Product Page Image with Text Info - End -->
+
+<!-- Product Reviews - Start -->
+{% if product.metafields.Stuhrling.Product_Review_Text_1 != blank
+  or product.metafields.Stuhrling.Product_Review_Author_1 != blank
+%}
+  <div class="product_review_outer">
+    <div class="wrapper-mini">
+      <h2 class="product_review_title">Reviews</h2>
+      <input type="hidden" id="current_page">
+      <input type="hidden" id="show_per_page">
+      <div id="content" class="owl-reviews">
+        {% if product.metafields.Stuhrling.Product_Review_Text_1 != blank
+          or product.metafields.Stuhrling.Product_Review_Author_1 != blank
+        %}
+          <div class="review_block item">
+            <svg width="88" height="16" viewBox="0 0 88 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.61066 15.2437C3.22466 15.4361 2.78666 15.0989 2.86466 14.6685L3.69466 10.0732L0.171654 6.81273C-0.157347 6.50767 0.0136534 5.95001 0.454654 5.88977L5.35266 5.21358L7.53666 1.00976C7.73366 0.630861 8.26666 0.630861 8.46366 1.00976L10.6477 5.21358L15.5457 5.88977C15.9867 5.95001 16.1577 6.50767 15.8277 6.81273L12.3057 10.0732L13.1357 14.6685C13.2137 15.0989 12.7757 15.4361 12.3897 15.2437L7.99866 13.0519L3.60966 15.2437H3.61066Z" fill="#FF6600"/>
+              <path d="M57.6107 15.2437C57.2247 15.4361 56.7867 15.0989 56.8647 14.6685L57.6947 10.0732L54.1717 6.81273C53.8427 6.50767 54.0137 5.95001 54.4547 5.88977L59.3527 5.21358L61.5367 1.00976C61.7337 0.630861 62.2667 0.630861 62.4637 1.00976L64.6477 5.21358L69.5457 5.88977C69.9867 5.95001 70.1577 6.50767 69.8277 6.81273L66.3057 10.0732L67.1357 14.6685C67.2137 15.0989 66.7757 15.4361 66.3897 15.2437L61.9987 13.0519L57.6097 15.2437H57.6107Z" fill="#FF6600"/>
+              <path d="M21.6107 15.2437C21.2247 15.4361 20.7867 15.0989 20.8647 14.6685L21.6947 10.0732L18.1717 6.81273C17.8427 6.50767 18.0137 5.95001 18.4547 5.88977L23.3527 5.21358L25.5367 1.00976C25.7337 0.630861 26.2667 0.630861 26.4637 1.00976L28.6477 5.21358L33.5457 5.88977C33.9867 5.95001 34.1577 6.50767 33.8277 6.81273L30.3057 10.0732L31.1357 14.6685C31.2137 15.0989 30.7757 15.4361 30.3897 15.2437L25.9987 13.0519L21.6097 15.2437H21.6107Z" fill="#FF6600"/>
+              <path d="M75.6107 15.2437C75.2247 15.4361 74.7867 15.0989 74.8647 14.6685L75.6947 10.0732L72.1717 6.81273C71.8427 6.50767 72.0137 5.95001 72.4547 5.88977L77.3527 5.21358L79.5367 1.00976C79.7337 0.630861 80.2667 0.630861 80.4637 1.00976L82.6477 5.21358L87.5457 5.88977C87.9867 5.95001 88.1577 6.50767 87.8277 6.81273L84.3057 10.0732L85.1357 14.6685C85.2137 15.0989 84.7757 15.4361 84.3897 15.2437L79.9987 13.0519L75.6097 15.2437H75.6107Z" fill="#FF6600"/>
+              <path d="M39.6107 15.2437C39.2247 15.4361 38.7867 15.0989 38.8647 14.6685L39.6947 10.0732L36.1717 6.81273C35.8427 6.50767 36.0137 5.95001 36.4547 5.88977L41.3527 5.21358L43.5367 1.00976C43.7337 0.630861 44.2667 0.630861 44.4637 1.00976L46.6477 5.21358L51.5457 5.88977C51.9867 5.95001 52.1577 6.50767 51.8277 6.81273L48.3057 10.0732L49.1357 14.6685C49.2137 15.0989 48.7757 15.4361 48.3897 15.2437L43.9987 13.0519L39.6097 15.2437H39.6107Z" fill="#FF6600"/>
+            </svg>
+            <p>
+              {{ product.metafields.Stuhrling.Product_Review_Text_1 }}
+            </p>
+            <span>{{ product.metafields.Stuhrling.Product_Review_Author_1 }}</span>
+          </div>
+        {% endif %}
+        {% if product.metafields.Stuhrling.Product_Review_Text_2 != blank
+          or product.metafields.Stuhrling.Product_Review_Author_2 != blank
+        %}
+          <div class="review_block item">
+            <svg width="88" height="16" viewBox="0 0 88 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.61066 15.2437C3.22466 15.4361 2.78666 15.0989 2.86466 14.6685L3.69466 10.0732L0.171654 6.81273C-0.157347 6.50767 0.0136534 5.95001 0.454654 5.88977L5.35266 5.21358L7.53666 1.00976C7.73366 0.630861 8.26666 0.630861 8.46366 1.00976L10.6477 5.21358L15.5457 5.88977C15.9867 5.95001 16.1577 6.50767 15.8277 6.81273L12.3057 10.0732L13.1357 14.6685C13.2137 15.0989 12.7757 15.4361 12.3897 15.2437L7.99866 13.0519L3.60966 15.2437H3.61066Z" fill="#FF6600"/>
+              <path d="M57.6107 15.2437C57.2247 15.4361 56.7867 15.0989 56.8647 14.6685L57.6947 10.0732L54.1717 6.81273C53.8427 6.50767 54.0137 5.95001 54.4547 5.88977L59.3527 5.21358L61.5367 1.00976C61.7337 0.630861 62.2667 0.630861 62.4637 1.00976L64.6477 5.21358L69.5457 5.88977C69.9867 5.95001 70.1577 6.50767 69.8277 6.81273L66.3057 10.0732L67.1357 14.6685C67.2137 15.0989 66.7757 15.4361 66.3897 15.2437L61.9987 13.0519L57.6097 15.2437H57.6107Z" fill="#FF6600"/>
+              <path d="M21.6107 15.2437C21.2247 15.4361 20.7867 15.0989 20.8647 14.6685L21.6947 10.0732L18.1717 6.81273C17.8427 6.50767 18.0137 5.95001 18.4547 5.88977L23.3527 5.21358L25.5367 1.00976C25.7337 0.630861 26.2667 0.630861 26.4637 1.00976L28.6477 5.21358L33.5457 5.88977C33.9867 5.95001 34.1577 6.50767 33.8277 6.81273L30.3057 10.0732L31.1357 14.6685C31.2137 15.0989 30.7757 15.4361 30.3897 15.2437L25.9987 13.0519L21.6097 15.2437H21.6107Z" fill="#FF6600"/>
+              <path d="M75.6107 15.2437C75.2247 15.4361 74.7867 15.0989 74.8647 14.6685L75.6947 10.0732L72.1717 6.81273C71.8427 6.50767 72.0137 5.95001 72.4547 5.88977L77.3527 5.21358L79.5367 1.00976C79.7337 0.630861 80.2667 0.630861 80.4637 1.00976L82.6477 5.21358L87.5457 5.88977C87.9867 5.95001 88.1577 6.50767 87.8277 6.81273L84.3057 10.0732L85.1357 14.6685C85.2137 15.0989 84.7757 15.4361 84.3897 15.2437L79.9987 13.0519L75.6097 15.2437H75.6107Z" fill="#FF6600"/>
+              <path d="M39.6107 15.2437C39.2247 15.4361 38.7867 15.0989 38.8647 14.6685L39.6947 10.0732L36.1717 6.81273C35.8427 6.50767 36.0137 5.95001 36.4547 5.88977L41.3527 5.21358L43.5367 1.00976C43.7337 0.630861 44.2667 0.630861 44.4637 1.00976L46.6477 5.21358L51.5457 5.88977C51.9867 5.95001 52.1577 6.50767 51.8277 6.81273L48.3057 10.0732L49.1357 14.6685C49.2137 15.0989 48.7757 15.4361 48.3897 15.2437L43.9987 13.0519L39.6097 15.2437H39.6107Z" fill="#FF6600"/>
+            </svg>
+            <p>
+              {{ product.metafields.Stuhrling.Product_Review_Text_2 }}
+            </p>
+            <span>{{ product.metafields.Stuhrling.Product_Review_Author_2 }}</span>
+          </div>
+        {% endif %}
+        {% if product.metafields.Stuhrling.Product_Review_Text_3 != blank
+          or product.metafields.Stuhrling.Product_Review_Author_3 != blank
+        %}
+          <div class="review_block item">
+            <svg width="88" height="16" viewBox="0 0 88 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.61066 15.2437C3.22466 15.4361 2.78666 15.0989 2.86466 14.6685L3.69466 10.0732L0.171654 6.81273C-0.157347 6.50767 0.0136534 5.95001 0.454654 5.88977L5.35266 5.21358L7.53666 1.00976C7.73366 0.630861 8.26666 0.630861 8.46366 1.00976L10.6477 5.21358L15.5457 5.88977C15.9867 5.95001 16.1577 6.50767 15.8277 6.81273L12.3057 10.0732L13.1357 14.6685C13.2137 15.0989 12.7757 15.4361 12.3897 15.2437L7.99866 13.0519L3.60966 15.2437H3.61066Z" fill="#FF6600"/>
+              <path d="M57.6107 15.2437C57.2247 15.4361 56.7867 15.0989 56.8647 14.6685L57.6947 10.0732L54.1717 6.81273C53.8427 6.50767 54.0137 5.95001 54.4547 5.88977L59.3527 5.21358L61.5367 1.00976C61.7337 0.630861 62.2667 0.630861 62.4637 1.00976L64.6477 5.21358L69.5457 5.88977C69.9867 5.95001 70.1577 6.50767 69.8277 6.81273L66.3057 10.0732L67.1357 14.6685C67.2137 15.0989 66.7757 15.4361 66.3897 15.2437L61.9987 13.0519L57.6097 15.2437H57.6107Z" fill="#FF6600"/>
+              <path d="M21.6107 15.2437C21.2247 15.4361 20.7867 15.0989 20.8647 14.6685L21.6947 10.0732L18.1717 6.81273C17.8427 6.50767 18.0137 5.95001 18.4547 5.88977L23.3527 5.21358L25.5367 1.00976C25.7337 0.630861 26.2667 0.630861 26.4637 1.00976L28.6477 5.21358L33.5457 5.88977C33.9867 5.95001 34.1577 6.50767 33.8277 6.81273L30.3057 10.0732L31.1357 14.6685C31.2137 15.0989 30.7757 15.4361 30.3897 15.2437L25.9987 13.0519L21.6097 15.2437H21.6107Z" fill="#FF6600"/>
+              <path d="M75.6107 15.2437C75.2247 15.4361 74.7867 15.0989 74.8647 14.6685L75.6947 10.0732L72.1717 6.81273C71.8427 6.50767 72.0137 5.95001 72.4547 5.88977L77.3527 5.21358L79.5367 1.00976C79.7337 0.630861 80.2667 0.630861 80.4637 1.00976L82.6477 5.21358L87.5457 5.88977C87.9867 5.95001 88.1577 6.50767 87.8277 6.81273L84.3057 10.0732L85.1357 14.6685C85.2137 15.0989 84.7757 15.4361 84.3897 15.2437L79.9987 13.0519L75.6097 15.2437H75.6107Z" fill="#FF6600"/>
+              <path d="M39.6107 15.2437C39.2247 15.4361 38.7867 15.0989 38.8647 14.6685L39.6947 10.0732L36.1717 6.81273C35.8427 6.50767 36.0137 5.95001 36.4547 5.88977L41.3527 5.21358L43.5367 1.00976C43.7337 0.630861 44.2667 0.630861 44.4637 1.00976L46.6477 5.21358L51.5457 5.88977C51.9867 5.95001 52.1577 6.50767 51.8277 6.81273L48.3057 10.0732L49.1357 14.6685C49.2137 15.0989 48.7757 15.4361 48.3897 15.2437L43.9987 13.0519L39.6097 15.2437H39.6107Z" fill="#FF6600"/>
+            </svg>
+            <p>
+              {{ product.metafields.Stuhrling.Product_Review_Text_3 }}
+            </p>
+            <span>{{ product.metafields.Stuhrling.Product_Review_Author_3 }}</span>
+          </div>
+        {% endif %}
+        {% if product.metafields.Stuhrling.Product_Review_Text_4 != blank
+          or product.metafields.Stuhrling.Product_Review_Author_4 != blank
+        %}
+          <div class="review_block item">
+            <svg width="88" height="16" viewBox="0 0 88 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.61066 15.2437C3.22466 15.4361 2.78666 15.0989 2.86466 14.6685L3.69466 10.0732L0.171654 6.81273C-0.157347 6.50767 0.0136534 5.95001 0.454654 5.88977L5.35266 5.21358L7.53666 1.00976C7.73366 0.630861 8.26666 0.630861 8.46366 1.00976L10.6477 5.21358L15.5457 5.88977C15.9867 5.95001 16.1577 6.50767 15.8277 6.81273L12.3057 10.0732L13.1357 14.6685C13.2137 15.0989 12.7757 15.4361 12.3897 15.2437L7.99866 13.0519L3.60966 15.2437H3.61066Z" fill="#FF6600"/>
+              <path d="M57.6107 15.2437C57.2247 15.4361 56.7867 15.0989 56.8647 14.6685L57.6947 10.0732L54.1717 6.81273C53.8427 6.50767 54.0137 5.95001 54.4547 5.88977L59.3527 5.21358L61.5367 1.00976C61.7337 0.630861 62.2667 0.630861 62.4637 1.00976L64.6477 5.21358L69.5457 5.88977C69.9867 5.95001 70.1577 6.50767 69.8277 6.81273L66.3057 10.0732L67.1357 14.6685C67.2137 15.0989 66.7757 15.4361 66.3897 15.2437L61.9987 13.0519L57.6097 15.2437H57.6107Z" fill="#FF6600"/>
+              <path d="M21.6107 15.2437C21.2247 15.4361 20.7867 15.0989 20.8647 14.6685L21.6947 10.0732L18.1717 6.81273C17.8427 6.50767 18.0137 5.95001 18.4547 5.88977L23.3527 5.21358L25.5367 1.00976C25.7337 0.630861 26.2667 0.630861 26.4637 1.00976L28.6477 5.21358L33.5457 5.88977C33.9867 5.95001 34.1577 6.50767 33.8277 6.81273L30.3057 10.0732L31.1357 14.6685C31.2137 15.0989 30.7757 15.4361 30.3897 15.2437L25.9987 13.0519L21.6097 15.2437H21.6107Z" fill="#FF6600"/>
+              <path d="M75.6107 15.2437C75.2247 15.4361 74.7867 15.0989 74.8647 14.6685L75.6947 10.0732L72.1717 6.81273C71.8427 6.50767 72.0137 5.95001 72.4547 5.88977L77.3527 5.21358L79.5367 1.00976C79.7337 0.630861 80.2667 0.630861 80.4637 1.00976L82.6477 5.21358L87.5457 5.88977C87.9867 5.95001 88.1577 6.50767 87.8277 6.81273L84.3057 10.0732L85.1357 14.6685C85.2137 15.0989 84.7757 15.4361 84.3897 15.2437L79.9987 13.0519L75.6097 15.2437H75.6107Z" fill="#FF6600"/>
+              <path d="M39.6107 15.2437C39.2247 15.4361 38.7867 15.0989 38.8647 14.6685L39.6947 10.0732L36.1717 6.81273C35.8427 6.50767 36.0137 5.95001 36.4547 5.88977L41.3527 5.21358L43.5367 1.00976C43.7337 0.630861 44.2667 0.630861 44.4637 1.00976L46.6477 5.21358L51.5457 5.88977C51.9867 5.95001 52.1577 6.50767 51.8277 6.81273L48.3057 10.0732L49.1357 14.6685C49.2137 15.0989 48.7757 15.4361 48.3897 15.2437L43.9987 13.0519L39.6097 15.2437H39.6107Z" fill="#FF6600"/>
+            </svg>
+            <p>
+              {{ product.metafields.Stuhrling.Product_Review_Text_4 }}
+            </p>
+            <span>{{ product.metafields.Stuhrling.Product_Review_Author_4 }}</span>
+          </div>
+        {% endif %}
+        {% if product.metafields.Stuhrling.Product_Review_Text_5 != blank
+          or product.metafields.Stuhrling.Product_Review_Author_5 != blank
+        %}
+          <div class="review_block item">
+            <svg width="88" height="16" viewBox="0 0 88 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.61066 15.2437C3.22466 15.4361 2.78666 15.0989 2.86466 14.6685L3.69466 10.0732L0.171654 6.81273C-0.157347 6.50767 0.0136534 5.95001 0.454654 5.88977L5.35266 5.21358L7.53666 1.00976C7.73366 0.630861 8.26666 0.630861 8.46366 1.00976L10.6477 5.21358L15.5457 5.88977C15.9867 5.95001 16.1577 6.50767 15.8277 6.81273L12.3057 10.0732L13.1357 14.6685C13.2137 15.0989 12.7757 15.4361 12.3897 15.2437L7.99866 13.0519L3.60966 15.2437H3.61066Z" fill="#FF6600"/>
+              <path d="M57.6107 15.2437C57.2247 15.4361 56.7867 15.0989 56.8647 14.6685L57.6947 10.0732L54.1717 6.81273C53.8427 6.50767 54.0137 5.95001 54.4547 5.88977L59.3527 5.21358L61.5367 1.00976C61.7337 0.630861 62.2667 0.630861 62.4637 1.00976L64.6477 5.21358L69.5457 5.88977C69.9867 5.95001 70.1577 6.50767 69.8277 6.81273L66.3057 10.0732L67.1357 14.6685C67.2137 15.0989 66.7757 15.4361 66.3897 15.2437L61.9987 13.0519L57.6097 15.2437H57.6107Z" fill="#FF6600"/>
+              <path d="M21.6107 15.2437C21.2247 15.4361 20.7867 15.0989 20.8647 14.6685L21.6947 10.0732L18.1717 6.81273C17.8427 6.50767 18.0137 5.95001 18.4547 5.88977L23.3527 5.21358L25.5367 1.00976C25.7337 0.630861 26.2667 0.630861 26.4637 1.00976L28.6477 5.21358L33.5457 5.88977C33.9867 5.95001 34.1577 6.50767 33.8277 6.81273L30.3057 10.0732L31.1357 14.6685C31.2137 15.0989 30.7757 15.4361 30.3897 15.2437L25.9987 13.0519L21.6097 15.2437H21.6107Z" fill="#FF6600"/>
+              <path d="M75.6107 15.2437C75.2247 15.4361 74.7867 15.0989 74.8647 14.6685L75.6947 10.0732L72.1717 6.81273C71.8427 6.50767 72.0137 5.95001 72.4547 5.88977L77.3527 5.21358L79.5367 1.00976C79.7337 0.630861 80.2667 0.630861 80.4637 1.00976L82.6477 5.21358L87.5457 5.88977C87.9867 5.95001 88.1577 6.50767 87.8277 6.81273L84.3057 10.0732L85.1357 14.6685C85.2137 15.0989 84.7757 15.4361 84.3897 15.2437L79.9987 13.0519L75.6097 15.2437H75.6107Z" fill="#FF6600"/>
+              <path d="M39.6107 15.2437C39.2247 15.4361 38.7867 15.0989 38.8647 14.6685L39.6947 10.0732L36.1717 6.81273C35.8427 6.50767 36.0137 5.95001 36.4547 5.88977L41.3527 5.21358L43.5367 1.00976C43.7337 0.630861 44.2667 0.630861 44.4637 1.00976L46.6477 5.21358L51.5457 5.88977C51.9867 5.95001 52.1577 6.50767 51.8277 6.81273L48.3057 10.0732L49.1357 14.6685C49.2137 15.0989 48.7757 15.4361 48.3897 15.2437L43.9987 13.0519L39.6097 15.2437H39.6107Z" fill="#FF6600"/>
+            </svg>
+            <p>
+              {{ product.metafields.Stuhrling.Product_Review_Text_5 }}
+            </p>
+            <span>{{ product.metafields.Stuhrling.Product_Review_Author_5 }}</span>
+          </div>
+        {% endif %}
+        {% if product.metafields.Stuhrling.Product_Review_Text_6 != blank
+          or product.metafields.Stuhrling.Product_Review_Author_6 != blank
+        %}
+          <div class="review_block item">
+            <svg width="88" height="16" viewBox="0 0 88 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.61066 15.2437C3.22466 15.4361 2.78666 15.0989 2.86466 14.6685L3.69466 10.0732L0.171654 6.81273C-0.157347 6.50767 0.0136534 5.95001 0.454654 5.88977L5.35266 5.21358L7.53666 1.00976C7.73366 0.630861 8.26666 0.630861 8.46366 1.00976L10.6477 5.21358L15.5457 5.88977C15.9867 5.95001 16.1577 6.50767 15.8277 6.81273L12.3057 10.0732L13.1357 14.6685C13.2137 15.0989 12.7757 15.4361 12.3897 15.2437L7.99866 13.0519L3.60966 15.2437H3.61066Z" fill="#FF6600"/>
+              <path d="M57.6107 15.2437C57.2247 15.4361 56.7867 15.0989 56.8647 14.6685L57.6947 10.0732L54.1717 6.81273C53.8427 6.50767 54.0137 5.95001 54.4547 5.88977L59.3527 5.21358L61.5367 1.00976C61.7337 0.630861 62.2667 0.630861 62.4637 1.00976L64.6477 5.21358L69.5457 5.88977C69.9867 5.95001 70.1577 6.50767 69.8277 6.81273L66.3057 10.0732L67.1357 14.6685C67.2137 15.0989 66.7757 15.4361 66.3897 15.2437L61.9987 13.0519L57.6097 15.2437H57.6107Z" fill="#FF6600"/>
+              <path d="M21.6107 15.2437C21.2247 15.4361 20.7867 15.0989 20.8647 14.6685L21.6947 10.0732L18.1717 6.81273C17.8427 6.50767 18.0137 5.95001 18.4547 5.88977L23.3527 5.21358L25.5367 1.00976C25.7337 0.630861 26.2667 0.630861 26.4637 1.00976L28.6477 5.21358L33.5457 5.88977C33.9867 5.95001 34.1577 6.50767 33.8277 6.81273L30.3057 10.0732L31.1357 14.6685C31.2137 15.0989 30.7757 15.4361 30.3897 15.2437L25.9987 13.0519L21.6097 15.2437H21.6107Z" fill="#FF6600"/>
+              <path d="M75.6107 15.2437C75.2247 15.4361 74.7867 15.0989 74.8647 14.6685L75.6947 10.0732L72.1717 6.81273C71.8427 6.50767 72.0137 5.95001 72.4547 5.88977L77.3527 5.21358L79.5367 1.00976C79.7337 0.630861 80.2667 0.630861 80.4637 1.00976L82.6477 5.21358L87.5457 5.88977C87.9867 5.95001 88.1577 6.50767 87.8277 6.81273L84.3057 10.0732L85.1357 14.6685C85.2137 15.0989 84.7757 15.4361 84.3897 15.2437L79.9987 13.0519L75.6097 15.2437H75.6107Z" fill="#FF6600"/>
+              <path d="M39.6107 15.2437C39.2247 15.4361 38.7867 15.0989 38.8647 14.6685L39.6947 10.0732L36.1717 6.81273C35.8427 6.50767 36.0137 5.95001 36.4547 5.88977L41.3527 5.21358L43.5367 1.00976C43.7337 0.630861 44.2667 0.630861 44.4637 1.00976L46.6477 5.21358L51.5457 5.88977C51.9867 5.95001 52.1577 6.50767 51.8277 6.81273L48.3057 10.0732L49.1357 14.6685C49.2137 15.0989 48.7757 15.4361 48.3897 15.2437L43.9987 13.0519L39.6097 15.2437H39.6107Z" fill="#FF6600"/>
+            </svg>
+            <p>
+              {{ product.metafields.Stuhrling.Product_Review_Text_6 }}
+            </p>
+            <span>{{ product.metafields.Stuhrling.Product_Review_Author_6 }}</span>
+          </div>
+        {% endif %}
+      </div>
+      <div id="page_navigation"></div>
+    </div>
+  </div>
+{% endif %}
+<!-- Product Reviews - End -->
+<!-- Product Page Image Gallery - Start -->
+<div class="product_gallery">
+  <div class="wrapper-mini">
+    <div class="gallery_inner_block">
+      <div class="left_gallery_block">
+        <div class="left_inner_gallery">
+          {% if product.metafields.Stuhrling.Product_Gallery_Image1 -%}
+            <img src="{{ product.metafields.Stuhrling.Product_Gallery_Image1 }}">
+          {%- endif %}
+          {% if product.metafields.Stuhrling.Product_Gallery_Image2 -%}
+            <img src="{{ product.metafields.Stuhrling.Product_Gallery_Image2 }}">
+          {%- endif %}
+        </div>
+        <div class="left_inner_gallery">
+          {% if product.metafields.Stuhrling.Product_Gallery_Image3 -%}
+            <img src="{{ product.metafields.Stuhrling.Product_Gallery_Image3 }}">
+          {%- endif %}
+          {% if product.metafields.Stuhrling.Product_Gallery_Image4 -%}
+            <img src="{{ product.metafields.Stuhrling.Product_Gallery_Image4 }}">
+          {%- endif %}
+        </div>
+      </div>
+      <div class="right_gallery_block">
+        {% if product.metafields.Stuhrling.Product_Gallery_Image5 -%}
+          <img src="{{ product.metafields.Stuhrling.Product_Gallery_Image5 }}">
+        {%- endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Product Page Image Gallery - End -->
+
+<!-- Testimonial with logos - Start -->
+{% if product.metafields.Stuhrling.Product_Testimonial_Logo_1 != blank
+  or product.metafields.Stuhrling.Product_Testimonial_Text_1 != blank
+%}
+  <div class="product_testimonial_outer">
+    <div class="wrapper-mini">
+      <div class="owl-testimonial owl-carousel owl-theme">
+        {% if product.metafields.Stuhrling.Product_Testimonial_Text_1 != blank
+          or product.metafields.Stuhrling.Product_Testimonial_Logo_1 != blank
+        %}
+          <div class="testimonial_block item">
+            <h3>
+              {{ product.metafields.Stuhrling.Product_Testimonial_Text_1 }}
+            </h3>
+            <div class="testimonial_image">
+              <img src="{{ product.metafields.Stuhrling.Product_Testimonial_Logo_1 }}">
+            </div>
+          </div>
+        {% endif %}
+        {% if product.metafields.Stuhrling.Product_Testimonial_Text_2 != blank
+          or product.metafields.Stuhrling.Product_Testimonial_Logo_2 != blank
+        %}
+          <div class="testimonial_block item">
+            <h3>
+              {{ product.metafields.Stuhrling.Product_Testimonial_Text_2 }}
+            </h3>
+            <div class="testimonial_image">
+              <img src="{{ product.metafields.Stuhrling.Product_Testimonial_Logo_2 }}">
+            </div>
+          </div>
+        {% endif %}
+        {% if product.metafields.Stuhrling.Product_Testimonial_Text_3 != blank
+          or product.metafields.Stuhrling.Product_Testimonial_Logo_3 != blank
+        %}
+          <div class="testimonial_block item">
+            <h3>
+              {{ product.metafields.Stuhrling.Product_Testimonial_Text_3 }}
+            </h3>
+            <div class="testimonial_image">
+              <img src="{{ product.metafields.Stuhrling.Product_Testimonial_Logo_3 }}">
+            </div>
+          </div>
+        {% endif %}
+        {% if product.metafields.Stuhrling.Product_Testimonial_Text_4 != blank
+          or product.metafields.Stuhrling.Product_Testimonial_Logo_4 != blank
+        %}
+          <div class="testimonial_block item">
+            <h3>
+              {{ product.metafields.Stuhrling.Product_Testimonial_Text_4 }}
+            </h3>
+            <div class="testimonial_image">
+              <img src="{{ product.metafields.Stuhrling.Product_Testimonial_Logo_4 }}">
+            </div>
+          </div>
+        {% endif %}
+        {% if product.metafields.Stuhrling.Product_Testimonial_Text_5 != blank
+          or product.metafields.Stuhrling.Product_Testimonial_Logo_5 != blank
+        %}
+          <div class="testimonial_block item">
+            <h3>
+              {{ product.metafields.Stuhrling.Product_Testimonial_Text_5 }}
+            </h3>
+            <div class="testimonial_image">
+              <img src="{{ product.metafields.Stuhrling.Product_Testimonial_Logo_5 }}">
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+<!-- Testimonial with logos - End -->
+
+<div class="product_desc1 product_gallery_3">
+  <div class="wrapper-mini">
+    {% if product.metafields.Stuhrling.Product_Gallery3_Info %}
+      <div class="desc-wrap desc1 image_with_text_block">
+        <div class="desc-col desc-data">
+          {{ product.metafields.Stuhrling.Product_Gallery3_Info }}
+        </div>
+        <div class="desc-col"></div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Product Page Image Gallery - Start -->
+<div class="product_gallery bottom_image_gallery carosel">
+  <div class="wrapper-mini">
+    <div class="product_simple_gallery owl-carousel owl-theme ">
+      {% if product.metafields.Stuhrling.Product_Gallery_2_Image_1 %}
+        <div class="gallery_block item">
+          <img src="{{ product.metafields.Stuhrling.Product_Gallery_2_Image_1 }}">
+          {% if product.metafields.Stuhrling.Product_Gallery_2_Title_1 %}
+            <h3 class="gallery_text">{{ product.metafields.Stuhrling.Product_Gallery_2_Title_1 }}</h3>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if product.metafields.Stuhrling.Product_Gallery_2_Image_2 %}
+        <div class="gallery_block item">
+          <img src="{{ product.metafields.Stuhrling.Product_Gallery_2_Image_2 }}">
+          {% if product.metafields.Stuhrling.Product_Gallery_2_Title_2 %}
+            <h3 class="gallery_text">{{ product.metafields.Stuhrling.Product_Gallery_2_Title_2 }}</h3>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if product.metafields.Stuhrling.Product_Gallery_2_Image_3 %}
+        <div class="gallery_block item">
+          <img src="{{ product.metafields.Stuhrling.Product_Gallery_2_Image_3 }}">
+          {% if product.metafields.Stuhrling.Product_Gallery_2_Title_3 %}
+            <h3 class="gallery_text">{{ product.metafields.Stuhrling.Product_Gallery_2_Title_3 }}</h3>
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if product.metafields.Stuhrling.Product_Gallery_2_Image_4 %}
+        <div class="gallery_block item">
+          <img src="{{ product.metafields.Stuhrling.Product_Gallery_2_Image_4 }}">
+          {% if product.metafields.Stuhrling.Product_Gallery_2_Title_4 %}
+            <h3 class="gallery_text">{{ product.metafields.Stuhrling.Product_Gallery_2_Title_4 }}</h3>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<!-- Product Page Image Gallery - End -->
+
+{% unless product == empty %}
+  <script type="application/json" id="ProductJson-{{ section.id }}">
+    {{ product | json }}
+  </script>
+{% endunless %}
+
+{% schema %}
+{
+  "name": {
+    "da": "Produktsider",
+    "de": "Produktseiten",
+    "en": "Product pages",
+    "es": "Páginas de productos",
+    "fi": "Tuotesivut",
+    "fr": "Pages de produits",
+    "hi": "उत्पाद पेज",
+    "it": "Pagine di prodotto",
+    "ja": "商品ページ",
+    "ko": "제품 페이지",
+    "nb": "Produktsider",
+    "nl": "Productpagina's",
+    "pt-BR": "Páginas de produtos",
+    "pt-PT": "Páginas de produtos",
+    "sv": "Produktsidor",
+    "th": "หน้าสินค้า",
+    "zh-CN": "产品页面",
+    "zh-TW": "產品頁面"
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "product_vendor_enable",
+      "label": {
+        "da": "Vis produktleverandør",
+        "de": "Produktverkäufer anzeigen",
+        "en": "Show product vendor",
+        "es": "Mostrar proveedor del producto",
+        "fi": "Näytä tuotteen myyjä",
+        "fr": "Afficher le distributeur du produit",
+        "hi": "उत्पाद विक्रेता दिखाएं",
+        "it": "Mostra fornitore prodotto",
+        "ja": "商品の販売元を表示する",
+        "ko": "제품 공급 업체 표시",
+        "nb": "Vis produktleverandør",
+        "nl": "Productleverancier weergeven",
+        "pt-BR": "Exibir o fornecedor do produto",
+        "pt-PT": "Mostrar o fornecedor do produto",
+        "sv": "Visa produktsäljare",
+        "th": "แสดงผู้ขายสินค้า",
+        "zh-CN": "显示产品厂商",
+        "zh-TW": "顯示產品廠商"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "product_quantity_enable",
+      "label": {
+        "da": "Vis antalsvælger",
+        "de": "Quantitäts-Auswahl anzeigen",
+        "en": "Show quantity selector",
+        "es": "Mostrar selector de cantidad",
+        "fi": "Näytä määrän valitsin",
+        "fr": "Afficher le sélecteur de quantité",
+        "hi": "मात्रा चयनकर्ता दिखाएं",
+        "it": "Mostra selettore quantità",
+        "ja": "数量セレクターを表示する",
+        "ko": "수량 선택기 표시",
+        "nb": "Vis mengdevelger",
+        "nl": "Hoeveelheidskiezer weergeven",
+        "pt-BR": "Exibir seletor de quantidade",
+        "pt-PT": "Mostrar um seletor de quantidade",
+        "sv": "Visa kvantitetsväljare",
+        "th": "แสดงตัวเลือกจำนวน",
+        "zh-CN": "显示数量选择器",
+        "zh-TW": "顯示數量選擇器"
+      }
+    },
+    {
+      "type": "select",
+      "id": "product_image_zoom_type",
+      "label": {
+        "da": "Billedzoomtype",
+        "de": "Bildzoomtyp",
+        "en": "Image zoom type",
+        "es": "Tipo de zoom de imagen",
+        "fi": "Kuvan zoomaustyyppi",
+        "fr": "Type de zoom sur image",
+        "hi": "इमेज ज़ूम प्रकार",
+        "it": "Tipo di zoom immagine",
+        "ja": "画像のズームタイプ",
+        "ko": "이미지 확대 유형",
+        "nb": "Zoomtype for bilder",
+        "nl": "Type zoom-afbeelding",
+        "pt-BR": "Tipo de zoom da imagem",
+        "pt-PT": "Tipo de zoom da imagem",
+        "sv": "Bildzoomtyp",
+        "th": "ประเภทการซูมภาพ",
+        "zh-CN": "图片缩放类型",
+        "zh-TW": "圖片縮放類型"
+      },
+      "options": [
+        {
+          "value": "lightbox",
+          "label": {
+            "da": "Lightbox",
+            "de": "Leuchtkasten",
+            "en": "Lightbox",
+            "es": "Lightbox",
+            "fi": "Lightbox-valotaulu",
+            "fr": "Visionneuse d'image",
+            "hi": "लाइटबॉक्स",
+            "it": "Lightbox",
+            "ja": "Lightbox",
+            "ko": "라이트 박스",
+            "nb": "Lysboks",
+            "nl": "Lightbox",
+            "pt-BR": "Lightbox",
+            "pt-PT": "Lightbox",
+            "sv": "Ljuslåda",
+            "th": "Lightbox",
+            "zh-CN": "灯箱",
+            "zh-TW": "燈箱"
+          }
+        },
+        {
+          "value": "zoom-in",
+          "label": {
+            "da": "Zoom ind",
+            "de": "Heranzoomen",
+            "en": "Zoom-in",
+            "es": "Acercar",
+            "fi": "Lähennä",
+            "fr": "Zoom avant",
+            "hi": "ज़ूम-इन",
+            "it": "Zoom avanti",
+            "ja": "ズームイン",
+            "ko": "확대",
+            "nb": "Zoom inn",
+            "nl": "Inzoomen",
+            "pt-BR": "Mais zoom",
+            "pt-PT": "Mais zoom",
+            "sv": "Zooma in",
+            "th": "ซูมเข้า",
+            "zh-CN": "缩小",
+            "zh-TW": "放大"
+          }
+        },
+        {
+          "value": "no-zoom",
+          "label": {
+            "da": "Ingen zoom",
+            "de": "Nicht zoomen",
+            "en": "No zoom",
+            "es": "Sin zoom",
+            "fi": "Ei zoomausta",
+            "fr": "Pas de zoom",
+            "hi": "कोई ज़ूम नहीं",
+            "it": "Nessun zoom",
+            "ja": "ズームなし",
+            "ko": "확대 없음",
+            "nb": "Ingen zoom",
+            "nl": "Geen zoom",
+            "pt-BR": "Sem zoom",
+            "pt-PT": "Sem zoom",
+            "sv": "Ingen zoom",
+            "th": "ไม่มีการซูม",
+            "zh-CN": "无缩放",
+            "zh-TW": "無縮放"
+          }
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "product_thumbnails_position",
+      "label": {
+        "da": "Position for produktets miniaturebillede",
+        "de": "Position der Miniaturansicht des Produkts",
+        "en": "Product thumbnail position",
+        "es": "Posición de imagen miniatura del producto",
+        "fi": "Tuotteen pikkukuvan sijainti",
+        "fr": "Position de la vignette du produit",
+        "hi": "उत्पाद थंबनेल की स्थिति",
+        "it": "Posizione anteprima prodotto",
+        "ja": "商品サムネイルの位置",
+        "ko": "제품 썸네일 위치",
+        "nb": "Posisjon for miniatyrbilde av produkt",
+        "nl": "Positie miniatuurafbeelding product",
+        "pt-BR": "Posição da miniatura de produto",
+        "pt-PT": "Posição da miniatura de produto",
+        "sv": "Position för förhandsgranskning av produkt",
+        "th": "ตำแหน่งรูปภาพขนาดย่อของสินค้า",
+        "zh-CN": "产品缩略图位置",
+        "zh-TW": "產品縮圖位置"
+      },
+      "options": [
+        {
+          "value": "right",
+          "label": {
+            "da": "Til højre for hovedbilledet",
+            "de": "Rechts vom Hauptbild",
+            "en": "Right of main image",
+            "es": "A la derecha de la imagen principal",
+            "fi": "Pääkuvan oikealla puolella",
+            "fr": "À droite de l'image principale",
+            "hi": "मुख्य इमेज की दाईं ओर",
+            "it": "A destra dell'immagine principale",
+            "ja": "メイン画像の右",
+            "ko": "주요 이미지의 오른쪽",
+            "nb": "Til høyre for hovedbildet",
+            "nl": "Rechts van hoofdafbeelding",
+            "pt-BR": "À direita da imagem principal",
+            "pt-PT": "À direita da imagem principal",
+            "sv": "Höger om huvudbild",
+            "th": "ด้านขวาของภาพหลัก",
+            "zh-CN": "主图片的右侧",
+            "zh-TW": "主要圖片右方"
+          }
+        },
+        {
+          "value": "below",
+          "label": {
+            "da": "Under hovedbilledet",
+            "de": "Unter dem Hauptbild",
+            "en": "Below main image",
+            "es": "Debajo de la imagen principal",
+            "fi": "Pääkuvan alla",
+            "fr": "Sous l'image principale",
+            "hi": "मुख्य इमेज के नीचे",
+            "it": "Sotto l'immagine principale",
+            "ja": "メイン画像の下",
+            "ko": "아래 주요 이미지",
+            "nb": "Under hovedbildet",
+            "nl": "Onder hoofdafbeelding",
+            "pt-BR": "Abaixo da imagem principal",
+            "pt-PT": "Abaixo da imagem principal",
+            "sv": "Under huvudbild",
+            "th": "ด้านล่างของภาพหลัก",
+            "zh-CN": "主图片的下方",
+            "zh-TW": "主要圖片下方"
+          }
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": {
+        "da": "Beskrivelse",
+        "de": "Beschreibung",
+        "en": "Description",
+        "es": "Descripción",
+        "fi": "Kuvaus",
+        "fr": "Description",
+        "hi": "विवरण",
+        "it": "Descrizione",
+        "ja": "説明",
+        "ko": "설명",
+        "nb": "Beskrivelse",
+        "nl": "Beschrijving",
+        "pt-BR": "Descrição",
+        "pt-PT": "Descrição",
+        "sv": "Beskrivning",
+        "th": "คำอธิบาย",
+        "zh-CN": "描述",
+        "zh-TW": "說明"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "show_extra_tab",
+      "label": {
+        "da": "Vis en fane ved siden af din produktbeskrivelse",
+        "de": "Ein Tab neben Ihrer Produktbeschreibung anzeigen",
+        "en": "Show a tab next to your product description",
+        "es": "Mostrar una pestaña al lado de la descripción de tu producto",
+        "fi": "Näytä tuotekuvauksen vieressä oleva välilehti",
+        "fr": "Afficher un onglet à côté de la description de votre produit",
+        "hi": "आपके उत्पाद विवरण के आगे टैब दिखाएं",
+        "it": "Mostra una scheda accanto alla descrizione del prodotto",
+        "ja": "商品説明の横にタブを表示する",
+        "ko": "제품 설명 옆에 탭 표시",
+        "nb": "Vis en fane ved siden av produktbeskrivelsen",
+        "nl": "Laat tabblad zien naast uw productbeschrijving",
+        "pt-BR": "Exibir uma aba ao lado da descrição do seu produto",
+        "pt-PT": "Mostrar um separador ao lado da sua descrição do produto",
+        "sv": "Visa en flik intill produktbeskrivningen",
+        "th": "แสดงแท็บถัดจากคำอธิบายสินค้าของคุณ",
+        "zh-CN": "显示产品描述旁边的标签",
+        "zh-TW": "於產品說明旁邊顯示索引標籤"
+      },
+      "default": false
+    },
+    {
+      "type": "page",
+      "id": "extra_tab_content",
+      "label": {
+        "da": "Fanens indhold",
+        "de": "Tab-Inhalt",
+        "en": "Tab content",
+        "es": "Contenido de la pestaña",
+        "fi": "Välilehden sisältö",
+        "fr": "Contenu de l'onglet",
+        "hi": "टैब सामग्री",
+        "it": "Contenuto della scheda",
+        "ja": "タブのコンテンツ",
+        "ko": "탭 콘텐츠",
+        "nb": "Faneinnhold",
+        "nl": "Content tabblad",
+        "pt-BR": "Conteúdo da aba",
+        "pt-PT": "Conteúdo do separador",
+        "sv": "Flikens innehåll",
+        "th": "เนื้อหาแท็บ",
+        "zh-CN": "标签内容",
+        "zh-TW": "索引標籤內容"
+      },
+      "info": {
+        "da": "Dette sideindhold vises i den ekstra fane.",
+        "de": "Der Inhalt dieser Seite wird auf der zusätzlichen Registerkarte angezeigt.",
+        "en": "This page content will appear in the extra tab.",
+        "es": "El contenido de esta página aparecerá en la pestaña adicional.",
+        "fi": "Tämä sivun sisältö näkyy ylimääräisessä välilehdessä.",
+        "fr": "Le contenu de cette page s'affichera dans l'onglet supplémentaire.",
+        "hi": "यह पृष्ठ सामग्री अतिरिक्त टैब में दिखाई देगी.",
+        "it": "Il contenuto di questa pagina verrà visualizzato nella scheda aggiuntiva.",
+        "ja": "このページのコンテンツは追加のタブに表示されます。",
+        "ko": "이 페이지 콘텐츠는 추가 탭에 나타납니다.",
+        "nb": "Dette sideinnholdet vil vises i ekstrafanen.",
+        "nl": "De content van deze pagina verschijnt in het extra tabblad.",
+        "pt-BR": "O conteúdo dessa página aparecerá na aba extra.",
+        "pt-PT": "O conteúdo desta página vai aparecer no separador adicional.",
+        "sv": "Sidinnehållet visas i fliken Extra.",
+        "th": "เนื้อหาของหน้านี้จะปรากฏในแท็บพิเศษ",
+        "zh-CN": "此页内容将显示在额外标签中。",
+        "zh-TW": "此頁面內容將出現在額外索引標籤。"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "social_sharing",
+      "label": {
+        "da": "Aktivér produktdeling",
+        "de": "Teilen von Produkten aktivieren",
+        "en": "Enable product sharing",
+        "es": "Habilitar compartir productos",
+        "fi": "Ota tuotejako käyttöön",
+        "fr": "Activer le partage de produits",
+        "hi": "उत्पाद साझाकरण सक्षम करें",
+        "it": "Permetti condivisione del prodotto",
+        "ja": "商品の共有を有効にする",
+        "ko": "제품 공유 활성화",
+        "nb": "Aktiver produktdeling",
+        "nl": "Delen van producten inschakelen",
+        "pt-BR": "Habilite o compartilhamento de produtos",
+        "pt-PT": "Ativar a partilha de produtos",
+        "sv": "Aktivera produktdelning",
+        "th": "เปิดใช้การแชร์สินค้า",
+        "zh-CN": "启用产品分享",
+        "zh-TW": "啟用產品分享"
+      }
+    },
+    {
+      "type": "header",
+      "content": {
+        "da": "Formular for produktmuligheder",
+        "de": "Produktoptionsformular",
+        "en": "Product options form",
+        "es": "Formulario de opciones de producto",
+        "fi": "Tuotevaihtoehtolomake",
+        "fr": "Formulaire d'options de produit",
+        "hi": "उत्पाद के विकल्प फ़ॉर्म",
+        "it": "Modulo delle opzioni di prodotto",
+        "ja": "商品オプションのフォーム",
+        "ko": "제품 옵션 양식",
+        "nb": "Skjema for produktalternativer",
+        "nl": "Formulier productopties",
+        "pt-BR": "Formulário de opções de produtos",
+        "pt-PT": "Formulário de opções de produtos",
+        "sv": "Produktalternativsformulär",
+        "th": "แบบฟอร์มตัวเลือกสินค้า",
+        "zh-CN": "产品选项表单",
+        "zh-TW": "產品選項表單"
+      }
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_payment_button",
+      "label": {
+        "da": "Vis dynamisk betalingsknap",
+        "de": "Dynamischen Checkout Button anzeigen",
+        "en": "Show dynamic checkout button",
+        "es": "Mostrar botón de pago dinámico",
+        "fi": "Näytä dynaaminen kassapainike",
+        "fr": "Afficher le bouton de passage à la caisse dynamique",
+        "hi": "डायनेमिक चेकआउट बटन दिखाएं",
+        "it": "Mostra pulsante di check-out dinamico",
+        "ja": "ダイナミックチェックアウトボタンを表示する",
+        "ko": "동적 결제 버튼 표시",
+        "nb": "Vis dynamisk knapp for å gå til kassen",
+        "nl": "Dynamische checkout knop weergeven",
+        "pt-BR": "Exibir botão dinâmico de checkout",
+        "pt-PT": "Mostrar o botão dinâmico de finalização da compra",
+        "sv": "Visa dynamiska utcheckningsknappar",
+        "th": "แสดงปุ่มชำระเงินแบบไดนามิก",
+        "zh-CN": "显示动态结账按钮",
+        "zh-TW": "顯示動態結帳按鈕"
+      },
+      "info": {
+        "da": "Den enkelte kunde vil se sin foretrukne betalingsmetode blandt dem, der er tilgængelige i din butik, f.eks. PayPal eller Apple Pay. [Få mere at vide](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "de": "Jeder Kunde sieht seine bevorzugte Zahlungsmethode aus den in Ihrem Shop verfügbaren Zahlungsmethoden wie PayPal oder Apple Pay. [Mehr Informationen](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "en": "Each customer will see their preferred payment method from those available on your store, such as PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "es": "Cada cliente verá su forma de pago preferida entre las disponibles en tu tienda, como PayPal o Apple Pay. [Más información](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "fi": "Kukin asiakas näkee ensisijaisen valintansa kauppasi tarjoamista maksutavoista, esim. PayPal tai Apple Pay. [Lisätietoja](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "fr": "Chaque client verra son moyen de paiement préféré parmi ceux qui sont proposés sur votre boutique, tels que PayPal ou Apple Pay. [En savoir plus](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "hi": "प्रत्येक ग्राहक आपके स्टोर पर उपलब्ध अपनी पसंदीदा भुगतान की विधि देखेंगे जैसे PayPal या Apple Pay. [अधिक जानें](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "it": "Ogni cliente vedrà il suo metodo di pagamento preferito tra quelli disponibili nel tuo negozio, come PayPal o Apple Pay. [Maggiori informazioni](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "ja": "PayPalやApple Payなど、ストアで利用可能な希望の決済方法がお客様に表示されます。[詳細情報](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "ko": "각 고객은 PayPal 또는 Apple Pay와 같이 스토어에서 사용 가능한 지불 방법을 확인할 수 있습니다. [자세히 알아보기](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "nb": "Hver enkelt kunde vil se sin foretrukne betalingsmåte blant de som er tilgjengelig i butikken din, som PayPal eller Apple Pay. [Finn ut mer](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "nl": "Elke klant ziet zijn of haar beschikbare voorkeursmethode om af te rekenen, zoals PayPal of Apple Pay. [Meer informatie](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "pt-BR": "Cada cliente verá sua forma de pagamento preferida dentre as disponíveis na loja, como PayPal ou Apple Pay. [Saiba mais](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "pt-PT": "Cada cliente irá ver o seu método de pagamento preferido entre os disponíveis na loja, como o PayPal ou Apple Pay. [Saiba mais](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "sv": "Varje kund kommer att se den föredragna betalningsmetoden från de som finns tillgängliga i din butik, till exempel PayPal eller Apple Pay. [Läs mer](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "th": "ลูกค้าแต่ละรายจะเห็นวิธีการชำระเงินที่ต้องการจากวิธีที่ใช้ได้ในร้านค้าของคุณ เช่น PayPal หรือ Apple Pay [เรียนรู้เพิ่มเติม](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "zh-CN": "每位客户都可在您商店提供的付款方式中看到他们的首选付款方式，例如 PayPal 或 Apple Pay。[了解详细信息](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "zh-TW": "每位顧客都可以在您商店內開放使用的付款方式中看見他們偏好使用的方式，如 PayPal、Apple Pay 等。[深入瞭解](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)"
+      },
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "add_to_cart_width",
+      "label": {
+        "da": "Variantvælger og knapstørrelse",
+        "de": "Variantenauswahl und Schaltflächengröße",
+        "en": "Variant picker and button size",
+        "es": "Selector de variantes y tamaño del botón",
+        "fi": "Versionvalitsin ja painikkeen koko",
+        "fr": "Sélecteur de variante et taille du bouton",
+        "hi": "वेरिएंट पिकर और बटन का आकार",
+        "it": "Dimensione selettore variante e pulsante",
+        "ja": "バリエーションピッカーとボタンサイズ",
+        "ko": "이형 상품 피커 및 버튼 사이즈",
+        "nb": "Variantvelger og knappestørrelse",
+        "nl": "Variantkiezer en knopgrootte",
+        "pt-BR": "Seletor de variantes e tamanho do botão",
+        "pt-PT": "Tamanho dos botões e seletor de variantes",
+        "sv": "Variantplockare och knappstorlek",
+        "th": "เครื่องมือเลือกตัวเลือกสินค้าและขนาดของปุ่ม",
+        "zh-CN": "多属性选择器和按钮大小",
+        "zh-TW": "子類選項選擇器和按鈕尺寸"
+      },
+      "options": [
+        {
+          "value": "small",
+          "label": {
+            "da": "Lille",
+            "de": "Klein",
+            "en": "Small",
+            "es": "Pequeño",
+            "fi": "Pieni",
+            "fr": "Petite",
+            "hi": "छोटा",
+            "it": "Small",
+            "ja": "小",
+            "ko": "스몰",
+            "nb": "Liten",
+            "nl": "Klein",
+            "pt-BR": "Pequeno",
+            "pt-PT": "Pequeno",
+            "sv": "Liten",
+            "th": "เล็ก",
+            "zh-CN": "小",
+            "zh-TW": "小型"
+          }
+        },
+        {
+          "value": "medium",
+          "label": {
+            "da": "Medium",
+            "de": "Mitte",
+            "en": "Medium",
+            "es": "Mediano",
+            "fi": "Keskisuuri",
+            "fr": "Moyenne",
+            "hi": "मध्यम",
+            "it": "Medium",
+            "ja": "中",
+            "ko": "보통",
+            "nb": "Middels",
+            "nl": "Gemiddeld",
+            "pt-BR": "Médio",
+            "pt-PT": "Intermédio",
+            "sv": "Medium",
+            "th": "ปานกลาง",
+            "zh-CN": "中等",
+            "zh-TW": "中等"
+          }
+        },
+        {
+          "value": "large",
+          "label": {
+            "da": "Stor",
+            "de": "Groß",
+            "en": "Large",
+            "es": "Grande",
+            "fi": "Suuri",
+            "fr": "Grande",
+            "hi": "बड़ा",
+            "it": "Large",
+            "ja": "大",
+            "ko": "라지",
+            "nb": "Stor",
+            "nl": "Groot",
+            "pt-BR": "Grande",
+            "pt-PT": "Grande",
+            "sv": "Stor",
+            "th": "ใหญ่",
+            "zh-CN": "大",
+            "zh-TW": "大型"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<script>
+    if ($(window).width() > 768 )
+    {
+    $('.swatch-element input').change(function(){
+      var bg_image = $(this).parents('.swatch-element').attr('data-bg-image');
+      $('.product_outer_background').css('background-image','url('+bg_image+')');
+    });
+    }
+    else
+    {
+      $('.swatch-element input').change(function(){
+      var bg_image = $(this).parents('.swatch-element').attr('data-mob-bg-image');
+      $('.product_outer_background').css('background-image','url('+bg_image+')');
+
+      var mb_feature_image = $(this).parents('.swatch-element').attr('data-mob-feature-image');
+  	$('.top_img img').attr('src',mb_feature_image);
+
+    });
+    }
+
+    // poster frame click event
+    $('.video_play').click(function(){
+      $(this).next('.video_outer_wrapper').show();
+    });
+    $('.videopopupjs__close').click(function(){
+      $('.video_outer_wrapper').hide();
+
+    })
+  // OWL Carausel for Testimonials
+    $(document).ready(function() {
+      var owl = $('.owl-testimonial');
+      owl.owlCarousel({
+        items: 1,
+        dots:false,
+        autoHeight:false,
+        nav:true,
+        center: false,
+        navText: ['<svg width="20" height="37" viewBox="0 0 20 37" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.9473 0.944336L1.2696 18.622L18.9473 36.2997" stroke="white"/></svg>','<svg width="20" height="37" viewBox="0 0 20 37" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.32227 0.944336L18.9999 18.622L1.32227 36.2997" stroke="white"/></svg>'],
+        loop:true,
+        autoplay:true,
+  	  autoplayTimeout:5000,
+  	  autoplayHoverPause:true,
+        responsive : {
+
+                768 :{
+
+                		dots: false,
+
+      			  },
+      			0 : {
+
+                		dots: true,
+                      nav: false,
+
+      			  }
+  	  }
+      });
+    $('div.landing-collec-sec .owl-theme .owl-nav button > i').click(function(e){
+      e.preventDefault();
+
+    })
+    });
+
+    $(document).ready(function() {
+      $('div.carosel div.product_simple_gallery').owlCarousel
+      ({
+        items: 4,
+        dots:false,
+        autoHeight:false,
+        nav:false,
+        center: false,
+        loop:false,
+        autoplay:false,
+        mouseDrag:false,
+        responsive : {
+      		768 : {
+                		items: 4
+      			  },
+      		600 : {
+        				items: 2,
+                		dots: true,
+                		loop: true
+      			  },
+          	0 : {
+        				items: 1,
+                		dots: true,
+                		loop: true
+      			  }
+  	  }
+      });
+    });
+
+  //   Pagination script
+  $(document).ready(function(){
+
+  	//how much items per page to show
+  	var show_per_page = 3;
+  	//getting the amount of elements inside content div
+  	var number_of_items = $('#content').children('.review_block').length;
+  	//calculate the number of pages we are going to have
+  	var number_of_pages = Math.ceil(number_of_items/show_per_page);
+
+  	//set the value of our hidden input fields
+  	$('#current_page').val(0);
+  	$('#show_per_page').val(show_per_page);
+
+
+  	var navigation_html = '<a class="previous_link" href="javascript:previous();">Previous</a>';
+  	var current_link = 0;
+  	while(number_of_pages > current_link){
+  		navigation_html += '<a class="page_link" href="javascript:go_to_page(' + current_link +')" longdesc="' + current_link +'">'+ (current_link + 1) +'</a>';
+  		current_link++;
+  	}
+  	navigation_html += '<a class="next_link" href="javascript:next();">Next</a>';
+
+  	$('#page_navigation').html(navigation_html);
+
+  	//add active_page class to the first page link
+  	$('#page_navigation .page_link:first').addClass('active_page');
+
+  	//hide all the elements inside content div
+  	$('#content').children('.review_block').css('display', 'none');
+
+  	//and show the first n (show_per_page) elements
+  	$('#content').children('.review_block').slice(0, show_per_page).css('display', 'block');
+
+  });
+
+  function previous(){
+
+  	new_page = parseInt($('#current_page').val()) - 1;
+  	//if there is an item before the current active link run the function
+  	if($('.active_page').prev('.page_link').length==true){
+  		go_to_page(new_page);
+  	}
+
+  }
+
+  function next(){
+  	new_page = parseInt($('#current_page').val()) + 1;
+  	//if there is an item after the current active link run the function
+  	if($('.active_page').next('.page_link').length==true){
+  		go_to_page(new_page);
+  	}
+
+  }
+  function go_to_page(page_num){
+  	//get the number of items shown per page
+  	var show_per_page = parseInt($('#show_per_page').val());
+
+  	//get the element number where to start the slice from
+  	start_from = page_num * show_per_page;
+
+  	//get the element number where to end the slice
+  	end_on = start_from + show_per_page;
+
+  	//hide all children elements of content div, get specific items and show them
+  	$('#content').children('.review_block').css('display', 'none').slice(start_from, end_on).css('display', 'block');
+
+  	/*get the page link that has longdesc attribute of the current page and add active_page class to it
+  	and remove that class from previously active page link*/
+  	$('.page_link[longdesc=' + page_num +']').addClass('active_page').siblings('.active_page').removeClass('active_page');
+
+  	//update the current page input field
+  	$('#current_page').val(page_num);
+  }
+    $(document).ready(function(){
+      setTimeout(function(){
+        $(".jdgm-prev-badge[data-average-rating='0.00']").parent('.star-review').next('.custom_rating').show();},1500);
+    });
+
+
+  $(document).scroll(function () {
+  if ($(this).scrollTop() > 40) {
+  $(".cart_price_btn.fixed_btn").addClass("fixed-add-to-cart-desktop");
+  }else{
+  $(".cart_price_btn.fixed_btn").removeClass("fixed-add-to-cart-desktop");
+  }
+  });
+</script>

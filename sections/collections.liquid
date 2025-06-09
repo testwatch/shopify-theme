@@ -1,0 +1,515 @@
+<div data-section-id="{{ section.id }}" data-section-type="collection-list-section" class="collections_lists">
+  {% if section.settings.title != blank %}
+  <div class="section-header section-header--small">
+    <h2 class="section-header__title collections_main_title">{{ section.settings.title | escape }}</h2>
+  </div>
+  {% endif %}
+
+  <div class="grid-uniform collection_list_slider">
+    {% case section.blocks.size %}
+      {% when 1 %}
+        {%- assign collection_item_width = 'one-half' -%}
+        {%- assign collection_width = 625 -%}
+      {% when 2 %}
+        {%- assign collection_item_width = 'one-half' -%}
+        {%- assign collection_width = 625 -%}
+      {% when 3 %}
+        {%- assign collection_item_width = 'medium-down--one-half one-third' -%}
+        {%- assign collection_width = 410 -%}
+      {% when 4 %}
+        {%- assign collection_item_width = 'medium-down--one-half one-quarter' -%}
+        {%- assign collection_width = 330 -%}
+      {% when 5 %}
+        {%- assign collection_item_width = 'small--one-half medium--one-third post-large--one-fifth' -%}
+        {%- assign collection_width = 235 -%}
+    {% endcase %}
+
+    {% for block in section.blocks limit: section.blocks.size %}
+      {% assign featured = block.settings.collection %}
+      <div class="grid__item {{collection_item_width}} text-center" {{ block.shopify_attributes }}>
+        {% include 'collection-grid-item-new' with collection_width: collection_width %}
+      </div>
+    {% endfor %}
+  </div>
+  
+</div>
+<style>
+  h2.collections_main_title {
+    text-align: center;
+    padding: 0px 0;
+    color: #fff;
+    letter-spacing: 9px;
+    text-transform: uppercase;
+}
+  .collections_lists {
+    background: #000;
+}
+  .collection_details {
+   text-align: left;
+    color: #fff;
+    position: absolute;
+    padding: 0 30px;
+    bottom: 12%;
+    left: 0;
+    right: 0;
+}
+
+h2.collection__title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+.collection_details span {
+    border: 1px solid #ff6600;
+    padding: 10px 25px;
+    border-radius: 25px;
+    display: none;
+  width: 50%;
+    text-align: center;
+    align-items: center;
+}
+p.grid-link__detail {
+    padding-bottom: 20px;
+}
+a.grid-link:hover .collection_details span {
+    display: block;
+}
+ .collections_lists .slick-dots li button:before {
+    content: unset !important;
+}
+
+.collections_lists .slick-dots li {
+    width: 30%;
+    height: 4px;
+    background: #000000;
+    margin: 0;
+}
+
+.collections_lists .slick-dots .slick-active {
+    opacity: 1;
+        background: #ff6600;
+
+}
+.collections_lists .slick-dots {
+      bottom: unset;
+      padding-bottom: 30px;
+
+}
+ @media(max-width:768px)
+  {
+     .collections_lists .slick-dots li button:before {
+    content: unset !important;
+}
+.collections_lists .slick-dots {
+    bottom: -25px !important;
+}
+.collections_lists .slick-dots li {
+       width: 10%;
+    height: 4px;
+    background: #000000;
+    margin: 0;
+}
+
+.collections_lists .slick-dots .slick-active {
+    opacity: 1;
+    background: #000000;
+
+}
+.collections_lists .slick-dots {
+      bottom: unset;
+      padding-bottom: 30px;
+
+}
+  }
+
+
+      @media(max-width: 450px){
+      .collections_lists {
+    background: #000;
+    padding: 0 20px;
+}
+
+.grid__item.medium-down--one-half.one-quarter.text-center {
+    padding-left: 0 !important;
+    width: 100%;
+    height: 300px !important;
+}
+
+a.grid-link {
+    display: block;
+    height: 100%;
+}
+
+.grid-link__image.grid-link__image--collection.collection_img {
+    height: 100% !important;
+}
+
+.collection__grid-image-wrapper {
+    height: 100%;
+}
+
+.collection__grid-image-wrapper>div {
+    height: 100% !important;
+}
+
+img.lazyautosizes.ls-is-cached.lazyloaded {
+    height: 100% !important;
+    object-fit: cover;
+  border-radius: 15px;
+}
+
+h2.grid-link__title.collection__title {
+    margin: 0 !important;
+    font-size: 16px;
+}
+
+.collection_details {
+    padding: 0 10px;
+  bottom: 5%;
+}
+
+p.grid-link__detail {
+    display: block;
+}
+
+.collection_details span {
+    display: block;
+    width: fit-content;
+    padding: 6px 12px;
+}
+
+.grid-uniform.collection_list_slider {
+    margin: 0 !important;
+    padding: 0 0 50px 0;
+}
+
+.collections_lists .slick-dots {
+bottom: -10px !important;
+}
+      
+.collections_lists .slick-dots li {
+    width: 20%;
+    height: 2px;
+}
+
+.collection_details span {
+font-size: 10px;
+}
+
+.collection_details:has(p) {
+font-size: 14px;
+font-family: 'Lato';
+letter-spacing: 1px;
+font-weight: 300;
+}
+
+p.image_text.align--center {
+font-size: 16px;
+font-weight: 300;
+}
+}
+  @media (max-width: 768px) {
+  h2.collections_main_title {
+    padding: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .section-header.section-header--small {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}
+  .collection__grid-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 125%; /* Adjust this if you want more or less height */
+  overflow: hidden;
+}
+.collection__grid-image-wrapper > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+  @media (min-width: 769px) {
+  .collection__grid-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 125%;
+    overflow: hidden;
+  }
+
+  .collection__grid-image-wrapper > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .collection__grid-image-wrapper,
+  .collection__grid-image-wrapper > div {
+    position: relative;
+    padding-top: unset;
+    height: auto;
+  }
+
+  img.lazyautosizes,
+  img.lazyloaded {
+    height: auto !important;
+    max-height: 300px;
+    object-fit: cover;
+  }
+}
+  .grid__item.text-center {
+  margin-bottom: 30px;
+}
+@media (min-width: 769px) {
+  .collection__grid-image-wrapper:hover img {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+
+  .collection_details span:hover {
+    background-color: #ff6600;
+    color: #fff;
+    transition: background-color 0.3s ease;
+  }
+}
+.collection_details span {
+  margin: 10px auto 0;
+  display: inline-block;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+</style>
+<script>
+  $('.collection_list_slider').slick({
+      slidesToShow: 3.5,
+    slidesToScroll: 1,
+      arrows: true,
+      dots: true,
+    infinite: false,
+        responsive: [
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 2,
+        }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1.5,
+            slidesToScroll: 1,
+          }
+      }
+    ]
+  });
+</script>
+
+{% schema %}
+{
+  "name": {
+    "da": "Kollektionsliste",
+    "de": "Kategorien-Liste",
+    "en": "Collections",
+    "es": "Lista de colecciones",
+    "fi": "Kokoelmaluettelo",
+    "fr": "Liste des collections",
+    "hi": "कलेक्शन सूची",
+    "it": "Elenco delle collezioni",
+    "ja": "コレクションリスト",
+    "ko": "컬렉션 목록",
+    "nb": "Samlingsliste",
+    "nl": "Collectielijst",
+    "pt-BR": "Lista de coleções",
+    "pt-PT": "Lista de coleções",
+    "sv": "Kollektionslista",
+    "th": "รายการคอลเลกชัน",
+    "zh-CN": "产品系列列表",
+    "zh-TW": "商品系列清單"
+  },
+  "class": "index-section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "da": "Overskrift",
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fi": "Otsake",
+        "fr": "Titre",
+        "hi": "शीर्षक",
+        "it": "Heading",
+        "ja": "見出し",
+        "ko": "제목",
+        "nb": "Overskrift",
+        "nl": "Kop",
+        "pt-BR": "Título",
+        "pt-PT": "Título",
+        "sv": "Rubrik",
+        "th": "ส่วนหัว",
+        "zh-CN": "标题",
+        "zh-TW": "標題"
+      },
+      "default": {
+        "da": "Kollektionsliste",
+        "de": "Kategorien-Liste",
+        "en": "Collection list",
+        "es": "Lista de colecciones",
+        "fi": "Kokoelmaluettelo",
+        "fr": "Page de liste des collections",
+        "hi": "कलेक्शन सूची",
+        "it": "Elenco delle collezioni",
+        "ja": "コレクションリスト",
+        "ko": "컬렉션 목록",
+        "nb": "Samlingsliste",
+        "nl": "Collectielijst",
+        "pt-BR": "Lista de coleções",
+        "pt-PT": "Lista de coleções",
+        "sv": "Kollektionslista",
+        "th": "รายการคอลเลกชัน",
+        "zh-CN": "产品系列列表",
+        "zh-TW": "商品系列清單"
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": {
+        "da": "Kollektion",
+        "de": "Kategorie",
+        "en": "Collection",
+        "es": "Colección",
+        "fi": "Kokoelma",
+        "fr": "Collection",
+        "hi": "कलेक्शन",
+        "it": "Collezione",
+        "ja": "コレクション",
+        "ko": "컬렉션",
+        "nb": "Samling",
+        "nl": "Collectie",
+        "pt-BR": "Coleção",
+        "pt-PT": "Coleção",
+        "sv": "Produktserie",
+        "th": "คอลเลกชัน",
+        "zh-CN": "收藏",
+        "zh-TW": "商品系列"
+      },
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": {
+            "da": "Kollektion",
+            "de": "Kategorie",
+            "en": "Collection",
+            "es": "Colección",
+            "fi": "Kokoelma",
+            "fr": "Collection",
+            "hi": "कलेक्शन",
+            "it": "Collezione",
+            "ja": "コレクション",
+            "ko": "컬렉션",
+            "nb": "Samling",
+            "nl": "Collectie",
+            "pt-BR": "Coleção",
+            "pt-PT": "Coleção",
+            "sv": "Produktserie",
+            "th": "คอลเลกชัน",
+            "zh-CN": "收藏",
+            "zh-TW": "商品系列"
+          }
+        },
+         {
+          "type": "image_picker",
+          "id": "collection_image",
+          "label": "Collection image"
+        }, 
+        {
+          "type": "richtext",
+          "id": "collections-title-txt",
+          "label": "Collection Title"
+        },
+        {
+          "type": "richtext",
+          "id": "collections-title-sub-txt",
+          "label": "Collection Sub Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "da": "Kollektionsliste",
+        "de": "Kategorien-Liste",
+        "en": "Collections",
+        "es": "Lista de colecciones",
+        "fi": "Kokoelmaluettelo",
+        "fr": "Page des collections",
+        "hi": "कलेक्शन सूची",
+        "it": "Elenco delle collezioni",
+        "ja": "コレクションリスト",
+        "ko": "컬렉션 목록",
+        "nb": "Samlingsliste",
+        "nl": "Collectielijst",
+        "pt-BR": "Lista de coleções",
+        "pt-PT": "Lista de coleções",
+        "sv": "Kollektionslista",
+        "th": "รายการคอลเลกชัน",
+        "zh-CN": "产品系列列表",
+        "zh-TW": "商品系列清單"
+      },
+      "category": {
+        "da": "Kollektion",
+        "de": "Kategorie",
+        "en": "Collection",
+        "es": "Colección",
+        "fi": "Kokoelma",
+        "fr": "Collection",
+        "hi": "कलेक्शन",
+        "it": "Collezione",
+        "ja": "コレクション",
+        "ko": "컬렉션",
+        "nb": "Samling",
+        "nl": "Collectie",
+        "pt-BR": "Coleção",
+        "pt-PT": "Coleção",
+        "sv": "Produktserie",
+        "th": "คอลเลกชัน",
+        "zh-CN": "收藏",
+        "zh-TW": "商品系列"
+      },
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,78 @@
+<div class="block-section">
+  <div class="block">
+    <h2 class="block-title">SHOP OUR <span class="colors">INSTAGRAM</span></h2>
+     <div class="wrapper-mini">
+       <div class="row instagram-slider">
+         {% for block in section.blocks %}
+         <div class="col-md-3 col-xs-12 col-sm-3">
+           <div class="images-power">
+           <a href="{{block.settings.link}}" > <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{%if block.settings.image != blank %}{{block.settings.image | img_url:'400x300'}}{%else%}https://cdn.shopify.com/s/files/1/0333/0936/0264/files/371A.02-Luciano-Legacy-MD1.png?v=1582611900{%endif%}"/>
+             </a>
+           </div>
+           </div>
+         {%endfor%}
+         </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name":"instagram",
+  "class": "index-section",
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+},
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "instagram",
+      "category": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      },
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

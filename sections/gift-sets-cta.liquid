@@ -1,0 +1,125 @@
+<section class="gift_sets_sec">
+  
+  <div class="wrapper-mini">
+    <div class="gift_set_boxes">
+      <div class="gift_set_box gift_set_box--one">
+        <a href="{{ section.settings.cta_link_one }}">
+          <div class="gift_set__image">
+            {% if section.settings.image_one != blank %}            
+            <picture>
+              <source media="(min-width:990px)" srcset="{{ section.settings.image_one | img_url: 'master' }}">
+              <img src="{{ section.settings.image_one_mb | img_url: 'master' }}" alt="">
+            </picture>
+            {% else %}
+            <img src="https://cdn.shopify.com/s/files/1/0333/0936/0264/files/placeholder-320x600.png?v=1642147054" alt="">
+          	{% endif %}
+          </div>
+        </a>
+        <div class="gift_set_textbox">
+          <h3 class="gift_set__title">
+            {{ section.settings.title_one }}
+          </h3>
+          <a class="btn btn--gift-set" href="{{ section.settings.cta_link_one }}">
+          	{{ section.settings.btn_text_one }}
+          </a>
+        </div>
+      </div>
+      <div class="gift_set_box gift_set_box--two lg-flex-col-reverse">
+        <a href="{{ section.settings.cta_link_two }}">
+          <div class="gift_set__image">
+            {% if section.settings.image_two != blank %}              
+              <picture>
+                <source media="(min-width:990px)" srcset="{{ section.settings.image_two | img_url: 'master' }}">
+                <img src="{{ section.settings.image_two_mb | img_url: 'master' }}" alt="">
+              </picture>
+            {% else %}
+              <img src="https://cdn.shopify.com/s/files/1/0333/0936/0264/files/placeholder-inverse.png?v=1642147137" alt="">
+          	{% endif %}
+          </div>
+        </a>
+        <div class="gift_set_textbox">
+          <h3 class="gift_set__title">
+            {{ section.settings.title_two }}
+          </h3>
+          <a class="btn btn--gift-set" href="{{ section.settings.cta_link_two }}">
+          	{{ section.settings.btn_text_two }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+{% schema %}
+  {
+    "name": "Gift Sets CTA",
+    "settings": [
+	  {
+		"type": "image_picker",
+		"id": "image_one",
+		"label": "Image One"
+	  },
+	  {
+		"type": "image_picker",
+		"id": "image_one_mb",
+		"label": "Mobile Image One"
+	  },
+	  {
+		"type": "text",
+		"id": "title_one",
+		"label": "Title One",
+		"default": "SHOP MENS GIFT SETS"
+	  },
+	  {
+		"type": "text",
+		"id": "btn_text_one",
+		"label": "Button Text One",
+		"default": "SHOP THE SALE"
+	  },
+ 	  {
+		"type": "url",
+		"id": "cta_link_one",
+		"label": "CTA Link One"
+	  },
+	  {
+		"type": "image_picker",
+		"id": "image_two",
+		"label": "Image Two"
+	  },
+	  {
+		"type": "image_picker",
+		"id": "image_two_mb",
+		"label": "Mobile Image Two"
+	  },
+	  {
+		"type": "text",
+		"id": "title_two",
+		"label": "Title Two",
+		"default": "SHOP MENS GIFT SETS"
+	  },
+	  {
+		"type": "text",
+		"id": "btn_text_two",
+		"label": "Button Text Two",
+		"default": "SHOP THE SALE"
+	  },
+ 	  {
+		"type": "url",
+		"id": "cta_link_two",
+		"label": "CTA Link Two"
+	  }
+	],
+	"presets": [
+	  {
+		"name": "Gift Sets CTA"
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

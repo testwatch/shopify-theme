@@ -1,0 +1,150 @@
+{% comment %}
+{% assign image_box_blocks = section.blocks | where: 'type', 'image_box' %}
+
+{% assign text_box_blocks = section.blocks | where: 'type', 'text_box' %}
+{% endcomment %}
+
+
+<div class="grid_box_container">
+	      {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+  			{% case block.type %}
+  			{% when 'image_box' %}
+              <div class="grid_box_size grid_box_image_box">
+                   <div class="box__image">
+                    <img src="{{ block.settings.image | img_url: 'master' }}">
+                   </div>            
+              </div>
+  
+  			{% when 'text_box' %}
+              <div class="grid_box_size grid_box_text_box">            
+                   <div class="grid_txt_box">
+                     <h2 class="grid_txt_box_title">{{ block.settings.title }}</h2>
+                     <p class="grid_txt_box_content">{{ block.settings.text }}</p>
+                   </div>             
+              </div>
+      		{% endcase %}
+          {% endfor %}
+          {% endif %}
+</div>
+
+
+{% schema %}
+  {
+    "name": "Grid image or Text",
+    "settings": [],
+
+	"blocks": [
+	  {
+		"type": "image_box",
+		"name": "Image Box",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+           }	
+		]
+	  },
+	  {
+		"type": "text_box",
+		"name": "Text Box",
+        "settings": [
+           {
+              "type": "text",
+              "id": "title",
+              "label": "Title",
+              "default": "Title"
+           },
+		   {
+              "type": "textarea",
+              "id": "text",
+              "label": "Text",
+              "default": "Box Content"
+           }
+		]
+	  }
+	],
+	"presets": [
+	  {
+		"name": "Grid image or Text"
+	  }
+	]
+
+
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+
+<style>
+.grid_box_container {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #000;
+    align-items: center;
+    justify-content: center;
+}
+.grid_box_size {
+    width: 33.33%;
+}  
+.box__image img {
+    max-width: 100%;
+    width: 100%;
+}  
+.grid_txt_box .grid_txt_box_title {
+    font-size: 27px;
+    letter-spacing: 1px;
+    line-height: 30px;
+    color: #f2f2f2;
+    font-weight: 300;
+    text-transform: uppercase;
+}  
+.grid_box_text_box {
+    padding: 0 60px;
+}  
+.grid_txt_box .grid_txt_box_content {
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 24px;
+    color: #f2f2f2;
+    font-weight: 300;
+    padding-top: 22px;
+}  
+  
+@media only screen and (max-width: 1024px) {     
+.grid_txt_box .grid_txt_box_title {
+    font-size: 21px;
+} 
+.grid_txt_box .grid_txt_box_content {
+    padding-top: 0;
+}  
+.grid_box_text_box {
+    padding: 0 48px;
+}  
+}  
+  
+@media only screen and (max-width: 768px) {   
+.grid_box_text_box {
+    padding: 0 20px;
+}  
+.grid_txt_box .grid_txt_box_title {
+    font-size: 16px;
+    line-height: 21px;
+}  
+}  
+  
+@media only screen and (max-width: 480px) {     
+.grid_box_text_box {
+    padding: 40px 20px;
+}  
+.grid_box_size {
+    width: 100%;
+}  
+}  
+</style>

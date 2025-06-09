@@ -1,0 +1,1296 @@
+<div class="header1">
+  <div class="header-announce announcement-slider" id="announcement-slider">
+    {%if section.settings.header_text != blank %}
+    <div class="sliderno1 item showing">
+      <div class="desktop-slide">
+        {%if section.settings.timer == 'one' %}
+        <div class="first-announce">
+          {% if section.settings.header_text_link != blank %}
+          <a href="{{section.settings.header_text_link }}"><span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span></a>
+          {% else %}
+          <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span>
+          {% endif %}
+        </div>
+        {%elsif section.settings.timer == 'two' %}
+          {%if section.settings.header_text != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link != blank %}
+            <a href="{{section.settings.header_text_link }}">{{section.settings.header_text}}</a>
+            {% else %}
+            {{section.settings.header_text}}
+            {% endif %}
+          </div>
+          {%endif%}
+        {%elsif section.settings.timer == 'three' %}
+          {%if section.settings.header_text != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link != blank %}
+            <a href="{{section.settings.header_text_link }}">{{section.settings.header_text}} <span class="timer_block"> <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span></span></a>
+            {% else %}
+            {{section.settings.header_text}}  <span class="timer_block"><span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span></span>
+            {% endif %}
+          </div>
+          {%endif%}
+        {%endif%}
+      </div>
+      <div class="mobile-slide">
+        {%if section.settings.timer == 'one' %}
+        <div class="first-announce">
+          {% if section.settings.header_text_link != blank %}
+          <a href="{{section.settings.header_text_link }}"><span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span></a>
+          {% else %}
+          <span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span>
+          {% endif %}
+        </div>
+        {%elsif section.settings.timer == 'two' %}
+          {%if section.settings.header_text_mobile != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_mobile != blank %}
+            <a href="{{section.settings.header_text_link }}">{{section.settings.header_text_mobile }}</a>
+            {% else %}
+            {{section.settings.header_text_mobile }}
+            {% endif %}
+          </div>
+          {%endif%}
+        {%elsif section.settings.timer == 'three' %}
+          {%if section.settings.header_text_mobile != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link != blank %}
+            <a href="{{section.settings.header_text_link }}">{{section.settings.header_text_mobile}}  <span class="timer_block"><span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span></span></a>
+            {% else %}
+            {{section.settings.header_text_mobile}}  <span class="timer_block"><span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span></span>
+            {% endif %}
+          </div>
+          {%endif%}
+        {%endif%}
+      </div>  
+    </div>
+    {% endif %}
+
+    {%if section.settings.header_text-1 != blank %}
+    <div class="sliderno2 item">
+      <div class="desktop-slide">
+        {%if section.settings.timer1 == 'one' %}
+        <div class="first-announce">
+          {% if section.settings.header_text_link-1 != blank %}
+          <a href="{{section.settings.header_text_link-1 }}"><span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span></a>
+          {% else %}
+          <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span>
+          {% endif %}
+        </div>
+        {%elsif section.settings.timer1 == 'two' %}
+          {%if section.settings.header_text-1 != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link-1 != blank %}
+            <a href="{{section.settings.header_text_link-1 }}">{{section.settings.header_text-1}}</a>
+            {% else %}
+            {{section.settings.header_text-1}}
+            {% endif %}
+          </div>
+          {%endif%}
+        {%elsif section.settings.timer1 == 'three' %}
+          {%if section.settings.header_text-1 != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link-1 != blank %}
+            <a href="{{section.settings.header_text_link-1 }}">{{section.settings.header_text-1}} <span class="timer_block"> <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span></span></a>
+            {% else %}
+            {{section.settings.header_text-1}} <span class="timer_block"> <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span></span>
+            {% endif %}
+          </div>
+          {%endif%}  
+        {%endif%}
+      </div>
+      <div class="mobile-slide">
+        {%if section.settings.timer1 == 'one' %}
+        <div class="first-announce">
+          {% if section.settings.header_text_link-1 != blank %}
+          <a href="{{section.settings.header_text_link-1 }}"><span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span></a>
+          {% else %}
+          <span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span>
+          {% endif %}
+        </div>
+        {%elsif section.settings.timer1 == 'two' %}
+          {%if section.settings.header_text_mobile-1 != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_mobile-1 != blank %}
+            <a href="{{section.settings.header_text_link-1 }}">{{section.settings.header_text_mobile-1}}</a>
+            {% else %}
+            {{section.settings.header_text_mobile-1}}
+            {% endif %}
+          </div>
+          {%endif%}
+        {%elsif section.settings.timer1 == 'three' %}
+          {%if section.settings.header_text_mobile-1 != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link-1 != blank %}
+            <a href="{{section.settings.header_text_link-1 }}">{{section.settings.header_text_mobile-1}} <span class="timer_block"> <span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span></span></a>
+            {% else %}
+            {{section.settings.header_text_mobile-1}}  <span class="timer_block"><span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span></span>
+            {% endif %}
+          </div>
+          {%endif%}
+        {%endif%}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if section.settings.header_text-2 != blank %}
+    <div class="sliderno3 item">
+      <div class="desktop-slide">
+        {%if section.settings.timer2 == 'one' %}
+        <div class="first-announce">
+          {% if section.settings.header_text_link-2 != blank %}
+          <a href="{{section.settings.header_text_link-2 }}"><span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span></a>
+          {% else %}
+          <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span>
+          {% endif %}
+        </div>
+        {%elsif section.settings.timer2 == 'two' %}
+          {%if section.settings.header_text-2 != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link-2 != blank %}
+            <a href="{{section.settings.header_text_link-2 }}">{{section.settings.header_text-2}}</a>
+            {% else %}
+            {{section.settings.header_text-2}}
+            {% endif %}
+          </div>
+          {%endif%}
+        {%elsif section.settings.timer2 == 'three' %}
+          {%if section.settings.header_text-2 != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link-2 != blank %}
+            <a href="{{section.settings.header_text_link-2 }}">{{section.settings.header_text-2}}  <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span></a>
+            {% else %}
+            {{section.settings.header_text-2}}  <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span>
+            {% endif %}
+          </div>
+          {%endif%}
+        {%endif%}
+      </div>
+      <div class="mobile-slide">
+        {%if section.settings.timer2 == 'one' %}
+        <div class="first-announce">
+          {% if section.settings.header_text_link-2 != blank %}
+          <a href="{{section.settings.header_text_link-2 }}"><span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span></a>
+          {% else %}
+          <span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span>
+          {% endif %}
+        </div>
+        {%elsif section.settings.timer2 == 'two' %}
+          {%if section.settings.header_text_mobile-2 != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_mobile-2 != blank %}
+            <a href="{{section.settings.header_text_link-2 }}">{{section.settings.header_text_mobile-2}}</a>
+            {% else %}
+            {{section.settings.header_text_mobile-2}}
+            {% endif %}
+          </div>
+          {%endif%}
+        {%elsif section.settings.timer2 == 'three' %}
+          {%if section.settings.header_text_mobile-2 != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link-2 != blank %}
+            <a href="{{section.settings.header_text_link-2 }}">{{section.settings.header_text_mobile-2}}  <span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span></a>
+            {% else %}
+            {{section.settings.header_text_mobile-2}}  <span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span>
+            {% endif %}
+          </div>
+          {%endif%}
+        {%endif%}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if section.settings.header_text-3 != blank %}
+      <div class="sliderno4 item">
+        <div class="desktop-slide">
+          {%if section.settings.timer3 == 'one' %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link-3 != blank %}
+            <a href="{{section.settings.header_text_link-3 }}"><span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span></a>
+            {% else %}
+            <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span>
+            {% endif %}
+          </div>
+          {%elsif section.settings.timer3 == 'two' %}
+            {%if section.settings.header_text-3 != blank %}
+            <div class="first-announce">
+              {% if section.settings.header_text_link-3 != blank %}
+              <a href="{{section.settings.header_text_link-3 }}">{{section.settings.header_text-3}}</a>
+              {% else %}
+              {{section.settings.header_text-3}}
+              {% endif %}
+            </div>
+            {%endif%}
+          {%elsif section.settings.timer3 == 'three' %}
+            {%if section.settings.header_text-3 != blank %}
+            <div class="first-announce">
+              {% if section.settings.header_text_link-3 != blank %}
+              <a href="{{section.settings.header_text_link-3 }}">{{section.settings.header_text-3}}  <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span></a>
+              {% else %}
+              {{section.settings.header_text-3}}  <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span>
+              {% endif %}
+            </div>
+            {%endif%}
+          {%endif%}
+        </div>
+        <div class="mobile-slide">
+          {%if section.settings.timer3 == 'one' %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link-3 != blank %}
+            <a href="{{section.settings.header_text_link-3 }}"><span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span></a>
+            {% else %}
+            <span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span>
+            {% endif %}
+          </div>
+          {%elsif section.settings.timer3 == 'two' %}
+            {%if section.settings.header_text_mobile-3 != blank %}
+            <div class="first-announce">
+              {% if section.settings.header_text_mobile-3 != blank %}
+              <a href="{{section.settings.header_text_link-3 }}">{{section.settings.header_text_mobile-3}}</a>
+              {% else %}
+              {{section.settings.header_text_mobile-3}}
+              {% endif %}
+            </div>
+            {%endif%}
+          {%elsif section.settings.timer3 == 'three' %}
+            {%if section.settings.header_text_mobile-3 != blank %}
+            <div class="first-announce">
+              {% if section.settings.header_text_link-3 != blank %}
+              <a href="{{section.settings.header_text_link-3 }}">{{section.settings.header_text_mobile-3}}  <span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span></a>
+              {% else %}
+              {{section.settings.header_text_mobile-3}}  <span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span>
+              {% endif %}
+            </div>
+            {%endif%}
+          {%endif%}
+          </div>
+      </div>
+      {% endif %}
+
+      {% if section.settings.header_text-4 != blank %}
+      <div class="sliderno5 item">
+        <div class="desktop-slide">
+        {%if section.settings.timer4 == 'one' %}    
+          <div class="first-announce">
+            {% if section.settings.header_text_link-4 != blank %}
+            <a href="{{section.settings.header_text_link-4 }}"><span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span></a>
+            {% else %}
+            <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span>
+            {% endif %}
+          </div>
+        {%elsif section.settings.timer4 == 'two' %}
+          {%if section.settings.header_text-4 != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link-4 != blank %}
+            <a href="{{section.settings.header_text_link-4 }}">{{section.settings.header_text-4}}</a>
+            {% else %}
+            {{section.settings.header_text-4}}
+            {% endif %}
+          </div>
+        {%endif%}
+        {%elsif section.settings.timer4 == 'three' %}
+          {%if section.settings.header_text-4 != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link-4 != blank %}
+            <a href="{{section.settings.header_text_link-4 }}">{{section.settings.header_text-4}}  <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span></a>
+            {% else %}
+            {{section.settings.header_text-4}}  <span id="timer-days"></span><span id="timer-hours"></span> <span id="timer-mint"></span> <span id="timer-sec"></span>
+            {% endif %}
+          </div>
+          {%endif%}
+        {%endif%}
+        </div>
+        <div class="mobile-slide">
+        {%if section.settings.timer4 == 'one' %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link-4 != blank %}
+            <a href="{{section.settings.header_text_link-4 }}"><span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span></a>
+            {% else %}
+            <span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span>
+            {% endif %}
+          </div>
+        {%elsif section.settings.timer4 == 'two' %}
+          {%if section.settings.header_text_mobile-4 != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_mobile-4 != blank %}
+            <a href="{{section.settings.header_text_link-4 }}">{{section.settings.header_text_mobile-4}}</a>
+            {% else %}
+            {{section.settings.header_text_mobile-4}}
+            {% endif %}
+          </div>
+          {%endif%}
+     
+        {%elsif section.settings.timer4 == 'three' %}
+          {%if section.settings.header_text_mobile-4 != blank %}
+          <div class="first-announce">
+            {% if section.settings.header_text_link-4 != blank %}
+            <a href="{{section.settings.header_text_link-4 }}">{{section.settings.header_text_mobile-4}}  <span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span></a>
+            {% else %}
+            {{section.settings.header_text_mobile-4}}  <span id="timer-days-mobile"></span><span id="timer-hours-mobile"></span> <span id="timer-mint-mobile"></span> <span id="timer-sec-mobile"></span>
+            {% endif %}
+          </div>
+          {%endif%}
+        {%endif%}
+        </div>
+  
+    </div>
+    {% endif %}
+
+    <button class="controls" id="announce_previous"><i class="fa fa-angle-left"></i></button>
+    <button class="controls" id="announce_next"><i class="fa fa-angle-right"></i></button>
+  </div>
+
+    {%if template contains 'product' %}
+    <div class="product-stikcy" style="display:none;">
+      <div class="price-data">
+        <form method="post" action="/cart/add">
+          <div class="row">
+            <div class="col-md-3 col-sm-2 col-xs-2 imagealong">
+              {% assign featured_image = product.images.first | default: product.featured_image %}
+              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{featured_image | img_url:'master'}}" class="feature_image lazyload">
+            </div>
+            <div class="col-md-6 col-sm-10 col-xs-10 align-flex">
+              <div class="product_group">
+                <div class="product_title">{{product.title}}</div>
+                <div class="product_money">{{product.price | money}}</div>
+              </div>
+              <div class="product_button"><input type="hidden" name="id" value="{{ product.variants.first.id }}" /><input type="submit" value="Add to cart" class="btn" /></div>
+            </div>
+            <div class="col-md-3 col-sm-2 col-xs-2 hidemobile">
+              <div class="addtocart_btn"><input type="submit" value="Add to cart" class="btn" /></div>
+            </div>
+          </div>
+        </form> 
+      </div>
+    </div>
+    {%endif%} 
+
+    <div class="header-bar">{%include 'header-bar'%}</div>
+  </div>
+
+{%comment%}<style>
+  {%- assign logo_width = 695 -%}
+  {%- assign logo_max_width = section.settings.logo_max_width | times: 1 -%}
+  {% if logo_max_width < logo_width %}
+    {%- assign logo_width = logo_max_width -%}
+  {% endif %}
+  .logo__image-wrapper {
+    max-width: {{ logo_width }}px;
+  }
+  /*================= If logo is above navigation ================== */
+  {% if section.settings.nav_below_logo %}
+    .site-nav {
+      {% if section.settings.show_header_lines %}
+        border-top: 1px solid {{ settings.color_borders }};
+        border-bottom: 1px solid {{ settings.color_borders }};
+      {% endif %}
+      margin-top: 30px;
+    }
+
+    {% unless section.settings.left_aligned_logo %}
+      .logo__image-wrapper {
+        margin: 0 auto;
+      }
+    {% endunless %}
+  {% endif %}
+
+  /*============ If logo is on the same line as navigation ============ */
+  {% unless section.settings.nav_below_logo or section.settings.show_header_lines == false %}
+    .site-header .grid--full {
+      border-bottom: 1px solid {{ settings.color_borders }};
+      padding-bottom: 30px;
+    }
+  {% endunless %}
+
+
+  {% unless section.settings.nav_below_logo %}
+    @media screen and (min-width: 769px) {
+      .site-nav {
+        text-align: right!important;
+      }
+    }
+  {% endunless %}
+  }
+
+</style>
+
+<div data-section-id="{{ section.id }}" data-section-type="header-section">
+  <div class="header-bar">
+    <div class="wrapper medium-down--hide">
+      <div class="post-large--display-table">
+
+        {% if section.settings.show_announcement or section.settings.header_search_enable %}
+          <div class="header-bar__left post-large--display-table-cell">
+
+            {% comment %}
+              Add social links to header
+            {% endcomment %}
+
+            {% comment %}
+            <div class="header-bar__module header-bar__module--list">
+              {% include 'social-links' %}
+            </div>
+            {% endcomment %}
+
+            {% if section.settings.show_announcement %}
+              <div class="header-bar__module header-bar__message">
+                {% if section.settings.announcement_link != blank %}
+                  <a href="{{ section.settings.announcement_link }}">
+                {% endif %}
+                  {{ section.settings.header_text | escape }}
+                {% if section.settings.announcement_link != blank %}
+                  </a>
+                {% endif %}
+              </div>
+            {% elsif section.settings.header_search_enable %}
+              <div class="header-bar__module header-bar__search">
+                {% include 'search-bar' with 'header' %}
+              </div>
+            {% endif %}
+
+          </div>
+        {% endif %}
+
+        <div class="header-bar__right post-large--display-table-cell">
+
+          
+
+          <div class="header-bar__module">
+            <span class="header-bar__sep" aria-hidden="true"></span>
+            <a href="{{ routes.cart_url }}" class="cart-page-link"><span class="icon icon-cart header-bar__cart-icon" aria-hidden="true"></span></a>
+          </div>
+
+          <div class="header-bar__module">
+            <a href="{{ routes.cart_url }}" class="cart-page-link">
+              {{ 'layout.cart.title' | t }}{% unless cart.item_count == 0 %}:{% endunless %}
+              <span class="cart-count header-bar__cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}">{{ cart.item_count }}</span>
+            </a>
+          </div>
+
+          {% if section.settings.header_search_enable %}
+            {% if section.settings.show_announcement %}
+              <div class="header-bar__module header-bar__search">
+                {% include 'search-bar' with 'header' %}
+              </div>
+            {% endif %}
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper post-large--hide announcement-bar--mobile">
+      {% if section.settings.show_announcement %}
+        {% if section.settings.announcement_link != blank %}
+          <a href="{{ section.settings.announcement_link }}">
+        {% endif %}
+          <span>{{ section.settings.header_text | escape }}</span>
+        {% if section.settings.announcement_link != blank %}
+          </a>
+        {% endif %}
+      {% endif %}
+    </div>
+
+    <div class="wrapper post-large--hide">
+      {% unless section.settings.nav_menu == blank and section.settings.header_search_enable == false and shop.customer_accounts_enabled == false %}
+        <button type="button" class="mobile-nav-trigger" id="MobileNavTrigger" aria-controls="MobileNav" aria-expanded="false">
+          <span class="icon icon-hamburger" aria-hidden="true"></span>
+          {{ 'layout.navigation.menu' | t }}
+        </button>
+      {% endunless %}
+      <a href="{{ routes.cart_url }}" class="cart-page-link mobile-cart-page-link">
+        <span class="icon icon-cart header-bar__cart-icon" aria-hidden="true"></span>
+        {{ 'layout.cart.title' | t }} <span class="cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}">{{ cart.item_count }}</span>
+      </a>
+    </div>
+
+  <header class="site-header" role="banner">
+    <div class="wrapper">
+
+      {% if section.settings.nav_below_logo %}
+        <div class="grid--full">
+          <div class="grid__item">
+            {% if request.page_type == 'index' %}
+              <h1 class="site-header__logo{% if section.settings.logo == blank %}{% unless section.settings.left_aligned_logo == false and section.settings.nav_below_logo %} post-large--left{% endunless %}{% endif %}" itemscope itemtype="http://schema.org/Organization">
+            {% else %}
+              <div class="h1 site-header__logo{% if section.settings.logo == blank %}{% unless section.settings.left_aligned_logo == false and section.settings.nav_below_logo %} post-large--left{% endunless %}{% endif %}" itemscope itemtype="http://schema.org/Organization">
+            {% endif %}
+              {% if section.settings.logo != blank %}
+                <noscript>
+                  {% capture image_size %}{{ logo_width | escape }}x{% endcapture %}
+                  <div class="logo__image-wrapper">
+                    {{ section.settings.logo | img_url: image_size | img_tag: shop.name }}
+                  </div>
+                </noscript>
+                <div class="logo__image-wrapper supports-js">
+                  <a href="{{ routes.root_url }}" itemprop="url" style="padding-top:{{ 1 | divided_by: section.settings.logo.aspect_ratio | times: 100}}%;">
+                    {% assign img_url = section.settings.logo | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                    <img class="logo__image lazyload"
+                         src="{{ section.settings.logo | img_url: '300x300' }}"
+                         data-src="{{ img_url }}"
+                         data-widths="[120, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                         data-aspectratio="{{ section.settings.logo.aspect_ratio }}"
+                         data-sizes="auto"
+                         alt="{{ shop.name | escape }}"
+                         itemprop="logo">
+                  </a>
+                </div>
+              {% else %}
+                <a href="{{ routes.root_url }}" itemprop="url">{{ shop.name }}</a>
+              {% endif %}
+            {% if request.page_type == 'index' %}
+              </h1>
+            {% else %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="grid--full medium-down--hide">
+          <div class="grid__item">
+            {% include 'site-nav' with linklists[section.settings.nav_menu] %}
+          </div>
+        </div>
+      {% else %}
+        <div class="grid--full post-large--display-table">
+          <div class="grid__item post-large--one-third post-large--display-table-cell">
+            {% if request.page_type == 'index' %}
+              <h1 class="site-header__logo{% if section.settings.logo == blank %}{% unless section.settings.left_aligned_logo == false and section.settings.nav_below_logo %} post-large--left{% endunless %}{% endif %}" itemscope itemtype="http://schema.org/Organization">
+            {% else %}
+              <div class="h1 site-header__logo{% if section.settings.logo == blank %}{% unless section.settings.left_aligned_logo == false and section.settings.nav_below_logo %} post-large--left{% endunless %}{% endif %}" itemscope itemtype="http://schema.org/Organization">
+            {% endif %}
+              {% if section.settings.logo != blank %}
+                <noscript>
+                  {% capture image_size %}{{ logo_width | escape }}x{% endcapture %}
+                  <div class="logo__image-wrapper">
+                    {{ section.settings.logo | img_url: image_size | img_tag: shop.name }}
+                  </div>
+                </noscript>
+                <div class="logo__image-wrapper supports-js">
+                  <a href="{{ routes.root_url }}" itemprop="url" style="padding-top:{{ 1 | divided_by: section.settings.logo.aspect_ratio | times: 100}}%;">
+                    {% assign img_url = section.settings.logo | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                    <img class="logo__image lazyload"
+                         src="{{ section.settings.logo | img_url: '300x300' }}"
+                         data-src="{{ img_url }}"
+                         data-widths="[120, 180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                         data-aspectratio="{{ section.settings.logo.aspect_ratio }}"
+                         data-sizes="auto"
+                         alt="{{ shop.name | escape }}"
+                         itemprop="logo">
+                  </a>
+                </div>
+              {% else %}
+                <a href="{{ routes.root_url }}" itemprop="url">{{ shop.name }}</a>
+              {% endif %}
+            {% if request.page_type == 'index' %}
+              </h1>
+            {% else %}
+              </div>
+            {% endif %}
+          </div>
+          <div class="grid__item post-large--two-thirds post-large--display-table-cell medium-down--hide">
+            {% include 'site-nav' with linklists[section.settings.nav_menu] %}
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+  </header>
+</div>
+{%endcomment%}
+<style>
+
+.cart-has-item-css i.fa.fa-shopping-basket
+  {
+    border: 1px solid #ff6b00 !important;
+    color: #ff6b00 !important;
+  }
+
+.header-desktop.desktop .cart-section
+  {
+      width: 35%; 
+  }
+
+.header-desktop.desktop .logo-section
+ {
+      width: 35%; 
+ }
+
+.header-desktop.desktop .site-nav
+  {
+    text-align: center;
+  }
+
+.header-desktop.desktop .menu-section.for_desktop
+  {
+    width: 70%;
+  }
+
+  .mobile_btn svg {
+    fill: #4e4d4d;
+}
+  .header-button.mobile_btn {
+    display: none;
+}
+  
+.header-search input#s {
+    background: #000 !important;
+}
+.menu-section li a {
+    font-family: "Lato", sans-serif;
+    font-weight: 600;
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.header-bar a, .header-bar button {
+    color: #fff;
+}
+.site-nav__link {
+    padding: 7px 7px 7px 7px !important;
+}
+  .site-nav__dropdown li a {
+    color: #000 !important;
+}
+    @media(max-width:768px)
+  {
+     .header-button.mobile_btn {
+    display: block;
+}
+    .mobile_body li a {
+    color: #000;
+}
+
+a.mobile-nav {
+    color: #000 !important;
+}
+    .mobile-banner-image-search {
+    background-color: transparent !important;
+}
+    .logo-section {
+    text-align: center;
+}
+    img.header_logo.header-logo {
+    max-width: 150px;
+    }
+    .s-menu {
+    font-size: 23px;
+      padding:0;
+    }
+    .icons-menu, .s-menu {
+    justify-content: center;
+}
+
+.header-bar
+{
+  padding: 15px 10px !important;
+}    
+    
+.header-desktop.desktop .logo-section
+    {
+      padding-left: 60px !important;
+    }
+    
+.s-menu.ss.for_mobile form
+    {
+      display: none;
+    }
+
+.header-button.mobile_btn {
+    display: none;
+}
+    
+  }
+</style>
+{% schema %}
+{
+  "name": {
+    "da": "Overskrift",
+    "de": "Titel",
+    "en": "Header",
+    "es": "Encabezado",
+    "fi": "Ylätunniste",
+    "fr": "En-tête",
+    "hi": "हैडर",
+    "it": "Header",
+    "ja": "ヘッダー",
+    "ko": "머리글",
+    "nb": "Header",
+    "nl": "Koptekst",
+    "pt-BR": "Cabeçalho",
+    "pt-PT": "Cabeçalho",
+    "sv": "Rubrik",
+    "th": "ส่วนหัว",
+    "zh-CN": "标头",
+    "zh-TW": "標頭"
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "header_search_enable",
+      "label": {
+        "da": "Vis søgelinje",
+        "de": "Suchleiste anzeigen",
+        "en": "Show search bar",
+        "es": "Mostrar barra de búsqueda",
+        "fi": "Näytä hakupalkki",
+        "fr": "Afficher la barre de recherche",
+        "hi": "सर्च बार दिखाएं",
+        "it": "Mostra barra di ricerca",
+        "ja": "検索バーを表示する",
+        "ko": "검색 바 표시",
+        "nb": "Vis søkefelt",
+        "nl": "Zoekbalk weergeven",
+        "pt-BR": "Exibir barra de pesquisa",
+        "pt-PT": "Mostrar barra de pesquisa",
+        "sv": "Visa sökfältet",
+        "th": "แสดงแถบการค้นหา",
+        "zh-CN": "显示搜索栏",
+        "zh-TW": "顯示搜尋列"
+      }
+    },
+	{
+      "type": "text",
+      "id": "headertimer",
+      "label": "Timer"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": {
+        "da": "Logo",
+        "de": "Logo",
+        "en": "Logo",
+        "es": "Logotipo",
+        "fi": "Logo",
+        "fr": "Logo",
+        "hi": "लोगो",
+        "it": "Logo",
+        "ja": "ロゴ",
+        "ko": "로고",
+        "nb": "Logo",
+        "nl": "Logo",
+        "pt-BR": "Logotipo",
+        "pt-PT": "Logótipo",
+        "sv": "Logotyp",
+        "th": "โลโก้",
+        "zh-CN": "logo",
+        "zh-TW": "商標"
+      },
+      "info": {
+        "da": "450 x 200 pixel anbefales",
+        "de": "450 x 200 Pixel empfohlen",
+        "en": "450 x 200px recommended",
+        "es": "450 x 200px recomendado",
+        "fi": "Suositus 450 x 200px",
+        "fr": "450 x 200 px recommandé",
+        "hi": "450 x 200px की अनुशंसा की जाती है",
+        "it": "450 x 200 px consigliato",
+        "ja": "450 x 200ピクセルを推奨",
+        "ko": "450x200 픽셀 권장",
+        "nb": "450 x 200 px anbefales",
+        "nl": "450 x 200 px aanbevolen",
+        "pt-BR": "450 x 200 px recomendado",
+        "pt-PT": "450 x 200 píxeis (recomendado)",
+        "sv": "450 x 200px rekommenderas",
+        "th": "แนะนำขนาด 450 x 200 พิกเซล",
+        "zh-CN": "推荐使用 450 x 200 像素大小",
+        "zh-TW": "建議使用 450 x 200px"
+      }
+    },
+    
+    {
+      "type": "header",
+      "content": {
+        "da": "Hovedmenu",
+        "de": "Hauptmenü",
+        "en": "Main menu",
+        "es": "Menú principal",
+        "fi": "Päävalikko",
+        "fr": "Menu principal",
+        "hi": "मुख्य मेनू",
+        "it": "Menu principale",
+        "ja": "メインメニュー",
+        "ko": "주 메뉴",
+        "nb": "Hovedmeny",
+        "nl": "Hoofdmenu",
+        "pt-BR": "Menu principal",
+        "pt-PT": "Menu principal",
+        "sv": "Huvudmeny",
+        "th": "เมนูหลัก",
+        "zh-CN": "主菜单",
+        "zh-TW": "主選單"
+      }
+    },
+    {
+      "type": "link_list",
+      "id": "nav_menu",
+      "label": {
+        "da": "Menu",
+        "de": "Menü",
+        "en": "Menu",
+        "es": "Menú",
+        "fi": "Valikko",
+        "fr": "Menu",
+        "hi": "मेनू",
+        "it": "Menu",
+        "ja": "メニュー",
+        "ko": "메뉴",
+        "nb": "Meny",
+        "nl": "Menu",
+        "pt-BR": "Menu",
+        "pt-PT": "Menu",
+        "sv": "Meny",
+        "th": "เมนู",
+        "zh-CN": "菜单",
+        "zh-TW": "選單"
+      },
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "nav_menu_mobile",
+      "label": "Menu Mobile",
+      "default": "main-menu"
+    },
+    
+    {
+      "type": "header",
+      "content": {
+        "da": "Meddelelseslinje",
+        "de": "Ankündigungsbereich",
+        "en": "Announcement bar 1",
+        "es": "Barra de anuncios",
+        "fi": "Ilmoituspalkki",
+        "fr": "Barre d'annonces",
+        "hi": "घोषणा बार",
+        "it": "Barra degli annunci",
+        "ja": "告知バー",
+        "ko": "공지 표시줄",
+        "nb": "Kunngjøringslinje",
+        "nl": "Aankondigingsbalk",
+        "pt-BR": "Barra de anúncios",
+        "pt-PT": "Barra de comunicado",
+        "sv": "Meddelandefält",
+        "th": "แถบประกาศ",
+        "zh-CN": "公告栏",
+        "zh-TW": "公告列"
+      }
+    },
+      {
+         "type":      "radio",
+         "id":        "timer",
+         "label":     "Timer/Text",
+         "options": [
+           { "value": "one", "label": "Timer" },
+           { "value": "two", "label": "Text" },
+      { "value": "three", "label": "Text With Timer" }
+         ],
+         "default":   "one",
+         "info":      "Timer"
+      },    
+    {
+      "type": "text",
+      "id": "header_text",
+      "label": {
+        "da": "Tekst",
+        "de": "Text",
+        "en": "Text",
+        "es": "Texto",
+        "fi": "Teksti",
+        "fr": "Texte",
+        "hi": "टेक्स्ट",
+        "it": "Testo",
+        "ja": "テキスト",
+        "ko": "텍스트",
+        "nb": "Tekst",
+        "nl": "Tekst",
+        "pt-BR": "Texto",
+        "pt-PT": "Texto",
+        "sv": "Text",
+        "th": "ข้อความ",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
+      },
+      "default": {
+        "da": "Meddel noget her",
+        "de": "Hier etwas ankündigen",
+        "en": "Announce something here",
+        "es": "Anuncia algo aquí",
+        "fi": "Ilmoita jotakin tässä",
+        "fr": "Annoncez quelque chose ici",
+        "hi": "यहां कुछ घोषित करें",
+        "it": "Annuncia qualcosa qui",
+        "ja": "ここで告知してください",
+        "ko": "여기에 공지하십시오",
+        "nb": "Kunngjør noe her",
+        "nl": "Kondig hier iets aan",
+        "pt-BR": "Anuncie algo aqui",
+        "pt-PT": "Anunciar algo aqui",
+        "sv": "Meddela något här",
+        "th": "ประกาศข้อความที่นี่",
+        "zh-CN": "在此处进行公告",
+        "zh-TW": "在此公告資訊"
+      }
+    },
+	 {
+      "type":"url",
+      "id":"header_text_link",
+      "label":"CTA Link"
+      },
+{
+      "type":"text",
+      "id":"header_text_mobile",
+      "label":"Mobile Text"
+      },
+	  {
+		"type":"header",
+		"content":"Announcement Bar 2"
+ 	  },
+      {
+         "type":      "radio",
+         "id":        "timer1",
+         "label":     "Timer/Text",
+         "options": [
+           { "value": "one", "label": "Timer" },
+           { "value": "two", "label": "Text" },
+      { "value": "three", "label": "Text With Timer" }
+         ],
+         "default":   "one",
+         "info":      "Timer"
+      },
+    {
+      "type": "text",
+      "id": "header_text-1",
+      "label": {
+        "da": "Tekst",
+        "de": "Text",
+        "en": "Text",
+        "es": "Texto",
+        "fi": "Teksti",
+        "fr": "Texte",
+        "hi": "टेक्स्ट",
+        "it": "Testo",
+        "ja": "テキスト",
+        "ko": "텍스트",
+        "nb": "Tekst",
+        "nl": "Tekst",
+        "pt-BR": "Texto",
+        "pt-PT": "Texto",
+        "sv": "Text",
+        "th": "ข้อความ",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
+      },
+      "default": {
+        "da": "Meddel noget her",
+        "de": "Hier etwas ankündigen",
+        "en": "Announce something here",
+        "es": "Anuncia algo aquí",
+        "fi": "Ilmoita jotakin tässä",
+        "fr": "Annoncez quelque chose ici",
+        "hi": "यहां कुछ घोषित करें",
+        "it": "Annuncia qualcosa qui",
+        "ja": "ここで告知してください",
+        "ko": "여기에 공지하십시오",
+        "nb": "Kunngjør noe her",
+        "nl": "Kondig hier iets aan",
+        "pt-BR": "Anuncie algo aqui",
+        "pt-PT": "Anunciar algo aqui",
+        "sv": "Meddela något här",
+        "th": "ประกาศข้อความที่นี่",
+        "zh-CN": "在此处进行公告",
+        "zh-TW": "在此公告資訊"
+      }
+  
+    },
+	 {
+      "type":"text",
+      "id":"header_text_mobile-1",
+      "label":"Mobile Text"
+      },
+      {
+      "type":"url",
+      "id":"header_text_link-1",
+      "label":"CTA Link"
+      },
+	  {
+		"type":"header",
+		"content":"Announcement Bar 3"
+ 	  },
+      {
+         "type":      "radio",
+         "id":        "timer2",
+         "label":     "Timer/Text",
+         "options": [
+           { "value": "one", "label": "Timer" },
+           { "value": "two", "label": "Text" },
+      { "value": "three", "label": "Text With Timer" }
+         ],
+         "default":   "one",
+         "info":      "Timer"
+      },	
+	 {
+      "type": "text",
+      "id": "header_text-2",
+      "label": {
+        "da": "Tekst",
+        "de": "Text",
+        "en": "Text",
+        "es": "Texto",
+        "fi": "Teksti",
+        "fr": "Texte",
+        "hi": "टेक्स्ट",
+        "it": "Testo",
+        "ja": "テキスト",
+        "ko": "텍스트",
+        "nb": "Tekst",
+        "nl": "Tekst",
+        "pt-BR": "Texto",
+        "pt-PT": "Texto",
+        "sv": "Text",
+        "th": "ข้อความ",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
+      },
+      "default": {
+        "da": "Meddel noget her",
+        "de": "Hier etwas ankündigen",
+        "en": "Announce something here",
+        "es": "Anuncia algo aquí",
+        "fi": "Ilmoita jotakin tässä",
+        "fr": "Annoncez quelque chose ici",
+        "hi": "यहां कुछ घोषित करें",
+        "it": "Annuncia qualcosa qui",
+        "ja": "ここで告知してください",
+        "ko": "여기에 공지하십시오",
+        "nb": "Kunngjør noe her",
+        "nl": "Kondig hier iets aan",
+        "pt-BR": "Anuncie algo aqui",
+        "pt-PT": "Anunciar algo aqui",
+        "sv": "Meddela något här",
+        "th": "ประกาศข้อความที่นี่",
+        "zh-CN": "在此处进行公告",
+        "zh-TW": "在此公告資訊"
+      }
+  
+    },
+	 {
+      "type":"text",
+      "id":"header_text_mobile-2",
+      "label":"Mobile Text"
+      },
+      {
+      "type":"url",
+      "id":"header_text_link-2",
+      "label":"CTA Link"
+      },
+	{
+		"type":"header",
+		"content":"Announcement Bar 4"
+ 	  },
+      {
+         "type":      "radio",
+         "id":        "timer3",
+         "label":     "Timer/Text",
+         "options": [
+           { "value": "one", "label": "Timer" },
+           { "value": "two", "label": "Text" },
+      { "value": "three", "label": "Text With Timer" }
+         ],
+         "default":   "one",
+         "info":      "Timer"
+      },
+			 {
+      "type": "text",
+      "id": "header_text-3",
+      "label": {
+        "da": "Tekst",
+        "de": "Text",
+        "en": "Text",
+        "es": "Texto",
+        "fi": "Teksti",
+        "fr": "Texte",
+        "hi": "टेक्स्ट",
+        "it": "Testo",
+        "ja": "テキスト",
+        "ko": "텍스트",
+        "nb": "Tekst",
+        "nl": "Tekst",
+        "pt-BR": "Texto",
+        "pt-PT": "Texto",
+        "sv": "Text",
+        "th": "ข้อความ",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
+      },
+      "default": {
+        "da": "Meddel noget her",
+        "de": "Hier etwas ankündigen",
+        "en": "Announce something here",
+        "es": "Anuncia algo aquí",
+        "fi": "Ilmoita jotakin tässä",
+        "fr": "Annoncez quelque chose ici",
+        "hi": "यहां कुछ घोषित करें",
+        "it": "Annuncia qualcosa qui",
+        "ja": "ここで告知してください",
+        "ko": "여기에 공지하십시오",
+        "nb": "Kunngjør noe her",
+        "nl": "Kondig hier iets aan",
+        "pt-BR": "Anuncie algo aqui",
+        "pt-PT": "Anunciar algo aqui",
+        "sv": "Meddela något här",
+        "th": "ประกาศข้อความที่นี่",
+        "zh-CN": "在此处进行公告",
+        "zh-TW": "在此公告資訊"
+      }
+  
+    },
+	
+	 {
+      "type":"text",
+      "id":"header_text_mobile-3",
+      "label":"Mobile Text"
+      },
+      {
+      "type":"url",
+      "id":"header_text_link-3",
+      "label":"CTA Link"
+      },
+	  {
+		"type":"header",
+		"content":"Announcement Bar 5"
+ 	  },
+      {
+         "type":      "radio",
+         "id":        "timer4",
+         "label":     "Timer/Text",
+         "options": [
+           { "value": "one", "label": "Timer" },
+           { "value": "two", "label": "Text" },
+      { "value": "three", "label": "Text With Timer" }
+         ],
+         "default":   "one",
+         "info":      "Timer"
+      },
+	  	 {
+      "type": "text",
+      "id": "header_text-4",
+      "label": {
+        "da": "Tekst",
+        "de": "Text",
+        "en": "Text",
+        "es": "Texto",
+        "fi": "Teksti",
+        "fr": "Texte",
+        "hi": "टेक्स्ट",
+        "it": "Testo",
+        "ja": "テキスト",
+        "ko": "텍스트",
+        "nb": "Tekst",
+        "nl": "Tekst",
+        "pt-BR": "Texto",
+        "pt-PT": "Texto",
+        "sv": "Text",
+        "th": "ข้อความ",
+        "zh-CN": "文本",
+        "zh-TW": "文字"
+      },
+      "default": {
+        "da": "Meddel noget her",
+        "de": "Hier etwas ankündigen",
+        "en": "Announce something here",
+        "es": "Anuncia algo aquí",
+        "fi": "Ilmoita jotakin tässä",
+        "fr": "Annoncez quelque chose ici",
+        "hi": "यहां कुछ घोषित करें",
+        "it": "Annuncia qualcosa qui",
+        "ja": "ここで告知してください",
+        "ko": "여기에 공지하십시오",
+        "nb": "Kunngjør noe her",
+        "nl": "Kondig hier iets aan",
+        "pt-BR": "Anuncie algo aqui",
+        "pt-PT": "Anunciar algo aqui",
+        "sv": "Meddela något här",
+        "th": "ประกาศข้อความที่นี่",
+        "zh-CN": "在此处进行公告",
+        "zh-TW": "在此公告資訊"
+      }
+  
+    },
+	 {
+      "type":"text",
+      "id":"header_text_mobile-4",
+      "label":"Mobile Text"
+      },
+      {
+      "type":"url",
+      "id":"header_text_link-4",
+      "label":"CTA Link"
+      }
+  ]
+}
+{% endschema %}
+ {%if section.settings.timer == 'one' or section.settings.timer == 'three' or section.settings.timer1 == 'one' or section.settings.timer1 == 'three' or section.settings.timer2 == 'one' or section.settings.timer2 == 'three' or section.settings.timer3 == 'one' or section.settings.timer3 == 'three' or section.settings.timer4 == 'one' or section.settings.timer4 == 'three' %}
+<script>
+  // Set the date we're counting down to
+  var countDownDate = new Date("{%if section.settings.headertimer != blank %}{{section.settings.headertimer}}{%else%}Jan 5, 2021 15:37:25{%endif%}").getTime();
+
+  // Update the count down every 1 second
+  var x = setInterval(function() {
+
+    // Get today's date and time
+    var now = new Date().getTime();
+      
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    $('.header-announce #timer-days').html("<span class='days_value'>"+days  + "</span><span class='timerdays'>Days</span> ");
+    $('.header-announce #timer-hours').html("<span class='hours_value'>"+hours  + "</span><span class='timerhours'>Hours</span> ");
+    $('.header-announce #timer-mint').html("<span class='minutes_value'>"+minutes  + "</span><span class='timermintue'>Minutes</span> ");
+    $('.header-announce #timer-sec').html("<span class='seconds_value'>"+seconds  + "</span><span class='timersec'>Seconds</span> ");
+
+    $('.header-announce #timer-days-mobile').html("<span class='days_value'>"+days  + "</span><span class='timerdays'>Days</span> ");
+    $('.header-announce #timer-hours-mobile').html("<span class='hours_value'>"+hours  + "</span><span class='timerhours'>Hours</span> ");
+    $('.header-announce #timer-mint-mobile').html("<span class='minutes_value'>"+minutes  + "</span><span class='timermintue'>Minutes</span> ");
+    $('.header-announce #timer-sec-mobile').html("<span class='seconds_value'>"+seconds  + "</span><span class='timersec'>Seconds</span> ");
+  }, 1000);
+
+  window.addEventListener('load', (event) => {
+  var days1 = parseInt($('.timer_block .days_value').text());
+  var hours1 = parseInt($('.timer_block .hours_value').text());
+  var minutes1 = parseInt($('.timer_block .minutes_value').text());
+  var seconds1 = parseInt($('.timer_block .seconds_value').text());
+  if(days1 <= 0 ) {
+    if(hours1 <= 0 ) {
+        if(minutes1 <= 0 ) {
+          if(seconds1 <=  0) {
+            $('.timer_block').remove();
+          } else {
+            $('.timer_block #timer-days').hide();
+            $('.timer_block #timer-days-mobile').hide();
+            $('.timer_block #timer-hours').hide();
+            $('.timer_block #timer-hours-mobile').hide();
+            // $('.timer_block #timer-mint').hide();
+            // $('.timer_block #timer-mint-mobile').hide();
+          }
+        } else {
+          $('.timer_block #timer-days').hide();
+          $('.timer_block #timer-days-mobile').hide();
+          $('.timer_block #timer-hours').hide();
+          $('.timer_block #timer-hours-mobile').hide();
+        }
+    } else {
+      $('.timer_block #timer-days').hide();
+      $('.timer_block #timer-days-mobile').hide();
+    }
+  }
+});
+</script>
+{% endif %}

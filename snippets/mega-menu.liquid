@@ -1,0 +1,78 @@
+        <div class="dropmenu-wrapper menu-animate">
+          <div class="container">
+            <div class="grid {% if parent_index <= 2 %}large-dropdown-inner{% else %}dropdown-inner{% endif %}">
+              
+              {% for childlink in link.links %}
+                {%- assign grand_child_list_handle = childlink.title | handle -%}
+                {% if childlink.links != blank %}
+                  <div class="grid__item one-third">
+                    <div class="sub-menu-wrapper">
+                      <span class="menu-link" href="{{ childlink.url }}">{{ childlink.title }}</span>
+                      <ul>
+                        {% for grandchildlink in childlink.links %}
+                          <li {% if grandchildlink.active %}class="grandchildlink-active"{% endif %}><a class="site-nav__link" href="{{ grandchildlink.url }}">{{ grandchildlink.title }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+             
+              {% elsif childlink.type == 'collection_link' %}
+                {% assign collection_tag = childlink.object.title | downcase | remove : " " %}
+                
+                {% if collection_tag contains 'mens' or collection_tag contains 'womens' or collection_tag contains 'sellers' or collection_tag contains 'watchsets' or collection_tag contains 'watchcouplesets' %}
+                  <div class="grid__item one-third menu_collection" data-collection_tag="{{collection_tag}}">
+                    <div class="menu-collection-image text-center">
+                      <a href="{% if collection_tag contains "men'sbestsellers" %}/pages/landing-collection-page{% elsif collection_tag contains 'womensbestseller' %}/pages/landing-women-best-seller{% else %}{{ childlink.url }}{% endif %}">
+                        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ childlink.object.image | img_url: 'large' }}" alt="{{ childlink.title | escape }}">
+                      </a>
+                      <a class="menu-link" href="{% if collection_tag contains "men'sbestsellers" %}/pages/landing-collection-page{% elsif collection_tag contains 'womensbestseller' %}/pages/landing-women-best-seller{% else %}{{ childlink.url }}{% endif %}">{{ childlink.title }}</a>
+                    </div>
+                  </div>
+                {% else %}
+                  <div class="grid__item product_links {% if parent_index == 1 %}one-sixth{% else %}one-third{% endif %}">
+                    <div class="menu-collection-image text-center product_block">
+                      <a href="{{ childlink.url }}">
+                      {{ collection_handle}}
+                        <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ childlink.object.image | img_url: 'large' }}" alt="{{ childlink.title | escape }}">
+                      </a>
+                      <a class="menu-link" href="{{ childlink.url }}">{{ childlink.title }}</a>
+                    </div>
+                  </div>
+                {% endif %}
+              {% elsif childlink.type == 'product_link'  %}
+               <div class="grid__item product_links {% if parent_index == 1 %}one-sixth{% else %}one-third{% endif %}">
+                    <div class="menu-collection-image product_block text-center">
+                        <a href="{{ childlink.url }}">
+                          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ childlink.object.featured_image | img_url: 'large' }}" alt="{{ childlink.title | escape }}">
+                        </a>
+                         <a class="menu-link" href="{{ childlink.url }}">{{ childlink.title }} {% comment %}<span>{{ childlink.object.price | money }}</span>{% endcomment %}</a>
+                    </div>
+                  </div>
+                {% else %}
+                  <div class="grid__item one-third">
+                    <div class="menu-collection-image text-center">
+                      {% if childlink.type == 'collection_link' %}
+                        <a href="{{ childlink.url }}">
+                          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ childlink.object.image | img_url: 'large' }}" alt="{{ childlink.title | escape }}">
+                        </a>
+                          <a class="menu-link" href="{{ childlink.url }}">{{ childlink.title }}</a>
+
+                      {% elsif childlink.type == 'product_link'  %}
+                        <a href="{{ childlink.url }}">
+                          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ childlink.object.featured_image | img_url: 'large' }}" alt="{{ childlink.title | escape }}">
+                        </a>
+                         <a class="menu-link" href="{{ childlink.url }}">{{ childlink.title }} <span>{{ childlink.object.price | money }}</span></a>
+
+                      {% else %}
+                        <span class="menu-link">{{ childlink.title }}</span>
+                          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ childlink.url }}" alt="{{ childlink.title | escape }}">
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+              
+            </div>
+          
+          </div>
+        </div>

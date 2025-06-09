@@ -1,0 +1,380 @@
+<div class="banner banner-{{ section.id }} home_banner">
+  
+  <div class="banner-track">
+    {% for block in section.blocks %}
+    <div class="banner-image desktop_baner">
+      <a href="{%if block.settings.link != blank %}{{block.settings.link}}{%endif%}">
+        <picture>
+  <source srcset="{{ block.settings.image | img_url: '1400x600' | replace: '.jpg', '.webp' }}" type="image/webp">
+  <img
+    {% if section.settings.main_banner and forloop.first %} fetchpriority="high" {% endif %}
+    class="desktop"
+    src="{{ block.settings.image | img_url: '1400x600' }}"
+    width="1400"
+    height="600"
+    loading="eager"
+    alt="{{ block.settings.main_heading | escape }}"
+  >
+</picture>
+
+        <div class="content-area {% if block.settings.text_layout == 'left'%}content_left {% elsif block.settings.text_layout == 'center'%}content_center{% elsif block.settings.text_layout == 'right' %}content_right{% endif %}">
+         {% if block.settings.main_heading != blank or block.settings.detail != blank or block.settings.sub_heading != blank or block.settings.button_text != blank %}
+          <div class="moon-area">
+          {% if block.settings.sub_heading != blank %}<p class="sub_heading caption"><span class="moon_Area_banner"><span class="colors sub_caption">{{block.settings.sub_heading}}</span></span> </p>{% endif %}
+            {% if block.settings.main_heading != blank %}<h3 class="main_heading">{{block.settings.main_heading}}</h3>{% endif %}
+           {% if block.settings.detail != blank %}<p class="sub_detail">{{block.settings.detail}}</p>{% endif %}
+                        {%- comment -%}
+            {% if block.settings.button_text != blank %}
+              <a class="banner-button" href="{%if block.settings.btnurl != blank %}{{block.settings.btnurl}}{%else%}collections/modena{%endif%}">{{  block.settings.button_text }}</a>
+            {% endif %}
+            {%- endcomment -%}
+          </div>
+         {% endif %}
+        </div>
+      </a>
+    </div>
+     <div class="banner-image mobile_banner">
+      <a href="{%if block.settings.link != blank %}{{block.settings.link}}{%endif%}">
+         <div class="content-area-mob">
+         {% if block.settings.main_heading != blank or block.settings.detail != blank or block.settings.sub_heading != blank or block.settings.button_text != blank %}
+          <div class="moon-area">
+          {% if block.settings.sub_heading != blank %}<p class="sub_heading caption"><span class="moon_Area_banner"><span class="colors sub_caption">{{block.settings.sub_heading}}</span></span> </p>{% endif %}
+            {% if block.settings.main_heading != blank %}<h3 class="main_heading">{{block.settings.main_heading}}</h3>{% endif %}
+           {% if block.settings.detail != blank %}<p class="sub_detail">{{block.settings.detail}}</p>{% endif %}
+            {%- comment -%}
+            {% if block.settings.button_text != blank %}
+              <a class="banner-button" href="{%if block.settings.btnurl != blank %}{{block.settings.btnurl}}{%else%}collections/modena{%endif%}">{{  block.settings.button_text }}</a>
+            {% endif %}
+           {%- endcomment -%}
+          </div>
+         {% endif %}
+        </div>
+      <div class="image_mobile_banner">
+              <img {% if section.settings.main_banner and forloop.first %} fetchpriority="high" {% endif %} class="mobile" src="{%if block.settings.Mobile_image != blank %}{{block.settings.Mobile_image | img_url:'master'}}{%endif%}">
+      </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+<style>
+  span.moon_Area_banner {
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-weight: 300;
+}
+  .caption {
+        margin-bottom: unset !important;
+
+  }
+  p.sub_detail {
+    font-size: 23px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+  a.banner-button {
+    color: #ff6b00;
+    border: 1px solid;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+  .mobile_banner{
+    display:none;
+  }
+  .index-section {
+    padding-top: unset !important;
+
+}
+   @media(max-width:768px)
+  {
+    
+  .content-area-mob {
+    background: #000;
+}
+  
+    .mobile_banner{
+    display:block;
+  }
+    .desktop_baner{
+    display:none;
+  }
+  .content-area-mob {
+    padding-bottom: 35px;
+    padding-top: 35px;
+}
+.banner-image img {
+    padding-bottom: 30px;
+}
+.home_banner .main_heading {
+    font-size: 25px;
+    letter-spacing: 6px;
+}
+  }
+   /* @media(max-width:768px)
+  {
+    .home_banner .main_heading {
+   font-size: 20px !important;
+    letter-spacing: 4px !important;
+}
+  } */
+
+    @media(max-width: 450px){
+.moon-area a {
+    display: block;
+    margin: 0 auto;
+}
+    
+.sub_detail {
+    font-size: 21px !important;
+    margin: 0 !important;
+}
+    
+.home_banner .main_heading {
+    font-size: 26px;
+    margin: 10px 0;
+}
+    
+.banner-button {
+    margin-top: 50px;
+    }
+
+.banner-button {
+    margin: 50px auto 0 !important;
+}
+
+.image_mobile_banner img {
+    height: 350px;
+    object-fit: cover;
+    object-position: bottom;
+}
+
+.moon-area .banner-button {
+    color: #fff;
+}
+  }
+</style>
+{% schema %}
+{
+  "name": "Home banner",
+  "class": "index-section",
+  "settings": [
+	  {
+		"type": "checkbox",
+		"id": "autoplay",
+		"label": "Autoplay",
+		"default": false
+	  },
+	  {
+		"type": "number",
+		"id": "autoplay_speed",
+		"label": "Autoplay Speed",
+		"default": 2500,
+		"info": "Enter time in milliseconds"
+	  },
+	  {
+		"type": "checkbox",
+		"id": "carousel",
+		"label": "Carousel",
+		"default": false
+	  },
+	  {
+		"type": "checkbox",
+		"id": "show_dots",
+		"label": "Show Dots",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "adapt_height",
+		"label": "Adapt Height",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "main_banner",
+		"label": "Main Banner",
+		"default": false
+	  }
+	],
+    "blocks": [
+    {
+    "type":"image",
+    "name":"Image Slide",
+    "settings": [
+    {
+    "type": "image_picker",
+    "id": "image",
+    "label": "Image"
+    },
+    {
+    "type": "image_picker",
+    "id": "Mobile_image",
+    "label": "Mobile Image"
+    },
+    {
+    "type": "textarea",
+    "id": "sub_heading",
+    "label":"Caption"
+    },
+    {
+    "type": "textarea",
+    "id": "main_heading",
+    "label":"Heading"
+    },  
+    {
+    "type": "textarea",
+    "id": "detail",
+    "label":"Sub Heading"
+    },
+    {
+    "type":"text",
+    "id":"button_text",
+    "label":"Button Label"
+    },
+    {
+    "type": "url",
+    "id": "link",
+    "label":"link"
+    },
+    {
+    "type": "url",
+    "id": "btnurl",
+    "label":"Button link"
+    },
+    {
+    "type":"header",
+    "content":"Text Layout"
+    },
+    {
+    "type": "select",
+    "id": "text_layout",
+    "label":"Choose Text Layout",
+    "options": [
+    {
+    "value": "left",
+    "label": "Left"
+    },
+    {
+    "value": "center",
+    "label": "Center"
+    },
+    {
+    "value": "right",
+    "label": "Right"
+    }
+    ]
+
+    }
+    ]
+    }
+    ],
+  "presets": [
+    {
+      "name": "Home banner",
+      "category": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  
+  .banner-image .desktop{
+    display: none; 
+  }
+  
+  .home_banner .slick-dots{
+    bottom: 4px;
+    background: #0000;
+  }
+  
+  .home_banner .banner-track.slick-slider{
+    margin-bottom: 0 !important; 
+  }
+  
+  
+  .home_banner .slick-dots li button:before{
+   	background-color: #ff5100; 
+    font-size: 0;
+    opacity: 0.6;
+    width: 12px;
+    height: 12px;
+  }
+  
+  .home_banner img{
+    display: block; 
+  }
+  
+  .home_banner .slick-dots li button[aria-selected="true"]:before{
+    opacity: 1; 
+  }
+  
+  
+  .new_home_banner{
+    margin-top: 0 !important;
+  } 
+  
+  .home_banner .slick-slide>div {
+    margin: 0;
+    line-height: 0;
+  }
+  
+  .home_banner .banner-image a:focus {
+    outline:  none ;
+  }
+  
+  .home_banner .slick-dots li{
+    margin: 0 2px; 
+  }
+  
+  
+  @media screen and (min-width: 768px) {
+    
+    .banner-image .mobile {
+      display: none; 
+    }
+    
+    .banner-image .desktop{
+      display: block; 
+    }
+  }
+  
+  
+</style>
+
+{% if section.blocks.size > 1 %}
+<script>
+  $('.home_banner .banner-track').slick({
+      infinite: {{ section.settings.carousel }},
+      speed: 300,
+      slidesToShow: 1,
+      autoplay: {{ section.settings.autoplay }},
+      autoplaySpeed: {{ section.settings.autoplay_speed }},
+      arrows: true,
+      dots: {{ section.settings.show_dots }},
+      adaptiveHeight: {{ section.settings.adapt_height }},
+  });
+</script>
+{% endif %}

@@ -1,0 +1,37 @@
+<!-- CSS ================================================== -->
+{% comment %}
+{{ 'custom.css' | asset_url | stylesheet_tag }}
+{{ 'custom-cart.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,615;0,700;0,800;1,400;1,500;1,600;1,615;1,700;1,800&display=swap" rel="stylesheet">
+{% endcomment %}
+
+{% if template != 'index' %}
+{{ 'v5.globo.filter.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+{{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+{{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+<style>
+  {% include 'custom_css' %}
+  {% include 'custom_cart_css' %}
+  {% include 'font-awesome' %}
+  {% include 'bootstrap_css' %}
+  /* Lato */
+  {% include 'web-fonts' %}
+</style>
+
+{%if template contains 'product'%}
+{% include 'video_popup_style' %}
+{% include 'font-EB_Garamond' %}
+{%endif%}
+{%if template contains 'cart'%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> 
+{%endif%}
+{% if template contains 'product' template contains 'landing-collection' or template contains 'page.mens-fashion' or template contains 'page.women-bestseller' or template contains 'product.gift_card' or template contains 'page.legacy-bestsellers' %}
+  {{ 'owl.carousel.min.css' | asset_url | stylesheet_tag }}	
+  {{ 'owl.theme.default.min.css' | asset_url | stylesheet_tag }}
+{% endif %}

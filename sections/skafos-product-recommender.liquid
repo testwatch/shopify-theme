@@ -1,0 +1,30 @@
+
+{%comment%}
+v0.1
+This snippet is created by Skafos.ai.
+We'll overwrite this file as and when we push updates.
+So, please don't modify this file, since it'll get overwritten when we push our update.
+{%endcomment%}
+
+{% if template contains 'cart' and cart.items.size > 0 %}
+    {% assign productIds = cart.items | map: 'product_id' %}
+    {% assign productId0 = productIds | join: '","gid://shopify/Product/' %}
+    {% assign productId1 = productId0 | prepend: '["gid://shopify/Product/' %}
+    {% assign productId2 = productId1 | append: '"]' %}
+    {% assign productId = productId2 | escape %}
+	  {% if shop.metafields.skafos.similarItems.value.enabled %}
+       <div class="skafos-similarity-recommender" data-shop-id="gid://shopify/Shop/{{shop.id}}" data-product-id="{{productId}}"></div>
+    {% endif %}
+{% else if template contains 'product' %}
+	  {% assign productId = product.id %}
+	  {% if shop.metafields.skafos.similarItems.value.enabled %}
+       <div class="skafos-similarity-recommender" data-shop-id="gid://shopify/Shop/{{shop.id}}" data-product-id="gid://shopify/Product/{{productId}}"></div>
+    {% endif %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Skafos Similar Items",
+  "settings": []
+}
+{% endschema %}

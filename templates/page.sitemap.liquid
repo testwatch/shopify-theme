@@ -1,0 +1,113 @@
+<div class="sitemap-wrapper">
+
+  <div class="sitemap-container">
+
+    <div class="section-header">
+      <h1 class="section-header--title">{{ page.title }}</h1>
+      <hr>
+    </div>
+
+    <div class="rte">
+      {%- comment -%} Start of HTML SiteMap code {%- endcomment -%}
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Pages</h2>
+          <ul>
+            {% paginate pages by 1000 %}
+              {% for page in pages %}
+                <li>
+                    <a href="{{ page.url }}">{{ page.title }}</a>
+                </li>
+              {% endfor %}
+            {% endpaginate %}
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h2>Products</h2>
+          <ul>
+            {% paginate collections.all.products by 1000 %}
+                {% for product in collections.all.products %}
+                    <li>
+                        <a href="{{ product.url }}">{{ product.title }}</a>
+                    </li>
+                {% endfor %}
+            {% endpaginate %}
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h2>Collections</h2>
+          <ul>
+            {% for c in collections %}
+                <li>
+                    <a href="{{ c.url }}">{{ c.title }}</a>
+                </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {%- comment -%}
+        End of HTML SiteMap code
+      {%- endcomment -%}
+    </div>
+
+  </div>
+
+</div>
+<style>
+  div.sitemap-wrapper
+  {
+	display: block;
+	width: 100%;
+	position: relative;
+  }
+  div.sitemap-wrapper div.sitemap-container
+  {
+	margin: 0 auto;
+	width: 85%;
+	padding: 70px 30px 40px;
+  }
+  div.sitemap-container div.section-header
+  {
+	text-align: center;
+	margin: 0;
+	display: block;
+    padding-bottom:70px;
+  }
+  div.sitemap-container div.section-header h1.section-header--title
+  {
+	margin: 0;
+	color: #000;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 30px;
+  }
+  div.sitemap-container div.section-header hr
+  {
+	margin: 30px auto !important;
+	border: 1px solid #000;
+	max-width: 200px;
+  }
+  div.col-md-4 h2
+  {
+    margin:0;
+    padding-bottom:20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  @media(max-width:480px)
+  {
+    div.sitemap-wrapper div.sitemap-container
+    {
+    	width: 85%;
+    	padding: 50px 0px 40px;
+    }
+    div.sitemap-container div.section-header
+    {
+        padding-bottom: 20px;
+    }
+    div.sitemap-container div.col-md-4
+    {
+      padding-bottom:20px;
+    }
+  }
+</style>
