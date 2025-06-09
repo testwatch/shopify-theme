@@ -7,9 +7,10 @@
   <div class="mobile-product-image-wrapper" style="text-align: center; margin-bottom: 20px;">
     {% assign fallback_image = product.images[0] %}
     <img
-      src="{{ product.featured_image | default: fallback_image | img_url: '800x' }}"
+      src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+      data-src="{{ product.featured_image | default: fallback_image | img_url: '800x' }}"
       alt="{{ product.title }}"
-      class="mobile-product-image"
+      class="lazyload mobile-product-image"
       style="max-width: 100%; height: auto;"
     >
   </div>
