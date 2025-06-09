@@ -987,11 +987,15 @@ theme.Product = (function() {
   }
 }
 
-setGiftPrice();
+document.addEventListener("DOMContentLoaded", function () {
+  setGiftPrice();
+});
+
 function formatPrice(priceInCents) {
   var price = priceInCents / 100;
   return '$' + price.toFixed(2);  // Adjust this formatting as needed
 }
+
         if (variant.available) {
     $('#AddToCart #AddToCartText').html('Add to Cart');
      $('.cart_price_btn').removeClass('sold_out_btn');
