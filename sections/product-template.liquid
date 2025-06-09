@@ -3,6 +3,17 @@
   {%if current.title == image.alt %}
   {% endif %}
 {% endcomment %}
+{% if request.device_type == 'mobile' %}
+  <div class="mobile-product-image-wrapper" style="text-align: center; margin-bottom: 20px;">
+    <img
+      src="{{ product.featured_image | img_url: '800x' }}"
+      alt="{{ product.title }}"
+      class="mobile-product-image"
+      style="max-width: 100%; height: auto;"
+    >
+  </div>
+{% endif %}
+
 
 <div class="wrapper-mini">
   <div
