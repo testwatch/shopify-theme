@@ -373,10 +373,9 @@
       slidesToShow: 1,
       autoplay: {{ section.settings.autoplay }},
       autoplaySpeed: {{ section.settings.autoplay_speed }},
-      arrows: true,
+      arrows: {% if section.blocks.size > 1 %}true{% else %}false{% endif %},
       dots: {{ section.settings.show_dots }},
       adaptiveHeight: {{ section.settings.adapt_height }},
     });
   });
 </script>
-{% endif %}
