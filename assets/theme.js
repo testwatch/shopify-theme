@@ -2293,6 +2293,29 @@ $('.close-icon-mobile-search').click(function() {
 //         responsive: [ ]
 //   });
 // }
+document.addEventListener("DOMContentLoaded", function () {
+  // Product page logic
+  if (window.location.pathname.includes("/products/")) {
+    Product?.();
+    setGiftPrice?.();
+    resizeElements?.();
+    addClydeToCart?.();
+  }
+
+  // Collection page logic
+  if (window.location.pathname.includes("/collections/")) {
+    Collection?.();
+  }
+
+  // Cart page logic
+  if (window.location.pathname === "/cart") {
+    Cart?.();
+  }
+
+  // Global logic (runs everywhere)
+  Header?.();
+  SlideshowSection?.();
+});
 
 
 
