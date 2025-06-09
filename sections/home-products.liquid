@@ -9,7 +9,17 @@
   {% for product in collections[collection].products %}
 
  <div class="product">
-  <a class="shop-now" href="{{ product.url }}"><img class="main-image lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ product.featured_image | product_img_url: '400x300' }}"></a>
+<a class="shop-now" href="{{ product.url }}">
+  <img
+    class="main-image lazyload"
+    src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+    data-src="{{ product.featured_image | product_img_url: '400x300' }}"
+    loading="lazy"
+    width="400"
+    height="300"
+    alt="{{ product.title | escape }}"
+  >
+</a>
   <div class="thumbanils-set">
     {% if product.variants.size >= 1 %}
     <div class="thumbanils home_thumbs">
