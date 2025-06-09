@@ -5,15 +5,15 @@
 {% endcomment %}
 {% if request.device_type == 'mobile' %}
   <div class="mobile-product-image-wrapper" style="text-align: center; margin-bottom: 20px;">
+    {% assign fallback_image = product.images[0] %}
     <img
-      src="{{ product.featured_image | img_url: '800x' }}"
+      src="{{ product.featured_image | default: fallback_image | img_url: '800x' }}"
       alt="{{ product.title }}"
       class="mobile-product-image"
       style="max-width: 100%; height: auto;"
     >
   </div>
 {% endif %}
-
 
 <div class="wrapper-mini">
   <div
