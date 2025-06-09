@@ -249,9 +249,22 @@
       </script>
     {% endif %}
 
-    {% comment %}
-      {% include 'globo.filter.script' %}{{ content_for_header }}
-    {% endcomment %}
+  {% if template.name == 'index' %}
+  {% for block in section.blocks %}
+    {% if forloop.first and block.settings.image %}
+      <link
+        rel="preload"
+        as="image"
+        href="{{ block.settings.image | img_url: '1600x' }}"
+        imagesrcset="{{ block.settings.image | img_url: '1600x' }} 1600w"
+      >
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% include 'globo.filter.script' %}
+{{ content_for_header }}
+
 
     {% include 'head_scripts', content_for_header: content_for_header %}
 
@@ -359,22 +372,7 @@
   jQuery('.custom-add-to-cart').click()
 });
 </script>
-    {% if template.name == 'index' %}
-  <link rel="preload" as="image" href="{{ section.settings.blocks[0].settings.image | img_url: '1400x600' }}">
-{% endif %}
-{% if template.name == 'index' %}
-  {% for block in section.blocks %}
-    {% if forloop.first and block.settings.image %}
-      <link
-        rel="preload"
-        as="image"
-        href="{{ block.settings.image | img_url: '1600x' }}"
-        imagesrcset="{{ block.settings.image | img_url: '1600x' }} 1600w"
-      >
-    {% endif %}
-  {% endfor %}
-{% endif %}
-
+  
   </head>
 
   <body
