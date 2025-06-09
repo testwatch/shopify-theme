@@ -371,7 +371,7 @@
       infinite: {{ section.settings.carousel }},
       speed: 300,
       slidesToShow: 1,
-      autoplay: {{ section.settings.autoplay }},
+      autoplay: {% if request.device_type == 'mobile' %}false{% else %}{{ section.settings.autoplay }}{% endif %},
       autoplaySpeed: {{ section.settings.autoplay_speed }},
       arrows: {% if section.blocks.size > 1 %}true{% else %}false{% endif %},
       dots: {{ section.settings.show_dots }},
