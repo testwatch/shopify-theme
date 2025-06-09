@@ -364,9 +364,10 @@
   
 </style>
 
-{% if section.blocks.size > 1 %}
+
 <script>
-  $('.home_banner .banner-track').slick({
+  document.addEventListener("DOMContentLoaded", function () {
+    $('.home_banner .banner-track').slick({
       infinite: {{ section.settings.carousel }},
       speed: 300,
       slidesToShow: 1,
@@ -375,6 +376,7 @@
       arrows: true,
       dots: {{ section.settings.show_dots }},
       adaptiveHeight: {{ section.settings.adapt_height }},
+    });
   });
 </script>
 {% endif %}
