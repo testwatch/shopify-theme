@@ -1366,7 +1366,11 @@
 {% schema %}
 {
   "name": "Product Template",
-  "settings": []
+  "settings": [],
+  "presets": {
+    "name": "Default",
+    "category": "Product"
+  }
 }
 {% endschema %}
 
@@ -1375,5 +1379,6 @@
   {% render 'extend-product-integration' %}
   <!-- Extend -- End Extend code -->
 {% endcomment %}
+
 
 
