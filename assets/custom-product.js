@@ -133,28 +133,3 @@ window.addEventListener('load', (event) => {
 
 
 // =============== Alexender Product Onload Page Remove Click Script Start ====================== 
-function updateMainProductImage(variant) {
-  if (!variant || !variant.featured_media_id) return;
-
-  const mediaList = ShopifyAnalytics.meta?.product?.media;
-  if (!mediaList || !Array.isArray(mediaList)) return;
-
-  const matchedMedia = mediaList.find(media => media.id === variant.featured_media_id);
-  if (!matchedMedia || !matchedMedia.src) return;
-
-  const mainImg = document.querySelector('#MainProductImage');
-  if (mainImg) {
-    mainImg.setAttribute('src', matchedMedia.src);
-    mainImg.setAttribute('data-src', matchedMedia.src);
-  }
-}
-
-document.addEventListener('change', function () {
-  const variantId = document.querySelector('[name="id"]')?.value;
-  const variants = ShopifyAnalytics.meta?.product?.variants;
-
-  if (!variantId || !variants) return;
-
-  const selectedVariant = variants.find(v => v.id == variantId);
-  updateMainProductImage(selectedVariant);
-});
