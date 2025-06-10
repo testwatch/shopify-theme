@@ -4099,7 +4099,7 @@
             "type": "image",
             "settings": {
               "image": "shopify://shop_images/3922.jpg",
-              "mobile_image": "shopify://shop_images/3922M.jpg",
+              "mobile_image": "shopify://shop_images/3922M_b256c399-a856-4285-91b5-226bf7aefd94.jpg",
               "alignment": "center center",
               "overlay_opacity": 30,
               "color_text": "#ffffff",
