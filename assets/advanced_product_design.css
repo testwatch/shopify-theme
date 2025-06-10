@@ -1173,7 +1173,7 @@ div.quant-buy-contain div.cart_price_btn.fixed-add-to-cart-desktop button#AddToC
   }
    .small--hide
     {
-      display:none !important;
+      display:block !important;
     }
   
 /* Announcement bar   */
