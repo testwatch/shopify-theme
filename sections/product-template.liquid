@@ -74,29 +74,31 @@
               {% if product.variants.size > 1 %}
                 {% assign current_variant = product.selected_or_first_available_variant %}
                 {% for image in product.images %}
-                  {% capture img_id %}ProductImage-{{ image.id }}{% endcapture %}
-                  {% capture img_wrapper_id %}ProductImageWrapper-{{ image.id }}{% endcapture %}
-                  {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                  {% include 'image-style' with image: image, small_style: false, width: 700, height: 1024, wrapper_id: img_wrapper_id, img_id: img_id %}
+  {% assign variant_for_image = product.variants | where: "image_id", image.id | first %}
+  {% capture img_id %}ProductImage-{{ image.id }}{% endcapture %}
+  {% capture img_wrapper_id %}ProductImageWrapper-{{ image.id }}{% endcapture %}
+  {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+  {% include 'image-style' with image: image, small_style: false, width: 700, height: 1024, wrapper_id: img_wrapper_id, img_id: img_id %}
 
-                  <div
-                    id="{{ img_wrapper_id }}"
-                    class="product-single__image-wrapper supports-js{% unless featured_image == image %} hide{% endunless %}{% if section.settings.product_image_zoom_type == 'lightbox' %} zoom-lightbox{% endif %}"
-                    data-image-id="{{ image.id }}"
-                  >
-                    <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
-                      <img
-  {% if featured_image == image %}id="MainProductImage"{% endif %}
-  class="product-single__image"
-  src="{{ image | img_url: '800x' }}"
-  alt="{{ image.alt | escape }}"
-  style="max-width: 100%; height: auto;"
->
-
-                    </div>
-                  </div>
-                {% endfor %}
-
+  <div
+    id="{{ img_wrapper_id }}"
+    class="product-single__image-wrapper supports-js{% unless featured_image == image %} hide{% endunless %}{% if section.settings.product_image_zoom_type == 'lightbox' %} zoom-lightbox{% endif %}"
+    data-image-id="{{ image.id }}"
+    {% if variant_for_image %}
+      data-variant-id="{{ variant_for_image.id }}"
+    {% endif %}
+  >
+    <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+      <img
+        {% if featured_image == image %}id="MainProductImage"{% endif %}
+        class="product-single__image"
+        src="{{ image | img_url: '800x' }}"
+        alt="{{ image.alt | escape }}"
+        style="max-width: 100%; height: auto;"
+      >
+    </div>
+  </div>
+{% endfor %}
                 <noscript>
                   <img
                     class="lazyload"
