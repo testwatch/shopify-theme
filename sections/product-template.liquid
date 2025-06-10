@@ -3,6 +3,19 @@
   {%if current.title == image.alt %}
   {% endif %}
 {% endcomment %}
+{% if request.device_type == 'mobile' %}
+  <div class="mobile-product-image-wrapper" style="text-align: center; margin-bottom: 20px;">
+    {% assign fallback_image = product.images[0] %}
+    <img
+  id="MainProductImage"
+  src="{{ product.featured_image | default: fallback_image | img_url: '800x' }}"
+  alt="{{ product.title }}"
+  class="mobile-product-image"
+  style="max-width: 100%; height: auto;"
+>
+
+  </div>
+{% endif %}
 
 <div class="wrapper-mini">
   <div
@@ -61,37 +74,31 @@
               {% if product.variants.size > 1 %}
                 {% assign current_variant = product.selected_or_first_available_variant %}
                 {% for image in product.images %}
-                  {% capture img_id %}ProductImage-{{ image.id }}{% endcapture %}
-                  {% capture img_wrapper_id %}ProductImageWrapper-{{ image.id }}{% endcapture %}
-                  {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                  {% include 'image-style' with image: image, small_style: false, width: 700, height: 1024, wrapper_id: img_wrapper_id, img_id: img_id %}
+  {% assign variant_for_image = product.variants | where: "image_id", image.id | first %}
+  {% capture img_id %}ProductImage-{{ image.id }}{% endcapture %}
+  {% capture img_wrapper_id %}ProductImageWrapper-{{ image.id }}{% endcapture %}
+  {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+  {% include 'image-style' with image: image, small_style: false, width: 700, height: 1024, wrapper_id: img_wrapper_id, img_id: img_id %}
 
-                  <div
-                    id="{{ img_wrapper_id }}"
-                    class="product-single__image-wrapper supports-js{% unless featured_image == image %} hide{% endunless %}{% if section.settings.product_image_zoom_type == 'lightbox' %} zoom-lightbox{% endif %}"
-                    data-image-id="{{ image.id }}"
-                  >
-                    <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
-                      <img
-                        id="{{ img_id }}"
-                        class="product-single__image lazyload"
-                        {% if featured_image == image %}
-                          src="{{ current_variant.image | img_url: '100x' }}"
-                        {% endif %}
-                        data-src="{{ img_url }}"
-                        data-widths="[180, 370, 540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
-                        data-aspectratio="{{ image.aspect_ratio }}"
-                        data-sizes="auto"
-                        data-zoom-image="{{ current_variant.image | img_url: 'master' }}"
-                        {% if section.settings.product_image_zoom_type == 'zoom-in' %}
-                          data-zoom="{{ current_variant.image | img_url: '1024x1024', scale: 2 }}"
-                        {% endif %}
-                        alt="{{ image.alt | escape }}"
-                      >
-                    </div>
-                  </div>
-                {% endfor %}
-
+  <div
+    id="{{ img_wrapper_id }}"
+    class="product-single__image-wrapper supports-js{% unless featured_image == image %} hide{% endunless %}{% if section.settings.product_image_zoom_type == 'lightbox' %} zoom-lightbox{% endif %}"
+    data-image-id="{{ image.id }}"
+    {% if variant_for_image %}
+      data-variant-id="{{ variant_for_image.id }}"
+    {% endif %}
+  >
+    <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+      <img
+        {% if featured_image == image %}id="MainProductImage"{% endif %}
+        class="product-single__image"
+        src="{{ image | img_url: '800x' }}"
+        alt="{{ image.alt | escape }}"
+        style="max-width: 100%; height: auto;"
+      >
+    </div>
+  </div>
+{% endfor %}
                 <noscript>
                   <img
                     class="lazyload"
@@ -272,29 +279,29 @@
                   {% endfor %}
                 </div>
               </div>
+             <div class="grid__item four-fifths product-single__photos" id="ProductPhoto">
+  {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+  
+  <img
+    class="lazyload1 zoom-cls"
+    data-zoom-image="{{ featured_image | img_url: 'master' }}"
+    src="{{ featured_image | img_url: '1024x1024' }}"
+    data-src="{{ featured_image | img_url: '1024x1024@2x' }}"
+    alt="{{ featured_image.alt | escape }}"
+    style="max-width: 100%; height: auto; display: block !important;"
+  >
 
-              <div class="grid__item four-fifths product-single__photos small--hide" id="ProductPhoto">
-                {% assign featured_image = product.selected_or_first_available_variant.featured_image
-                  | default: product.featured_image
-                %}
-                <img
-                  class=" zoom-cls"
-                  data-zoom-image="{{ featured_image | img_url: 'master' }}"
-                  src="{{ featured_image | img_url: 'original'}}"
-                  data-src="{{ featured_image | img_url: '1024x1024', scale: 2 }}"
-                  alt="{{ featured_image.alt | escape }}"
-                >
-                <noscript>
-                  <img
-                    class=""
-                    src="{{ featured_image | img_url: 'master'}}"
-                    data-src="{{ featured_image | img_url: '1024x1024', scale: 2 }}"
-                    alt="{{ featured_image.alt | escape }}"
-                  >
-                </noscript>
-                <div class="video_cls"></div>
-              </div>
-            </div>
+  <noscript>
+    <img
+      class="zoom-cls"
+      src="{{ featured_image | img_url: 'master'}}"
+      data-src="{{ featured_image | img_url: '1024x1024@2x' }}"
+      alt="{{ featured_image.alt | escape }}"
+    >
+  </noscript>
+  
+  <div class="video_cls"></div>
+</div>
           {% endif %}
 
           {% if section.settings.product_image_zoom_type == 'lightbox' %}
@@ -409,23 +416,26 @@
 
             {% form 'product', product, class: productform_class %}
               <select name="id" id="ProductSelect-{{ section.id }}" class="product-single__variants">
-                {% for variant in product.variants %}
-                  {% if variant.available %}
-                    <option
-                      {% if variant == product.selected_or_first_available_variant %}
-                        selected="selected"
-                      {% endif %}
-                      data-sku="{{ variant.sku }}"
-                      value="{{ variant.id }}"
-                    >
-                      {{ variant.title }} - {{ variant.price | money_with_currency }}
-                    </option>
+  {% for variant in product.variants %}
+    {% if variant.available %}
+      <option
+        {% if variant == product.selected_or_first_available_variant %}
+          selected="selected"
+        {% endif %}
+        data-image-id="{{ variant.image.id }}"
+        data-sku="{{ variant.sku }}"
+        value="{{ variant.id }}"
+      >
+        {{ variant.title }} - {{ variant.price | money_with_currency }}
+      </option>
+    {% else %}
+      <option disabled="disabled">
+        {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+      </option>
+    {% endif %}
+  {% endfor %}
+</select>
 
-                  {% else %}
-                    <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
-                  {% endif %}
-                {% endfor %}
-              </select>
               {% assign current_variant = product.selected_or_first_available_variant %}
               <div
                 class="price_part desk-hidden mobile_cart_price"
@@ -729,6 +739,26 @@
                    {% endfor %}
                  </li>
      </ul>
+     <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const variantSelect = document.querySelector('#ProductSelect-{{ section.id }}');
+    const imageWrappers = document.querySelectorAll('[data-variant-id]');
+
+    if (!variantSelect || !imageWrappers.length) return;
+
+    variantSelect.addEventListener('change', function (event) {
+      const selectedVariantId = event.target.value;
+
+      imageWrappers.forEach(function (wrapper) {
+        if (wrapper.getAttribute('data-variant-id') === selectedVariantId) {
+          wrapper.classList.remove('hide');
+        } else {
+          wrapper.classList.add('hide');
+        }
+      });
+    });
+  });
+</script>
             </div>  -->
 {% endcomment %}
 
@@ -1315,3 +1345,4 @@
   {% render 'extend-product-integration' %}
   <!-- Extend -- End Extend code -->
 {% endcomment %}
+
