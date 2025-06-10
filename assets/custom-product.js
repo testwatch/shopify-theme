@@ -133,26 +133,28 @@ window.addEventListener('load', (event) => {
 
 
 // =============== Alexender Product Onload Page Remove Click Script Start ====================== 
-window.onload = function(){
-$('body').removeClass('product_name_product-alexander-watches')
-};
-// =============== Alexender Product Onload Page Remove Click Script End ======================
 function updateMainProductImage(variant) {
-  if (!variant || !variant.featured_image) return;
+  if (!variant || !variant.featured_media_id) return;
+
+  const mediaList = ShopifyAnalytics.meta?.product?.media;
+  if (!mediaList || !Array.isArray(mediaList)) return;
+
+  const matchedMedia = mediaList.find(media => media.id === variant.featured_media_id);
+  if (!matchedMedia || !matchedMedia.src) return;
 
   const mainImg = document.querySelector('#MainProductImage');
-
   if (mainImg) {
-    mainImg.setAttribute('src', variant.featured_image.src);
-    mainImg.setAttribute('data-src', variant.featured_image.src); // for themes that still use lazyload
+    mainImg.setAttribute('src', matchedMedia.src);
+    mainImg.setAttribute('data-src', matchedMedia.src);
   }
 }
 
 document.addEventListener('change', function () {
   const variantId = document.querySelector('[name="id"]')?.value;
+  const variants = ShopifyAnalytics.meta?.product?.variants;
 
-  if (!variantId || !ShopifyAnalytics?.meta?.product?.variants) return;
+  if (!variantId || !variants) return;
 
-  const variant = ShopifyAnalytics.meta.product.variants.find(v => v.id == variantId);
-  updateMainProductImage(variant);
+  const selectedVariant = variants.find(v => v.id == variantId);
+  updateMainProductImage(selectedVariant);
 });
