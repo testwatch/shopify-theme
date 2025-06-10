@@ -133,32 +133,3 @@ window.addEventListener('load', (event) => {
 
 
 // =============== Alexender Product Onload Page Remove Click Script Start ====================== 
-document.addEventListener("DOMContentLoaded", function () {
-  const variantSelect = document.querySelector('select[name="id"]');
-
-  if (!variantSelect) return;
-
-  variantSelect.addEventListener("change", function (e) {
-    const selectedOption = variantSelect.options[variantSelect.selectedIndex];
-    const variantId = selectedOption.value;
-
-    // Find all variant images
-    const imageWrappers = document.querySelectorAll(".product-single__image-wrapper");
-    imageWrappers.forEach(wrapper => {
-      wrapper.classList.add("hide");
-    });
-
-    // Reveal only the image wrapper for this variant
-    const selectedImage = document.querySelector(`[id^="ProductImageWrapper-"][data-image-id] img[src*="/products/"][src*="${variantId}"]`);
-    if (selectedImage && selectedImage.closest('.product-single__image-wrapper')) {
-      selectedImage.closest('.product-single__image-wrapper').classList.remove("hide");
-    }
-
-    // Update main image block if necessary
-    const featuredImage = document.querySelector('#ProductPhoto img');
-    const variantImageJSON = window.product.variants.find(v => v.id == variantId);
-    if (featuredImage && variantImageJSON && variantImageJSON.featured_image) {
-      featuredImage.src = variantImageJSON.featured_image.src.replace(/(\.jpg|\.png).*/, '_1024x1024$1');
-    }
-  });
-});
