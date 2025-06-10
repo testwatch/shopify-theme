@@ -159,25 +159,26 @@
                 </noscript>
               {% endif %}
             </div>
-
             {% if product.images.size > 0 %}
-              <ul class="product-single__thumbnails grid-uniform mobile-prod" id="ProductThumbs">
-                {% for image in product.images %}
-                  <li
-                    data-color="{{image.alt}}"
-                    class="grid__item wide--one-quarter large--one-third medium-down--one-third"
-                  >
-                    <img
-                      class=""
-                      src="{{ image.src | img_url: 'master' }}"
-                      data-src="{{ image.src | img_url: 'grande' }}"
-                      alt="{{ image.alt | escape }}"
-                    >
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-          {% else %}
+  <ul class="product-single__thumbnails grid-uniform mobile-prod" id="ProductThumbs">
+    {% for image in product.images %}
+      <li
+        data-color="{{ image.alt }}"
+        class="grid__item wide--one-quarter large--one-third medium-down--one-third"
+      >
+        <img
+          class=""
+          src="{{ image.src | img_url: 'master' }}"
+          data-src="{{ image.src | img_url: 'grande' }}"
+          alt="{{ image.alt | escape }}"
+        >
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No images available</p> <!-- Or some fallback content -->
+{% endif %}
+
             <div class="grid margin-left-free">
               <div class="left-padding grid__item one-fifth product-single__left small--one-whole">
                 <div class="large--hide single__title">
