@@ -133,3 +133,42 @@ window.addEventListener('load', (event) => {
 
 
 // =============== Alexender Product Onload Page Remove Click Script Start ====================== 
+document.addEventListener('DOMContentLoaded', function() {
+  // Variant image switcher
+  const thumbnails = document.querySelectorAll('[data-variant-id]');
+  
+  thumbnails.forEach(thumbnail => {
+    thumbnail.addEventListener('click', function(e) {
+      e.preventDefault();
+      const variantId = this.dataset.variantId;
+      const mainImage = document.getElementById('ProductMainImage');
+      
+      // Find matching image for this variant
+      const variantImages = document.querySelectorAll(`[data-variant-id="${variantId}"]`);
+      const newImageSrc = this.href || this.src;
+      
+      if (variantImages.length > 0) {
+        // Update main image
+        mainImage.src = newImageSrc;
+        mainImage.dataset.variantId = variantId;
+        
+        // Update zoom data if needed
+        if (mainImage.dataset.zoomImage) {
+          mainImage.dataset.zoomImage = newImageSrc.replace('_1024x1024.', '_master.');
+        }
+      }
+    });
+  });
+
+  // Also handle variant changes from dropdowns/swatches
+  document.querySelector('[name="id"]')?.addEventListener('change', function() {
+    const variantId = this.value;
+    const variantImage = document.querySelector(`[data-variant-id="${variantId}"]`);
+    
+    if (variantImage) {
+      const mainImage = document.getElementById('ProductMainImage');
+      mainImage.src = variantImage.href || variantImage.src;
+      mainImage.dataset.variantId = variantId;
+    }
+  });
+});
