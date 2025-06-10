@@ -290,9 +290,9 @@
                       </div>
                     {% endif %}
                   {% endfor %}
-                </div>
-              </div>
-             <div class="grid__item four-fifths product-single__photos" id="ProductPhoto">
+               </div>
+</div>
+<div class="grid__item four-fifths product-single__photos" id="ProductPhoto">
   {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
   
   <img
@@ -312,11 +312,9 @@
       alt="{{ featured_image.alt | escape }}"
     >
   </noscript>
-  
+
   <div class="video_cls"></div>
 </div>
-          {% endif %}
-
           {% if section.settings.product_image_zoom_type == 'lightbox' %}
             <ul class="gallery" class="hidden">
               {% for image in product.images %}
