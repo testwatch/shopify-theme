@@ -70,49 +70,47 @@
     <div class="grid__item post-large--one-half product_position">
       {% if section.settings.product_thumbnails_position == 'below' %}
         <div class="product-single__photos">
-          {% if product.variants.size > 1 %}
-            {% assign current_variant = product.selected_or_first_available_variant %}
-            {% for image in product.images %}
-              {% assign variant_for_image = product.variants | where: "image_id", image.id | first %}
-              {% capture img_id %}ProductImage-{{ image.id }}{% endcapture %}
-              {% capture img_wrapper_id %}ProductImageWrapper-{{ image.id }}{% endcapture %}
-              {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-              {% include 'image-style', image: image, small_style: false, width: 700, height: 1024, wrapper_id: img_wrapper_id, img_id: img_id %}
+  {% if product.variants.size > 1 %}
+    {% assign current_variant = product.selected_or_first_available_variant %}
+    {% for image in product.images %}
+      {% assign variant_for_image = product.variants | where: "image_id", image.id | first %}
+      {% capture img_id %}ProductImage-{{ image.id }}{% endcapture %}
+      {% capture img_wrapper_id %}ProductImageWrapper-{{ image.id }}{% endcapture %}
+      {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
-              <div class="thumbnail-wrapper">
-                <img
-                  class="variant-thumbnail"
-                  src="{{ image | img_url: '100x' }}"
-                  data-image="{{ image | img_url: '800x' }}"
-                  alt="{{ image.alt | escape }}"
-                >
-              </div>
-            {% endfor %}
-          {% endif %}
+      <!-- Variant thumbnail that triggers image switch -->
+      <div class="thumbnail-wrapper">
+        <img
+          class="variant-thumbnail"
+          src="{{ image | img_url: '100x' }}"
+          data-image="{{ image | img_url: '800x' }}"
+          alt="{{ image.alt | escape }}"
+        >
+      </div>
+
+      <!-- Main product image -->
+      <div
+        id="{{ img_wrapper_id }}"
+        class="product-single__image-wrapper supports-js{% unless featured_image == image %} hide{% endunless %}{% if section.settings.product_image_zoom_type == 'lightbox' %} zoom-lightbox{% endif %}"
+        data-image-id="{{ image.id }}"
+        {% if variant_for_image %}
+          data-variant-id="{{ variant_for_image.id }}"
+        {% endif %}
+      >
+        <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+          <img
+            {% if featured_image == image %}id="MainProductImage"{% endif %}
+            class="product-single__image"
+            src="{{ image | img_url: '800x' }}"
+            alt="{{ image.alt | escape }}"
+            style="max-width: 100%; height: auto;"
+          >
         </div>
-      {% endif %}
-    </div>
-  </div>
+      </div>
+    {% endfor %}
+  {% endif %}
 </div>
 
-    id="{{ img_wrapper_id }}"
-    class="product-single__image-wrapper supports-js{% unless featured_image == image %} hide{% endunless %}{% if section.settings.product_image_zoom_type == 'lightbox' %} zoom-lightbox{% endif %}"
-    data-image-id="{{ image.id }}"
-    {% if variant_for_image %}
-      data-variant-id="{{ variant_for_image.id }}"
-    {% endif %}
-  >
-    <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
-      <img
-        {% if featured_image == image %}id="MainProductImage"{% endif %}
-        class="product-single__image"
-        src="{{ image | img_url: '800x' }}"
-        alt="{{ image.alt | escape }}"
-        style="max-width: 100%; height: auto;"
-      >
-    </div>
-  </div>
-{% endfor %}
                 <noscript>
                   <img
                     class="lazyload"
