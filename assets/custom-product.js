@@ -133,7 +133,3 @@ window.addEventListener('load', (event) => {
 
 
 // =============== Alexender Product Onload Page Remove Click Script Start ====================== 
-window.onload = function(){
-$('body').removeClass('product_name_product-alexander-watches')
-};
-// =============== Alexender Product Onload Page Remove Click Script End ======================
