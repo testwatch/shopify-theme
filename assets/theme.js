@@ -2316,6 +2316,13 @@ document.addEventListener("DOMContentLoaded", function () {
   Header?.();
   SlideshowSection?.();
 });
+document.addEventListener("DOMContentLoaded", function () {
+  const section = document.querySelector('[data-section-type="product-template"]');
+  if (section && typeof theme !== 'undefined' && typeof theme.Product === 'function') {
+    new theme.Product(section);
+  }
+});
+
 
 
 
