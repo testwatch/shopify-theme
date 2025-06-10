@@ -65,7 +65,6 @@
         {% include 'breadcrumb' %}
       </div>
     -->
-
     <div class="product-single">
   <div class="grid product-single__hero">
     <div class="grid__item post-large--one-half product_position">
@@ -78,9 +77,8 @@
               {% capture img_id %}ProductImage-{{ image.id }}{% endcapture %}
               {% capture img_wrapper_id %}ProductImageWrapper-{{ image.id }}{% endcapture %}
               {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-              {% include 'image-style' with image: image, small_style: false, width: 700, height: 1024, wrapper_id: img_wrapper_id, img_id: img_id %}
+              {% include 'image-style', image: image, small_style: false, width: 700, height: 1024, wrapper_id: img_wrapper_id, img_id: img_id %}
 
-              <!-- ✅ Variant thumbnail image to trigger switching -->
               <div class="thumbnail-wrapper">
                 <img
                   class="variant-thumbnail"
@@ -631,7 +629,6 @@
                     selected country due to restrictions.
                   </div>
                 </div>
-             
  {% comment %}
               <div class="button-center cart_price_btn AddToCartButton">
                 {% if current_variant.available %}
