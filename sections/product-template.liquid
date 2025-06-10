@@ -148,20 +148,26 @@
 
             {% if product.images.size > 0 %}
               <ul class="product-single__thumbnails grid-uniform mobile-prod" id="ProductThumbs">
-                {% for image in product.images %}
-                  <li
-                    data-color="{{image.alt}}"
-                    class="grid__item wide--one-quarter large--one-third medium-down--one-third"
-                  >
-                    <img
-                      class=""
-                      src="{{ image.src | img_url: 'master' }}"
-                      data-src="{{ image.src | img_url: 'grande' }}"
-                      alt="{{ image.alt | escape }}"
-                    >
-                  </li>
-                {% endfor %}
-              </ul>
+  {% for image in product.images %}
+    {% comment %} Get the first variant associated with this image {% endcomment %}
+    {% assign imageVariant = image.variants.first %}
+    
+    <li class="grid__item" {% if imageVariant %}data-variant-id="{{ imageVariant.id }}"{% endif %}>
+      <a 
+        href="{{ image.src | img_url: '1024x1024' }}" 
+        class="product-single__thumbnail"
+        {% if imageVariant %}data-variant-id="{{ imageVariant.id }}"{% endif %}
+        data-image-id="{{ image.id }}"
+      >
+        <img 
+          src="{{ image.src | img_url: 'compact' }}" 
+          alt="{{ image.alt | escape }}"
+          {% if imageVariant %}data-variant-id="{{ imageVariant.id }}"{% endif %}
+        >
+      </a>
+    </li>
+  {% endfor %}
+</ul>
             {% endif %}
           {% else %}
             <div class="grid margin-left-free">
