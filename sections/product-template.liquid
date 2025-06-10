@@ -86,12 +86,13 @@
                   >
                     <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
                       <img
-  id="MainProductImage"
+  {% if featured_image == image %}id="MainProductImage"{% endif %}
   class="product-single__image"
-  src="{{ current_variant.image | img_url: '800x' }}"
+  src="{{ image | img_url: '800x' }}"
   alt="{{ image.alt | escape }}"
   style="max-width: 100%; height: auto;"
 >
+
                     </div>
                   </div>
                 {% endfor %}
