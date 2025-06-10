@@ -1362,10 +1362,18 @@
     }
   });
 </script>
+
+{% schema %}
+{
+  "name": "Product Template",
+  "settings": []
+}
 {% endschema %}
+
 {% comment %}
   <!-- Extend -- Load product integration script -->
   {% render 'extend-product-integration' %}
   <!-- Extend -- End Extend code -->
 {% endcomment %}
+
 
