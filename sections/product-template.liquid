@@ -7,12 +7,13 @@
   <div class="mobile-product-image-wrapper" style="text-align: center; margin-bottom: 20px;">
     {% assign fallback_image = product.images[0] %}
     <img
-      src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-      data-src="{{ product.featured_image | default: fallback_image | img_url: '800x' }}"
-      alt="{{ product.title }}"
-      class="lazyload mobile-product-image"
-      style="max-width: 100%; height: auto;"
-    >
+  id="MainProductImage"
+  src="{{ product.featured_image | default: fallback_image | img_url: '800x' }}"
+  alt="{{ product.title }}"
+  class="mobile-product-image"
+  style="max-width: 100%; height: auto;"
+>
+
   </div>
 {% endif %}
 
@@ -85,21 +86,12 @@
                   >
                     <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
                       <img
-                        id="{{ img_id }}"
-                        class="product-single__image lazyload"
-                        {% if featured_image == image %}
-                          src="{{ current_variant.image | img_url: '100x' }}"
-                        {% endif %}
-                        data-src="{{ img_url }}"
-                        data-widths="[180, 370, 540, 740, 900, 1080, 1296, 1512, 1728, 2048]"
-                        data-aspectratio="{{ image.aspect_ratio }}"
-                        data-sizes="auto"
-                        data-zoom-image="{{ current_variant.image | img_url: 'master' }}"
-                        {% if section.settings.product_image_zoom_type == 'zoom-in' %}
-                          data-zoom="{{ current_variant.image | img_url: '1024x1024', scale: 2 }}"
-                        {% endif %}
-                        alt="{{ image.alt | escape }}"
-                      >
+  id="MainProductImage"
+  class="product-single__image"
+  src="{{ current_variant.image | img_url: '800x' }}"
+  alt="{{ image.alt | escape }}"
+  style="max-width: 100%; height: auto;"
+>
                     </div>
                   </div>
                 {% endfor %}
