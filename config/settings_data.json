@@ -4081,20 +4081,6 @@
       "slider_gcXGDq": {
         "type": "slider",
         "blocks": {
-          "image_BfkhXK": {
-            "type": "image",
-            "settings": {
-              "image": "shopify://shop_images/1009.jpg",
-              "mobile_image": "shopify://shop_images/1009mobile.jpg",
-              "alignment": "center center",
-              "overlay_opacity": 30,
-              "color_text": "#ffffff",
-              "text_alignment": "center",
-              "slide_heading": "",
-              "button_label": "",
-              "button_link": "shopify://products/the-swiss-automatic-radiance-1009-45mm-diver"
-            }
-          },
           "image_kTGFeW": {
             "type": "image",
             "settings": {
@@ -4108,11 +4094,25 @@
               "button_label": "",
               "button_link": "shopify://collections/fathers-day"
             }
+          },
+          "image_BfkhXK": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/3922.jpg",
+              "mobile_image": "shopify://shop_images/3922M.jpg",
+              "alignment": "center center",
+              "overlay_opacity": 30,
+              "color_text": "#ffffff",
+              "text_alignment": "center",
+              "slide_heading": "",
+              "button_label": "",
+              "button_link": "shopify://products/special-reserve-3922-and-3923-automatic-48mm-skeleton"
+            }
           }
         },
         "block_order": [
-          "image_BfkhXK",
-          "image_kTGFeW"
+          "image_kTGFeW",
+          "image_BfkhXK"
         ],
         "custom_css": [
           ".slides__slide {position: relative;}",
@@ -4240,11 +4240,6 @@
       },
       "6298225925462806087": {
         "type": "shopify://apps/blockx-country-blocker/blocks/app-embed/b7d028e1-4369-4ca2-8d8c-e7d90d1ba404",
-        "disabled": false,
-        "settings": {}
-      },
-      "pagefly-page-builder": {
-        "type": "shopify://apps/pagefly-page-builder/blocks/app-embed/83e179f7-59a0-4589-8c66-c0dddf959200",
         "disabled": false,
         "settings": {}
       }
