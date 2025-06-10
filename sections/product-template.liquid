@@ -1345,30 +1345,4 @@
   {% render 'extend-product-integration' %}
   <!-- Extend -- End Extend code -->
 {% endcomment %}
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const variantSelect = document.querySelector('#ProductSelect-{{ section.id }}');
-    const imageWrappers = document.querySelectorAll('[data-variant-id]');
-
-    if (!variantSelect || !imageWrappers.length) return;
-
-    variantSelect.addEventListener('change', function (event) {
-      const selectedVariantId = event.target.value;
-
-      imageWrappers.forEach(function (wrapper) {
-        if (wrapper.getAttribute('data-variant-id') === selectedVariantId) {
-          wrapper.classList.remove('hide');
-        } else {
-          wrapper.classList.add('hide');
-        }
-      });
-
-      // Optionally scroll to the image on mobile
-      const selectedImage = document.querySelector(`[data-variant-id="${selectedVariantId}"]`);
-      if (selectedImage) {
-        selectedImage.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
-</script>
 
