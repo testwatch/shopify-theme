@@ -530,6 +530,47 @@
   <script type="application/json" id="ProductJson-{{ section.id }}">
     {{ product | json }}
   </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var selector = document.querySelector('#ProductSelect-{{ section.id }}');
+    if (!selector) return;
+
+    selector.addEventListener('change', function () {
+      var selectedVariantId = selector.value;
+      var productData = JSON.parse(document.getElementById('ProductJson-{{ section.id }}').textContent);
+      var selectedVariant = productData.variants.find(function (variant) {
+        return variant.id == selectedVariantId;
+      });
+
+      if (selectedVariant) {
+        // Update price
+        document.querySelectorAll('.price_update').forEach(function(el){
+          el.innerHTML = Shopify.formatMoney(selectedVariant.price, "{{ shop.money_format }}");
+        });
+
+        // Update Compare Price
+        if (selectedVariant.compare_at_price) {
+          document.getElementById('ComparePrice').innerText = Shopify.formatMoney(selectedVariant.compare_at_price, "{{ shop.money_format }}");
+        }
+
+        // Update Add to Cart data
+        document.querySelectorAll('#AddToCart').forEach(function(el){
+          el.disabled = !selectedVariant.available;
+          el.dataset.price = selectedVariant.price / 100;
+        });
+
+        // Update featured image (if applicable)
+        if (selectedVariant.featured_image) {
+          const mainImage = document.querySelector('#ProductPhoto img');
+          if (mainImage) {
+            mainImage.src = selectedVariant.featured_image.src;
+          }
+        }
+      }
+    });
+  });
+</script>
+
 {% endunless %}
 
 {% schema %}
