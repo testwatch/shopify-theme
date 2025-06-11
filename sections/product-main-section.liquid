@@ -496,7 +496,8 @@
   {%if product.tags contains 'Strap' %}
   <div class="large--hide accordinn">{%include 'strap-mobile'%}</div>
   {%else%}
-  <div class="large--hide accordinn">{%include 'newpdp-mobile-tab-details'%}</div>
+  <div class="large--hide accordinn">{%include 'newpdp-mobile-tab-details'%}
+  {{ 'variant-switcher.js' | asset_url | script_tag }}</div>
   {%endif%}
 </div>
 {% comment %}
@@ -522,7 +523,6 @@
                  {% endfor %}
                </li>
    </ul>
-   {{ 'variant-switcher.js' | asset_url | script_tag }}
           </div>  -->
 {%endcomment%}
 
