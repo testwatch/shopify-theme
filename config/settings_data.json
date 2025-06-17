@@ -289,6 +289,7 @@
       },
       "1582631631236": {
         "type": "Home-reviews",
+        "disabled": true,
         "settings": {
           "image": "shopify://shop_images/Money-Inc-FINAL_d117aca2-4440-4c75-b83d-554c22f90ee6.png",
           "img_one_link": "",
@@ -1998,6 +1999,7 @@
           "94244951-c09f-4d37-bb6f-2483a6d1fbe6",
           "1608115317956bb61b-0"
         ],
+        "disabled": true,
         "custom_css": [
           "/* Round the buttons in Two Banners Section */.banner-button {border-radius: 30px !important; padding: 10px 40px !important; transition: background-color 0.3s ease, transform 0.3s ease;}",
           ".banner-button:hover {transform: translateY(-2px); background-color: #333;}",
@@ -3840,6 +3842,7 @@
           "33468b6f-4736-4406-a3f5-bd09f2af0860-1668672020cfa4e511-2",
           "33468b6f-4736-4406-a3f5-bd09f2af0860-1668672020cfa4e511-3"
         ],
+        "disabled": true,
         "custom_css": [
           "{margin-top: 0 !important; padding-top: 0 !important;}",
           ".slick-slide > div {background-color: black !important;}"
@@ -3894,6 +3897,7 @@
           "45972210-f1ec-4b08-bd71-0e19f6bf8d03-166875362850829b2a-0",
           "2f7fc5f7-678b-4109-a493-a1d13c2ca21f"
         ],
+        "disabled": true,
         "custom_css": [
           "* Round the buttons in Two Banners Section */.banner-button {border-radius: 30px !important; padding: 10px 40px !important; transition: background-color 0.3s ease, transform 0.3s ease;}",
           ".banner-button:hover {transform: translateY(-2px); background-color: #333;}",
@@ -3943,6 +3947,7 @@
           "696ede40-bef9-4c00-b9a3-45b7be8ca1cc",
           "40277a72-961a-4ae5-a4d9-fc5ecc640fc7"
         ],
+        "disabled": true,
         "custom_css": [],
         "settings": {
           "heading": "",
@@ -3984,6 +3989,7 @@
           "5dd5494e-eb9f-415d-84cf-02b021d9c68c",
           "23fa5932-95cd-4547-8fbd-f6165add9265"
         ],
+        "disabled": true,
         "settings": {
           "heading": "",
           "video_url": ""
@@ -4022,6 +4028,7 @@
           "5fd5133e-7cd1-4d44-b195-dbf732b5efe0",
           "f51bc9a3-ded7-4015-8a1e-b4a1aff73c96"
         ],
+        "disabled": true,
         "custom_css": [
           "img {border-radius: 0;}",
           "a.banner-btn.banner-button {background-color: transparent !important; /* Override inline background color */ border: 2px solid #ff6b00 !important; /* Optional: match Add to Cart style */ color: #ff6b00 !important; /* Optional: match text color */ border-radius: 30px !important; /* Optional: rounded corners */ padding: 10px 20px !important; transition: all 0.3s ease !important;}",
@@ -4103,6 +4110,7 @@
           "image_kTGFeW",
           "image_BfkhXK"
         ],
+        "disabled": true,
         "custom_css": [
           ".slides__slide {position: relative;}",
           ".slides__slide > a {position: relative; z-index: 1; display: block;}",
@@ -4137,6 +4145,7 @@
       },
       "new_image_wd_txt_DPKayE": {
         "type": "new-image-wd-txt",
+        "disabled": true,
         "custom_css": [
           ".register-button {background-color: #000; color: #fff; padding: 12px 28px; font-weight: bold; text-decoration: none; border-radius: 30px; display: inline-block; margin-top: 20px; letter-spacing: 1px; transition: all 0.3s ease;}",
           ".register-button:hover {background-color: #333; color: #fff;}",
@@ -4158,6 +4167,7 @@
       }
     },
     "content_for_index": [
+      "360_viewer_PjpPdJ",
       "slider_gcXGDq",
       "1582618761328",
       "33468b6f-4736-4406-a3f5-bd09f2af0860",
@@ -4171,8 +4181,7 @@
       "1582631631236",
       "64945c37-3632-42b7-9cb1-5dbb52115933",
       "e541fb54-e9e9-4e24-b16f-9bd3c8f1b2e7",
-      "new_image_wd_txt_DPKayE",
-      "360_viewer_PjpPdJ"
+      "new_image_wd_txt_DPKayE"
     ],
     "blocks": {
       "855628211100114053": {
