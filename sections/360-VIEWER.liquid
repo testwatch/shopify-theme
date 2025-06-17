@@ -1,15 +1,3 @@
-{% schema %}
-{
-  "name": "Canvas 360 Viewer",
-  "settings": [],
-  "presets": [
-    {
-      "name": "Canvas 360 Rolex Style"
-    }
-  ]
-}
-{% endschema %}
-
 <style>
   .canvas-360-wrapper {
     position: relative;
@@ -36,136 +24,85 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const frameCount = 54;
-  const canvas = document.getElementById("watch360Canvas");
-  const context = canvas.getContext("2d");
-  const images = [];
-  const imageCenters = [];
-  let currentFrame = 0;
-  let lastTime = 0;
-  const fps = 30;
-  const interval = 1000 / fps;
-  const spinSpeed = 0.2;
-  const backgroundColor = [244, 245, 249];
-  const tolerance = 20;
+  document.addEventListener("DOMContentLoaded", function () {
+    const frameCount = 54;
+    const canvas = document.getElementById("watch360Canvas");
+    const context = canvas.getContext("2d");
+    const images = [];
+    let currentFrame = 0;
+    let lastTime = 0;
+    const fps = 30;
+    const interval = 1000 / fps;
 
-  const imagePath = i => `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}.jpg`;
+    const imagePath = i => `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}.jpg`;
 
-  function getImageCenter(img, bgColor = backgroundColor) {
-    const tempCanvas = document.createElement('canvas');
-    tempCanvas.width = img.width;
-    tempCanvas.height = img.height;
-    const tempCtx = tempCanvas.getContext('2d');
-    tempCtx.drawImage(img, 0, 0);
-    const data = tempCtx.getImageData(0, 0, img.width, img.height).data;
-    let sumX = 0, sumY = 0, count = 0;
-    for (let y = 0; y < img.height; y++) {
-      for (let x = 0; x < img.width; x++) {
-        const idx = (y * img.width + x) * 4;
-        const r = data[idx], g = data[idx + 1], b = data[idx + 2];
-        if (
-          Math.abs(r - bgColor[0]) > tolerance ||
-          Math.abs(g - bgColor[1]) > tolerance ||
-          Math.abs(b - bgColor[2]) > tolerance
-        ) {
-          sumX += x;
-          sumY += y;
-          count++;
-        }
-      }
-    }
-    if (count === 0) return { x: img.width / 2, y: img.height / 2 };
-    return { x: sumX / count, y: sumY / count };
-  }
-
-  function preloadImages() {
-    return Promise.all(
-      Array.from({length: frameCount}, (_, i) =>
-        new Promise(resolve => {
-          const img = new Image();
-          img.onload = () => resolve(img);
-          img.onerror = () => {
-            console.error("Image failed to load:", img.src);
-            // Push a placeholder 1x1 transparent image so array stays in sync
-            const placeholder = document.createElement("canvas");
-            placeholder.width = 1;
-            placeholder.height = 1;
-            resolve(placeholder);
-          };
-          img.src = imagePath(i);
+    const preloadImages = () => {
+      return Promise.all(
+        [...Array(frameCount)].map((_, i) => {
+          return new Promise(resolve => {
+            const img = new Image();
+            img.src = imagePath(i);
+            img.onload = () => resolve(img);
+          });
         })
-      )
-    );
-  }
+      );
+    };
 
-  function drawFrame(index) {
-    const img = images[index];
-    const center = imageCenters[index];
-    if (!img || !center) return;
+    const drawFrame = (index) => {
+      const img = images[index];
+      if (!img) return;
+      // Fit image to canvas
+      const canvasRatio = canvas.width / canvas.height;
+      const imgRatio = img.width / img.height;
 
-    // Fit image to canvas
-    const canvasRatio = canvas.width / canvas.height;
-    const imgRatio = img.width / img.height;
-    let drawWidth, drawHeight;
-    if (imgRatio > canvasRatio) {
-      drawWidth = canvas.width;
-      drawHeight = canvas.width / imgRatio;
-    } else {
-      drawHeight = canvas.height;
-      drawWidth = canvas.height * imgRatio;
-    }
+      let drawWidth, drawHeight;
+      if (imgRatio > canvasRatio) {
+        drawWidth = canvas.width;
+        drawHeight = canvas.width / imgRatio;
+      } else {
+        drawHeight = canvas.height;
+        drawWidth = canvas.height * imgRatio;
+      }
 
-    // Offset so detected center aligns with canvas center
-    const offsetX = (canvas.width / 2) - (center.x * (drawWidth / img.width));
-    const offsetY = (canvas.height / 2) - (center.y * (drawHeight / img.height));
+      const x = (canvas.width - drawWidth) / 2;
+      const y = (canvas.height - drawHeight) / 2;
 
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-  }
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(img, x, y, drawWidth, drawHeight);
+    };
 
-  function resizeCanvas() {
-    const maxWidth = 1100;
-    const maxHeight = 1336;
-    const ratio = maxWidth / maxHeight;
-    let width = Math.min(window.innerWidth, maxWidth);
-    let height = width / ratio;
-    if (height > window.innerHeight * 0.8) {
-      height = window.innerHeight * 0.8;
-      width = height * ratio;
-    }
-    canvas.width = width;
-    canvas.height = height;
-    drawFrame(Math.floor(currentFrame));
-  }
-  window.addEventListener('resize', resizeCanvas);
-
-  function rotateSpin(timestamp) {
-    if (!lastTime) lastTime = timestamp;
-    const delta = timestamp - lastTime;
-    if (delta > interval) {
-      currentFrame = (currentFrame + spinSpeed) % frameCount;
+    function resizeCanvas() {
+      const maxWidth = 1100;
+      const maxHeight = 1336;
+      const ratio = maxWidth / maxHeight;
+      let width = Math.min(window.innerWidth, maxWidth);
+      let height = width / ratio;
+      if (height > window.innerHeight * 0.8) {
+        height = window.innerHeight * 0.8;
+        width = height * ratio;
+      }
+      canvas.width = width;
+      canvas.height = height;
       drawFrame(Math.floor(currentFrame));
-      lastTime = timestamp;
     }
-    requestAnimationFrame(rotateSpin);
-  }
+    window.addEventListener('resize', resizeCanvas);
 
-  // MAIN
-  preloadImages().then(loadedImgs => {
-    // images and imageCenters must always be the same length
-    loadedImgs.forEach((img, idx) => {
-      images.push(img);
-      imageCenters.push(getImageCenter(img));
+    const rotateSlowly = (timestamp) => {
+      if (!lastTime) lastTime = timestamp;
+      const delta = timestamp - lastTime;
+
+      if (delta > interval) {
+        currentFrame = (currentFrame + 0.03) % frameCount;
+        drawFrame(Math.floor(currentFrame));
+        lastTime = timestamp;
+      }
+      requestAnimationFrame(rotateSlowly);
+    };
+
+    preloadImages().then(loaded => {
+      images.push(...loaded);
+      resizeCanvas();
+      rotateSlowly(performance.now());
     });
-
-    // Sanity check: if *all* images are 1x1 (failed), abort
-    if (images.every(img => img.width === 1 && img.height === 1)) {
-      console.error("No valid frames loaded. Check your URLs and filenames.");
-      return;
-    }
-    resizeCanvas();
-    rotateSpin(performance.now());
   });
-});
 </script>
