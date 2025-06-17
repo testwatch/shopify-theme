@@ -1,3 +1,15 @@
+{% schema %}
+{
+  "name": "Canvas 360 Viewer",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Canvas 360 Rolex Style"
+    }
+  ]
+}
+{% endschema %}
+
 <style>
   .canvas-360-wrapper {
     position: relative;
@@ -33,6 +45,7 @@
     let lastTime = 0;
     const fps = 30;
     const interval = 1000 / fps;
+    const spinSpeed = 0.2; // Increase this to spin faster (try 0.2-0.4 for fast spin)
 
     const imagePath = i => `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}.jpg`;
 
@@ -87,22 +100,22 @@
     }
     window.addEventListener('resize', resizeCanvas);
 
-    const rotateSlowly = (timestamp) => {
+    const rotateSpin = (timestamp) => {
       if (!lastTime) lastTime = timestamp;
       const delta = timestamp - lastTime;
 
       if (delta > interval) {
-        currentFrame = (currentFrame + 0.03) % frameCount;
+        currentFrame = (currentFrame + spinSpeed) % frameCount;
         drawFrame(Math.floor(currentFrame));
         lastTime = timestamp;
       }
-      requestAnimationFrame(rotateSlowly);
+      requestAnimationFrame(rotateSpin);
     };
 
     preloadImages().then(loaded => {
       images.push(...loaded);
       resizeCanvas();
-      rotateSlowly(performance.now());
+      rotateSpin(performance.now());
     });
   });
 </script>
