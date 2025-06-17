@@ -1,6 +1,80 @@
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Canvas 360 Viewer",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Canvas 360 Rolex Style"
+    }
+  ]
+}
 {% endschema %}
+
+<style>
+  .canvas-360-wrapper {
+    position: relative;
+    height: 100vh;
+    background: linear-gradient(to bottom, #f4f5f9 0%, #ffffff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  canvas#watch360Canvas {
+    width: 100%;
+    height: auto;
+    max-width: 1100px;
+    display: block;
+    filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.15));
+  }
+</style>
+
+<div class="canvas-360-wrapper">
+  <canvas id="watch360Canvas" width="1100" height="1336"></canvas>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const frameCount = 54;
+    const canvas = document.getElementById("watch360Canvas");
+    const context = canvas.getContext("2d");
+    const images = [];
+    let currentFrame = 0;
+
+    const imagePath = i => `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}.jpg`;
+
+    const preloadImages = () => {
+      return Promise.all(
+        [...Array(frameCount)].map((_, i) => {
+          return new Promise(resolve => {
+            const img = new Image();
+            img.src = imagePath(i);
+            img.onload = () => resolve(img);
+          });
+        })
+      );
+    };
+
+    const drawFrame = (index) => {
+      const img = images[index];
+      if (!img) return;
+      const scale = 1; // Reset to original scale
+      const x = (canvas.width / 2) - (img.width / 2) * scale;
+      const y = (canvas.height / 2) - (img.height / 2) * scale;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(img, x, y, img.width * scale, img.height * scale);
+    };
+
+    const rotateSlowly = () => {
+      currentFrame = (currentFrame + 0.03) % frameCount;
+      drawFrame(Math.floor(currentFrame));
+      requestAnimationFrame(rotateSlowly);
+    };
+
+    preloadImages().then(loaded => {
+      images.push(...loaded);
+      drawFrame(0);
+      rotateSlowly();
+    });
+  });
+</script>
