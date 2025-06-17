@@ -48,12 +48,12 @@
     const interval = 1000 / fps;
     const spinSpeed = 0.2; // Adjust for faster/slower spin
 
-    // Change this if your background color is different (default is #f4f5f9)
+    // Default background color: #f4f5f9 (adjust if needed)
     const backgroundColor = [244, 245, 249];
+    const tolerance = 20; // Higher number = more tolerant, adjust if needed
 
     const imagePath = i => `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}.jpg`;
 
-    // Calculate the center of mass for non-background pixels in the image
     function getImageCenter(img, bgColor = backgroundColor) {
       const tempCanvas = document.createElement('canvas');
       tempCanvas.width = img.width;
@@ -67,11 +67,10 @@
         for (let x = 0; x < img.width; x++) {
           const idx = (y * img.width + x) * 4;
           const r = data[idx], g = data[idx + 1], b = data[idx + 2];
-          // If not background color (with some tolerance)
           if (
-            Math.abs(r - bgColor[0]) > 8 ||
-            Math.abs(g - bgColor[1]) > 8 ||
-            Math.abs(b - bgColor[2]) > 8
+            Math.abs(r - bgColor[0]) > tolerance ||
+            Math.abs(g - bgColor[1]) > tolerance ||
+            Math.abs(b - bgColor[2]) > tolerance
           ) {
             sumX += x;
             sumY += y;
@@ -79,21 +78,28 @@
           }
         }
       }
-      if (count === 0) return { x: img.width / 2, y: img.height / 2 };
+      if (count === 0) {
+        // fallback: center of image
+        return { x: img.width / 2, y: img.height / 2 };
+      }
       return { x: sumX / count, y: sumY / count };
     }
 
-    const preloadImages = () => {
+    function preloadImages() {
       return Promise.all(
         [...Array(frameCount)].map((_, i) => {
           return new Promise(resolve => {
             const img = new Image();
             img.src = imagePath(i);
             img.onload = () => resolve(img);
+            img.onerror = () => {
+              console.error("Image failed to load:", img.src);
+              resolve(null);
+            };
           });
         })
       );
-    };
+    }
 
     const drawFrame = (index) => {
       const img = images[index];
@@ -150,11 +156,21 @@
     };
 
     preloadImages().then(loaded => {
-      images.push(...loaded);
+      // Filter out failed images (nulls)
+      const filtered = loaded.filter(img => !!img);
+      if (filtered.length === 0) {
+        console.error("No images loaded! Please check your image URLs.");
+        return;
+      }
 
-      // Calculate center for each image (may take a few seconds for many frames/larger images)
-      loaded.forEach(img => {
-        imageCenters.push(getImageCenter(img));
+      images.push(...filtered);
+
+      // Calculate centers
+      filtered.forEach((img, idx) => {
+        const center = getImageCenter(img);
+        imageCenters.push(center);
+        // Uncomment for debugging:
+        // console.log(`Frame ${idx + 1} center:`, center);
       });
 
       resizeCanvas();
