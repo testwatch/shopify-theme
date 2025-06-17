@@ -41,13 +41,47 @@
     const canvas = document.getElementById("watch360Canvas");
     const context = canvas.getContext("2d");
     const images = [];
+    const imageCenters = [];
     let currentFrame = 0;
     let lastTime = 0;
     const fps = 30;
     const interval = 1000 / fps;
-    const spinSpeed = 0.2; // Increase this to spin faster (try 0.2-0.4 for fast spin)
+    const spinSpeed = 0.2; // Adjust for faster/slower spin
+
+    // Change this if your background color is different (default is #f4f5f9)
+    const backgroundColor = [244, 245, 249];
 
     const imagePath = i => `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}.jpg`;
+
+    // Calculate the center of mass for non-background pixels in the image
+    function getImageCenter(img, bgColor = backgroundColor) {
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = img.width;
+      tempCanvas.height = img.height;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(img, 0, 0);
+      const data = tempCtx.getImageData(0, 0, img.width, img.height).data;
+
+      let sumX = 0, sumY = 0, count = 0;
+      for (let y = 0; y < img.height; y++) {
+        for (let x = 0; x < img.width; x++) {
+          const idx = (y * img.width + x) * 4;
+          const r = data[idx], g = data[idx + 1], b = data[idx + 2];
+          // If not background color (with some tolerance)
+          if (
+            Math.abs(r - bgColor[0]) > 8 ||
+            Math.abs(g - bgColor[1]) > 8 ||
+            Math.abs(b - bgColor[2]) > 8
+          ) {
+            sumX += x;
+            sumY += y;
+            count++;
+          }
+        }
+      }
+      if (count === 0) return { x: img.width / 2, y: img.height / 2 };
+      return { x: sumX / count, y: sumY / count };
+    }
 
     const preloadImages = () => {
       return Promise.all(
@@ -63,7 +97,9 @@
 
     const drawFrame = (index) => {
       const img = images[index];
-      if (!img) return;
+      const center = imageCenters[index];
+      if (!img || !center) return;
+
       // Fit image to canvas
       const canvasRatio = canvas.width / canvas.height;
       const imgRatio = img.width / img.height;
@@ -77,11 +113,12 @@
         drawWidth = canvas.height * imgRatio;
       }
 
-      const x = (canvas.width - drawWidth) / 2;
-      const y = (canvas.height - drawHeight) / 2;
+      // Offset so the detected watch center aligns with canvas center
+      const offsetX = (canvas.width / 2) - (center.x * (drawWidth / img.width));
+      const offsetY = (canvas.height / 2) - (center.y * (drawHeight / img.height));
 
       context.clearRect(0, 0, canvas.width, canvas.height);
-      context.drawImage(img, x, y, drawWidth, drawHeight);
+      context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
     };
 
     function resizeCanvas() {
@@ -114,6 +151,12 @@
 
     preloadImages().then(loaded => {
       images.push(...loaded);
+
+      // Calculate center for each image (may take a few seconds for many frames/larger images)
+      loaded.forEach(img => {
+        imageCenters.push(getImageCenter(img));
+      });
+
       resizeCanvas();
       rotateSpin(performance.now());
     });
