@@ -215,18 +215,7 @@
       },
       "product-template": {
         "type": "product-template",
-        "settings": {
-          "product_vendor_enable": true,
-          "product_quantity_enable": false,
-          "product_image_zoom_type": "lightbox",
-          "product_thumbnails_position": "right",
-          "show_extra_tab": false,
-          "extra_tab_content": "",
-          "social_sharing": false,
-          "enable_payment_button": false,
-          "add_to_cart_width": "small",
-          "free-ship-text-id": "<p>Free Shipping On Orders</p>"
-        }
+        "settings": {}
       },
       "collection-template": {
         "type": "collection-template",
@@ -4161,6 +4150,11 @@
           "box_heading": "Register my watch",
           "box_text": "Register your Stührling watch to unlock your full brand experience. Create an account, add your watch to your collection, and access your warranty, user guides, and more—all in one place."
         }
+      },
+      "360_viewer_PjpPdJ": {
+        "type": "360-VIEWER",
+        "name": "Canvas 360 Rolex Style",
+        "settings": {}
       }
     },
     "content_for_index": [
@@ -4177,7 +4171,8 @@
       "1582631631236",
       "64945c37-3632-42b7-9cb1-5dbb52115933",
       "e541fb54-e9e9-4e24-b16f-9bd3c8f1b2e7",
-      "new_image_wd_txt_DPKayE"
+      "new_image_wd_txt_DPKayE",
+      "360_viewer_PjpPdJ"
     ],
     "blocks": {
       "855628211100114053": {
