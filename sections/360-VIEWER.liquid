@@ -13,40 +13,32 @@
 <style>
   .canvas-360-wrapper {
     position: relative;
-    width: 100vw;
+    width: 100%;
     max-width: 1100px;
-    aspect-ratio: 4/5;
-    background: #000000 !important;
+    aspect-ratio: 1 / 1.2;
+    background: #000 !important;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
-    box-sizing: border-box;
   }
 
   canvas#watch360Canvas {
-    width: 100% !important;
-    height: 100% !important;
     display: block;
-    filter: drop-shadow(0 30px 40px rgba(0,0,0,0.15));
-    background: #000000 !important;
-    box-sizing: border-box;
-    max-width: 100vw;
+    width: 100% !important;
+    height: auto !important;
     max-height: 80vh;
-    object-fit: contain;
+    background: #000 !important;
     border-radius: 12px;
   }
 
   @media (max-width: 700px) {
     .canvas-360-wrapper {
-      max-width: 98vw;
-      aspect-ratio: 1/1.2;
-      min-height: 300px;
-      max-height: 70vw;
-      padding: 0;
+      aspect-ratio: 1 / 1.2;
+      max-width: 100vw;
     }
+
     canvas#watch360Canvas {
-      max-height: 60vh;
       border-radius: 8px;
     }
   }
@@ -88,31 +80,6 @@
       return { width: rect.width, height: rect.height };
     }
 
-    const drawFrame = (index) => {
-      const img = images[index];
-      if (!img) return;
-
-      // Fill canvas with black before drawing
-      context.fillStyle = "#000000";
-      context.fillRect(0, 0, canvas.width, canvas.height);
-
-      const canvasRatio = canvas.width / canvas.height;
-      const imgRatio = img.width / img.height;
-
-      let drawWidth, drawHeight;
-      if (imgRatio > canvasRatio) {
-        drawWidth = canvas.width;
-        drawHeight = canvas.width / imgRatio;
-      } else {
-        drawHeight = canvas.height;
-        drawWidth = canvas.height * imgRatio;
-      }
-
-      const x = (canvas.width - drawWidth) / 2;
-      const y = (canvas.height - drawHeight) / 2;
-      context.drawImage(img, x, y, drawWidth, drawHeight);
-    };
-
     function resizeCanvas() {
       const { width, height } = getWrapperDimensions();
       const dpr = window.devicePixelRatio || 1;
@@ -124,11 +91,38 @@
       canvas.style.height = height + 'px';
 
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
-
       drawFrame(Math.floor(currentFrame));
     }
 
-    window.addEventListener('resize', resizeCanvas);
+    const drawFrame = (index) => {
+      const img = images[index];
+      if (!img) return;
+
+      const canvasWidth = canvas.width;
+      const canvasHeight = canvas.height;
+
+      // Fill canvas with black
+      context.fillStyle = "#000000";
+      context.fillRect(0, 0, canvasWidth, canvasHeight);
+
+      // Calculate image size while preserving aspect ratio
+      const imgRatio = img.width / img.height;
+      const canvasRatio = canvasWidth / canvasHeight;
+
+      let drawWidth, drawHeight;
+      if (imgRatio > canvasRatio) {
+        drawWidth = canvasWidth;
+        drawHeight = canvasWidth / imgRatio;
+      } else {
+        drawHeight = canvasHeight;
+        drawWidth = canvasHeight * imgRatio;
+      }
+
+      const x = (canvasWidth - drawWidth) / 2;
+      const y = (canvasHeight - drawHeight) / 2;
+
+      context.drawImage(img, x, y, drawWidth, drawHeight);
+    };
 
     const rotateSpin = (timestamp) => {
       if (!lastTime) lastTime = timestamp;
@@ -147,7 +141,9 @@
       rotateSpin(performance.now());
     });
 
+    window.addEventListener('resize', resizeCanvas);
     window.addEventListener('load', resizeCanvas);
   });
 </script>
+
 
