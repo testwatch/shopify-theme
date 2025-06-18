@@ -112,11 +112,23 @@
     };
 
     function resizeCanvas() {
-      const { width, height } = getWrapperDimensions();
-      canvas.width = width;
-      canvas.height = height;
-      drawFrame(Math.floor(currentFrame));
-    }
+  const { width, height } = getWrapperDimensions();
+  const dpr = window.devicePixelRatio || 1;
+
+  // Set canvas pixel resolution for high-DPI displays
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+
+  // Maintain physical size in layout
+  canvas.style.width = width + 'px';
+  canvas.style.height = height + 'px';
+
+  // Scale drawing operations accordingly
+  context.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  drawFrame(Math.floor(currentFrame));
+}
+
 
     window.addEventListener('resize', resizeCanvas);
 
