@@ -4162,6 +4162,9 @@
       },
       "360_viewer_PjpPdJ": {
         "type": "360-VIEWER",
+        "custom_css": [
+          ".canvas-360-sectionwatch360Canvas, .canvas-360-wrapper {background: #fff;}"
+        ],
         "name": "Canvas 360 Rolex Style",
         "settings": {}
       }
