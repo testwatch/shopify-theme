@@ -14,31 +14,35 @@
     position: relative;
     width: 100%;
     max-width: 1100px;
-    height: auto;
     background: #FFF !important;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
     box-sizing: border-box;
+    /* Flexible height based on content */
+    height: 0;
+    padding-bottom: 125%; /* Default 4:5 ratio */
   }
   
   canvas#watch360Canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
     display: block;
     filter: drop-shadow(0 30px 40px rgba(0,0,0,0.15));
     background: transparent;
     box-sizing: border-box;
-    max-width: 100%;
     object-fit: contain;
     border-radius: 12px;
   }
   
   @media (max-width: 700px) {
     .canvas-360-wrapper {
-      max-width: 100%;
-      padding: 0;
+      max-width: 100vw;
+      padding-bottom: 100%; /* More square aspect ratio for mobile */
     }
     canvas#watch360Canvas {
       border-radius: 8px;
@@ -61,62 +65,85 @@ document.addEventListener("DOMContentLoaded", function() {
   const fps = 30;
   const interval = 1000 / fps;
   const spinSpeed = 0.2;
+  let isMobile = window.matchMedia("(max-width: 700px)").matches;
 
-  const imagePath = i => `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}.jpg`;
+  // Use higher quality images if available (add _2x suffix for retina)
+  const imagePath = i => {
+    const basePath = `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}`;
+    return isMobile ? `${basePath}_mobile.jpg` : `${basePath}.jpg`;
+  };
 
   const preloadImages = () => {
     return Promise.all(
       Array.from({length: frameCount}, (_, i) => {
         return new Promise(resolve => {
           const img = new Image();
-          img.onload = () => resolve(img);
+          img.onload = () => {
+            // Only use high quality images that loaded successfully
+            if (img.naturalWidth > 100) resolve(img);
+            else console.warn(`Low quality image detected for frame ${i}`);
+          };
           img.src = imagePath(i);
         });
       })
     );
   };
 
+  const setupCanvas = () => {
+    const wrapper = document.querySelector('.canvas-360-wrapper');
+    const rect = wrapper.getBoundingClientRect();
+    const pixelRatio = window.devicePixelRatio || 1;
+    
+    // Set display size (CSS)
+    canvas.style.width = `${rect.width}px`;
+    canvas.style.height = `${rect.height}px`;
+    
+    // Set internal buffer size (scaled for quality)
+    canvas.width = rect.width * pixelRatio;
+    canvas.height = rect.height * pixelRatio;
+    
+    // Scale context to compensate for high DPI
+    context.scale(pixelRatio, pixelRatio);
+  };
+
   const drawFrame = (index) => {
     const img = images[index];
     if (!img) return;
 
-    // Get natural image dimensions
-    const imgWidth = img.naturalWidth;
-    const imgHeight = img.naturalHeight;
-    const imgRatio = imgWidth / imgHeight;
-
-    // Get canvas display dimensions (CSS)
-    const displayWidth = canvas.clientWidth;
-    const displayHeight = canvas.clientHeight;
-    const canvasRatio = displayWidth / displayHeight;
+    const imgRatio = img.naturalWidth / img.naturalHeight;
+    const canvasRatio = canvas.width / canvas.height;
 
     let drawWidth, drawHeight, x, y;
 
-    // Calculate dimensions to fit entire image
+    // Fit entire image in canvas (contain)
     if (imgRatio > canvasRatio) {
-      // Image is wider than canvas - fit to width
-      drawWidth = displayWidth;
-      drawHeight = displayWidth / imgRatio;
+      // Fit to width
+      drawWidth = canvas.width;
+      drawHeight = drawWidth / imgRatio;
       x = 0;
-      y = (displayHeight - drawHeight) / 2;
+      y = (canvas.height - drawHeight) / 2;
     } else {
-      // Image is taller than canvas - fit to height
-      drawHeight = displayHeight;
-      drawWidth = displayHeight * imgRatio;
-      x = (displayWidth - drawWidth) / 2;
+      // Fit to height
+      drawHeight = canvas.height;
+      drawWidth = drawHeight * imgRatio;
+      x = (canvas.width - drawWidth) / 2;
       y = 0;
     }
 
-    // Set canvas internal dimensions to match display
-    canvas.width = displayWidth;
-    canvas.height = displayHeight;
-
-    // Clear and draw
+    // Clear and draw with high quality
+    context.imageSmoothingEnabled = true;
     context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(img, x, y, drawWidth, drawHeight);
+    context.drawImage(
+      img, 
+      x / (window.devicePixelRatio || 1),
+      y / (window.devicePixelRatio || 1),
+      drawWidth / (window.devicePixelRatio || 1),
+      drawHeight / (window.devicePixelRatio || 1)
+    );
   };
 
   const resizeCanvas = () => {
+    setupCanvas();
     drawFrame(Math.floor(currentFrame));
   };
 
@@ -132,11 +159,17 @@ document.addEventListener("DOMContentLoaded", function() {
   };
 
   // Initialize
-  preloadImages().then(loaded => {
-    images.push(...loaded);
-    window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('resize', () => {
+    isMobile = window.matchMedia("(max-width: 700px)").matches;
     resizeCanvas();
+  });
+
+  preloadImages().then(loaded => {
+    // Filter out any failed images
+    images.push(...loaded.filter(img => img.naturalWidth > 100));
+    setupCanvas();
     rotateSpin(performance.now());
+    window.addEventListener('load', resizeCanvas);
   });
 });
 </script>
