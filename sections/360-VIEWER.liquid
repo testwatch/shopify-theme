@@ -16,89 +16,138 @@
     max-width: 1100px;
     margin: 0 auto;
     background: #FFF;
+    overflow: hidden;
   }
   
   #watch360Canvas {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     background: transparent;
-    border-radius: 12px;
+    image-rendering: -webkit-optimize-contrast; /* Crisper rendering */
+    touch-action: none; /* Better touch control */
   }
 </style>
 
 <div class="canvas-360-wrapper">
   <canvas id="watch360Canvas"></canvas>
+  <div id="loadingMessage" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);">
+    Loading watch viewer...
+  </div>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  // 1. Basic Configuration
-  const frameCount = 54;
-  const spinSpeed = 0.1; // Perfect watch rotation speed
-  const imageBaseUrl = 'https://cdn.shopify.com/s/files/1/0333/0936/0264/files/';
-  
-  // 2. Canvas Setup
+  // 1. Configuration
+  const CONFIG = {
+    frameCount: 54,
+    spinSpeed: 0.18, // Optimal watch rotation speed
+    imageBaseUrl: 'https://cdn.shopify.com/s/files/1/0333/0936/0264/files/',
+    loadBatchSize: 5, // Load images in batches for better performance
+    motionBlur: true, // Smoother transitions between frames
+    targetFPS: 60    // Target frame rate
+  };
+
+  // 2. State Management
+  const state = {
+    currentFrame: 0,
+    lastFrameTime: performance.now(),
+    images: [],
+    isDragging: false,
+    lastDragX: 0,
+    velocity: 0,
+    loaded: false
+  };
+
+  // 3. DOM Elements
   const canvas = document.getElementById('watch360Canvas');
-  const ctx = canvas.getContext('2d');
-  let imagesLoaded = 0;
-  const images = new Array(frameCount);
+  const ctx = canvas.getContext('2d', { alpha: false });
+  const loadingMessage = document.getElementById('loadingMessage');
   
-  // 3. Proper Canvas Sizing
-  function resizeCanvas() {
+  // 4. Canvas Setup with High DPI Support
+  function setupCanvas() {
     const wrapper = document.querySelector('.canvas-360-wrapper');
-    const width = wrapper.clientWidth;
-    const height = width * (5/4); // 4:5 aspect ratio
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2); // Cap at 2x for performance
     
-    canvas.style.width = width + 'px';
-    canvas.style.height = height + 'px';
+    canvas.width = wrapper.clientWidth * pixelRatio;
+    canvas.height = wrapper.clientHeight * pixelRatio;
+    canvas.style.width = wrapper.clientWidth + 'px';
+    canvas.style.height = wrapper.clientHeight + 'px';
     
-    // High DPI support
-    const pixelRatio = window.devicePixelRatio || 1;
-    canvas.width = width * pixelRatio;
-    canvas.height = height * pixelRatio;
     ctx.scale(pixelRatio, pixelRatio);
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
   }
-  
-  // 4. Image Loading with Fallback
-  function loadImages() {
-    let loadedCount = 0;
-    const loadingPromises = [];
+
+  // 5. Optimized Image Loading
+  async function loadImages() {
+    const batchCount = Math.ceil(CONFIG.frameCount / CONFIG.loadBatchSize);
     
-    for (let i = 0; i < frameCount; i++) {
-      loadingPromises.push(new Promise((resolve) => {
-        const img = new Image();
-        img.onload = function() {
-          images[i] = img;
-          loadedCount++;
-          if (loadedCount === frameCount) {
-            console.log('All images loaded successfully');
-            startAnimation();
-          }
-          resolve();
-        };
-        img.onerror = function() {
-          console.warn('Failed to load image', i+1);
-          // Fallback to previous image
-          images[i] = images[i-1] || new Image();
-          loadedCount++;
-          resolve();
-        };
-        img.src = `${imageBaseUrl}1020_360_${i+1}.jpg?${Date.now()}`;
-      }));
+    for (let batch = 0; batch < batchCount; batch++) {
+      const batchStart = batch * CONFIG.loadBatchSize;
+      const batchEnd = Math.min(batchStart + CONFIG.loadBatchSize, CONFIG.frameCount);
+      
+      await Promise.all(
+        Array.from({length: batchEnd - batchStart}, (_, i) => {
+          const frameIndex = batchStart + i;
+          return new Promise(resolve => {
+            const img = new Image();
+            img.onload = () => {
+              state.images[frameIndex] = img;
+              updateLoadingProgress();
+              resolve();
+            };
+            img.onerror = () => {
+              // Fallback to previous frame if available
+              state.images[frameIndex] = state.images[frameIndex - 1] || createPlaceholder(frameIndex);
+              resolve();
+            };
+            img.src = `${CONFIG.imageBaseUrl}1020_360_${frameIndex + 1}.jpg?${Date.now()}`;
+          });
+        })
+      );
     }
     
-    return Promise.all(loadingPromises);
+    state.loaded = true;
+    loadingMessage.style.display = 'none';
   }
-  
-  // 5. Smooth Frame Drawing
-  function drawFrame(frame) {
-    const img = images[Math.floor(frame) % frameCount];
-    if (!img) return;
+
+  function createPlaceholder(index) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 800;
+    canvas.height = 1000;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#f0f0f0';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#999';
+    ctx.font = '30px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(`Frame ${index + 1}`, canvas.width/2, canvas.height/2);
+    return canvas;
+  }
+
+  function updateLoadingProgress() {
+    const loaded = state.images.filter(img => img).length;
+    loadingMessage.textContent = `Loading... ${Math.round((loaded/CONFIG.frameCount)*100)}%`;
+  }
+
+  // 6. Advanced Rendering with Motion Blur
+  function render() {
+    if (!state.loaded) return;
     
+    const frameIndex = Math.floor(state.currentFrame) % CONFIG.frameCount;
+    const nextFrameIndex = (frameIndex + 1) % CONFIG.frameCount;
+    const blend = state.currentFrame % 1;
+    
+    const img1 = state.images[frameIndex];
+    const img2 = state.images[nextFrameIndex];
+    
+    if (!img1 || !img2) return;
+    
+    // Calculate dimensions
     const canvasWidth = canvas.width / (window.devicePixelRatio || 1);
     const canvasHeight = canvas.height / (window.devicePixelRatio || 1);
-    const imgRatio = img.naturalWidth / img.naturalHeight;
+    const imgRatio = img1.width / img1.height;
     const canvasRatio = canvasWidth / canvasHeight;
     
     let width, height, x, y;
@@ -115,41 +164,113 @@ document.addEventListener("DOMContentLoaded", function() {
       y = 0;
     }
     
+    // Clear canvas
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    ctx.drawImage(img, x, y, width, height);
-  }
-  
-  // 6. Animation Loop
-  function startAnimation() {
-    let lastTime = performance.now();
-    let currentFrame = 0;
     
-    function animate(time) {
-      const deltaTime = time - lastTime;
-      lastTime = time;
+    // Apply motion blur effect if enabled
+    if (CONFIG.motionBlur && Math.abs(state.velocity) > 0.1) {
+      const blurIntensity = Math.min(Math.abs(state.velocity) * 0.5, 0.7);
       
-      // Smooth, consistent rotation speed
-      currentFrame = (currentFrame + spinSpeed * (deltaTime / 16.67)) % frameCount;
-      drawFrame(currentFrame);
+      // Draw previous frame with slight transparency
+      ctx.globalAlpha = blurIntensity * 0.3;
+      ctx.drawImage(img1, x, y, width, height);
       
-      requestAnimationFrame(animate);
+      // Draw current frame
+      ctx.globalAlpha = 1 - (blend * blurIntensity);
+      ctx.drawImage(img1, x, y, width, height);
+      
+      // Draw next frame
+      ctx.globalAlpha = blend * blurIntensity;
+      ctx.drawImage(img2, x, y, width, height);
+    } else {
+      // Standard rendering without blur
+      ctx.globalAlpha = 1 - blend;
+      ctx.drawImage(img1, x, y, width, height);
+      
+      ctx.globalAlpha = blend;
+      ctx.drawImage(img2, x, y, width, height);
     }
     
-    animate(performance.now());
+    ctx.globalAlpha = 1;
   }
-  
-  // 7. Initialize Everything
-  function init() {
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+
+  // 7. Physics-based Animation
+  function animate(timestamp) {
+    if (!state.lastFrameTime) state.lastFrameTime = timestamp;
     
-    loadImages().then(() => {
-      console.log('Viewer ready');
-    }).catch(error => {
-      console.error('Initialization error:', error);
+    const deltaTime = Math.min(timestamp - state.lastFrameTime, 100); // Cap at 100ms
+    state.lastFrameTime = timestamp;
+    
+    // Apply velocity damping
+    state.velocity *= 0.95;
+    if (Math.abs(state.velocity) < 0.01) state.velocity = 0;
+    
+    // Update position
+    state.currentFrame += state.velocity * deltaTime / 16.67;
+    
+    // Auto-rotate when not dragging
+    if (!state.isDragging && Math.abs(state.velocity) < 0.1) {
+      state.currentFrame += CONFIG.spinSpeed * deltaTime / 16.67;
+    }
+    
+    render();
+    requestAnimationFrame(animate);
+  }
+
+  // 8. Touch/Mouse Controls
+  function setupControls() {
+    // Touch events
+    canvas.addEventListener('touchstart', handleDragStart);
+    canvas.addEventListener('touchmove', handleDrag);
+    canvas.addEventListener('touchend', handleDragEnd);
+    
+    // Mouse events
+    canvas.addEventListener('mousedown', handleDragStart);
+    canvas.addEventListener('mousemove', handleDrag);
+    canvas.addEventListener('mouseup', handleDragEnd);
+    canvas.addEventListener('mouseleave', handleDragEnd);
+    
+    function handleDragStart(e) {
+      state.isDragging = true;
+      state.lastDragX = e.clientX || e.touches[0].clientX;
+      e.preventDefault();
+    }
+    
+    function handleDrag(e) {
+      if (!state.isDragging) return;
+      
+      const clientX = e.clientX || e.touches[0].clientX;
+      const deltaX = clientX - state.lastDragX;
+      
+      state.lastDragX = clientX;
+      state.velocity = -deltaX * 0.02; // Adjust sensitivity
+      state.currentFrame += deltaX * 0.2;
+      
+      e.preventDefault();
+    }
+    
+    function handleDragEnd() {
+      state.isDragging = false;
+    }
+  }
+
+  // 9. Initialization
+  async function init() {
+    setupCanvas();
+    setupControls();
+    
+    // Show loading message
+    loadingMessage.style.display = 'block';
+    
+    await loadImages();
+    animate(performance.now());
+    
+    window.addEventListener('resize', () => {
+      setupCanvas();
+      render();
     });
   }
-  
+
   // Start the viewer
   init();
 });
