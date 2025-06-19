@@ -152,13 +152,12 @@
   <div class="canvas-360-wrapper">
     <canvas id="watch360Canvas"></canvas>
     <div class="canvas-360-indicator">
-  <svg width="64" height="32" viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="360 degrees, interactive, spin">
-    <text x="0" y="16" font-family="Arial" font-size="18" fill="#ccc">360°</text>
-    <!-- Circular arc with arrowhead -->
-    <path d="M14 24
-             A18 18 0 0 1 50 24" stroke="#ccc" stroke-width="2.5" fill="none"/>
+  <svg width="100" height="48" viewBox="0 0 100 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="360 degrees spin direction">
+    <text x="20" y="22" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="bold" fill="#111">360°</text>
+    <!-- Arc (arrow body) -->
+    <path d="M18 36 Q50 52 82 36" stroke="#111" stroke-width="4" fill="none" />
     <!-- Arrowhead -->
-    <path d="M50 24 L46 20 M50 24 L54 20" stroke="#ccc" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M82 36 L76 32 M82 36 L76 40" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>
   </svg>
 </div>
     <a 
