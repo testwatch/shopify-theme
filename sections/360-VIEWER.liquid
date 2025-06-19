@@ -10,7 +10,7 @@
 }
 {% endschema %}
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
 
 .canvas-360-section {
   width: 100vw;
@@ -49,6 +49,7 @@
   margin: 0 auto;
   padding: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -64,33 +65,32 @@
   max-height: 100%;
 }
 
-.loading-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0,0,0,0.85);
-  z-index: 10;
+.canvas-360-explore-btn {
+  display: inline-block;
+  margin: 2rem auto 0 auto;
+  padding: 0.95rem 2.2rem;
+  background: #ff6b00;
+  color: #fff;
+  border: none;
+  border-radius: 2.5rem;
+  font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 12px rgba(255,107,0,0.18);
+  cursor: pointer;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
+  text-decoration: none;
+  text-align: center;
 }
 
-.progress-bar {
-  width: 80%;
-  height: 4px;
-  background: #222;
-  margin-top: 10px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  background: #fff;
-  transition: width 0.3s ease;
+.canvas-360-explore-btn:hover,
+.canvas-360-explore-btn:focus {
+  background: #ff8600;
+  box-shadow: 0 4px 20px rgba(255,107,0,0.25);
+  transform: translateY(-2px) scale(1.04);
+  outline: none;
 }
 
 @media (max-width: 900px) {
@@ -114,10 +114,15 @@
     min-height: 60vw;
   }
   .canvas-360-headline {
-    font-size: 7.2 rem; /* Increased from 1.1rem */
+    font-size: 1.6rem;
     margin-top: 1.2rem;
     margin-bottom: 1.2rem;
     padding: 0 0.5rem;
+  }
+  .canvas-360-explore-btn {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.5rem;
+    margin-top: 1.3rem;
   }
 }
 </style>
@@ -128,12 +133,14 @@
   </div>
   <div class="canvas-360-wrapper">
     <canvas id="watch360Canvas"></canvas>
-    <div class="loading-container" id="loadingContainer">
-      <div>Loading Watch Viewer</div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-    </div>
+    <a 
+      class="canvas-360-explore-btn" 
+      href="https://stuhrling.com/products/swiss-automatic-datemaster?variant=44829378052262"
+      target="_blank" 
+      rel="noopener"
+    >
+      Explore
+    </a>
   </div>
 </div>
 
@@ -150,15 +157,12 @@ document.addEventListener("DOMContentLoaded", function() {
   const state = {
     images: [],
     currentFrame: 0,
-    ready: false,
-    loadingProgress: 0
+    ready: false
   };
 
   // 3. DOM Elements
   const canvas = document.getElementById('watch360Canvas');
   const ctx = canvas.getContext('2d');
-  const loadingContainer = document.getElementById('loadingContainer');
-  const progressFill = document.getElementById('progressFill');
 
   // 4. Optimized Canvas Setup
   function setupCanvas() {
@@ -182,10 +186,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 2. Load the rest in background, in small batches
     for (let i = 1; i < CONFIG.frameCount; i += CONFIG.batchSize) {
-      await loadFrameBatch(i, CONFIG.batchSize);
-      if (i === 1) loadingContainer.style.display = 'none'; // Hide loading UI after second batch
+      loadFrameBatch(i, CONFIG.batchSize);
     }
-    loadingContainer.style.display = 'none';
   }
 
   async function loadFrameBatch(start, count) {
@@ -197,13 +199,11 @@ document.addEventListener("DOMContentLoaded", function() {
           const img = new Image();
           img.onload = () => {
             state.images[index] = img;
-            updateProgress();
             if (Math.floor(state.currentFrame) === index) drawFrame();
             resolve();
           };
           img.onerror = () => {
             state.images[index] = state.images[index - 1] || createPlaceholder();
-            updateProgress();
             resolve();
           };
           img.src = `${CONFIG.imageBaseUrl}1020_360_${index + 1}.jpg`;
@@ -222,45 +222,39 @@ document.addEventListener("DOMContentLoaded", function() {
     return canvas;
   }
 
-  function updateProgress() {
-    const loaded = state.images.filter(img => img).length;
-    state.loadingProgress = loaded / CONFIG.frameCount;
-    progressFill.style.width = `${state.loadingProgress * 100}%`;
-  }
-
   // 6. Drawing Logic
- function drawFrame() {
-  if (!state.ready || state.images.length === 0) return;
-  const frameIndex = Math.floor(state.currentFrame) % CONFIG.frameCount;
-  const img = state.images[frameIndex];
-  if (!img) return;
-  const displayWidth = canvas.width / (window.devicePixelRatio || 1);
-  const displayHeight = canvas.height / (window.devicePixelRatio || 1);
-  ctx.clearRect(0, 0, displayWidth, displayHeight);
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0, 0, displayWidth, displayHeight);
+  function drawFrame() {
+    if (!state.ready || state.images.length === 0) return;
+    const frameIndex = Math.floor(state.currentFrame) % CONFIG.frameCount;
+    const img = state.images[frameIndex];
+    if (!img) return;
+    const displayWidth = canvas.width / (window.devicePixelRatio || 1);
+    const displayHeight = canvas.height / (window.devicePixelRatio || 1);
+    ctx.clearRect(0, 0, displayWidth, displayHeight);
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, displayWidth, displayHeight);
 
-  // --- COVER LOGIC (fills all canvas, may crop image) ---
-  const imgRatio = img.width / img.height;
-  const canvasRatio = displayWidth / displayHeight;
-  let width, height, x, y;
+    // --- COVER LOGIC (fills all canvas, may crop image) ---
+    const imgRatio = img.width / img.height;
+    const canvasRatio = displayWidth / displayHeight;
+    let width, height, x, y;
 
-  if (imgRatio > canvasRatio) {
-    // Image is wider than canvas: fit by height, crop width
-    height = displayHeight;
-    width = height * imgRatio;
-    x = (displayWidth - width) / 2;
-    y = 0;
-  } else {
-    // Image is taller than canvas: fit by width, crop height
-    width = displayWidth;
-    height = width / imgRatio;
-    x = 0;
-    y = (displayHeight - height) / 2;
+    if (imgRatio > canvasRatio) {
+      // Image is wider than canvas: fit by height, crop width
+      height = displayHeight;
+      width = height * imgRatio;
+      x = (displayWidth - width) / 2;
+      y = 0;
+    } else {
+      // Image is taller than canvas: fit by width, crop height
+      width = displayWidth;
+      height = width / imgRatio;
+      x = 0;
+      y = (displayHeight - height) / 2;
+    }
+
+    ctx.drawImage(img, x, y, width, height);
   }
-
-  ctx.drawImage(img, x, y, width, height);
-}
 
   // 7. Drag-to-Rotate Control
   let isDragging = false;
