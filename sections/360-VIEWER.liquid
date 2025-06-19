@@ -119,7 +119,21 @@
     margin-bottom: 3rem;
   }
 }
-
+@media (max-width: 600px) {
+  .canvas-360-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  #watch360Canvas,
+  .canvas-360-indicator,
+  .canvas-360-explore-btn {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+  }
+}
 </style>
 
 <div class="canvas-360-section">
