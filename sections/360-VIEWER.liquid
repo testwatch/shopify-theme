@@ -121,9 +121,11 @@
 }
 
 @media (max-width: 600px) {
-  .canvas-360-section {
-    padding: 2rem 1rem 3rem;
-    text-align: center;
+  .canvas-360-wrapper {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
   }
 
   .canvas-360-wrapper {
@@ -139,13 +141,10 @@
     margin: 0 auto 2rem; /* ✅ center & add bottom spacing */
   }
 
-  #watch360Canvas {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    margin: 0 auto 1rem;
+   #watch360Canvas {
+    width: 100% !important;
+    height: auto !important;
     display: block;
-    object-fit: contain;
   }
 
   .canvas-360-headline {
