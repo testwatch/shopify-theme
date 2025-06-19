@@ -1,11 +1,22 @@
+{% schema %}
+{
+  "name": "Canvas 360 Viewer",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Canvas 360 Rolex Style"
+    }
+  ]
+}
+{% endschema %}
 <style>
   .canvas-360-wrapper {
     position: relative;
     width: 100%;
-    max-width: 800px; /* Optimal watch display size */
+    max-width: 800px;
     margin: 0 auto;
     background: #FFF;
-    aspect-ratio: 4/5; /* Perfect watch proportion */
+    aspect-ratio: 4/5;
   }
   
   #watch360Canvas {
@@ -13,119 +24,168 @@
     height: 100%;
     display: block;
     background: transparent;
-    image-rendering: crisp-edges; /* Sharp rendering */
+  }
+  
+  .loading-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.9);
+    z-index: 10;
+  }
+  
+  .progress-bar {
+    width: 80%;
+    height: 4px;
+    background: #f0f0f0;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #333;
+    transition: width 0.3s ease;
   }
 </style>
 
 <div class="canvas-360-wrapper">
   <canvas id="watch360Canvas"></canvas>
-  <div class="loading-message">Loading watch...</div>
+  <div class="loading-container" id="loadingContainer">
+    <div>Loading Watch Viewer</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  // 1. Stable Configuration
-  const config = {
+  // 1. Configuration
+  const CONFIG = {
     frameCount: 54,
-    spinSpeed: 0.09, // Perfect watch rotation speed
-    imageBasePath: 'https://cdn.shopify.com/s/files/1/0333/0936/0264/files/',
-    targetFPS: 60
+    spinSpeed: 0.1,
+    imageBaseUrl: 'https://cdn.shopify.com/s/files/1/0333/0936/0264/files/',
+    priorityFrames: 15, // Number of frames to load first for quick start
+    batchSize: 5       // Frames to load simultaneously
   };
 
-  // 2. DOM Elements
-  const canvas = document.getElementById('watch360Canvas');
-  const ctx = canvas.getContext('2d');
-  const loadingMessage = document.querySelector('.loading-message');
-  
-  // 3. State Management
+  // 2. State Management
   const state = {
     images: [],
     currentFrame: 0,
-    lastTime: performance.now(),
-    loadingProgress: 0,
-    ready: false
+    lastTime: 0,
+    ready: false,
+    loadingProgress: 0
   };
 
-  // 4. Proper Canvas Setup
+  // 3. DOM Elements
+  const canvas = document.getElementById('watch360Canvas');
+  const ctx = canvas.getContext('2d');
+  const loadingContainer = document.getElementById('loadingContainer');
+  const progressFill = document.getElementById('progressFill');
+
+  // 4. Optimized Canvas Setup
   function setupCanvas() {
-    const wrapper = canvas.parentElement;
-    const pixelRatio = Math.min(window.devicePixelRatio, 2); // Limit to 2x for performance
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = canvas.parentElement.getBoundingClientRect();
     
-    // Set internal canvas size
-    canvas.width = wrapper.clientWidth * pixelRatio;
-    canvas.height = wrapper.clientHeight * pixelRatio;
+    canvas.width = rect.width * pixelRatio;
+    canvas.height = rect.height * pixelRatio;
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
     
-    // Scale context for sharp rendering
     ctx.scale(pixelRatio, pixelRatio);
     ctx.imageSmoothingEnabled = true;
   }
 
-  // 5. Reliable Image Loading
-  function loadImages() {
-    let loadedCount = 0;
+  // 5. Lightning-Fast Image Loading
+  async function loadImages() {
+    // First load priority frames for immediate display
+    await loadFrameBatch(0, CONFIG.priorityFrames);
     
-    const loadSingleImage = (index) => {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => {
-          state.images[index] = img;
-          loadedCount++;
-          state.loadingProgress = loadedCount / config.frameCount;
-          loadingMessage.textContent = `Loading ${Math.round(state.loadingProgress * 100)}%`;
-          resolve();
-        };
-        img.onerror = () => {
-          console.warn(`Failed to load frame ${index+1}`);
-          // Create blank frame if image fails to load
-          state.images[index] = createBlankFrame(index);
-          loadedCount++;
-          resolve();
-        };
-        img.src = `${config.imageBasePath}1020_360_${index+1}.jpg?${Date.now()}`;
-      });
-    };
+    // Start animation with just priority frames
+    state.ready = true;
+    animate(performance.now());
     
-    // Load images sequentially for stability
-    const loadSequentially = async (index = 0) => {
-      if (index >= config.frameCount) {
-        state.ready = true;
-        loadingMessage.style.display = 'none';
-        return;
-      }
-      await loadSingleImage(index);
-      await loadSequentially(index + 1);
-    };
-    
-    loadSequentially();
+    // Load remaining frames in background
+    loadRemainingFrames();
   }
 
-  function createBlankFrame(index) {
+  async function loadFrameBatch(start, count) {
+    const end = Math.min(start + count, CONFIG.frameCount);
+    
+    await Promise.all(
+      Array.from({length: end - start}, (_, i) => {
+        const index = start + i;
+        return new Promise(resolve => {
+          const img = new Image();
+          img.onload = () => {
+            state.images[index] = img;
+            updateProgress();
+            resolve();
+          };
+          img.onerror = () => {
+            // Use previous frame if available
+            state.images[index] = state.images[index - 1] || createPlaceholder();
+            updateProgress();
+            resolve();
+          };
+          img.src = `${CONFIG.imageBaseUrl}1020_360_${index + 1}.jpg?${Date.now()}`;
+        });
+      })
+    );
+  }
+
+  async function loadRemainingFrames() {
+    for (let i = CONFIG.priorityFrames; i < CONFIG.frameCount; i += CONFIG.batchSize) {
+      await loadFrameBatch(i, CONFIG.batchSize);
+    }
+    loadingContainer.style.display = 'none';
+  }
+
+  function createPlaceholder() {
     const canvas = document.createElement('canvas');
     canvas.width = 800;
     canvas.height = 1000;
     const ctx = canvas.getContext('2d');
     ctx.fillStyle = '#f5f5f5';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#ccc';
-    ctx.font = '20px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText(`Frame ${index+1}`, canvas.width/2, canvas.height/2);
     return canvas;
   }
 
-  // 6. Stable Frame Rendering
+  function updateProgress() {
+    const loaded = state.images.filter(img => img).length;
+    state.loadingProgress = loaded / CONFIG.frameCount;
+    progressFill.style.width = `${state.loadingProgress * 100}%`;
+  }
+
+  // 6. Smooth Animation
+  function animate(time) {
+    if (!state.lastTime) state.lastTime = time;
+    const deltaTime = time - state.lastTime;
+    state.lastTime = time;
+    
+    state.currentFrame = (state.currentFrame + CONFIG.spinSpeed * (deltaTime / 16.67)) % CONFIG.frameCount;
+    
+    drawFrame();
+    requestAnimationFrame(animate);
+  }
+
   function drawFrame() {
     if (!state.ready || state.images.length === 0) return;
     
-    const frameIndex = Math.floor(state.currentFrame) % config.frameCount;
+    const frameIndex = Math.floor(state.currentFrame) % CONFIG.frameCount;
     const img = state.images[frameIndex];
-    
     if (!img) return;
     
-    // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Calculate dimensions (maintain aspect ratio)
     const displayWidth = canvas.width / (window.devicePixelRatio || 1);
     const displayHeight = canvas.height / (window.devicePixelRatio || 1);
     const imgRatio = img.width / img.height;
@@ -134,49 +194,28 @@ document.addEventListener("DOMContentLoaded", function() {
     let width, height, x, y;
     
     if (imgRatio > canvasRatio) {
-      // Fit to width
       width = displayWidth;
       height = width / imgRatio;
       x = 0;
       y = (displayHeight - height) / 2;
     } else {
-      // Fit to height
       height = displayHeight;
       width = height * imgRatio;
       x = (displayWidth - width) / 2;
       y = 0;
     }
     
-    // Draw image
+    ctx.clearRect(0, 0, displayWidth, displayHeight);
     ctx.drawImage(img, x, y, width, height);
   }
 
-  // 7. Smooth Animation Loop
-  function animate(currentTime) {
-    if (!state.lastTime) state.lastTime = currentTime;
-    const deltaTime = currentTime - state.lastTime;
-    state.lastTime = currentTime;
-    
-    // Consistent frame advance regardless of FPS
-    state.currentFrame += config.spinSpeed * (deltaTime / (1000 / config.targetFPS));
-    
-    drawFrame();
-    requestAnimationFrame(animate);
-  }
-
-  // 8. Initialize Viewer
+  // 7. Initialize
   function init() {
     setupCanvas();
+    window.addEventListener('resize', setupCanvas);
     loadImages();
-    animate(performance.now());
-    
-    window.addEventListener('resize', () => {
-      setupCanvas();
-      drawFrame();
-    });
   }
 
-  // Start the viewer
   init();
 });
 </script>
