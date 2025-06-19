@@ -152,13 +152,15 @@
   <div class="canvas-360-wrapper">
     <canvas id="watch360Canvas"></canvas>
     <div class="canvas-360-indicator">
-      <svg width="52" height="24" viewBox="0 0 52 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="360 degrees moveable">
-        <text x="0" y="16" font-family="Arial" font-size="18" fill="#fff">360°</text>
-        <path d="M8 20c10-12 26-12 36 0" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path d="M7 20l3 3M7 20l3-3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path d="M45 20l-3 3M45 20l-3-3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
-      </svg>
-    </div>
+  <svg width="64" height="32" viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="360 degrees, interactive, spin">
+    <text x="0" y="16" font-family="Arial" font-size="18" fill="#ccc">360°</text>
+    <!-- Circular arc with arrowhead -->
+    <path d="M14 24
+             A18 18 0 0 1 50 24" stroke="#ccc" stroke-width="2.5" fill="none"/>
+    <!-- Arrowhead -->
+    <path d="M50 24 L46 20 M50 24 L54 20" stroke="#ccc" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </svg>
+</div>
     <a 
       class="canvas-360-explore-btn" 
       href="https://stuhrling.com/products/swiss-automatic-datemaster?variant=44829378052262"
