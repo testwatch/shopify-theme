@@ -13,14 +13,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
 
 .canvas-360-section {
-  width: 100vw;
+  width: 100%;
   max-width: 100vw;
-  /* min-height: 100vh;  REMOVE THIS LINE TO PREVENT CROPPING */
-  padding: 2.5rem 0 0 0; /* Add top padding */
+  padding: 2rem 0 0 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   background: #000;
 }
@@ -28,41 +26,40 @@
 .canvas-360-headline {
   color: #fff;
   font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 3rem; /* Bigger font */
+  font-size: 2.2rem;
   font-weight: 700;
   text-align: center;
-  margin-top: 0; /* Remove to avoid double spacing with section padding */
-  margin-bottom: 2.5rem;
+  margin: 0 0 1.5rem 0; /* no top margin, just space below */
   letter-spacing: 0.02em;
   text-shadow: 0 4px 24px rgba(0,0,0,0.20), 0 1px 0 #666;
   line-height: 1.15;
-  max-width: 90vw;
+  max-width: 94vw;
   padding: 0 1rem;
+  word-break: break-word;
 }
 
 .canvas-360-wrapper {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  aspect-ratio: 4/5;
+  max-width: 480px;
   background: #000;
   margin: 0 auto;
   padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 #watch360Canvas {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: block;
   background: #000;
   cursor: grab;
   touch-action: pan-y;
   max-width: 100%;
-  max-height: 100%;
+  max-height: 80vh;
 }
 
 .canvas-360-explore-btn {
@@ -75,7 +72,7 @@
   border-radius: 2.5rem;
   font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 700;
-  font-size: 2rem; /* Even bigger font */
+  font-size: 2rem;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   box-shadow: 0 2px 12px rgba(255,107,0,0.18);
@@ -95,34 +92,29 @@
 
 @media (max-width: 900px) {
   .canvas-360-wrapper {
-    max-width: 90vw;
+    max-width: 94vw;
   }
   .canvas-360-headline {
-    font-size: 2.4rem;
-    margin-top: 0;
-    margin-bottom: 1.8rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
   }
 }
 
 @media (max-width: 600px) {
   .canvas-360-section {
-    padding: 1.5rem 0 0 0;
+    padding: 1rem 0 0 0;
   }
   .canvas-360-wrapper {
-    width: 100%;
     max-width: 100vw;
-    aspect-ratio: 4/5;
-    min-height: 60vw;
   }
   .canvas-360-headline {
-    font-size: 2rem; /* Large and readable on mobile */
-    margin-top: 0.5rem;
-    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
     padding: 0 0.5rem;
   }
   .canvas-360-explore-btn {
-    font-size: 1.3rem;
-    padding: 1rem 1.9rem;
+    font-size: 1.1rem;
+    padding: 0.8rem 1.5rem;
     margin-top: 1.3rem;
   }
 }
