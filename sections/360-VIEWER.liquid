@@ -197,24 +197,29 @@ document.addEventListener("DOMContentLoaded", function() {
   if (!img) return;
   const displayWidth = canvas.width / (window.devicePixelRatio || 1);
   const displayHeight = canvas.height / (window.devicePixelRatio || 1);
+  ctx.clearRect(0, 0, displayWidth, displayHeight);
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, displayWidth, displayHeight);
+
+  // --- COVER LOGIC (fills all canvas, may crop image) ---
   const imgRatio = img.width / img.height;
   const canvasRatio = displayWidth / displayHeight;
   let width, height, x, y;
+
   if (imgRatio > canvasRatio) {
-    width = displayWidth;
-    height = width / imgRatio;
-    x = 0;
-    y = (displayHeight - height) / 2;
-  } else {
+    // Image is wider than canvas: fit by height, crop width
     height = displayHeight;
     width = height * imgRatio;
     x = (displayWidth - width) / 2;
     y = 0;
+  } else {
+    // Image is taller than canvas: fit by width, crop height
+    width = displayWidth;
+    height = width / imgRatio;
+    x = 0;
+    y = (displayHeight - height) / 2;
   }
-  ctx.clearRect(0, 0, displayWidth, displayHeight);
-  // Fill the background with white before drawing the image
-  ctx.fillStyle = "#fff";
-  ctx.fillRect(0, 0, displayWidth, displayHeight);
+
   ctx.drawImage(img, x, y, width, height);
 }
 
