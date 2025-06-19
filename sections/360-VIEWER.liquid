@@ -18,14 +18,14 @@
     background: #FFF;
     aspect-ratio: 4/5;
   }
-  
   #watch360Canvas {
     width: 100%;
     height: 100%;
     display: block;
     background: transparent;
+    cursor: grab;
+    touch-action: pan-y;
   }
-  
   .loading-container {
     position: absolute;
     top: 0;
@@ -39,7 +39,6 @@
     background: rgba(255,255,255,0.9);
     z-index: 10;
   }
-  
   .progress-bar {
     width: 80%;
     height: 4px;
@@ -47,7 +46,6 @@
     margin-top: 10px;
     overflow: hidden;
   }
-  
   .progress-fill {
     height: 100%;
     width: 0%;
@@ -71,17 +69,15 @@ document.addEventListener("DOMContentLoaded", function() {
   // 1. Configuration
   const CONFIG = {
     frameCount: 54,
-    spinSpeed: 0.1,
     imageBaseUrl: 'https://cdn.shopify.com/s/files/1/0333/0936/0264/files/',
-    priorityFrames: 15, // Number of frames to load first for quick start
-    batchSize: 5       // Frames to load simultaneously
+    // lowResBaseUrl: '', // Optional: add if you have a low-res quick-load version!
+    batchSize: 5
   };
 
   // 2. State Management
   const state = {
     images: [],
     currentFrame: 0,
-    lastTime: 0,
     ready: false,
     loadingProgress: 0
   };
@@ -96,32 +92,32 @@ document.addEventListener("DOMContentLoaded", function() {
   function setupCanvas() {
     const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
     const rect = canvas.parentElement.getBoundingClientRect();
-    
     canvas.width = rect.width * pixelRatio;
     canvas.height = rect.height * pixelRatio;
     canvas.style.width = rect.width + 'px';
     canvas.style.height = rect.height + 'px';
-    
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // reset transform
     ctx.scale(pixelRatio, pixelRatio);
     ctx.imageSmoothingEnabled = true;
   }
 
-  // 5. Lightning-Fast Image Loading
+  // 5. Fastest Image Loading
   async function loadImages() {
-    // First load priority frames for immediate display
-    await loadFrameBatch(0, CONFIG.priorityFrames);
-    
-    // Start animation with just priority frames
+    // 1. Load only first frame and display instantly
+    await loadFrameBatch(0, 1);
     state.ready = true;
-    animate(performance.now());
-    
-    // Load remaining frames in background
-    loadRemainingFrames();
+    drawFrame();
+
+    // 2. Load the rest in background, in small batches
+    for (let i = 1; i < CONFIG.frameCount; i += CONFIG.batchSize) {
+      await loadFrameBatch(i, CONFIG.batchSize);
+      if (i === 1) loadingContainer.style.display = 'none'; // Hide loading UI after second batch
+    }
+    loadingContainer.style.display = 'none';
   }
 
   async function loadFrameBatch(start, count) {
     const end = Math.min(start + count, CONFIG.frameCount);
-    
     await Promise.all(
       Array.from({length: end - start}, (_, i) => {
         const index = start + i;
@@ -130,25 +126,20 @@ document.addEventListener("DOMContentLoaded", function() {
           img.onload = () => {
             state.images[index] = img;
             updateProgress();
+            // If this is the current frame, redraw immediately
+            if (Math.floor(state.currentFrame) === index) drawFrame();
             resolve();
           };
           img.onerror = () => {
-            // Use previous frame if available
             state.images[index] = state.images[index - 1] || createPlaceholder();
             updateProgress();
             resolve();
           };
-          img.src = `${CONFIG.imageBaseUrl}1020_360_${index + 1}.jpg?${Date.now()}`;
+          img.src = `${CONFIG.imageBaseUrl}1020_360_${index + 1}.jpg`;
+          // Remove cache-busting for browser cache!
         });
       })
     );
-  }
-
-  async function loadRemainingFrames() {
-    for (let i = CONFIG.priorityFrames; i < CONFIG.frameCount; i += CONFIG.batchSize) {
-      await loadFrameBatch(i, CONFIG.batchSize);
-    }
-    loadingContainer.style.display = 'none';
   }
 
   function createPlaceholder() {
@@ -167,32 +158,17 @@ document.addEventListener("DOMContentLoaded", function() {
     progressFill.style.width = `${state.loadingProgress * 100}%`;
   }
 
-  // 6. Smooth Animation
-  function animate(time) {
-    if (!state.lastTime) state.lastTime = time;
-    const deltaTime = time - state.lastTime;
-    state.lastTime = time;
-    
-    state.currentFrame = (state.currentFrame + CONFIG.spinSpeed * (deltaTime / 16.67)) % CONFIG.frameCount;
-    
-    drawFrame();
-    requestAnimationFrame(animate);
-  }
-
+  // 6. Drawing Logic
   function drawFrame() {
     if (!state.ready || state.images.length === 0) return;
-    
     const frameIndex = Math.floor(state.currentFrame) % CONFIG.frameCount;
     const img = state.images[frameIndex];
     if (!img) return;
-    
     const displayWidth = canvas.width / (window.devicePixelRatio || 1);
     const displayHeight = canvas.height / (window.devicePixelRatio || 1);
     const imgRatio = img.width / img.height;
     const canvasRatio = displayWidth / displayHeight;
-    
     let width, height, x, y;
-    
     if (imgRatio > canvasRatio) {
       width = displayWidth;
       height = width / imgRatio;
@@ -204,15 +180,70 @@ document.addEventListener("DOMContentLoaded", function() {
       x = (displayWidth - width) / 2;
       y = 0;
     }
-    
     ctx.clearRect(0, 0, displayWidth, displayHeight);
     ctx.drawImage(img, x, y, width, height);
   }
 
-  // 7. Initialize
+  // 7. Drag-to-Rotate Control
+  let isDragging = false;
+  let lastX = 0;
+  let dragStartFrame = 0;
+
+  // Mouse events
+  canvas.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    lastX = e.clientX;
+    dragStartFrame = state.currentFrame;
+    canvas.style.cursor = "grabbing";
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - lastX;
+    const sensitivity = 2.5; // Lower = faster, higher = slower
+    state.currentFrame = (dragStartFrame + dx / sensitivity) % CONFIG.frameCount;
+    if (state.currentFrame < 0) state.currentFrame += CONFIG.frameCount;
+    drawFrame();
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    canvas.style.cursor = "grab";
+  });
+
+  canvas.addEventListener('mouseleave', () => {
+    isDragging = false;
+    canvas.style.cursor = "grab";
+  });
+
+  // Touch events
+  canvas.addEventListener('touchstart', (e) => {
+    if (e.touches.length !== 1) return;
+    isDragging = true;
+    lastX = e.touches[0].clientX;
+    dragStartFrame = state.currentFrame;
+  }, { passive: false });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging || e.touches.length !== 1) return;
+    const dx = e.touches[0].clientX - lastX;
+    const sensitivity = 2.5;
+    state.currentFrame = (dragStartFrame + dx / sensitivity) % CONFIG.frameCount;
+    if (state.currentFrame < 0) state.currentFrame += CONFIG.frameCount;
+    drawFrame();
+  }, { passive: false });
+
+  window.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+
+  // 8. Initialize
   function init() {
     setupCanvas();
-    window.addEventListener('resize', setupCanvas);
+    window.addEventListener('resize', () => {
+      setupCanvas();
+      drawFrame();
+    });
     loadImages();
   }
 
