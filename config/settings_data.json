@@ -4162,7 +4162,9 @@
       },
       "360_viewer_PjpPdJ": {
         "type": "360-VIEWER",
-        "custom_css": [],
+        "custom_css": [
+          "@media screen and (max-width: 767px) {.watch360Canvas{text-align: center; margin: 0 auto; /* }}"
+        ],
         "name": "Canvas 360 Rolex Style",
         "settings": {}
       }
