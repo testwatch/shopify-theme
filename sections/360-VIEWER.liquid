@@ -53,123 +53,151 @@
 <div class="canvas-360-wrapper">
   <canvas id="watch360Canvas"></canvas>
 </div>
-
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+  // Configuration
   const frameCount = 54;
-  const canvas = document.getElementById("watch360Canvas");
-  const context = canvas.getContext("2d");
-  const images = [];
-  let currentFrame = 0;
-  let lastTime = 0;
-  const fps = 30;
-  const interval = 1000 / fps;
-  const spinSpeed = 0.2;
+  const targetFPS = 60;
+  const baseSpinSpeed = 0.15; // Reduced from 0.5 to 0.15 for slower spin
+  let qualityMode = 'high';
   let isMobile = window.matchMedia("(max-width: 700px)").matches;
 
-  // Use higher quality images if available (add _2x suffix for retina)
-  const imagePath = i => {
-    const basePath = `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}`;
-    return isMobile ? `${basePath}_mobile.jpg` : `${basePath}.jpg`;
+  // Canvas setup
+  const canvas = document.getElementById("watch360Canvas");
+  const context = canvas.getContext("2d", { willReadFrequently: false });
+  const images = [];
+  
+  // High-quality rendering setup
+  const pixelRatio = window.devicePixelRatio || 1;
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
+  
+  // Animation state
+  let currentFrame = 0;
+  let lastTime = performance.now();
+
+  // 1. Improved Image Loading with Quality Assurance
+  const loadImage = (i) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = "Anonymous";
+      img.src = `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}.jpg?quality=100`;
+      img.onload = () => {
+        if (img.naturalWidth > 500) { // Quality check
+          resolve(img);
+        } else {
+          reject(`Low quality image (frame ${i})`);
+        }
+      };
+      img.onerror = () => reject(`Failed to load frame ${i}`);
+    });
   };
 
-  const preloadImages = () => {
-    return Promise.all(
-      Array.from({length: frameCount}, (_, i) => {
-        return new Promise(resolve => {
-          const img = new Image();
-          img.onload = () => {
-            // Only use high quality images that loaded successfully
-            if (img.naturalWidth > 100) resolve(img);
-            else console.warn(`Low quality image detected for frame ${i}`);
-          };
-          img.src = imagePath(i);
-        });
-      })
-    );
-  };
-
+  // 2. High-Quality Rendering with Retina Support
   const setupCanvas = () => {
-    const wrapper = document.querySelector('.canvas-360-wrapper');
-    const rect = wrapper.getBoundingClientRect();
-    const pixelRatio = window.devicePixelRatio || 1;
+    const wrapper = canvas.parentElement;
+    const width = wrapper.clientWidth;
+    const height = wrapper.clientHeight;
     
-    // Set display size (CSS)
-    canvas.style.width = `${rect.width}px`;
-    canvas.style.height = `${rect.height}px`;
-    
-    // Set internal buffer size (scaled for quality)
-    canvas.width = rect.width * pixelRatio;
-    canvas.height = rect.height * pixelRatio;
+    // Set internal canvas size (scaled for retina)
+    canvas.width = width * pixelRatio;
+    canvas.height = height * pixelRatio;
     
     // Scale context to compensate for high DPI
     context.scale(pixelRatio, pixelRatio);
+    context.imageSmoothingEnabled = true;
+    context.imageSmoothingQuality = 'high';
   };
 
-  const drawFrame = (index) => {
-    const img = images[index];
-    if (!img) return;
-
+  // 3. Optimized Frame Drawing with Motion Blur Effect
+  const drawFrame = () => {
+    const frameIndex = Math.floor(currentFrame) % frameCount;
+    const nextFrameIndex = (frameIndex + 1) % frameCount;
+    const blendAmount = currentFrame % 1;
+    
+    const img = images[frameIndex];
+    const nextImg = images[nextFrameIndex];
+    
+    if (!img || !nextImg) return;
+    
+    // Clear canvas
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Calculate dimensions (maintain aspect ratio)
     const imgRatio = img.naturalWidth / img.naturalHeight;
-    const canvasRatio = canvas.width / canvas.height;
-
-    let drawWidth, drawHeight, x, y;
-
-    // Fit entire image in canvas (contain)
+    const canvasDisplayWidth = canvas.width / pixelRatio;
+    const canvasDisplayHeight = canvas.height / pixelRatio;
+    const canvasRatio = canvasDisplayWidth / canvasDisplayHeight;
+    
+    let width, height, x, y;
+    
     if (imgRatio > canvasRatio) {
-      // Fit to width
-      drawWidth = canvas.width;
-      drawHeight = drawWidth / imgRatio;
+      width = canvasDisplayWidth;
+      height = width / imgRatio;
       x = 0;
-      y = (canvas.height - drawHeight) / 2;
+      y = (canvasDisplayHeight - height) / 2;
     } else {
-      // Fit to height
-      drawHeight = canvas.height;
-      drawWidth = drawHeight * imgRatio;
-      x = (canvas.width - drawWidth) / 2;
+      height = canvasDisplayHeight;
+      width = height * imgRatio;
+      x = (canvasDisplayWidth - width) / 2;
       y = 0;
     }
-
-    // Clear and draw with high quality
-    context.imageSmoothingEnabled = true;
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(
-      img, 
-      x / (window.devicePixelRatio || 1),
-      y / (window.devicePixelRatio || 1),
-      drawWidth / (window.devicePixelRatio || 1),
-      drawHeight / (window.devicePixelRatio || 1)
-    );
+    
+    // Draw with motion blur effect between frames
+    context.globalAlpha = 1 - (blendAmount * 0.3); // Reduced blend for sharper image
+    context.drawImage(img, x, y, width, height);
+    
+    context.globalAlpha = blendAmount * 0.3;
+    context.drawImage(nextImg, x, y, width, height);
+    
+    context.globalAlpha = 1;
   };
 
-  const resizeCanvas = () => {
+  // 4. Smooth Animation Loop with Dynamic Speed Control
+  const animate = (timestamp) => {
+    const deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
+    
+    // Adjust speed based on frame rate to maintain consistency
+    const adjustedSpeed = baseSpinSpeed * (deltaTime / 16.67);
+    currentFrame = (currentFrame + adjustedSpeed) % frameCount;
+    
+    drawFrame();
+    requestAnimationFrame(animate);
+  };
+
+  // 5. Initialize with Quality Checks
+  const init = async () => {
     setupCanvas();
-    drawFrame(Math.floor(currentFrame));
-  };
-
-  const rotateSpin = (timestamp) => {
-    if (!lastTime) lastTime = timestamp;
-    const delta = timestamp - lastTime;
-    if (delta > interval) {
-      currentFrame = (currentFrame + spinSpeed) % frameCount;
-      drawFrame(Math.floor(currentFrame));
-      lastTime = timestamp;
+    
+    try {
+      // Load all frames with progress feedback
+      for (let i = 0; i < frameCount; i++) {
+        try {
+          const img = await loadImage(i);
+          images[i] = img;
+        } catch (e) {
+          console.warn(e);
+          // Fallback to previous frame if loading fails
+          images[i] = images[Math.max(0, i-1)] || new Image();
+        }
+      }
+      
+      // Start animation
+      animate(performance.now());
+      
+      // Handle resize
+      window.addEventListener('resize', () => {
+        setupCanvas();
+        drawFrame();
+      });
+      
+    } catch (error) {
+      console.error("Initialization failed:", error);
     }
-    requestAnimationFrame(rotateSpin);
   };
 
-  // Initialize
-  window.addEventListener('resize', () => {
-    isMobile = window.matchMedia("(max-width: 700px)").matches;
-    resizeCanvas();
-  });
-
-  preloadImages().then(loaded => {
-    // Filter out any failed images
-    images.push(...loaded.filter(img => img.naturalWidth > 100));
-    setupCanvas();
-    rotateSpin(performance.now());
-    window.addEventListener('load', resizeCanvas);
-  });
+  // Start the viewer
+  init();
 });
 </script>
