@@ -54,9 +54,11 @@
   <canvas id="watch360Canvas"></canvas>
 </div>
 
+<!-- ✅ Updated Script (Paste this INSIDE <script> tags!) -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const frameCount = 54;
+    const isMobile = window.matchMedia("(max-width: 700px)").matches;
+    const frameCount = isMobile ? 27 : 54; // Optional: Fewer frames on mobile
     const canvas = document.getElementById("watch360Canvas");
     const context = canvas.getContext("2d");
     const images = [];
@@ -66,7 +68,8 @@
     const interval = 1000 / fps;
     const spinSpeed = 0.2;
 
-    const imagePath = i => `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}.jpg`;
+    const imagePath = i => 
+      `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}.jpg`;
 
     const preloadImages = () => {
       return Promise.all(
@@ -89,9 +92,12 @@
     const drawFrame = (index) => {
       const img = images[index];
       if (!img) return;
+
       const canvasRatio = canvas.width / canvas.height;
       const imgRatio = img.width / img.height;
-      let drawWidth, drawHeight;
+
+      let drawWidth, drawHeight, x, y;
+
       if (imgRatio > canvasRatio) {
         drawWidth = canvas.width;
         drawHeight = canvas.width / imgRatio;
@@ -99,18 +105,32 @@
         drawHeight = canvas.height;
         drawWidth = canvas.height * imgRatio;
       }
-      const x = (canvas.width - drawWidth) / 2;
-      const y = (canvas.height - drawHeight) / 2;
+
+      x = (canvas.width - drawWidth) / 2;
+      y = (canvas.height - drawHeight) / 2;
+
       context.clearRect(0, 0, canvas.width, canvas.height);
       context.drawImage(img, x, y, drawWidth, drawHeight);
     };
 
     function resizeCanvas() {
       const { width, height } = getWrapperDimensions();
-      canvas.width = width;
-      canvas.height = height;
+      const pixelRatio = window.devicePixelRatio || 1;
+
+      // Set display size (CSS)
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+
+      // Set drawing buffer size (scaled for high-DPI)
+      canvas.width = width * pixelRatio;
+      canvas.height = height * pixelRatio;
+
+      // Scale context to prevent blur
+      context.scale(pixelRatio, pixelRatio);
+
       drawFrame(Math.floor(currentFrame));
     }
+
     window.addEventListener('resize', resizeCanvas);
 
     const rotateSpin = (timestamp) => {
