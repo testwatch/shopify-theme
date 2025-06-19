@@ -9,42 +9,38 @@
   ]
 }
 {% endschema %}
-
 <style>
   .canvas-360-wrapper {
     position: relative;
-    width: 100vw;
+    width: 100%;
     max-width: 1100px;
-    aspect-ratio: 4/5;
-    background: #FFFF!important;
+    height: auto;
+    background: #FFF !important;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
     box-sizing: border-box;
   }
+  
   canvas#watch360Canvas {
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
     display: block;
     filter: drop-shadow(0 30px 40px rgba(0,0,0,0.15));
     background: transparent;
     box-sizing: border-box;
-    max-width: 100vw;
-    max-height: 80vh;
+    max-width: 100%;
     object-fit: contain;
     border-radius: 12px;
   }
+  
   @media (max-width: 700px) {
     .canvas-360-wrapper {
-      max-width: 98vw;
-      aspect-ratio: 1/1.2;
-      min-height: 300px;
-      max-height: 70vw;
+      max-width: 100%;
       padding: 0;
     }
     canvas#watch360Canvas {
-      max-height: 60vh;
       border-radius: 8px;
     }
   }
@@ -54,102 +50,93 @@
   <canvas id="watch360Canvas"></canvas>
 </div>
 
-<!-- ✅ Updated Script (Paste this INSIDE <script> tags!) -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const isMobile = window.matchMedia("(max-width: 700px)").matches;
-    const frameCount = isMobile ? 27 : 54; // Optional: Fewer frames on mobile
-    const canvas = document.getElementById("watch360Canvas");
-    const context = canvas.getContext("2d");
-    const images = [];
-    let currentFrame = 0;
-    let lastTime = 0;
-    const fps = 30;
-    const interval = 1000 / fps;
-    const spinSpeed = 0.2;
+document.addEventListener("DOMContentLoaded", function() {
+  const frameCount = 54;
+  const canvas = document.getElementById("watch360Canvas");
+  const context = canvas.getContext("2d");
+  const images = [];
+  let currentFrame = 0;
+  let lastTime = 0;
+  const fps = 30;
+  const interval = 1000 / fps;
+  const spinSpeed = 0.2;
 
-    const imagePath = i => 
-      `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}.jpg`;
+  const imagePath = i => `https://cdn.shopify.com/s/files/1/0333/0936/0264/files/1020_360_${i + 1}.jpg`;
 
-    const preloadImages = () => {
-      return Promise.all(
-        [...Array(frameCount)].map((_, i) => {
-          return new Promise(resolve => {
-            const img = new Image();
-            img.src = imagePath(i);
-            img.onload = () => resolve(img);
-          });
-        })
-      );
-    };
+  const preloadImages = () => {
+    return Promise.all(
+      Array.from({length: frameCount}, (_, i) => {
+        return new Promise(resolve => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.src = imagePath(i);
+        });
+      })
+    );
+  };
 
-    function getWrapperDimensions() {
-      const wrapper = document.querySelector('.canvas-360-wrapper');
-      const rect = wrapper.getBoundingClientRect();
-      return { width: rect.width, height: rect.height };
+  const drawFrame = (index) => {
+    const img = images[index];
+    if (!img) return;
+
+    // Get natural image dimensions
+    const imgWidth = img.naturalWidth;
+    const imgHeight = img.naturalHeight;
+    const imgRatio = imgWidth / imgHeight;
+
+    // Get canvas display dimensions (CSS)
+    const displayWidth = canvas.clientWidth;
+    const displayHeight = canvas.clientHeight;
+    const canvasRatio = displayWidth / displayHeight;
+
+    let drawWidth, drawHeight, x, y;
+
+    // Calculate dimensions to fit entire image
+    if (imgRatio > canvasRatio) {
+      // Image is wider than canvas - fit to width
+      drawWidth = displayWidth;
+      drawHeight = displayWidth / imgRatio;
+      x = 0;
+      y = (displayHeight - drawHeight) / 2;
+    } else {
+      // Image is taller than canvas - fit to height
+      drawHeight = displayHeight;
+      drawWidth = displayHeight * imgRatio;
+      x = (displayWidth - drawWidth) / 2;
+      y = 0;
     }
 
-    const drawFrame = (index) => {
-      const img = images[index];
-      if (!img) return;
+    // Set canvas internal dimensions to match display
+    canvas.width = displayWidth;
+    canvas.height = displayHeight;
 
-      const canvasRatio = canvas.width / canvas.height;
-      const imgRatio = img.width / img.height;
+    // Clear and draw
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(img, x, y, drawWidth, drawHeight);
+  };
 
-      let drawWidth, drawHeight, x, y;
+  const resizeCanvas = () => {
+    drawFrame(Math.floor(currentFrame));
+  };
 
-      if (imgRatio > canvasRatio) {
-        drawWidth = canvas.width;
-        drawHeight = canvas.width / imgRatio;
-      } else {
-        drawHeight = canvas.height;
-        drawWidth = canvas.height * imgRatio;
-      }
-
-      x = (canvas.width - drawWidth) / 2;
-      y = (canvas.height - drawHeight) / 2;
-
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      context.drawImage(img, x, y, drawWidth, drawHeight);
-    };
-
-    function resizeCanvas() {
-      const { width, height } = getWrapperDimensions();
-      const pixelRatio = window.devicePixelRatio || 1;
-
-      // Set display size (CSS)
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-
-      // Set drawing buffer size (scaled for high-DPI)
-      canvas.width = width * pixelRatio;
-      canvas.height = height * pixelRatio;
-
-      // Scale context to prevent blur
-      context.scale(pixelRatio, pixelRatio);
-
+  const rotateSpin = (timestamp) => {
+    if (!lastTime) lastTime = timestamp;
+    const delta = timestamp - lastTime;
+    if (delta > interval) {
+      currentFrame = (currentFrame + spinSpeed) % frameCount;
       drawFrame(Math.floor(currentFrame));
+      lastTime = timestamp;
     }
+    requestAnimationFrame(rotateSpin);
+  };
 
+  // Initialize
+  preloadImages().then(loaded => {
+    images.push(...loaded);
     window.addEventListener('resize', resizeCanvas);
-
-    const rotateSpin = (timestamp) => {
-      if (!lastTime) lastTime = timestamp;
-      const delta = timestamp - lastTime;
-      if (delta > interval) {
-        currentFrame = (currentFrame + spinSpeed) % frameCount;
-        drawFrame(Math.floor(currentFrame));
-        lastTime = timestamp;
-      }
-      requestAnimationFrame(rotateSpin);
-    };
-
-    preloadImages().then(loaded => {
-      images.push(...loaded);
-      resizeCanvas();
-      rotateSpin(performance.now());
-    });
-
-    window.addEventListener('load', resizeCanvas);
+    resizeCanvas();
+    rotateSpin(performance.now());
   });
+});
 </script>
