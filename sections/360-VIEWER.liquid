@@ -189,30 +189,33 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // 6. Drawing Logic
-  function drawFrame() {
-    if (!state.ready || state.images.length === 0) return;
-    const frameIndex = Math.floor(state.currentFrame) % CONFIG.frameCount;
-    const img = state.images[frameIndex];
-    if (!img) return;
-    const displayWidth = canvas.width / (window.devicePixelRatio || 1);
-    const displayHeight = canvas.height / (window.devicePixelRatio || 1);
-    const imgRatio = img.width / img.height;
-    const canvasRatio = displayWidth / displayHeight;
-    let width, height, x, y;
-    if (imgRatio > canvasRatio) {
-      width = displayWidth;
-      height = width / imgRatio;
-      x = 0;
-      y = (displayHeight - height) / 2;
-    } else {
-      height = displayHeight;
-      width = height * imgRatio;
-      x = (displayWidth - width) / 2;
-      y = 0;
-    }
-    ctx.clearRect(0, 0, displayWidth, displayHeight);
-    ctx.drawImage(img, x, y, width, height);
+ function drawFrame() {
+  if (!state.ready || state.images.length === 0) return;
+  const frameIndex = Math.floor(state.currentFrame) % CONFIG.frameCount;
+  const img = state.images[frameIndex];
+  if (!img) return;
+  const displayWidth = canvas.width / (window.devicePixelRatio || 1);
+  const displayHeight = canvas.height / (window.devicePixelRatio || 1);
+  const imgRatio = img.width / img.height;
+  const canvasRatio = displayWidth / displayHeight;
+  let width, height, x, y;
+  if (imgRatio > canvasRatio) {
+    width = displayWidth;
+    height = width / imgRatio;
+    x = 0;
+    y = (displayHeight - height) / 2;
+  } else {
+    height = displayHeight;
+    width = height * imgRatio;
+    x = (displayWidth - width) / 2;
+    y = 0;
   }
+  ctx.clearRect(0, 0, displayWidth, displayHeight);
+  // Fill the background with white before drawing the image
+  ctx.fillStyle = "#fff";
+  ctx.fillRect(0, 0, displayWidth, displayHeight);
+  ctx.drawImage(img, x, y, width, height);
+}
 
   // 7. Drag-to-Rotate Control
   let isDragging = false;
