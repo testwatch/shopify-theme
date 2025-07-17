@@ -147,20 +147,7 @@
                   </ul>
                 </div>
                 {%else%}
-                  <div class="gallery-video">
-                {% for variant in product.variants %}
-                {% assign current = product.selected_or_first_available_variant %}
-                {%if variant.metafields.Stuhrling.Rotate_video  != blank %}
-                <div {%if current.id == variant.id %}{%else%}style="display:none"{%endif%} class="{{variant.id}}" id="variant_id">
-                  <div class="cc-video" style="visibility: visible;" data-scr="<iframe src='{{ variant.metafields.Stuhrling.Rotate_video  | split:'?' | first}}?autoplay=1&loop=1&autopause=0' width='640' height='360' frameborder='0' allow='autoplay; fullscreen' allowfullscreen></iframe>"> 
-                    <div class="video-item"> 
-                      <div class="cc-info"> <i class="icon-play-ytb"></i></div> 
-                    </div>
-                      <iframe src="{{ variant.metafields.Stuhrling.Rotate_video  | split:'?' | first}}?autoplay=1&loop=1&autopause=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                  </div>
-                </div>
-                {%endif%}
-                {%endfor%}
+                  
             
                     {% capture img_id %}ProductImage-{{ image.id }}{% endcapture %}
                     {% capture img_wrapper_id %}ProductImageWrapper-{{ image.id }}{% endcapture %}
